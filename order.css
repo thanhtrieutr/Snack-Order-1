@@ -9,7 +9,9 @@
     display:inline-block;
     box-sizing: border-box;
     width:20%;
-    float: left;
+    /* float: left; */
+    margin-top: 50px;
+    height: calc(90% - 150px);
     padding:3px;
 }
 #login_zone a{

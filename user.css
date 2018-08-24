@@ -1,0 +1,19 @@
+.user-zone {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14;
+    display: inline-block;
+    height: 60%;
+    width: 20%;
+    border: 1px solid #99ccff;
+    box-shadow: 2px 2px 2px #b3b3b3;
+    border-radius: 2px;
+    background-color: white;
+}
+.avatar {
+    display:block;
+    width: 70%;
+    margin:auto;
+}
+.user-zone p {
+    padding: 10px;
+}

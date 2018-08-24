@@ -1,0 +1,51 @@
+body{
+    background-color: #E9EBEE;
+    font-family: Arial, Helvetica, sans-serif;
+}
+#main-order{
+    height: calc(100% - 100px);
+    width: 45%;
+    overflow-y: scroll;
+    display: inline-block;
+    position: absolute;
+    left: 21%;
+    padding: 10px;
+    top: 90px;
+    padding-bottom: 0;
+}
+.one-snack{
+    border: 1px solid #99ccff;
+    background-color: white;
+    margin-bottom: 10px;
+    width: calc(100% - 10px);
+    position: relative;
+    display: inline-block;
+    box-shadow: 2px 2px 2px #b3b3b3;
+    border-radius: 2px;
+}
+.snack-img{
+    height: 35%;
+    width: 35%;
+}
+[class ^= "main-snack"]{    
+    position: absolute;
+    display: inline-block;
+    width: 55%;
+    font-size: 20px;
+}
+.main-snack-name{
+    top: 20%;
+    font-weight: 700;
+}
+.main-snack-price{
+    top: 60%;
+    color: red;
+    text-align: center;
+}
+.one-snack input{
+    position: absolute;
+    top: 35%;
+    right: 4%;
+    width: 20px;
+    height: 20px;
+}

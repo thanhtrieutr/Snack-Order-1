@@ -6,21 +6,18 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
-        <div class="container">
-            <h1>Login</h1>
-            <h4>Welcome back, Customer</h4>
-            <h3>Username</h3>
-            <div id = "input">
-            <input id="input-username" type="text" placeholder="&#xf007 * Enter Username (more than 8 characters)" name="user" required>
+        <div class="main-content">
+            <div class="logo-container">
+                <img class="logo" src="https://preview.ibb.co/kzLOhp/Logo.png" >
             </div>
-            <h3>Password</h3>
-            <div id = "input">
-            <input id="input-password" type="password" placeholder="&#xf023 * Enter Password (8-32 characters)"  name="psw" required>
+            <div class="container">
+                <h3>Username</h3>
+                <input id="input" type="text" placeholder="&#xf007 * Username (more than 8 characters)" name="user" required>
+                <h3>Password</h3>
+                <input id="input" type="password" placeholder="&#xf023  * Password (8-32 characters)"  name="psw" required>
+                <div class = "button"> <a href = "order.html"> <button type="submit" id="signinbtn"> Sign In</button> </a> </div>
+                <h4 id = "redirect-register"> Don't you have an account? <a id = "link-signup" href="signup.html"> We got you </a></h4>
             </div>
-            <div id = "button"><button type="submit" id="signupbtn">Sign In</button></div>
-            <h4 id = "redirect-register"> Don't you have an account? <a id = "link-signup" href="signup.html"> We got you </a></h4>
         </div>
-        <script src="login.js"></script>
-
     </body>
 </html>

@@ -1,7 +1,7 @@
 # Snack-Order
 Snack Order Webpage Changelog (26/8/2018) Pre-release
 
-- Completed HTML and CSS of elements
+- Completed HTML and CSS elements 
 1. Sign Up and Sign In 
 2. Main Order Page (include User, Food Menu and Bill Section)
 

@@ -1,0 +1,84 @@
+#bill-form {
+    height: calc(100% - 120px);
+    width:25%;
+    display: inline-block;
+    position: absolute;
+    top: 101px;
+    left: 71.5%;
+    padding: 10px;
+    padding-bottom: 0;
+    overflow-y: scroll;
+    /* border: solid 1px; */
+    /* border-color: black; */
+    border: 1px solid #99ccff;
+    background-color: white;
+}
+#bill-form h1 {
+    text-align: center;
+}
+#bill-form span {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.order-thing {
+    /* position: absolute; */
+    /* border: solid 1px; */
+    /* border-color: black; */
+    padding: 5px;
+}
+.name-of-snack{
+    top: 20%;
+    font-weight: 700;
+    /* position: absolute; */
+    display: inline-block;
+    width: 55%;
+    font-size: 20px;
+}
+.price-of-snack{
+    top: 60%;
+    /* position: absolute; */
+    display: inline-block;
+    width: 55%;
+    font-size: 20px;
+}
+.oder-thing .number-of-snack{
+    /* position: absolute; */
+    top: 35%;
+    right: 4%;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    /* align-items: flex-end; */
+    padding : auto;
+}
+.number-of-snack {
+    display: inline-block;
+    /* width: 40%; */
+    margin-left: 35%;
+}
+#total-price-text {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    /* padding: 5px; */
+    display: inline-block;
+    margin-top: 10px;
+    margin-bottom:10px;
+}
+#total-price-number {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    padding:5px;
+    display: inline-block;
+    /* margin-top: 10px;
+    margin-bottom: 10px; */
+    margin-left: 50%;
+}
+#order-button { 
+    display: block;
+    margin: auto;  
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #99ccff;
+    font-size: 20px;
+    padding: 10px 20px;
+    margin-bottom: 10px;
+}

@@ -1,15 +1,17 @@
 #bill-form {
-    height: calc(100% - 110px);
+    height: calc(100% - 120px);
     width:25%;
     display: inline-block;
     position: absolute;
-    top: 90px;
-    left: 72%;
+    top: 101px;
+    left: 71.5%;
     padding: 10px;
     padding-bottom: 0;
     overflow-y: scroll;
-    border: solid 1px;
-    border-color: black;
+    /* border: solid 1px; */
+    /* border-color: black; */
+    border: 1px solid #99ccff;
+    background-color: white;
 }
 #bill-form h1 {
     text-align: center;

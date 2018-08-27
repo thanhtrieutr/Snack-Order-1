@@ -1,5 +1,6 @@
 body{
-    background-color: #E9EBEE;
+    background-color: #ffff99;
+    opacity: 10%;
     font-family: Arial, Helvetica, sans-serif;
 }
 #main-order{
@@ -8,7 +9,7 @@ body{
     overflow-y: scroll;
     display: inline-block;
     position: absolute;
-    left: 23%;
+    left: 23.5%;
     padding: 10px;
     padding-right: 0;
     padding-top:0;
@@ -16,7 +17,7 @@ body{
     padding-bottom: 0;
 }
 .one-snack{
-    border: 1px solid #99ccff;
+    border: 1px solid #ffe36a;
     background-color: white;
     margin-bottom: 10px;
     width: calc(100% - 10px);

@@ -1,0 +1,29 @@
+#title{
+    background-color: #ffa31a;
+    text-align: center;
+    font-family: 'monofett';
+    color:whitesmoke;
+    font-size: 60px;
+}
+#login_zone{
+    display:inline-block;
+    box-sizing: border-box;
+    width:20%;
+    /* float: left; */
+    margin-top: 50px;
+    height: calc(90% - 150px);
+    padding:3px;
+    margin-left: 10px;
+}
+#login_zone a{
+    width:40%;
+    margin:5%;
+    float:left;
+    background-color: #ffa31a;
+    color:whitesmoke;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+}
+

@@ -1,4 +1,4 @@
-# Snack-Order
+# Snack-Order Changelog
 Snack Order Webpage Changelog (26/8/2018) Pre-release
 
 - Completed HTML and CSS elements 

@@ -5,11 +5,10 @@ body{
 }
 #main-order{
     height: calc(100% - 110px);
-    width: 45%;
+    width: 70%;
     overflow-y: scroll;
     display: inline-block;
     position: absolute;
-    left: 23.5%;
     padding: 10px;
     padding-right: 0;
     padding-top:0;

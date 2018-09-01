@@ -2,17 +2,18 @@ body{
     background-color: #ffff99;
     opacity: 10%;
     font-family: Arial, Helvetica, sans-serif;
+    margin:0;
 }
 #main-order{
+    z-index: -1;
     height: calc(100% - 110px);
     width: 70%;
-    overflow-y: scroll;
     display: inline-block;
-    position: absolute;
+    position:absolute;
     padding: 10px;
     padding-right: 0;
     padding-top:0;
-    top: 100px;
+    top: 20%;
     padding-bottom: 0;
 }
 .one-snack{

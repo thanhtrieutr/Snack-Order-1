@@ -2,8 +2,8 @@
     height: calc(100% - 120px);
     width:25%;
     display: inline-block;
-    position: absolute;
-    top: 101px;
+    position: fixed;
+    top: 20%;
     left: 71.5%;
     padding: 10px;
     padding-bottom: 0;

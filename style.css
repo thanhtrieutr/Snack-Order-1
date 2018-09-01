@@ -1,5 +1,6 @@
 #bill-form {
     height: calc(100% - 120px);
+    z-index: 2;
     width:25%;
     display: inline-block;
     position: fixed;

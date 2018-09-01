@@ -8,13 +8,13 @@ body{
     z-index: 0;
     height: calc(100% - 110px);
     width:65%;
-    left:3%;
+    left:4%;
     display: inline-block;
     position:absolute;
     padding: 10px;
     padding-right: 0;
     padding-top:0;
-    top: 20%;
+    top: 16%;
     padding-bottom: 0;
 }
 .one-snack{

@@ -1,9 +1,10 @@
 #bill-form {
     height: calc(100% - 120px);
+    z-index: 2;
     width:25%;
     display: inline-block;
-    position: absolute;
-    top: 101px;
+    position: fixed;
+    top: 16%;
     left: 71.5%;
     padding: 10px;
     padding-bottom: 0;
@@ -95,6 +96,7 @@
     font-size: 20px;
     padding: 10px 20px;
     margin-bottom: 10px;
+    font-weight: bold;
 }
 .number-button {
     display:inline-block;

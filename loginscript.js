@@ -15,6 +15,11 @@ function alertDataUser(){
 
     var pos = localUser.indexOf(User);
     if (pos > -1 && User == localUser[pos] && Password == localPas[pos]){
+
+        //flag current account
+        localStorage.setItem("currentAccount", User);
+
+        //redirect
         alert("Accept account");
         window.location = "order.html";
     }

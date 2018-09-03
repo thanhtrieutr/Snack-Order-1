@@ -22,10 +22,14 @@ function alertDataUser(){
         alert("Password is too long or too short");
         return;
     }
-    if (!validateEmail(User)){
-        alert("Email is not valid");
+    if (User.length <1 || User.length>100){
+        lert("user is not valid");
         return;
     }
+    // if (!validateEmail(User)){
+    //     alert("Email is not valid");
+    //     return;
+    // }
 
     //get from storage
     var localUser, localPassword;

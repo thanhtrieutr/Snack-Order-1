@@ -22,8 +22,8 @@ function alertDataUser(){
         alert("Password is too long or too short");
         return;
     }
-    if (User.length <1 || User.length>100){
-        lert("user is not valid");
+    if (User.length <1 || User.length > 100){
+        alert("user is not valid");
         return;
     }
     // if (!validateEmail(User)){

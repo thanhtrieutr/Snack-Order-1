@@ -11,7 +11,7 @@ function alertDataUser(){
     var Password = document.getElementById("inputPassword").value;
     var repeatPassword = document.getElementById("inputRepeatPassword").value;
 
-    alert('User :' + User + '\n' + 'Password: ' + Password  + '\n' + 'RePassword: ' + repeatPassword);
+    // alert('User :' + User + '\n' + 'Password: ' + Password  + '\n' + 'RePassword: ' + repeatPassword);
 
     //check validation
     if (repeatPassword != Password){
@@ -35,9 +35,9 @@ function alertDataUser(){
         localUser = [];
         localPassword = [];
     }
-    alert(localUser);
-    alert(localPassword);
-    alert(localUser.indexOf(User));
+    // alert(localUser);
+    // alert(localPassword);
+    // alert(localUser.indexOf(User));
 
     //check exist
     if (localUser.indexOf(User) == -1){

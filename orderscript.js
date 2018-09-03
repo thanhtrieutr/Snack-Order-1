@@ -7,14 +7,14 @@ function checklogin(){
     }
     else {
         document.getElementById("user_name").innerHTML = currentAccount;
-        alert("Current user: " + currentAccount);
+        // alert("Current user: " + currentAccount);
     }
 }
 checklogin();
 
 function logout(){
     localStorage.removeItem("currentAccount");
-    alert("remove succeed");
+    // alert("remove succeed");
     window.location = "login.html";
 }
 

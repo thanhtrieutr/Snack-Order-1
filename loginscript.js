@@ -2,7 +2,7 @@ function alertDataUser(){
 
     var User = document.getElementById("inputUser").value;
     var Password = document.getElementById("inputPassword").value;
-    alert('User :' + User + '\n' + 'Password: ' + Password);
+    // alert('User :' + User + '\n' + 'Password: ' + Password);
 
     var localUser, localPas;
     localUser = JSON.parse(localStorage.getItem("UserArray"));

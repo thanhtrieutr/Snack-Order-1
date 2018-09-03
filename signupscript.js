@@ -15,7 +15,7 @@ function alertDataUser(){
 
     //check validation
     if (repeatPassword != Password){
-        alert("Password and repeat password are not same");
+        alert("Password and repeat password are not match");
         return;
     }
     if (Password.length <1 || Password.length > 32){

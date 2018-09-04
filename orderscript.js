@@ -6,7 +6,7 @@ function checklogin(){
         window.location = "login.html";
     }
     else {
-        document.getElementById("user_name").innerHTML = currentAccount+"   ";
+        document.getElementById("user_name").innerHTML = currentAccount+"     ";
         // alert("Current user: " + currentAccount);
     }
 }

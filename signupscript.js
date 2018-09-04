@@ -9,19 +9,7 @@ function alertDataUser(){
     // alert('User :' + User + '\n' + 'Password: ' + Password  + '\n' + 'RePassword: ' + repeatPassword);
 
     //check validation
-    if (repeatPassword != Password){
-        alert("Password and repeat password are not match");
-        return;
-    }
-    if (Password.length <1 || Password.length > 32){
-        alert("Password is too long or too short");
-        return;
-    }
-    else if (!password_check(Password)){
-        alert("Password can only contains charactor a-z,A-Z,0-9,!#$%&'*+-/=?^_`{|}");
-        return;
-    }
-    if (User.length <1 || User.length > 100){
+    if (User.length <6 || User.length > 100){
         alert("Username is too long or too short");
         return;
     }
@@ -29,7 +17,18 @@ function alertDataUser(){
         alert("Email is not valid");
         return;
     }
-
+    if (Password.length <8 || Password.length > 16){
+        alert("Password is too long or too short");
+        return;
+    }
+    else if (!password_check(Password)){
+        alert("Password can only contains characters a->z,A->Z,0->9 and symbol !#$%&'*+-/=?^_`{|}");
+        return;
+    }
+    if (repeatPassword != Password){
+        alert("Password and repeat password are not match");
+        return;
+    }
     //get from storage
     var localUser, localPassword;
     localUser = JSON.parse(localStorage.getItem("UserArray"));

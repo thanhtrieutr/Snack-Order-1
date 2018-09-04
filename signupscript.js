@@ -17,15 +17,17 @@ function alertDataUser(){
         alert("Password is too long or too short");
         return;
     }
-    else if (password_check(Password)){
-        alert("Password can only contains charactor a-z,A-Z,0-9,!#$%&'*+-/=?^_`{|}")
+    else if (!password_check(Password)){
+        alert("Password can only contains charactor a-z,A-Z,0-9,!#$%&'*+-/=?^_`{|}");
+        return;
     }
     if (User.length <1 || User.length > 100){
         alert("Username is too long or too short");
         return;
     }
-    else if (email_check(User)){
+    else if (!email_check(User)){
         alert("Email is not valid");
+        return;
     }
 
     //get from storage

@@ -29,7 +29,7 @@ function alertDataUser(){
 function checklogin(){
     var currentAccount = localStorage.getItem("currentAccount");
     var localUser = localStorage.getItem("UserArray");
-    if (currentAccount==null && localUser.indexOf(currentAccount) == -1) {
+    if (currentAccount==null || localUser.indexOf(currentAccount) == -1) {
         let i;
     }
     else {

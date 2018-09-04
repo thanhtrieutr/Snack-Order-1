@@ -1,7 +1,19 @@
+function createNewAccount(user, password){
+    var obj = {};
+    obj.user = user;
+    obj.password = password;
+    obj.cartArray = [];
+    return obj;
+ }
+
+ function findUserPos(localAccount, user){
+    for (var i in localAccount){
+        if (localAccount[i].user == user)
+            return i;
+    }
+    return -1;
+ }
 function alertDataUser(){
-    //localStorage.removeItem("UserArray");
-    //localStorage.removeItem("PassArray");
-    // get from html
     var User = document.getElementById("inputUser").value;
     var Password = document.getElementById("inputPassword").value;
     var repeatPassword = document.getElementById("inputRepeatPassword").value;
@@ -30,27 +42,19 @@ function alertDataUser(){
         return;
     }
     //get from storage
-    var localUser, localPassword;
-    localUser = JSON.parse(localStorage.getItem("UserArray"));
-    localPassword = JSON.parse(localStorage.getItem("PassArray"));
-    if (localUser == null){
-        localUser = [];
-        localPassword = [];
+    var localAccount;
+    localAccount = JSON.parse(localStorage.getItem("accountArray"));
+    if (localAccount == null){
+        localAccount = [];
     }
-    // alert(localUser);
-    // alert(localPassword);
-    // alert(localUser.indexOf(User));
 
     //check exist
-    if (localUser.indexOf(User) == -1){
+    if (findUserPos(localAccount, User) == -1){
 
         //change
-        localUser.push(User);
-        localPassword.push(Password);
-        localUser = JSON.stringify(localUser);
-        localPassword = JSON.stringify(localPassword);
-        localStorage.setItem("UserArray",localUser);
-        localStorage.setItem("PassArray",localPassword);
+        var newAccount = createNewAccount(User, Password);
+        localAccount.push(newAccount);
+        localStorage.setItem("accountArray", JSON.stringify(localAccount));
 
         //flag current account
         localStorage.setItem("currentAccount", User);
@@ -62,8 +66,6 @@ function alertDataUser(){
     else {
         alert("User conflict");
     }
-    // localStorage.setItem("User", User);
-    // localStorage.setItem("Password", Password);
     
 }
 
@@ -81,8 +83,8 @@ function check_key_press(key)
 
 function checklogin(){
     var currentAccount = localStorage.getItem("currentAccount");
-    var localUser = localStorage.getItem("UserArray");
-    if (currentAccount==null || localUser.indexOf(currentAccount) == -1) {
+    var localAccount = JSON.parse(localStorage.getItem("accountArray"));
+    if (currentAccount==null || findUserPos(localAccount, currentAccount) == -1) {
         let i;
     }
     else {

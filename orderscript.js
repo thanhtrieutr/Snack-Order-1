@@ -1,7 +1,15 @@
+function findUserPos(localAccount, user){
+    for (var i in localAccount){
+        if (localAccount[i].user == user)
+            return i;
+    }
+    return -1;
+ }
+ 
 function checklogin(){
     var currentAccount = localStorage.getItem("currentAccount");
-    var localUser = localStorage.getItem("UserArray");
-    if (currentAccount==null || localUser.indexOf(currentAccount) == -1){
+    var localAccount = JSON.parse(localStorage.getItem("accountArray"));
+    if (currentAccount==null ||  findUserPos(localAccount, currentAccount) == -1){
         alert("You haven't login");
         window.location = "login.html";
     }
@@ -13,7 +21,6 @@ function checklogin(){
 
 function logout(){
     localStorage.removeItem("currentAccount");
-    // alert("remove succeed");
     window.location = "login.html";
 }
 
@@ -33,22 +40,10 @@ addEventListener("load",rotate_username("user_name"));
 document.getElementById("logOutButton").addEventListener('click', logout);
 
 //choose snack
-// test data
-var demoObject = [{
-    user: "test",
-    password: "123"
-}];
-var tmp = [{
-    productID: 1,
-    amount: 1
-}];
-demoObject[0].cartArray = tmp;
-localStorage.setItem("accountArray", JSON.stringify(demoObject));
-//
 
 
 var localAccount = (JSON.parse(localStorage.getItem("accountArray")) || []);
-var user = /*document.getElementById("user_name").innerHTML*/ "test";
+var user = localStorage.getItem("currentAccount");
 
 function getUserInLocalAccount( tmpUser){
     for (var i in localAccount){
@@ -87,6 +82,7 @@ function findProductPosition(currentUser, currentID){
 function chooseSnack(currentID ){
     var checkBox = document.getElementById("checkbox-" + currentID);
     var currentUser = getUserInLocalAccount(user);
+    console.log(currentUser);
     if (checkBox.checked == true){
         var product = findProductPosition(currentUser, currentID);
         if (product == -1){

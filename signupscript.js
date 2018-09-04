@@ -17,6 +17,9 @@ function alertDataUser(){
         alert("Password is too long or too short");
         return;
     }
+    else if (password_check(Password)){
+        alert("Password can only contains charactor a-z,A-Z,0-9,!#$%&'*+-/=?^_`{|}")
+    }
     if (User.length <1 || User.length > 100){
         alert("Username is too long or too short");
         return;
@@ -64,8 +67,10 @@ function alertDataUser(){
 }
 
  function email_check(user){
-    return /^[a-zA-Z0-9_!#$%&'*+-/=?^_`{|}]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(user);
+    return /^[a-zA-Z0-9!#$%&'*+-/=?^_`{|}]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(user);
  }
- 
+ function password_check(password){
+    return /^[[a-zA-Z0-9!#$%&'*+-/=?^_`{|}]+$/.test(password);
+}
 
 document.getElementById("signupbtn").addEventListener("click", alertDataUser);

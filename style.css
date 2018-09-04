@@ -18,6 +18,8 @@
     height: 70%;
     overflow-y: scroll;
     margin-bottom: 5px;
+    display: flex;
+    flex-direction: column;
 }
 #bill-form h1 {
     text-align: center;

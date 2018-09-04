@@ -52,21 +52,75 @@ function getUserInLocalAccount( tmpUser){
     }
     return -1;
 }
+function addSnack(ID, amount){
+    var cartID = "cart-" + ID;
+    //parent 
+    var parentElement = document.getElementById("still-main-bill-form");
+
+    //make 1 snack element
+    var oneDiv, oneSpan, oneText, snackName, snackPrice, oneButton;
+    oneDiv = document.createElement("div");
+    oneDiv.setAttribute("class", "order-thing");
+    oneDiv.setAttribute("id", cartID);
+
+    //name of snack
+    oneSpan = document.createElement("span");
+    oneSpan.setAttribute("class", "name-of-snack");
+    snackName = document.getElementById("snack-name-" + ID).innerHTML;
+    oneText = document.createTextNode( snackName );
+    oneSpan.appendChild(oneText);
+    oneDiv.appendChild(oneSpan);
+
+    //price of snack
+    oneSpan = document.createElement("span");
+    oneSpan.setAttribute("class", "price-of-snack");
+    snackPrice = document.getElementById("snack-price-" + ID).innerHTML;
+    oneText = document.createTextNode( snackPrice );
+    oneSpan.appendChild(oneText);
+    oneDiv.appendChild(oneSpan);
+
+    //amount of snack
+    oneSpan = document.createElement("span");
+    oneSpan.setAttribute("class", "number-of-snack");
+    //- button
+    oneButton = document.createElement("button");
+    oneButton.setAttribute("class", "number-button");
+    oneText = document.createTextNode("-");
+    oneButton.appendChild(oneText);
+    oneSpan.appendChild(oneButton);
+    
+    //amount
+    oneText = document.createTextNode(" " + amount + " ");
+    oneSpan.appendChild(oneText);
+
+    //+ button
+    oneButton = document.createElement("button");
+    oneButton.setAttribute("class", "number-button");
+    oneText = document.createTextNode("+");
+    oneButton.appendChild(oneText);
+    oneSpan.appendChild(oneButton);
+    oneDiv.appendChild(oneSpan);
+
+    //add to parent
+    parentElement.appendChild(oneDiv);
+}
+function removeSnack(ID){
+    var cartID = "cart-" + ID;
+    var element = document.getElementById(cartID);
+    if (document.contains( element ))
+        element.parentNode.removeChild(element);
+}
 function showCurrentSnack(){
     var currentUser = getUserInLocalAccount(user);
     if (currentUser.cartArray == null)
         currentUser.cartArray = [];
     //hidd all
     for (var i=1; i<=4; i++){
-        var cartID = "cart-" + i;
-        document.getElementById(cartID).style.display = "none";
+        removeSnack(i);
     }
     //show in data
     for (var i in currentUser.cartArray){
-        var cartID = "cart-" + currentUser.cartArray[i].productID;
-        var displaySnack = document.getElementById(cartID);
-        displaySnack.style.display = "block";
-        displaySnack.style.order = i;
+        addSnack( currentUser.cartArray[i].productID, currentUser.cartArray[i].amount);
         document.getElementById("checkbox-" + currentUser.cartArray[i].productID).checked = true;
     }
 }
@@ -92,7 +146,8 @@ function chooseSnack(currentID ){
             };
             currentUser.cartArray.push(newProduct);
             localStorage.setItem("accountArray", JSON.stringify(localAccount));
-            showCurrentSnack();
+            //showCurrentSnack();
+            addSnack(newProduct.productID, newProduct.amount);
         }
     }
     else{
@@ -100,7 +155,8 @@ function chooseSnack(currentID ){
         if (product != -1){
             currentUser.cartArray.splice(product, 1);
             localStorage.setItem("accountArray", JSON.stringify(localAccount));
-            showCurrentSnack();
+            //showCurrentSnack();
+            removeSnack(currentID);
         }
     }
 }

@@ -25,4 +25,17 @@ function alertDataUser(){
     }
     else alert("Account don't exist or wrong password");
 }
+
+function checklogin(){
+    var currentAccount = localStorage.getItem("currentAccount");
+    var localUser = localStorage.getItem("UserArray");
+    if (currentAccount==null && localUser.indexOf(currentAccount) == -1) {
+        let i;
+    }
+    else {
+        alert("You already login");
+        window.location = "order.html";
+    }
+}
+checklogin();
 document.getElementById("signinbtn").addEventListener("click", alertDataUser);

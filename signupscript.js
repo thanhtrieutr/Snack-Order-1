@@ -79,5 +79,19 @@ function check_key_press(key)
     var keycode=key.keyCode;
     if (keycode==13) alertDataUser();
 }
+
+function checklogin(){
+    var currentAccount = localStorage.getItem("currentAccount");
+    var localUser = localStorage.getItem("UserArray");
+    if (currentAccount==null && localUser.indexOf(currentAccount) == -1) {
+        let i;
+    }
+    else {
+        alert("You already login");
+        window.location = "order.html";
+    }
+}
+checklogin();
+
 addEventListener("keypress",check_key_press);
 document.getElementById("signupbtn").addEventListener("click", alertDataUser);

@@ -37,5 +37,11 @@ function checklogin(){
         window.location = "order.html";
     }
 }
+function check_key_press(key){
+    var keycode=key.keyCode;
+    if (keycode==13) alertDataUser();
+}
+
 checklogin();
+addEventListener("keypress",check_key_press);
 document.getElementById("signinbtn").addEventListener("click", alertDataUser);

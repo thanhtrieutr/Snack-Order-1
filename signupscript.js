@@ -1,8 +1,3 @@
-function validateEmail(email) {
-    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-  }
-
 function alertDataUser(){
     //localStorage.removeItem("UserArray");
     //localStorage.removeItem("PassArray");
@@ -23,13 +18,12 @@ function alertDataUser(){
         return;
     }
     if (User.length <1 || User.length > 100){
-        alert("user is not valid");
+        alert("Username is too long or too short");
         return;
     }
-    // if (!validateEmail(User)){
-    //     alert("Email is not valid");
-    //     return;
-    // }
+    else if (email_check(User)){
+        alert("Email is not valid");
+    }
 
     //get from storage
     var localUser, localPassword;
@@ -68,4 +62,10 @@ function alertDataUser(){
     // localStorage.setItem("Password", Password);
     
 }
+
+ function email_check(user){
+    return /^[a-zA-Z0-9_!#$%&'*+-/=?^_`{|}]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(user);
+ }
+ 
+
 document.getElementById("signupbtn").addEventListener("click", alertDataUser);

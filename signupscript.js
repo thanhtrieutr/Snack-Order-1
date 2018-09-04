@@ -72,5 +72,10 @@ function alertDataUser(){
  function password_check(password){
     return /^[[a-zA-Z0-9!#$%&'*+-/=?^_`{|}]+$/.test(password);
 }
-
+function check_key_press(key)
+{
+    var keycode=key.keyCode;
+    if (keycode==13) alertDataUser();
+}
+addEventListener("keypress",check_key_press);
 document.getElementById("signupbtn").addEventListener("click", alertDataUser);

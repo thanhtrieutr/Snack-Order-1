@@ -1,12 +1,19 @@
-function validateEmail(email) {
-    var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-  }
+function createNewAccount(user, password){
+    var obj = {};
+    obj.user = user;
+    obj.password = password;
+    obj.cartArray = [];
+    return obj;
+ }
 
+ function findUserPos(localAccount, user){
+    for (var i in localAccount){
+        if (localAccount[i].user == user)
+            return i;
+    }
+    return -1;
+ }
 function alertDataUser(){
-    //localStorage.removeItem("UserArray");
-    //localStorage.removeItem("PassArray");
-    // get from html
     var User = document.getElementById("inputUser").value;
     var Password = document.getElementById("inputPassword").value;
     var repeatPassword = document.getElementById("inputRepeatPassword").value;
@@ -14,45 +21,40 @@ function alertDataUser(){
     // alert('User :' + User + '\n' + 'Password: ' + Password  + '\n' + 'RePassword: ' + repeatPassword);
 
     //check validation
+    if (User.length <6 || User.length > 100){
+        alert("Username is too long or too short");
+        return;
+    }
+    else if (!email_check(User)){
+        alert("Email is not valid");
+        return;
+    }
+    if (Password.length <8 || Password.length > 16){
+        alert("Password is too long or too short");
+        return;
+    }
+    else if (!password_check(Password)){
+        alert("Password can only contains characters a->z,A->Z,0->9 and symbol !#$%&'*+-/=?^_`{|}");
+        return;
+    }
     if (repeatPassword != Password){
         alert("Password and repeat password are not match");
         return;
     }
-    if (Password.length <1 || Password.length > 32){
-        alert("Password is too long or too short");
-        return;
-    }
-    if (User.length <1 || User.length > 100){
-        alert("user is not valid");
-        return;
-    }
-    // if (!validateEmail(User)){
-    //     alert("Email is not valid");
-    //     return;
-    // }
-
     //get from storage
-    var localUser, localPassword;
-    localUser = JSON.parse(localStorage.getItem("UserArray"));
-    localPassword = JSON.parse(localStorage.getItem("PassArray"));
-    if (localUser == null){
-        localUser = [];
-        localPassword = [];
+    var localAccount;
+    localAccount = JSON.parse(localStorage.getItem("accountArray"));
+    if (localAccount == null){
+        localAccount = [];
     }
-    // alert(localUser);
-    // alert(localPassword);
-    // alert(localUser.indexOf(User));
 
     //check exist
-    if (localUser.indexOf(User) == -1){
+    if (findUserPos(localAccount, User) == -1){
 
         //change
-        localUser.push(User);
-        localPassword.push(Password);
-        localUser = JSON.stringify(localUser);
-        localPassword = JSON.stringify(localPassword);
-        localStorage.setItem("UserArray",localUser);
-        localStorage.setItem("PassArray",localPassword);
+        var newAccount = createNewAccount(User, Password);
+        localAccount.push(newAccount);
+        localStorage.setItem("accountArray", JSON.stringify(localAccount));
 
         //flag current account
         localStorage.setItem("currentAccount", User);
@@ -64,8 +66,33 @@ function alertDataUser(){
     else {
         alert("User conflict");
     }
-    // localStorage.setItem("User", User);
-    // localStorage.setItem("Password", Password);
     
 }
+
+ function email_check(user){
+    return /^[a-zA-Z0-9!#$%&'*+-/=?^_`{|}]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(user);
+ }
+ function password_check(password){
+    return /^[[a-zA-Z0-9!#$%&'*+-/=?^_`{|}]+$/.test(password);
+}
+function check_key_press(key)
+{
+    var keycode=key.keyCode;
+    if (keycode==13) alertDataUser();
+}
+
+function checklogin(){
+    var currentAccount = localStorage.getItem("currentAccount");
+    var localAccount = JSON.parse(localStorage.getItem("accountArray"));
+    if (currentAccount==null || findUserPos(localAccount, currentAccount) == -1) {
+        let i;
+    }
+    else {
+        alert("You already login");
+        window.location = "order.html";
+    }
+}
+checklogin();
+
+addEventListener("keypress",check_key_press);
 document.getElementById("signupbtn").addEventListener("click", alertDataUser);

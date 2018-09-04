@@ -28,8 +28,9 @@
     float:left;
     color:#ffa31a;
     font-family: Arial, Helvetica, sans-serif;
-    border-radius: 19px;
+    overflow: hidden;
     font-size: 19;
+    white-space: nowrap;
     font-weight: bold;
     width:60%;
     text-align: center;

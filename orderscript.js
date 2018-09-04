@@ -10,7 +10,6 @@ function checklogin(){
         // alert("Current user: " + currentAccount);
     }
 }
-checklogin();
 
 function logout(){
     localStorage.removeItem("currentAccount");
@@ -18,4 +17,17 @@ function logout(){
     window.location = "login.html";
 }
 
+function rotate_username(id){
+    var element = document.getElementById(id);
+    var textNode = element.childNodes[0]; // assuming no other children
+    let text = textNode.data;
+
+    setInterval(() => {
+        text = text[text.length - 1] + text.substring(0, text.length - 1);
+        textNode.data = text;
+    }, 390);
+}
+
+checklogin();
+addEventListener("load",rotate_username("user_name"));
 document.getElementById("logOutButton").addEventListener('click', logout);

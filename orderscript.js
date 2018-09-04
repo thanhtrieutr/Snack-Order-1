@@ -6,7 +6,7 @@ function checklogin(){
         window.location = "login.html";
     }
     else {
-        document.getElementById("user_name").innerHTML = currentAccount;
+        document.getElementById("user_name").innerHTML = currentAccount+"   ";
         // alert("Current user: " + currentAccount);
     }
 }
@@ -21,11 +21,11 @@ function rotate_username(id){
     var element = document.getElementById(id);
     var textNode = element.childNodes[0]; // assuming no other children
     let text = textNode.data;
-
+    if (text.length<=20) return;
     setInterval(() => {
-        text = text[text.length - 1] + text.substring(0, text.length - 1);
+        text = text.substring(1, text.length)+text[0];
         textNode.data = text;
-    }, 390);
+    }, 200);
 }
 
 checklogin();

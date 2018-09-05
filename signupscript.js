@@ -8,8 +8,9 @@ function createNewAccount(user, password){
 
 function findUserPos(localAccount, user){
     for (var i in localAccount){
-        if (localAccount[i].user == user)
+        if (localAccount[i].user == user) {
             return i;
+        }
     }
     return -1;
 }
@@ -75,7 +76,9 @@ function alertDataUser(){
     return /^[[a-zA-Z0-9!#$%&'*+-/=?^_`{|}]+$/.test(password);
 }
 function checkKeyPress(key){
-    if (key.keyCode == 13) alertDataUser();
+    if (key.keyCode == 13) {
+        alertDataUser();
+    }
 }
 
 function checkLogin(){

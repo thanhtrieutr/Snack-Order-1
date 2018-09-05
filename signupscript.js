@@ -26,7 +26,7 @@ function alertDataUser(){
         return;
     }
     else if (!email_check(User)){
-        alert("Email is not valid");
+        alert("Email is not valid and must only contains contains characters a->z,A->Z,0->9");
         return;
     }
     if (Password.length <8 || Password.length > 16){
@@ -70,7 +70,7 @@ function alertDataUser(){
 }
 
  function email_check(user){
-    return /^[a-zA-Z0-9!#$%&'*+-/=?^_`{|}]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(user);
+    return /^[a-zA-Z0-9_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(user);
  }
  function password_check(password){
     return /^[[a-zA-Z0-9!#$%&'*+-/=?^_`{|}]+$/.test(password);

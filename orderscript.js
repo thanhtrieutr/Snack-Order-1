@@ -1,7 +1,7 @@
-function findUserPos(localAccount, user){
+function findUserPosition(localAccount, user){
     for (var i in localAccount){
-        if (localAccount[i].user == user)
-            return i;
+        if (localAccount[i].user == user){
+            return i;}
     }
     return -1;
  }
@@ -9,35 +9,36 @@ function findUserPos(localAccount, user){
 function checklogin(){
     var currentAccount = localStorage.getItem("currentAccount");
     var localAccount = JSON.parse(localStorage.getItem("accountArray"));
-    if (currentAccount==null ||  findUserPos(localAccount, currentAccount) == -1){
+    if (currentAccount == null ||  findUserPosition(localAccount, currentAccount) == -1){
         alert("You haven't login");
         window.location = "login.html";
     }
     else {
-        document.getElementById("user_name").innerHTML = currentAccount+"     ";
-        // alert("Current user: " + currentAccount);
+        document.getElementById("user-name").innerHTML = currentAccount + "     ";
     }
 }
 
-function logout(){
+function logOut(){
     localStorage.removeItem("currentAccount");
     window.location = "login.html";
 }
 
-function rotate_username(id){
+function rotateUsername(id){
     var element = document.getElementById(id);
     var textNode = element.childNodes[0]; // assuming no other children
     let text = textNode.data;
-    if (text.length<=20) return;
+    if (text.length <= 20) { 
+        return; 
+    }
     setInterval(() => {
-        text = text.substring(1, text.length)+text[0];
+        text = text.substring(1, text.length) + text[0];
         textNode.data = text;
     }, 200);
 }
 
 checklogin();
-addEventListener("load",rotate_username("user_name"));
-document.getElementById("logOutButton").addEventListener('click', logout);
+addEventListener("load", rotateUsername("user-name"));
+document.getElementById("log-out-button").addEventListener('click', logOut);
 
 //choose snack
 
@@ -47,8 +48,9 @@ var user = localStorage.getItem("currentAccount");
 
 function getUserInLocalAccount( tmpUser){
     for (var i in localAccount){
-        if (localAccount[i].user == tmpUser)
-            return localAccount[i];
+        if (localAccount[i].user == tmpUser) { 
+            return localAccount[i]; 
+        }
     }
     return -1;
 }
@@ -107,13 +109,14 @@ function addSnack(ID, amount){
 function removeSnack(ID){
     var cartID = "cart-" + ID;
     var element = document.getElementById(cartID);
-    if (document.contains( element ))
-        element.parentNode.removeChild(element);
+    if (document.contains( element )) { 
+        element.parentNode.removeChild(element); 
+    }
 }
 function showCurrentSnack(){
     var currentUser = getUserInLocalAccount(user);
-    if (currentUser.cartArray == null)
-        currentUser.cartArray = [];
+    if (currentUser.cartArray == null) { 
+        currentUser.cartArray = []; }
     //hidd all
     for (var i=1; i<=4; i++){
         removeSnack(i);
@@ -128,8 +131,8 @@ showCurrentSnack();
 
 function findProductPosition(currentUser, currentID){
     for (var i in currentUser.cartArray){
-        if (currentUser.cartArray[i].productID == currentID)
-            return i;
+        if (currentUser.cartArray[i].productID == currentID){
+            return i;}
     }
     return -1;
 }
@@ -146,7 +149,6 @@ function chooseSnack(currentID ){
             };
             currentUser.cartArray.push(newProduct);
             localStorage.setItem("accountArray", JSON.stringify(localAccount));
-            //showCurrentSnack();
             addSnack(newProduct.productID, newProduct.amount);
         }
     }
@@ -155,7 +157,6 @@ function chooseSnack(currentID ){
         if (product != -1){
             currentUser.cartArray.splice(product, 1);
             localStorage.setItem("accountArray", JSON.stringify(localAccount));
-            //showCurrentSnack();
             removeSnack(currentID);
         }
     }

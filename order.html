@@ -12,77 +12,73 @@
         <link rel="stylesheet" type="text/css" media="screen" href="style.css" />
     </head>
     <body>
-        <div id="title">SNACK-ORDER</div>
-        <div id="login_zone">
-            <a id="log_in" href="login.html">LOGIN</a>
-            <a id="sign_up" href="signup.html">SIGN UP</a>
-            <div class="user-zone">
-            <img class="avatar" src="https://i.imgur.com/rTNSSa8.jpg" alt="User Avatar"> 
-            <p>Username: Pikachu</p> 
-            <p>Telephone: +84123456789</p> 
-            <p>Address: Some Address 123</p> 
+        <div id="title">
+            SNACK-ORDER 
+            <div id="User_bar"> 
+                <a href="profile.html"> <div id="user_name">Username </div> </a>
+                <button id="logOutButton">Log Out</button>
             </div>
         </div>
-
         <span id="main-order">
             <!-- for one snack -->
             <!-- first -->
             <span class="one-snack">
                 <img class="snack-img" src="https://i.imgur.com/14LDgbZ.jpg" alt="Snack Bento ">
-                <span class="main-snack-name">
+                <span class="main-snack-name" id="snack-name-1">
                     Snack Mực Tẩm Gia Vị Cay Ngọt Bento (24g)
                 </span>
-                <span class="main-snack-price">
+                <span class="main-snack-price" id="snack-price-1">
                     19.000 ₫
                 </span>
-                <input type="checkbox">
+                <input type="checkbox" id="checkbox-1" onclick="chooseSnack(1)">
             </span>
 
             <!-- second -->
             <span class="one-snack">
                 <img class="snack-img" src="https://i.imgur.com/XGoBsQd.jpg" alt="Snack Ligo">
-                <span class="main-snack-name">
+                <span class="main-snack-name" id="snack-name-2">
                     Bánh Snack Khoai Tây Ligo (110g)
                 </span>
-                <span class="main-snack-price">
+                <span class="main-snack-price" id="snack-price-2">
                     35.000 ₫
                 </span>
-                <input type="checkbox">
+                <input type="checkbox" id="checkbox-2" onclick="chooseSnack(2)">
             </span>
 
             <!-- third -->
             <span class="one-snack">
                 <img class="snack-img" src="https://i.imgur.com/I753nx1.jpg" alt="Snack Seaweed">
-                <span class="main-snack-name">
+                <span class="main-snack-name" id="snack-name-3">
                     Snack rong biển Tao Kae Noi Tempura vị Cay 25g
                 </span>
-                <span class="main-snack-price">
+                <span class="main-snack-price" id="snack-price-3">
                     19.000 ₫
                 </span>
-                <input type="checkbox">
+                <input type="checkbox" id="checkbox-3" onclick="chooseSnack(3)">
             </span>
 
-            <!-- third -->
+            <!-- forth -->
             <span class="one-snack">
                 <img class="snack-img" src="https://i.imgur.com/53XhkaO.jpg" alt="Snack Shrimp ">
-                <span class="main-snack-name">
+                <span class="main-snack-name" id="snack-name-4">
                     Bánh Snack Tôm NongShim Túi Lớn (180g)
                 </span>
-                <span class="main-snack-price">
+                <span class="main-snack-price" id="snack-price-4">
                     44.000 ₫
                 </span>
-                <input type="checkbox">
+                <input type="checkbox" id="checkbox-4" onclick="chooseSnack(4)">
             </span>
         </span>
 
         <!-- Huy -->
         <div id="bill-form">
-            <h1>BILL</h1>
-            <div class="main-bill-form">
+            <h1>Cart</h1>
+            
+            <div class="main-bill-form" id="still-main-bill-form">
 
-                <div class="order-thing"> 
+                <!-- <div class="order-thing" id="cart-1"> 
                     <span class="name-of-snack">Snack Mực Tẩm Gia Vị Cay Ngọt Bento (24g)</span>
-                    <span class="price-of-snack">5000d</span>
+                    <span class="price-of-snack">19.000 ₫</span>
                     <span class="number-of-snack">
                         <button class="number-button">-</button>
                         1
@@ -90,9 +86,9 @@
                     </span>
                 </div>
 
-                <div class="order-thing"> 
-                    <span class="name-of-snack">Snack Mực Tẩm Gia Vị Cay Ngọt Bento (24g)</span>
-                    <span class="price-of-snack">5001d</span>
+                <div class="order-thing" id="cart-2"> 
+                    <span class="name-of-snack">Bánh Snack Khoai Tây Ligo (110g)</span>
+                    <span class="price-of-snack">35.000 ₫</span>
                     <span class="number-of-snack">
                         <button class="number-button">-</button>
                         1
@@ -100,9 +96,9 @@
                     </span>
                 </div>
 
-                <div class="order-thing"> 
+                <div class="order-thing" id="cart-3"> 
                     <span class="name-of-snack">Snack rong biển Tao Kae Noi Tempura vị Cay 25g</span>
-                    <span class="price-of-snack">5002d</span>
+                    <span class="price-of-snack">19.000 ₫</span>
                     <span class="number-of-snack">
                         <button class="number-button">-</button>
                         1
@@ -111,45 +107,17 @@
                 </div>
 
                             
-                <div class="order-thing">             
-                    <span class="name-of-snack">Snack rong biển Tao Kae Noi Tempura vị Cay 25g</span>            
-                    <span class="price-of-snack">5002d</span>
+                <div class="order-thing" id="cart-4">             
+                    <span class="name-of-snack">Bánh Snack Tôm NongShim Túi Lớn (180g)</span>            
+                    <span class="price-of-snack">44.000 ₫</span>
                     <span class="number-of-snack">                                    
                         <button class="number-button">-</button>              
                         1 
                         <button class="number-button">+</button>
                     </span>
-                </div>
+                </div> -->
 
-                <div class="order-thing"> 
-                    <span class="name-of-snack">Snack rong biển Tao Kae Noi Tempura vị Cay 25g</span>
-                    <span class="price-of-snack">5002d</span>
-                    <span class="number-of-snack">
-                        <button class="number-button">-</button>
-                        1
-                        <button class="number-button">+</button>
-                    </span>
-                </div>
-
-                <div class="order-thing"> 
-                    <span class="name-of-snack">Snack rong biển Tao Kae Noi Tempura vị Cay 25g</span>
-                    <span class="price-of-snack">5002d</span>
-                    <span class="number-of-snack">
-                        <button class="number-button">-</button>
-                            1
-                        <button class="number-button">+</button>
-                    </span>
-                </div>
-
-                <div class="order-thing"> 
-                    <span class="name-of-snack">Snack rong biển Tao Kae Noi Tempura vị Cay 25g</span>
-                    <span class="price-of-snack">5002d</span>
-                    <span class="number-of-snack">
-                        <button class="number-button">-</button>
-                        1
-                        <button class="number-button">+</button>
-                    </span>
-                </div>
+                
             </div>
             
             <div>
@@ -159,4 +127,6 @@
             <button class="my-button" id="order-button">Order</button>
         </div>
     </body>
+
+    <script src="orderscript.js"> </script>
 </html>

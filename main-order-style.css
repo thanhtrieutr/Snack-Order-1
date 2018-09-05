@@ -2,18 +2,19 @@ body{
     background-color: #ffff99;
     opacity: 10%;
     font-family: Arial, Helvetica, sans-serif;
+    margin:0;
 }
 #main-order{
+    z-index: 0;
     height: calc(100% - 110px);
-    width: 45%;
-    overflow-y: scroll;
+    width:65%;
+    left:4%;
     display: inline-block;
-    position: absolute;
-    left: 23.5%;
+    position:absolute;
     padding: 10px;
     padding-right: 0;
     padding-top:0;
-    top: 100px;
+    top: 16%;
     padding-bottom: 0;
 }
 .one-snack{
@@ -28,7 +29,7 @@ body{
 }
 .snack-img{
     height: 35%;
-    width: 35%;
+    width: 25%;
 }
 [class ^= "main-snack"]{    
     position: absolute;
@@ -37,6 +38,7 @@ body{
     font-size: 20px;
 }
 .main-snack-name{
+    padding-left: 10px;
     top: 20%;
     font-weight: 700;
 }
@@ -53,6 +55,6 @@ body{
     position: absolute;
     top: 35%;
     right: 4%;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
 }

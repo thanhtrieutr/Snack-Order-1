@@ -1,0 +1,56 @@
+*{
+    font-family: "Lato","Helvetica Neue","Helvetica","Arial", fontawesome;
+    line-height: 1.4;
+}
+body{
+    background: url("https://preview.ibb.co/eraOhp/Background_Signin.png");
+    opacity: 10%;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.main-content{
+     height: 68%; 
+    border-radius: 20px;
+    width: 400px;
+    position: relative;
+    top: 15%;
+    margin: auto;
+    margin-top: 15px;
+    text-align: center;
+    background-color: #E9EBEE;
+    background: url("https://www.xmple.com/wallpaper/linear-highlight-yellow-green-gradient-1920x1080-c2-fffdc7-c7ffcd-l-50-a-135-f-21.svg");
+    padding-bottom: 5px;
+}
+
+.user-zone {
+    font-size: 18;
+    display: inline-block;
+    width: 100%;
+    font-weight: 700;
+}
+.avatar {
+    padding: 10px;
+    display:block;
+    width: 40%;
+    height: 35%;
+    margin:auto;
+}
+.user-zone p {
+    padding: 10px;
+}
+button {
+    background-color: #ffe36a;
+    color: black;
+    padding: 5px 20px;
+    width: 30%;
+    margin-bottom: 0px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    opacity: 0.9;
+    margin-left: 5%;
+    margin-right: 5%;
+}

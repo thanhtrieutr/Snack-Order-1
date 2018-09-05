@@ -1,15 +1,16 @@
-function findUserPosition(localAccount, user){
-    for (var i in localAccount){
-        if (localAccount[i].user == user){
-            return i;}
+function findUserPosition(localAccount, user) {
+    for (var i in localAccount) {
+        if (localAccount[i].user == user) {
+            return i;
+        }
     }
     return -1;
- }
+}
  
-function checklogin(){
+function checklogin() {
     var currentAccount = localStorage.getItem("currentAccount");
     var localAccount = JSON.parse(localStorage.getItem("accountArray"));
-    if (currentAccount == null ||  findUserPosition(localAccount, currentAccount) == -1){
+    if (currentAccount == null || findUserPosition(localAccount, currentAccount) == -1) {
         alert("You haven't login");
         window.location = "login.html";
     }
@@ -18,17 +19,17 @@ function checklogin(){
     }
 }
 
-function logOut(){
+function logOut() {
     localStorage.removeItem("currentAccount");
     window.location = "login.html";
 }
 
-function rotateUsername(id){
+function rotateUsername(id) {
     var element = document.getElementById(id);
     var textNode = element.childNodes[0]; // assuming no other children
     let text = textNode.data;
-    if (text.length <= 20) { 
-        return; 
+    if (text.length <= 20) {
+        return;
     }
     setInterval(() => {
         text = text.substring(1, text.length) + text[0];
@@ -43,18 +44,18 @@ document.getElementById("log-out-button").addEventListener('click', logOut);
 //choose snack
 
 
-var localAccount = (JSON.parse(localStorage.getItem("accountArray")) || []);
+var localAccount = (JSON.parse( localStorage.getItem("accountArray")) || []);
 var user = localStorage.getItem("currentAccount");
 
-function getUserInLocalAccount( tmpUser){
-    for (var i in localAccount){
+function getUserInLocalAccount(tmpUser) {
+    for (var i in localAccount) {
         if (localAccount[i].user == tmpUser) { 
             return localAccount[i]; 
         }
     }
     return -1;
 }
-function addSnack(ID, amount){
+function addSnack(ID, amount) {
     var cartID = "cart-" + ID;
     //parent 
     var parentElement = document.getElementById("still-main-bill-form");
@@ -69,7 +70,7 @@ function addSnack(ID, amount){
     oneSpan = document.createElement("span");
     oneSpan.setAttribute("class", "name-of-snack");
     snackName = document.getElementById("snack-name-" + ID).innerHTML;
-    oneText = document.createTextNode( snackName );
+    oneText = document.createTextNode(snackName);
     oneSpan.appendChild(oneText);
     oneDiv.appendChild(oneSpan);
 
@@ -77,7 +78,7 @@ function addSnack(ID, amount){
     oneSpan = document.createElement("span");
     oneSpan.setAttribute("class", "price-of-snack");
     snackPrice = document.getElementById("snack-price-" + ID).innerHTML;
-    oneText = document.createTextNode( snackPrice );
+    oneText = document.createTextNode(snackPrice);
     oneSpan.appendChild(oneText);
     oneDiv.appendChild(oneSpan);
 
@@ -106,55 +107,57 @@ function addSnack(ID, amount){
     //add to parent
     parentElement.appendChild(oneDiv);
 }
-function removeSnack(ID){
+function removeSnack(ID) {
     var cartID = "cart-" + ID;
     var element = document.getElementById(cartID);
-    if (document.contains( element )) { 
+    if (document.contains(element)) { 
         element.parentNode.removeChild(element); 
     }
 }
-function showCurrentSnack(){
+function showCurrentSnack() {
     var currentUser = getUserInLocalAccount(user);
     if (currentUser.cartArray == null) { 
-        currentUser.cartArray = []; }
+        currentUser.cartArray = []; 
+    }
     //hidd all
-    for (var i=1; i<=4; i++){
+    for (var i=1; i<=4; i++) {
         removeSnack(i);
     }
     //show in data
-    for (var i in currentUser.cartArray){
+    for (var i in currentUser.cartArray) {
         addSnack( currentUser.cartArray[i].productID, currentUser.cartArray[i].amount);
         document.getElementById("checkbox-" + currentUser.cartArray[i].productID).checked = true;
     }
 }
 showCurrentSnack();
 
-function findProductPosition(currentUser, currentID){
-    for (var i in currentUser.cartArray){
-        if (currentUser.cartArray[i].productID == currentID){
-            return i;}
+function findProductPosition(currentUser, currentID) {
+    for (var i in currentUser.cartArray) {
+        if (currentUser.cartArray[i].productID == currentID) {
+            return i;
+        }
     }
     return -1;
 }
-function chooseSnack(currentID ){
+function chooseSnack(currentID) {
     var checkBox = document.getElementById("checkbox-" + currentID);
     var currentUser = getUserInLocalAccount(user);
     console.log(currentUser);
-    if (checkBox.checked == true){
+    if (checkBox.checked == true) {
         var product = findProductPosition(currentUser, currentID);
-        if (product == -1){
+        if (product == -1) {
             var newProduct = {
-                productID : currentID,
-                amount : 1
+                productID: currentID,
+                amount: 1
             };
             currentUser.cartArray.push(newProduct);
             localStorage.setItem("accountArray", JSON.stringify(localAccount));
             addSnack(newProduct.productID, newProduct.amount);
         }
     }
-    else{
+    else {
         var product = findProductPosition(currentUser, currentID);
-        if (product != -1){
+        if (product != -1) {
             currentUser.cartArray.splice(product, 1);
             localStorage.setItem("accountArray", JSON.stringify(localAccount));
             removeSnack(currentID);

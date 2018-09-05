@@ -11,7 +11,7 @@
     border: 1px solid #ffe36a;
     background-color: white;
 }
-.main-bill-form{
+.main-bill-form {
     height: 70%;
     overflow-y: scroll;
     margin-bottom: 5px;
@@ -30,27 +30,26 @@
     padding: 5px;
     position: relative;
 }
-.name-of-snack{
+.name-of-snack {
     top: 20%;
     font-weight: 700;
     display: inline-block;
     width: 70%;
     font-size: 20px;
-
 }
-.price-of-snack{
+.price-of-snack {
     top: 60%;
     display: inline-block;
     width: 55%;
     font-size: 20px;
 }
-.oder-thing .number-of-snack{
+.oder-thing .number-of-snack {
     top: 35%;
     right: 4%;
     width: 20px;
     height: 20px;
     display: flex;
-    padding : auto;
+    padding: auto;
 }
 .number-of-snack {
     display: inline-block;
@@ -61,16 +60,16 @@
     font-size: 20px;
     display: inline-block;
     margin-top: 10px;
-    margin-bottom:10px;
+    margin-bottom: 10px;
 }
 #total-price-number {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 20px;
-    padding:5px;
+    padding: 5px;
     display: inline-block;
     margin-left: 47%;
 }
-#order-button { 
+#order-button {
     display: block;
     margin: auto;  
     font-family: Arial, Helvetica, sans-serif;

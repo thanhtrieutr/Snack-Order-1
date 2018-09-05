@@ -98,8 +98,6 @@ document.getElementById("sign-up-button").addEventListener("click", alertDataUse
 let passText = 'background: #222; color: #61B97F';
 let failText = 'background: #222; color: #E42A1B';
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 // check email character
 function emailCheck(user){
     return /^[a-zA-Z0-9_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(user)

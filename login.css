@@ -72,7 +72,7 @@ button {
 #link-signup {
     text-decoration: none;
 }
-.logo,.logo-container {
+.logo, .logo-container {
     width: 468px;
     height: 200px;
     margin: auto;

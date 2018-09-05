@@ -1,15 +1,17 @@
-*{
+* {
     font-family: "Lato","Helvetica Neue","Helvetica","Arial", fontawesome;
     line-height: 1.4;
 }
-body{
+
+body {
     background: url("https://preview.ibb.co/eraOhp/Background_Signin.png");
     opacity: 10%;
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
 }
-.main-content{
+
+.main-content {
     height: 68%; 
     border-radius: 20px;
     width: 400px;
@@ -29,6 +31,7 @@ body{
     width: 100%;
     font-weight: 700;
 }
+
 .avatar {
     padding: 10px;
     display: block;
@@ -36,9 +39,11 @@ body{
     height: 35%;
     margin: auto;
 }
+
 .user-zone p {
     padding: 10px;
 }
+
 button {
     background-color: #ffe36a;
     color: black;

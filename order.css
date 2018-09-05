@@ -10,7 +10,7 @@
     color:whitesmoke;
     font-size: 60px;
 }
-#user_bar{
+#user-bar{
     display:block;
     position: absolute;
     box-sizing: border-box;
@@ -23,8 +23,7 @@
     border-radius: 19px;
     padding :9px;
 }
-#user_name{
-    display: inline-block;
+#user-name{
     float:left;
     color:#ffa31a;
     font-family: Arial, Helvetica, sans-serif;
@@ -36,8 +35,7 @@
     text-align: center;
 }
 
-#user_bar button{
-    display: inline-block;
+#user-bar button{
     float:right;
     color:#ffe36a;
     background: #ffa31a;

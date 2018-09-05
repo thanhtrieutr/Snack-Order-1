@@ -149,7 +149,6 @@ function chooseSnack(currentID ){
             };
             currentUser.cartArray.push(newProduct);
             localStorage.setItem("accountArray", JSON.stringify(localAccount));
-            //showCurrentSnack();
             addSnack(newProduct.productID, newProduct.amount);
         }
     }
@@ -158,7 +157,6 @@ function chooseSnack(currentID ){
         if (product != -1){
             currentUser.cartArray.splice(product, 1);
             localStorage.setItem("accountArray", JSON.stringify(localAccount));
-            //showCurrentSnack();
             removeSnack(currentID);
         }
     }

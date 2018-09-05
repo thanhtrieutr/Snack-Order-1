@@ -1,5 +1,5 @@
-function findUserPosition(localAccount, user){
-    for (var i in localAccount){
+function findUserPosition(localAccount, user) {
+    for (var i in localAccount) {
         if (localAccount[i].user == user) {
             return i;
         }
@@ -9,7 +9,7 @@ function findUserPosition(localAccount, user){
 function checkLogIn(){
     var currentAccount = localStorage.getItem("currentAccount");
     var localAccount = JSON.parse(localStorage.getItem("accountArray"));
-    if (currentAccount == null ||  findUserPos(localAccount, currentAccount) == -1){
+    if (currentAccount == null ||  findUserPos(localAccount, currentAccount) == -1) {
         alert("You haven't login");
         window.location = "login.html";
     }

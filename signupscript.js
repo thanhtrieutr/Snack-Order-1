@@ -94,10 +94,11 @@ checkLogin();
 addEventListener("keypress",checkKeyPress);
 document.getElementById("signUpButton").addEventListener("click", alertDataUser);
 
-// UNIT TEST
+//UNIT TEST
 let passText = 'background: #222; color: #61B97F';
 let failText = 'background: #222; color: #E42A1B';
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 // check email character
 function emailCheck(user){
@@ -108,6 +109,9 @@ function emailCheck(user){
 =======
 //unit test for email_check:
 >>>>>>> 511221708d6797b13b07897cf83f971c7d528317
+=======
+//unit test for email_check:
+>>>>>>> 9dcd43d387616e4a7be7ccb5dd85300322a73293
 function testEmailCheck(description, expectation, func) {
     if(func == expectation) {
       console.log(`%cPass: ${description}`, passText)
@@ -119,6 +123,7 @@ testEmailCheck("Email must only contain characters a->z,A->Z,0->9", true, emailC
 testEmailCheck("Email must only contain characters a->z,A->Z,0->9", true, emailCheck("dylan00433@gmail.com"));
 testEmailCheck("Email must only contain characters a->z,A->Z,0->9", true, emailCheck("aaaaaaa"));
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 
 //check password character
@@ -127,6 +132,8 @@ function passwordCheck(password){
 }
 =======
 >>>>>>> 511221708d6797b13b07897cf83f971c7d528317
+=======
+>>>>>>> 9dcd43d387616e4a7be7ccb5dd85300322a73293
 
 //unit test for password_check:
 function testPasswordCheck(expect, funcCheck) {

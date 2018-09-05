@@ -1,43 +1,43 @@
 function createNewAccount(user, password){
-    var obj = {};
-    obj.user = user;
-    obj.password = password;
-    obj.cartArray = [];
-    return obj;
- }
+    var newAccount = {};
+    newAccount.user = user;
+    newAccount.password = password;
+    newAccount.cartArray = [];
+    return newAccount;
+}
 
- function findUserPos(localAccount, user){
+function findUserPosition(localAccount, user){
     for (var i in localAccount){
-        if (localAccount[i].user == user)
+        if (localAccount[i].user == user) {
             return i;
+        }
     }
     return -1;
- }
+}
+
 function alertDataUser(){
-    var User = document.getElementById("inputUser").value;
-    var Password = document.getElementById("inputPassword").value;
+    var user = document.getElementById("inputUser").value;
+    var password = document.getElementById("inputPassword").value;
     var repeatPassword = document.getElementById("inputRepeatPassword").value;
 
-    // alert('User :' + User + '\n' + 'Password: ' + Password  + '\n' + 'RePassword: ' + repeatPassword);
-
     //check validation
-    if (User.length <6 || User.length > 100){
+    if (user.length < 6 || user.length > 100){
         alert("Username is too long or too short");
         return;
     }
-    else if (!email_check(User)){
+    else if (!emailCheck(user)){
         alert("Email is not valid and must only contains contains characters a->z,A->Z,0->9");
         return;
     }
-    if (Password.length <8 || Password.length > 16){
+    if (password.length < 8 || password.length > 16){
         alert("Password is too long or too short");
         return;
     }
-    else if (!password_check(Password)){
+    else if (!passwordCheck(password)){
         alert("Password can only contains characters a->z,A->Z,0->9 and symbol !#$%&'*+-/=?^_`{|}");
         return;
     }
-    if (repeatPassword != Password){
+    if (repeatPassword != password){
         alert("Password and repeat password are not match");
         return;
     }
@@ -49,15 +49,15 @@ function alertDataUser(){
     }
 
     //check exist
-    if (findUserPos(localAccount, User) == -1){
+    if (findUserPosition(localAccount, user) == -1){
 
         //change
-        var newAccount = createNewAccount(User, Password);
+        var newAccount = createNewAccount(user, password);
         localAccount.push(newAccount);
         localStorage.setItem("accountArray", JSON.stringify(localAccount));
 
         //flag current account
-        localStorage.setItem("currentAccount", User);
+        localStorage.setItem("currentAccount", user);
 
         // redirect
         alert("signup success");
@@ -69,45 +69,36 @@ function alertDataUser(){
     
 }
 
- function email_check(user){
+ function emailCheck(user){
     return /^[a-zA-Z0-9_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(user);
  }
- function password_check(password){
+ function passwordCheck(password){
     return /^[[a-zA-Z0-9!#$%&'*+-/=?^_`{|}]+$/.test(password);
 }
-function check_key_press(key)
-{
-    var keycode=key.keyCode;
-    if (keycode==13) alertDataUser();
+function checkKeyPress(key){
+    if (key.keyCode == 13) {
+        alertDataUser();
+    }
 }
 
-function checklogin(){
+function checkLogin(){
     var currentAccount = localStorage.getItem("currentAccount");
     var localAccount = JSON.parse(localStorage.getItem("accountArray"));
-    if (currentAccount==null || findUserPos(localAccount, currentAccount) == -1) {
-        let i;
-    }
-    else {
+    if (currentAccount != null && findUserPosition(localAccount, currentAccount) != -1) {
         alert("You already login");
         window.location = "order.html";
     }
 }
-checklogin();
+checkLogin();
 
-addEventListener("keypress",check_key_press);
-document.getElementById("signupbtn").addEventListener("click", alertDataUser);
+addEventListener("keypress",checkKeyPress);
+document.getElementById("signUpButton").addEventListener("click", alertDataUser);
 
-
-// UNIT TEST
+//UNIT TEST
 let passText = 'background: #222; color: #61B97F';
 let failText = 'background: #222; color: #E42A1B';
 
-// check email character
-function emailCheck(user){
-    return /^[a-zA-Z0-9_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(user)
-}
-
-// unit test for email_check:
+//unit test for email_check:
 function testEmailCheck(description, expectation, func) {
     if(func == expectation) {
       console.log(`%cPass: ${description}`, passText)
@@ -118,12 +109,6 @@ function testEmailCheck(description, expectation, func) {
 testEmailCheck("Email must only contain characters a->z,A->Z,0->9", true, emailCheck("aaa@aaa.aaa"));
 testEmailCheck("Email must only contain characters a->z,A->Z,0->9", true, emailCheck("dylan00433@gmail.com"));
 testEmailCheck("Email must only contain characters a->z,A->Z,0->9", true, emailCheck("aaaaaaa"));
-
-
-//check password character
-function passwordCheck(password){
-    return /^[[a-zA-Z0-9!#$%&'*+-/=?^_`{|}]+$/.test(password);
-}
 
 //unit test for password_check:
 function testPasswordCheck(expect, funcCheck) {

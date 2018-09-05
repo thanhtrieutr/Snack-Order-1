@@ -1,12 +1,12 @@
 function createNewAccount(user, password){
-    var obj = {};
-    obj.user = user;
-    obj.password = password;
-    obj.cartArray = [];
-    return obj;
+    var newAccount = {};
+    newAccount.user = user;
+    newAccount.password = password;
+    newAccount.cartArray = [];
+    return newAccount;
 }
 
-function findUserPos(localAccount, user){
+function findUserPosition(localAccount, user){
     for (var i in localAccount){
         if (localAccount[i].user == user) {
             return i;
@@ -49,7 +49,7 @@ function alertDataUser(){
     }
 
     //check exist
-    if (findUserPos(localAccount, user) == -1){
+    if (findUserPosition(localAccount, user) == -1){
 
         //change
         var newAccount = createNewAccount(user, password);
@@ -84,7 +84,7 @@ function checkKeyPress(key){
 function checkLogin(){
     var currentAccount = localStorage.getItem("currentAccount");
     var localAccount = JSON.parse(localStorage.getItem("accountArray"));
-    if (currentAccount != null && findUserPos(localAccount, currentAccount) != -1) {
+    if (currentAccount != null && findUserPosition(localAccount, currentAccount) != -1) {
         alert("You already login");
         window.location = "order.html";
     }

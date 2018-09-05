@@ -1,20 +1,20 @@
-*{
+* {
     font-family: "Lato","Helvetica Neue","Helvetica","Arial", fontawesome;
     line-height: 1.4;
 }
-body{
+body {
     background: url("https://preview.ibb.co/eraOhp/Background_Signin.png");
     opacity: 10%;
     background-position: center center;
     background-size: cover;
     background-repeat: no-repeat;
 }
-.container, h1{
+.container, h1 {
     border-radius: 4px;
     background: white;
     border: hidden;
 }
-.container{
+.container {
     border-radius: 20px;
     width: 400px;
     height: auto;
@@ -25,13 +25,13 @@ body{
     background: url("https://www.xmple.com/wallpaper/linear-highlight-yellow-green-gradient-1920x1080-c2-fffdc7-c7ffcd-l-50-a-135-f-21.svg");
     padding-bottom: 5px;
 }
-h3{
-    text-align:left;
+h3 {
+    text-align: left;
     padding: 0px 20px;
     padding-top: 20px;
     margin: 0;
 }
-h4{
+h4 {
     padding: 0;
     margin: 15px auto;
     text-align: center;
@@ -66,10 +66,10 @@ button {
     font-weight: bold;
     opacity: 0.9;
 }
-#redirect-login  {
+#redirect-login {
     padding-top: 0;
 }
-#link-signup{
+#link-signup {
     text-decoration: none;
 }
 .logo,.logo-container {

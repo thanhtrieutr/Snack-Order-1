@@ -1,4 +1,4 @@
-function createNewAccount(user, password){
+function createNewAccount(user, password) {
     var newAccount = {};
     newAccount.user = user;
     newAccount.password = password;
@@ -6,8 +6,8 @@ function createNewAccount(user, password){
     return newAccount;
 }
 
-function findUserPosition(localAccount, user){
-    for (var i in localAccount){
+function findUserPosition(localAccount, user) {
+    for (var i in localAccount) {
         if (localAccount[i].user == user) {
             return i;
         }
@@ -15,11 +15,10 @@ function findUserPosition(localAccount, user){
     return -1;
 }
 
-function alertDataUser(){
+function alertDataUser() {
 
     var user = document.getElementById("input-user").value;
     var password = document.getElementById("input-password").value;
-
 
     var localAccount = JSON.parse(localStorage.getItem("accountArray"));
 
@@ -28,7 +27,7 @@ function alertDataUser(){
     }
 
     var position = findUserPosition(localAccount, user);
-    if (position > -1 && user == localAccount[position].user && password == localAccount[position].password){
+    if (position > -1 && user == localAccount[position].user && password == localAccount[position].password) {
 
         //flag current account
         localStorage.setItem("currentAccount", user);
@@ -40,7 +39,7 @@ function alertDataUser(){
     else alert("Account don't exist or wrong password");
 }
 
-function checkLogIn(){
+function checkLogIn() {
     var currentAccount = localStorage.getItem("currentAccount");
     var localAccount = JSON.parse(localStorage.getItem("accountArray"));
     if (currentAccount != null && findUserPosition(localAccount, currentAccount) != -1) {
@@ -48,7 +47,7 @@ function checkLogIn(){
         window.location = "order.html";
     }
 }
-function checkKeyPress(key){
+function checkKeyPress(key) {
     if (key.keyCode == 13) {
         alertDataUser();
     }

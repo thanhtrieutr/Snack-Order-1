@@ -1,23 +1,23 @@
-body{
+body {
     background-color: #ffff99;
     opacity: 10%;
     font-family: Arial, Helvetica, sans-serif;
-    margin:0;
+    margin: 0;
 }
-#main-order{
+#main-order {
     z-index: 0;
     height: calc(100% - 110px);
-    width:65%;
-    left:4%;
+    width: 65%;
+    left: 4%;
     display: inline-block;
-    position:absolute;
+    position: absolute;
     padding: 10px;
     padding-right: 0;
-    padding-top:0;
+    padding-top: 0;
     top: 16%;
     padding-bottom: 0;
 }
-.one-snack{
+.one-snack {
     border: 1px solid #ffe36a;
     background-color: white;
     margin-bottom: 10px;
@@ -27,31 +27,31 @@ body{
     box-shadow: 2px 2px 2px #b3b3b3;
     border-radius: 2px;
 }
-.snack-img{
+.snack-img {
     height: 35%;
     width: 25%;
 }
-[class ^= "main-snack"]{    
+[class ^= "main-snack"] {    
     position: absolute;
     display: inline-block;
     width: 55%;
     font-size: 20px;
 }
-.main-snack-name{
+.main-snack-name {
     padding-left: 10px;
     top: 20%;
     font-weight: 700;
 }
-.main-snack-price{
+.main-snack-price {
     top: 60%;
     color: red;
     text-align: center;
 }
-.main-snack-price:hover{
+.main-snack-price:hover {
     font-weight: 600;
     font-size: 26px;
 }
-.one-snack input{
+.one-snack input {
     position: absolute;
     top: 35%;
     right: 4%;

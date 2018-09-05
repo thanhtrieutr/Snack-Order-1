@@ -1,4 +1,4 @@
-function createNewAccount(user, password){
+function createNewAccount(user, password) {
     var newAccount = {};
     newAccount.user = user;
     newAccount.password = password;
@@ -6,7 +6,7 @@ function createNewAccount(user, password){
     return newAccount;
 }
 
-function findUserPosition(localAccount, user){
+function findUserPosition(localAccount, user) {
     for (var i in localAccount){
         if (localAccount[i].user == user) {
             return i;
@@ -15,41 +15,41 @@ function findUserPosition(localAccount, user){
     return -1;
 }
 
-function alertDataUser(){
+function alertDataUser() {
     var user = document.getElementById("input-user").value;
     var password = document.getElementById("input-password").value;
     var repeatPassword = document.getElementById("input-repeat-password").value;
 
     //check validation
-    if (user.length < 6 || user.length > 100){
+    if (user.length < 6 || user.length > 100) {
         alert("Username is too long or too short");
         return;
     }
-    else if (!emailCheck(user)){
+    else if (!emailCheck(user)) {
         alert("Email is not valid and must only contains contains characters a->z,A->Z,0->9");
         return;
     }
-    if (password.length < 8 || password.length > 16){
+    if (password.length < 8 || password.length > 16) {
         alert("Password is too long or too short");
         return;
     }
-    else if (!passwordCheck(password)){
+    else if (!passwordCheck(password)) {
         alert("Password can only contains characters a->z,A->Z,0->9 and symbol !#$%&'*+-/=?^_`{|}");
         return;
     }
-    if (repeatPassword != password){
+    if (repeatPassword != password) {
         alert("Password and repeat password are not match");
         return;
     }
     //get from storage
     var localAccount;
     localAccount = JSON.parse(localStorage.getItem("accountArray"));
-    if (localAccount == null){
+    if (localAccount == null) {
         localAccount = [];
     }
 
     //check exist
-    if (findUserPosition(localAccount, user) == -1){
+    if (findUserPosition(localAccount, user) == -1) {
 
         //change
         var newAccount = createNewAccount(user, password);
@@ -69,19 +69,19 @@ function alertDataUser(){
     
 }
 
- function emailCheck(user){
+ function emailCheck(user) {
     return /^[a-zA-Z0-9_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(user);
  }
- function passwordCheck(password){
+ function passwordCheck(password) {
     return /^[[a-zA-Z0-9!#$%&'*+-/=?^_`{|}]+$/.test(password);
 }
-function checkKeyPress(key){
+function checkKeyPress(key) {
     if (key.keyCode == 13) {
         alertDataUser();
     }
 }
 
-function checkLogin(){
+function checkLogin() {
     var currentAccount = localStorage.getItem("currentAccount");
     var localAccount = JSON.parse(localStorage.getItem("accountArray"));
     if (currentAccount != null && findUserPosition(localAccount, currentAccount) != -1) {
@@ -91,7 +91,7 @@ function checkLogin(){
 }
 checkLogin();
 
-addEventListener("keypress",checkKeyPress);
+addEventListener("keypress", checkKeyPress);
 document.getElementById("sign-up-button").addEventListener("click", alertDataUser);
 
 //UNIT TEST
@@ -99,7 +99,7 @@ let passText = 'background: #222; color: #61B97F';
 let failText = 'background: #222; color: #E42A1B';
 
 // check email character
-function emailCheck(user){
+function emailCheck(user) {
     return /^[a-zA-Z0-9_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(user)
 }
 
@@ -122,7 +122,7 @@ testEmailCheck("Email must only contain characters a->z,A->Z,0->9", true, emailC
 testEmailCheck("Email must only contain characters a->z,A->Z,0->9", true, emailCheck("aaaaaaa"));
 
 //check password character
-function passwordCheck(password){
+function passwordCheck(password) {
     return /^[[a-zA-Z0-9!#$%&'*+-/=?^_`{|}]+$/.test(password);
 }
 
@@ -135,6 +135,6 @@ function testPasswordCheck(expect, funcCheck) {
         console.log(`%cFail: actual: ${funcCheck}, expect: ${expect}`, failText)
       }
 }
-testPasswordCheck(true,passwordCheck("akkajskajaaaa"));
-testPasswordCheck(true,passwordCheck("akkaj   skajaaaa"));
-testPasswordCheck(true,passwordCheck("akkajsk###!!!!!!!ajaaaa"))
+testPasswordCheck(true, passwordCheck("akkajskajaaaa"));
+testPasswordCheck(true, passwordCheck("akkaj   skajaaaa"));
+testPasswordCheck(true, passwordCheck("akkajsk###!!!!!!!ajaaaa"))

@@ -7,7 +7,7 @@ function findUserPosition(localAccount, user) {
     return -1;
 }
  
-function checklogin() {
+function checkLogin() {
     var currentAccount = localStorage.getItem("currentAccount");
     var localAccount = JSON.parse(localStorage.getItem("accountArray"));
     if (currentAccount == null || findUserPosition(localAccount, currentAccount) == -1) {
@@ -37,7 +37,7 @@ function rotateUsername(id) {
     }, 200);
 }
 
-checklogin();
+checkLogin();
 addEventListener("load", rotateUsername("user-name"));
 document.getElementById("log-out-button").addEventListener('click', logOut);
 
@@ -47,9 +47,9 @@ document.getElementById("log-out-button").addEventListener('click', logOut);
 var localAccount = (JSON.parse( localStorage.getItem("accountArray")) || []);
 var user = localStorage.getItem("currentAccount");
 
-function getUserInLocalAccount(tmpUser) {
+function getUserInLocalAccount(temporary) {
     for (var i in localAccount) {
-        if (localAccount[i].user == tmpUser) { 
+        if (localAccount[i].user == temporary) { 
             return localAccount[i]; 
         }
     }
@@ -120,7 +120,7 @@ function showCurrentSnack() {
         currentUser.cartArray = []; 
     }
     //hidd all
-    for (var i=1; i<=4; i++) {
+    for (var i = 1; i <= 4; i++) {
         removeSnack(i);
     }
     //show in data

@@ -15,28 +15,28 @@ function findUserPos(localAccount, user){
 }
 
 function alertDataUser(){
-    var User = document.getElementById("inputUser").value;
-    var Password = document.getElementById("inputPassword").value;
+    var user = document.getElementById("inputUser").value;
+    var password = document.getElementById("inputPassword").value;
     var repeatPassword = document.getElementById("inputRepeatPassword").value;
 
     //check validation
-    if (User.length < 6 || User.length > 100){
+    if (user.length < 6 || user.length > 100){
         alert("Username is too long or too short");
         return;
     }
-    else if (!emailCheck(User)){
+    else if (!emailCheck(user)){
         alert("Email is not valid and must only contains contains characters a->z,A->Z,0->9");
         return;
     }
-    if (Password.length < 8 || Password.length > 16){
+    if (password.length < 8 || password.length > 16){
         alert("Password is too long or too short");
         return;
     }
-    else if (!passwordCheck(Password)){
+    else if (!passwordCheck(password)){
         alert("Password can only contains characters a->z,A->Z,0->9 and symbol !#$%&'*+-/=?^_`{|}");
         return;
     }
-    if (repeatPassword != Password){
+    if (repeatPassword != password){
         alert("Password and repeat password are not match");
         return;
     }
@@ -48,15 +48,15 @@ function alertDataUser(){
     }
 
     //check exist
-    if (findUserPos(localAccount, User) == -1){
+    if (findUserPos(localAccount, user) == -1){
 
         //change
-        var newAccount = createNewAccount(User, Password);
+        var newAccount = createNewAccount(user, password);
         localAccount.push(newAccount);
         localStorage.setItem("accountArray", JSON.stringify(localAccount));
 
         //flag current account
-        localStorage.setItem("currentAccount", User);
+        localStorage.setItem("currentAccount", user);
 
         // redirect
         alert("signup success");
@@ -75,8 +75,7 @@ function alertDataUser(){
     return /^[[a-zA-Z0-9!#$%&'*+-/=?^_`{|}]+$/.test(password);
 }
 function checkKeyPress(key){
-    var keycode = key.keyCode;
-    if (keycode == 13) alertDataUser();
+    if (key.keyCode == 13) alertDataUser();
 }
 
 function checkLogin(){
@@ -90,7 +89,7 @@ function checkLogin(){
 checkLogin();
 
 addEventListener("keypress",checkKeyPress);
-document.getElementById("signupbtn").addEventListener("click", alertDataUser);
+document.getElementById("signUpButton").addEventListener("click", alertDataUser);
 
 //UNIT TEST
 let passText = 'background: #222; color: #61B97F';

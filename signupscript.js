@@ -16,9 +16,9 @@ function findUserPosition(localAccount, user){
 }
 
 function alertDataUser(){
-    var user = document.getElementById("inputUser").value;
-    var password = document.getElementById("inputPassword").value;
-    var repeatPassword = document.getElementById("inputRepeatPassword").value;
+    var user = document.getElementById("input-user").value;
+    var password = document.getElementById("input-password").value;
+    var repeatPassword = document.getElementById("input-repeat-password").value;
 
     //check validation
     if (user.length < 6 || user.length > 100){
@@ -92,7 +92,7 @@ function checkLogin(){
 checkLogin();
 
 addEventListener("keypress",checkKeyPress);
-document.getElementById("signUpButton").addEventListener("click", alertDataUser);
+document.getElementById("sign-up-button").addEventListener("click", alertDataUser);
 
 //UNIT TEST
 let passText = 'background: #222; color: #61B97F';
@@ -106,12 +106,12 @@ function emailCheck(user){
 }
 
 // unit test for email_check:
-=======
+
 //unit test for email_check:
->>>>>>> 511221708d6797b13b07897cf83f971c7d528317
-=======
+
+
 //unit test for email_check:
->>>>>>> 9dcd43d387616e4a7be7ccb5dd85300322a73293
+
 function testEmailCheck(description, expectation, func) {
     if(func == expectation) {
       console.log(`%cPass: ${description}`, passText)
@@ -122,18 +122,11 @@ function testEmailCheck(description, expectation, func) {
 testEmailCheck("Email must only contain characters a->z,A->Z,0->9", true, emailCheck("aaa@aaa.aaa"));
 testEmailCheck("Email must only contain characters a->z,A->Z,0->9", true, emailCheck("dylan00433@gmail.com"));
 testEmailCheck("Email must only contain characters a->z,A->Z,0->9", true, emailCheck("aaaaaaa"));
-<<<<<<< HEAD
-<<<<<<< HEAD
-
 
 //check password character
 function passwordCheck(password){
     return /^[[a-zA-Z0-9!#$%&'*+-/=?^_`{|}]+$/.test(password);
 }
-=======
->>>>>>> 511221708d6797b13b07897cf83f971c7d528317
-=======
->>>>>>> 9dcd43d387616e4a7be7ccb5dd85300322a73293
 
 //unit test for password_check:
 function testPasswordCheck(expect, funcCheck) {

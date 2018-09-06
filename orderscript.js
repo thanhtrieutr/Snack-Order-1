@@ -1,23 +1,23 @@
-function findUserPosition(localAccount, user) {
-    for (var i in localAccount) {
-        if (localAccount[i].user == user) {
-            return i;
-        }
-    }
-    return -1;
-}
+// function findUserPosition(localAccount, user) {
+//     for (var i in localAccount) {
+//         if (localAccount[i].user == user) {
+//             return i;
+//         }
+//     }
+//     return -1;
+// }
  
-function checkLogin() {
-    var currentAccount = localStorage.getItem("currentAccount");
-    var localAccount = JSON.parse(localStorage.getItem("accountArray"));
-    if (currentAccount == null || findUserPosition(localAccount, currentAccount) == -1) {
-        alert("You haven't login");
-        window.location = "login.html";
-    }
-    else {
-        document.getElementById("user-name").innerHTML = currentAccount + "     ";
-    }
-}
+// function checkLogIn() {
+//     var currentAccount = localStorage.getItem("currentAccount");
+//     var localAccount = JSON.parse(localStorage.getItem("accountArray"));
+//     if (currentAccount == null || findUserPosition(localAccount, currentAccount) == -1) {
+//         alert("You haven't login");
+//         window.location = "login.html";
+//     }
+//     else {
+//         document.getElementById("user-name").innerHTML = currentAccount + "     ";
+//     }
+// }
 
 function logOut() {
     localStorage.removeItem("currentAccount");
@@ -25,7 +25,7 @@ function logOut() {
 }
 
 function rotateUsername(id) {
-    var element = document.getElementById(id);
+    var element = getById(id);
     var textNode = element.childNodes[0]; // assuming no other children
     let text = textNode.data;
     if (text.length <= 20) {
@@ -37,9 +37,9 @@ function rotateUsername(id) {
     }, 200);
 }
 
-checkLogin();
+checkLogIn();
 addEventListener("load", rotateUsername("user-name"));
-document.getElementById("log-out-button").addEventListener('click', logOut);
+getById("log-out-button").addEventListener('click', logOut);
 
 //choose snack
 
@@ -58,7 +58,7 @@ function getUserInLocalAccount(temporary) {
 function addSnack(ID, amount) {
     var cartID = "cart-" + ID;
     //parent 
-    var parentElement = document.getElementById("still-main-bill-form");
+    var parentElement = getById("still-main-bill-form");
 
     //make 1 snack element
     var oneDiv, oneSpan, oneText, snackName, snackPrice, oneButton;
@@ -69,7 +69,7 @@ function addSnack(ID, amount) {
     //name of snack
     oneSpan = document.createElement("span");
     oneSpan.setAttribute("class", "name-of-snack");
-    snackName = document.getElementById("snack-name-" + ID).innerHTML;
+    snackName = getById("snack-name-" + ID).innerHTML;
     oneText = document.createTextNode(snackName);
     oneSpan.appendChild(oneText);
     oneDiv.appendChild(oneSpan);
@@ -77,7 +77,7 @@ function addSnack(ID, amount) {
     //price of snack
     oneSpan = document.createElement("span");
     oneSpan.setAttribute("class", "price-of-snack");
-    snackPrice = document.getElementById("snack-price-" + ID).innerHTML;
+    snackPrice = getById("snack-price-" + ID).innerHTML;
     oneText = document.createTextNode(snackPrice);
     oneSpan.appendChild(oneText);
     oneDiv.appendChild(oneSpan);
@@ -109,7 +109,7 @@ function addSnack(ID, amount) {
 }
 function removeSnack(ID) {
     var cartID = "cart-" + ID;
-    var element = document.getElementById(cartID);
+    var element = getById(cartID);
     if (document.contains(element)) { 
         element.parentNode.removeChild(element); 
     }
@@ -126,7 +126,7 @@ function showCurrentSnack() {
     //show in data
     for (var i in currentUser.cartArray) {
         addSnack( currentUser.cartArray[i].productID, currentUser.cartArray[i].amount);
-        document.getElementById("checkbox-" + currentUser.cartArray[i].productID).checked = true;
+        getById("checkbox-" + currentUser.cartArray[i].productID).checked = true;
     }
 }
 showCurrentSnack();
@@ -140,7 +140,17 @@ function findProductPosition(currentUser, currentID) {
     return -1;
 }
 function chooseSnack(currentID) {
-    var checkBox = document.getElementById("checkbox-" + currentID);
+    var checkBox = function checkLogin() {
+    var currentAccount = localStorage.getItem("currentAccount");
+    var localAccount = JSON.parse(localStorage.getItem("accountArray"));
+    if (currentAccount == null || findUserPosition(localAccount, currentAccount) == -1) {
+        alert("You haven't login");
+        window.location = "login.html";
+    }
+    else {
+        getById("user-name").innerHTML = currentAccount + "     ";
+    }
+}("checkbox-" + currentID);
     var currentUser = getUserInLocalAccount(user);
     console.log(currentUser);
     if (checkBox.checked == true) {

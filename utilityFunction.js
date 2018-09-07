@@ -14,7 +14,7 @@ function createNewAccount(user, password) {
 
 //Function findUserPosition:
 function findUserPosition(localAccount, user) {
-  for (var i in localAccount){
+  for (var i in localAccount) {
       if (localAccount[i].user == user) {
           return i;
       }

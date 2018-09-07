@@ -2,7 +2,7 @@ let passText = 'background: #222; color: #61B97F';
 let failText = 'background: #222; color: #E42A1B';
 
 //check email character
-function email_check(user){
+function email_check(user) {
     return /^[a-zA-Z0-9_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(user)
 }
 
@@ -17,7 +17,7 @@ function testEmail_check(description, expectation, func) {
 testEmail_check("Email must only contain characters a->z,A->Z,0->9", true, email_check("aaa@aaa.aaa"))
 
 //check password character
-function password_check(password){
+function password_check(password) {
     return /^[[a-zA-Z0-9!#$%&'*+-/=?^_`{|}]+$/.test(password);
 }
 

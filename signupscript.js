@@ -52,10 +52,10 @@ function alertDataUser() {
     
 }
 
- function emailCheck(user) {
+function emailCheck(user) {
     return /^[a-zA-Z0-9_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(user);
- }
- function passwordCheck(password) {
+}
+function passwordCheck(password) {
     return /^[[a-zA-Z0-9!#$%&'*+-/=?^_`{|}]+$/.test(password);
 }
 function checkKeyPress(key) {

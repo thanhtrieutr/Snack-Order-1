@@ -181,7 +181,7 @@ function displayPrice(x) {
     return x + "đ";
 }
 
-function increaseAmount(currentID){
+function increaseAmount(currentID) {
     var currentUser = getUserInLocalAccount(user);
     var product = findProductPosition(currentUser, Number(currentID));
     var currentProduct = currentUser.cartArray[product];
@@ -203,11 +203,11 @@ function increaseAmount(currentID){
     document.getElementById("total-price-number").innerHTML = totalPrice(currentUser.cartArray);
 }   
 
-function decreaseAmount(currentID){
+function decreaseAmount(currentID) {
     var currentUser = getUserInLocalAccount(user);
     var product = findProductPosition(currentUser, Number(currentID));
     var currentProduct = currentUser.cartArray[product];
-    if (currentProduct.amount > 1){
+    if (currentProduct.amount > 1) {
         currentProduct.amount --;
     }
     if (currentProduct.amount == 1) {

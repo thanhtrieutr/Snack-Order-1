@@ -1,6 +1,6 @@
 // Function for getElementById:
 function getById(field) {
-    return document.getElementById("field");
+    return document.getElementById(field);
 };
 
 //Function createNewAccount:
@@ -23,7 +23,7 @@ function findUserPosition(localAccount, user) {
 }
 
 // Function checkLogIn (already):
-function checkLogInAlredy() {
+function checkLogInAlready() {
   var currentAccount = localStorage.getItem("currentAccount");
   var localAccount = JSON.parse(localStorage.getItem("accountArray"));
   if (currentAccount != null && findUserPosition(localAccount, currentAccount) != -1) {

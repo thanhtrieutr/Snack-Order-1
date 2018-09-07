@@ -140,17 +140,7 @@ function findProductPosition(currentUser, currentID) {
     return -1;
 }
 function chooseSnack(currentID) {
-    var checkBox = function checkLogin() {
-    var currentAccount = localStorage.getItem("currentAccount");
-    var localAccount = JSON.parse(localStorage.getItem("accountArray"));
-    if (currentAccount == null || findUserPosition(localAccount, currentAccount) == -1) {
-        alert("You haven't login");
-        window.location = "login.html";
-    }
-    else {
-        getById("user-name").innerHTML = currentAccount + "     ";
-    }
-}("checkbox-" + currentID);
+    var checkBox = getById("checkbox-" + currentID);
     var currentUser = getUserInLocalAccount(user);
     console.log(currentUser);
     if (checkBox.checked == true) {

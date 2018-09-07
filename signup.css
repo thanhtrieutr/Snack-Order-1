@@ -1,5 +1,5 @@
 * { 
-    font-family: "Lato","Helvetica Neue","Helvetica","Arial", fontawesome;
+    font-family: "Lato", "Helvetica Neue", "Helvetica","Arial", fontawesome;
     line-height: 1.4;
 }
 
@@ -30,14 +30,14 @@ body {
 }
 
 h3 {
-    text-align:left;
+    text-align: left;
     padding: 0px 20px;
     padding-top: 20px;
     margin: 0;
 }
 
 h4 {
-    padding:0;
+    padding: 0;
     margin: 15px auto;
     text-align: center;
 }
@@ -75,7 +75,7 @@ button {
     opacity: 0.9;
 }
 
-#redirect-log-in  {
+#redirect-log-in {
     padding-top: 0;
 }
 

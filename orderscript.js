@@ -1,24 +1,3 @@
-// function findUserPosition(localAccount, user) {
-//     for (var i in localAccount) {
-//         if (localAccount[i].user == user) {
-//             return i;
-//         }
-//     }
-//     return -1;
-// }
- 
-// function checkLogIn() {
-//     var currentAccount = localStorage.getItem("currentAccount");
-//     var localAccount = JSON.parse(localStorage.getItem("accountArray"));
-//     if (currentAccount == null || findUserPosition(localAccount, currentAccount) == -1) {
-//         alert("You haven't login");
-//         window.location = "login.html";
-//     }
-//     else {
-//         document.getElementById("user-name").innerHTML = currentAccount + "     ";
-//     }
-// }
-
 function logOut() {
     localStorage.removeItem("currentAccount");
     window.location = "login.html";
@@ -58,11 +37,12 @@ function getUserInLocalAccount(temporary) {
 
 const itemPrice = [19,35,19,44];
 
-function totalPrice(cartArray){
+function totalPrice(cartArray) {
     var sum = 0;
     if (cartArray == null) cartArray = [];
-    for (var i in cartArray)
+    for (var i in cartArray) {
         sum += cartArray[i].amount * itemPrice[cartArray[i].productID - 1];
+    }
     return displayPrice(sum * 1000);
 }
 
@@ -103,7 +83,9 @@ function addSnack(ID, amount) {
     oneButton.setAttribute("id", "minus-button-" + ID);
     oneButton.setAttribute("onclick", "decreaseAmount("+ ID +")");
     oneText = document.createTextNode("-");
-    if (amount == 1) oneButton.disabled = true;
+    if (amount == 1) {
+        oneButton.disabled = true;
+    }
     oneButton.appendChild(oneText);
     oneSpan.appendChild(oneButton);
     
@@ -190,11 +172,12 @@ function chooseSnack(currentID) {
     }
 }
 
-function displayPrice(x){
+function displayPrice(x) {
     x = x.toString();
     var pattern = /(-?\d+)(\d{3})/;
-    while (pattern.test(x))
+    while (pattern.test(x)) {
         x = x.replace(pattern, "$1,$2");
+    }
     return x + "đ";
 }
 
@@ -202,10 +185,15 @@ function increaseAmount(currentID){
     var currentUser = getUserInLocalAccount(user);
     var product = findProductPosition(currentUser, Number(currentID));
     var currentProduct = currentUser.cartArray[product];
-    if (currentProduct.amount < 99)
+    if (currentProduct.amount < 99) {
         currentProduct.amount ++;
-    if (currentProduct.amount == 99) document.getElementById("add-button-" + currentID).disabled = true;
-    else document.getElementById("add-button-" + currentID).disabled = false;
+    }
+    if (currentProduct.amount == 99) {
+        document.getElementById("add-button-" + currentID).disabled = true;
+    }
+    else {
+        document.getElementById("add-button-" + currentID).disabled = false;
+    }
     document.getElementById("minus-button-" + currentID).disabled = false;
     
     //show data
@@ -222,8 +210,12 @@ function decreaseAmount(currentID){
     if (currentProduct.amount > 1){
         currentProduct.amount --;
     }
-    if (currentProduct.amount == 1) document.getElementById("minus-button-" + currentID).disabled = true;
-    else document.getElementById("minus-button-" + currentID).disabled = false;
+    if (currentProduct.amount == 1) {
+        document.getElementById("minus-button-" + currentID).disabled = true;
+    }
+    else { 
+        document.getElementById("minus-button-" + currentID).disabled = false;
+    }
     document.getElementById("add-button-" + currentID).disabled = false;
     
     //show data

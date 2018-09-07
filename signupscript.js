@@ -1,24 +1,7 @@
-function createNewAccount(user, password) {
-    var newAccount = {};
-    newAccount.user = user;
-    newAccount.password = password;
-    newAccount.cartArray = [];
-    return newAccount;
-}
-
-function findUserPosition(localAccount, user) {
-    for (var i in localAccount){
-        if (localAccount[i].user == user) {
-            return i;
-        }
-    }
-    return -1;
-}
-
 function alertDataUser() {
-    var user = document.getElementById("input-user").value;
-    var password = document.getElementById("input-password").value;
-    var repeatPassword = document.getElementById("input-repeat-password").value;
+    var user = getById("input-user").value;
+    var password = getById("input-password").value;
+    var repeatPassword = getById("input-repeat-password").value;
 
     //check validation
     if (user.length < 6 || user.length > 100) {
@@ -69,10 +52,10 @@ function alertDataUser() {
     
 }
 
- function emailCheck(user) {
+function emailCheck(user) {
     return /^[a-zA-Z0-9_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(user);
- }
- function passwordCheck(password) {
+}
+function passwordCheck(password) {
     return /^[[a-zA-Z0-9!#$%&'*+-/=?^_`{|}]+$/.test(password);
 }
 function checkKeyPress(key) {
@@ -81,18 +64,10 @@ function checkKeyPress(key) {
     }
 }
 
-function checkLogin() {
-    var currentAccount = localStorage.getItem("currentAccount");
-    var localAccount = JSON.parse(localStorage.getItem("accountArray"));
-    if (currentAccount != null && findUserPosition(localAccount, currentAccount) != -1) {
-        alert("You already login");
-        window.location = "order.html";
-    }
-}
-checkLogin();
+checkLogInAlready();
 
 addEventListener("keypress", checkKeyPress);
-document.getElementById("sign-up-button").addEventListener("click", alertDataUser);
+getById("sign-up-button").addEventListener("click", alertDataUser);
 
 //UNIT TEST
 let passText = 'background: #222; color: #61B97F';

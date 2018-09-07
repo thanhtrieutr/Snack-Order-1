@@ -66,3 +66,36 @@ testGetUserInLocalAccount("Testing getUserInLocalAccount function: return correc
 testGetUserInLocalAccount("Testing getUserInLocalAccount function: return correctly", -1, getUserInLocalAccount(testVariable, undefined));
 //------------------------------------------------------------------------------------------------------------------------
 
+
+
+// test function totalPrice ----------------------------------------------------------------------------------------------
+function testTotalPrice(description, expectation, func) {
+    if (func == expectation) {
+        console.log(`%cPass: ${description}`, passText);
+    }
+    else {
+        console.log(`%cFail: actual: ${func}, expectation: ${expectation}`, failText);
+    }
+}
+
+testTotalPrice("Testing totalPrice function: return correctly", "0đ", totalPrice([]));
+testTotalPrice("Testing totalPrice function: return correctly", "0đ", totalPrice(null));
+testTotalPrice("Testing totalPrice function: return correctly", "0đ", totalPrice(undefined));
+//------------------------------------------------------------------------------------------------------------------------
+
+
+// test function findProductPosition ----------------------------------------------------------------------------------------------
+function testFindProductPosition(description, expectation, func) {
+    if (func == expectation) {
+        console.log(`%cPass: ${description}`, passText);
+    }
+    else {
+        console.log(`%cFail: actual: ${func}, expectation: ${expectation}`, failText);
+    }
+}
+
+testFindProductPosition("Testing findProductPosition function: return correctly", -1, findProductPosition(getItemFromLocal("currentAccount")));
+testFindProductPosition("Testing findProductPosition function: return correctly", -1, findProductPosition(getItemFromLocal("currentAccount"), null));
+testFindProductPosition("Testing findProductPosition function: return correctly", -1, findProductPosition(getItemFromLocal("currentAccount"), undefined));
+testFindProductPosition("Testing findProductPosition function: return correctly", -1, findProductPosition("", null));
+//------------------------------------------------------------------------------------------------------------------------

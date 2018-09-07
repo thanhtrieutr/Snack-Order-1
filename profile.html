@@ -8,17 +8,27 @@
     <body>
         <div class="main-content">
             <div class="user-zone">
-                <img class="avatar" src="https://i.imgur.com/rTNSSa8.jpg" alt="User Avatar"> 
-                <p>Username: Pikachu</p> 
-                <p>Telephone: +84123456789</p> 
-                <p>Address: Some Address 123</p> 
+                <img class="avatar" src="https://i.imgur.com/S2IRHcz.png" alt="User Avatar">
+                <p>Username: 
+                    <span id="user-field"></span> 
+                </p> 
+                <p>Telephone: 
+                    <span id="telephone-field" class="normal-field"></span>
+                    <input id="telephone-input" class="change-input"> 
+                </p> 
+                <p> <span> Address: </span> 
+                    <span id="address-field" class="normal-field"></span> 
+                    <input id="address-input" class="change-input">
+                </p> 
             </div>
 
             <div class = "button">
-                  <button type="submit" id="change-button"> Change</button>  
+                  <button type="submit" id="change-button" onclick="goToChangeMode()"> Change</button>  
+                  <button type="submit" id="save-button" onclick="goToNormalMode(true)"> Save</button>  
                   <a href="order.html"> <button type="submit" id="return-button"> Return</button>  </a>
             </div>
         </div>
     </body>
-    <script src="orderscript.js"> </script>
+    <script src="utilityFunction.js"></script>
+    <script src="profilescript.js"> </script>
 </html>

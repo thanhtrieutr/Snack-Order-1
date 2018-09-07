@@ -29,7 +29,6 @@ function checkValidTelephone(telephone) {
     }
     var pattern = /[0-9]/g;
     var number = telephone.match(pattern);
-    alert(number);
     if (number.length < 8 || number.length > 12) {
         return false;
     }

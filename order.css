@@ -46,5 +46,14 @@
     width: 35%;
     font-size: 19px;
 }
+.number-button:disabled {
+    background: rgba(158, 158, 158, 0.3);
+    border: 2px solid rgba(187, 187, 187, 0.3);
+    box-shadow: none;
+    cursor: default;
+}
+.number-button {
+    cursor: pointer;
+}
 
 

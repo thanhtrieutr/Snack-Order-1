@@ -43,10 +43,10 @@ body {
 .user-zone p {
     padding: 10px;
     padding-top: 0; 
-    word-wrap:break-word;
+    word-wrap: break-word;
 }
 
-.user-zone p input{
+.user-zone p input {
     width: 60%;
 }
 

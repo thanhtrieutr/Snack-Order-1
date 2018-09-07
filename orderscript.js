@@ -22,7 +22,6 @@ getById("log-out-button").addEventListener('click', logOut);
 
 //choose snack
 
-
 var localAccount = (JSON.parse( localStorage.getItem("accountArray")) || []);
 var user = localStorage.getItem("currentAccount");
 

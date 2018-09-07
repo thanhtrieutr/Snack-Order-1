@@ -1,3 +1,5 @@
+var isLoadFull = false;
+if (isLoadFull) {
 function logOut() {
     localStorage.removeItem("currentAccount");
     window.location = "login.html";
@@ -223,3 +225,36 @@ function decreaseAmount(currentID) {
     localStorage.setItem("accountArray", JSON.stringify(localAccount));
     document.getElementById("total-price-number").innerHTML = totalPrice(currentUser.cartArray);
 }   
+}
+//// client
+function createNewSnack(snack) {
+    var newSnack = document.createElement('span');
+    newSnack.setAttribute("class", "one-snack");
+    newSnack.innerHTML = 
+    `<img class="snack-img" src=${snack.img} alt="Snack Bento ">
+    <span class="main-snack-name" id="snack-name-${snack.id}">
+        ${snack.name}
+    </span>
+    <span class="main-snack-price" id="snack-price-${snack.id}">
+        ${snack.price}
+    </span>
+    <input type="checkbox" id="checkbox-${snack.id}" onclick="chooseSnack(${snack.id})">`;
+    return newSnack;
+}
+function loadSnack() {
+    var http = new XMLHttpRequest();
+    http.open("GET", "http://127.0.0.1:3000/products", true);
+    http.send();
+    var snackList = document.getElementById("main-order");
+    http.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200){
+            var  snacks = JSON.parse(this.response);
+            snacks.forEach(snack => {
+                var newSnack = createNewSnack(snack);
+                snackList.appendChild(newSnack);
+            });
+            isLoadFull = true;
+        }
+    }
+}
+loadSnack();

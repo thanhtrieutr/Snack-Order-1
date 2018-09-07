@@ -1,23 +1,7 @@
 var localAccount = JSON.parse(localStorage.getItem("accountArray"));
 var currentAccount = localStorage.getItem("currentAccount");
 var isChangeMode;
-// function findUserPosition(localAccount, user) {
-//     for (var i in localAccount) {
-//         if (localAccount[i].user == user) {
-//             return i;
-//         }
-//     }
-//     return -1;
-// }
-// function checkLogIn() {
-//     if (currentAccount == null || findUserPosition(localAccount, currentAccount) == -1) {
-//         alert("You haven't login");
-//         window.location = "login.html";
-//     }
-//     else {
-//         document.getElementById("user-field").innerHTML = currentAccount;
-//     }
-// }
+
 checkLogIn();
 
 function checkValidTelephone(telephone) {

@@ -41,6 +41,11 @@ function checkLogIn() {
       window.location = "login.html";
   }
   else {
-      document.getElementById("user-name").innerHTML = currentAccount + "     ";
+        if (document.getElementById("user-name")) {
+            document.getElementById("user-name").innerHTML = currentAccount + "     ";
+        }
+        if (document.getElementById("user-field")) {
+            document.getElementById("user-field").innerHTML = currentAccount;
+        }
   }
 }

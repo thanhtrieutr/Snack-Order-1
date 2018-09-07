@@ -1,23 +1,23 @@
 var localAccount = JSON.parse(localStorage.getItem("accountArray"));
 var currentAccount = localStorage.getItem("currentAccount");
-
-function findUserPosition(localAccount, user) {
-    for (var i in localAccount) {
-        if (localAccount[i].user == user) {
-            return i;
-        }
-    }
-    return -1;
-}
-function checkLogIn() {
-    if (currentAccount == null || findUserPosition(localAccount, currentAccount) == -1) {
-        alert("You haven't login");
-        window.location = "login.html";
-    }
-    else {
-        document.getElementById("user-field").innerHTML = currentAccount;
-    }
-}
+var isChangeMode;
+// function findUserPosition(localAccount, user) {
+//     for (var i in localAccount) {
+//         if (localAccount[i].user == user) {
+//             return i;
+//         }
+//     }
+//     return -1;
+// }
+// function checkLogIn() {
+//     if (currentAccount == null || findUserPosition(localAccount, currentAccount) == -1) {
+//         alert("You haven't login");
+//         window.location = "login.html";
+//     }
+//     else {
+//         document.getElementById("user-field").innerHTML = currentAccount;
+//     }
+// }
 checkLogIn();
 
 function checkValidTelephone(telephone) {
@@ -27,11 +27,17 @@ function checkValidTelephone(telephone) {
     if (telephone.length < 8 || telephone.length > 15) {
         return false;
     }
+    var pattern = /[0-9]/g;
+    var number = telephone.match(pattern);
+    alert(number);
+    if (number.length < 8 || number.length > 12) {
+        return false;
+    }
     return /^[0-9- ]+$/.test(telephone);
 }
 //normal mode
 function goToNormalMode(isSave) {
-
+    isChangeMode = false;
     var account = localAccount[ findUserPosition(localAccount, currentAccount)];
     if (account.telephone == null) {
         account.telephone = "";
@@ -69,7 +75,7 @@ goToNormalMode(false);
 
 //change mode
 function goToChangeMode() {
-
+    isChangeMode = true;
     var account = localAccount[ findUserPosition(localAccount, currentAccount)];
     if (account.telephone == null) {
         account.telephone = "";
@@ -92,3 +98,10 @@ function goToChangeMode() {
     document.getElementById("telephone-field").style.display = "none";
     document.getElementById("address-field").style.display = "none";
 }
+
+function checkKeyPress(key) {
+    if (key.keyCode == 13 && isChangeMode) {
+        goToNormalMode(true);
+    }
+}
+addEventListener("keypress",checkKeyPress);

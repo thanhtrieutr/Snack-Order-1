@@ -1,5 +1,10 @@
-var isLoadFull = false;
-if (isLoadFull) {
+//after load  full data
+function afterLoad() {
+    checkLogIn();
+    addEventListener("load", rotateUsername("user-name"));
+    getById("log-out-button").addEventListener('click', logOut);
+    showCurrentSnack();
+}
 function logOut() {
     localStorage.removeItem("currentAccount");
     window.location = "login.html";
@@ -18,9 +23,6 @@ function rotateUsername(id) {
     }, 200);
 }
 
-checkLogIn();
-addEventListener("load", rotateUsername("user-name"));
-getById("log-out-button").addEventListener('click', logOut);
 
 //choose snack
 
@@ -135,7 +137,6 @@ function showCurrentSnack() {
     }
     document.getElementById("total-price-number").innerHTML = totalPrice(currentUser.cartArray);
 }
-showCurrentSnack();
 
 function findProductPosition(currentUser, currentID) {
     for (var i in currentUser.cartArray) {
@@ -225,7 +226,7 @@ function decreaseAmount(currentID) {
     localStorage.setItem("accountArray", JSON.stringify(localAccount));
     document.getElementById("total-price-number").innerHTML = totalPrice(currentUser.cartArray);
 }   
-}
+
 //// client
 function createNewSnack(snack) {
     var newSnack = document.createElement('span');
@@ -241,6 +242,7 @@ function createNewSnack(snack) {
     <input type="checkbox" id="checkbox-${snack.id}" onclick="chooseSnack(${snack.id})">`;
     return newSnack;
 }
+
 function loadSnack() {
     var http = new XMLHttpRequest();
     http.open("GET", "http://127.0.0.1:3000/products", true);
@@ -253,7 +255,7 @@ function loadSnack() {
                 var newSnack = createNewSnack(snack);
                 snackList.appendChild(newSnack);
             });
-            isLoadFull = true;
+            afterLoad();
         }
     }
 }

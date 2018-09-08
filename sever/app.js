@@ -8,10 +8,10 @@ const books = [
     {id: 2, name: "con cho"}
 ];
 var product = [
-    {id: 1, name: "Snack Mực Tẩm Gia Vị Cay Ngọt Bento (24g)", price: "19.000 ₫", img: "https://i.imgur.com/14LDgbZ.jpg" },
-    {id: 2, name: "Bánh Snack Khoai Tây Ligo (110g)", price: "35.000 ₫", img: "https://i.imgur.com/XGoBsQd.jpg" },
-    {id: 3, name: "Snack rong biển Tao Kae Noi Tempura vị Cay 25g", price: "19.000 ₫", img: "https://i.imgur.com/I753nx1.jpg" },
-    {id: 4, name: "Bánh Snack Tôm NongShim Túi Lớn (180g)", price: "44.000 ₫", img: "https://i.imgur.com/53XhkaO.jpg" }
+    {id: 1, name: "Snack Mực Tẩm Gia Vị Cay Ngọt Bento (24kg)", price: "19.000 ₫", img: "https://i.imgur.com/14LDgbZ.jpg" },
+    {id: 2, name: "Bánh Snack Khoai Tây Ligo (110kg)", price: "35.000 ₫", img: "https://i.imgur.com/XGoBsQd.jpg" },
+    {id: 3, name: "Snack rong biển Tao Kae Noi Tempura vị Cay 25kg", price: "19.000 ₫", img: "https://i.imgur.com/I753nx1.jpg" },
+    {id: 4, name: "Bánh Snack Tôm NongShim Túi Lớn (180kg)", price: "44.000 ₫", img: "https://i.imgur.com/53XhkaO.jpg" }
 ];
 
 const sever = http.createServer((request, response) => {

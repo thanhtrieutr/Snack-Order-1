@@ -1,0 +1,31 @@
+<html>
+    <head>
+
+    </head>
+    <body>
+        <div id="book-list">
+            
+        </div>
+        <button id="get-button">Get Book-List</button>
+    </body>
+
+    <script>
+        document.getElementById("get-button").addEventListener("click", () => {
+            var http = new XMLHttpRequest();
+            http.open("GET", "http://127.0.0.1:3000/books", true);
+            http.send();
+            var bookList = document.getElementById("book-list");
+            //bookList.innerHTML = http.response;
+            http.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200){
+                    var  books = JSON.parse(this.response);
+                    books.forEach(book => {
+                        var newBook = document.createElement('div');
+                        newBook.innerHTML = book.name;
+                        bookList.appendChild(newBook);
+                    });
+                }
+            }
+        });
+    </script>
+</html>

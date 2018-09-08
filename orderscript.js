@@ -1,8 +1,8 @@
+checkLogIn();
+addEventListener("load", rotateUsername("user-name"));
+getById("log-out-button").addEventListener('click', logOut);
 //after load  full data
 function afterLoad() {
-    checkLogIn();
-    addEventListener("load", rotateUsername("user-name"));
-    getById("log-out-button").addEventListener('click', logOut);
     showCurrentSnack();
 }
 function logOut() {

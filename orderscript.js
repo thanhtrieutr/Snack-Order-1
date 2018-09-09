@@ -7,6 +7,7 @@ function afterLoad() {
 }
 function logOut() {
     localStorage.removeItem("currentAccount");
+    localStorage.removeItem('token');
     window.location = "login.html";
 }
 

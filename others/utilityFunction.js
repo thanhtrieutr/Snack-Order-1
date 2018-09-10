@@ -39,7 +39,7 @@ function checkLogInAlready() {
   checkToken(token, result => {
     if (result) {
         alert("You already login");
-        window.location = "order.html";
+        window.location.href = "../main-order/order.html";
     }
   });
 }
@@ -51,7 +51,7 @@ function checkLogIn() {
   checkToken(token, result => {
     if (result == false) {
         alert("You haven't login");
-        window.location = "login.html";
+        window.location.href = "../login/login.html";
     }
     else {
         if (document.getElementById("user-name")) {

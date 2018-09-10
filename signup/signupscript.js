@@ -43,11 +43,11 @@ function alertDataUser() {
         localStorage.setItem("currentAccount", user);
 
         // redirect
-        alert("signup success");
-        window.location = "login.html";
+        alert("Signup successful");
+        window.location.href = "../login/login.html";
     }
     else {
-        alert("User conflict");
+        alert("User existed");
     }
     
 }

@@ -8,7 +8,7 @@ function afterLoad() {
 function logOut() {
     localStorage.removeItem("currentAccount");
     localStorage.removeItem('token');
-    window.location = "login.html";
+    window.location.href = "../login/login.html";
 }
 
 function rotateUsername(id) {

@@ -18,7 +18,7 @@ function alertAnswerLogIn(user, token) {
         localStorage.setItem("token", token);
         //redirect
         alert("Accept account");
-        window.location = "order.html";
+        window.location.href = "../main-order/order.html";
     }
     else {
         alert("Account don't exist or wrong password");

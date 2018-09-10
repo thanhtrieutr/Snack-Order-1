@@ -1,25 +1,33 @@
-function alertDataUser() {
-
-    var user = getById("input-user").value;
-    var password = getById("input-password").value;
-
-    var localAccount = JSON.parse(localStorage.getItem("accountArray"));
-
-    if (localAccount == null) {
-        localAccount = [];
+function checkLoginInSever(user, password) {
+    var account = createNewAccount(user, password);
+    var http = new XMLHttpRequest();
+    http.open('POST', "http://127.0.0.1:3000/checkLogin", true);
+    http.send(JSON.stringify(account));
+    http.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var token = JSON.parse(this.response);
+            alertAnswerLogIn(user, token);
+        }
     }
-
-    var position = findUserPosition(localAccount, user);
-    if (position > -1 && user == localAccount[position].user && password == localAccount[position].password) {
-
+}
+function alertAnswerLogIn(user, token) {
+    console.log(token);
+    if (token != false) {
         //flag current account
         localStorage.setItem("currentAccount", user);
-
+        localStorage.setItem("token", token);
         //redirect
         alert("Accept account");
         window.location = "order.html";
     }
-    else alert("Account don't exist or wrong password");
+    else {
+        alert("Account don't exist or wrong password");
+    }
+}
+function alertDataUser() {
+    var user = getById("input-user").value;
+    var password = getById("input-password").value;
+    checkLoginInSever(user, password);
 }
 
 function checkKeyPress(key) {

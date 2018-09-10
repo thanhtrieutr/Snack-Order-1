@@ -44,7 +44,7 @@ function alertDataUser() {
 
         // redirect
         alert("signup success");
-        window.location = "order.html";
+        window.location = "login.html";
     }
     else {
         alert("User conflict");

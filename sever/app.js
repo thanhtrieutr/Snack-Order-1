@@ -3,10 +3,7 @@ const http = require('http');
 const hostname = "127.0.0.1";
 const port = 3000;
 
-const books = [
-    {id: 1, name: "con ga"},
-    {id: 2, name: "con cho"}
-];
+
 var product = [
     {id: 1, name: "Snack Mực Tẩm Gia Vị Cay Ngọt Bento (24kg)", price: "19.000 ₫", img: "https://i.imgur.com/14LDgbZ.jpg" },
     {id: 2, name: "Bánh Snack Khoai Tây Ligo (110kg)", price: "35.000 ₫", img: "https://i.imgur.com/XGoBsQd.jpg" },
@@ -27,13 +24,13 @@ function findValidUserPosition(accountList, user) {
     }
     return -1;
 }
-function colectDataFormPost(request, callback) {
+function collectDataFromPost(request, callback) {
     let body = '';
     // collect data
     request.on('data', chunk => {
         body += chunk.toString();
     });
-    //colect done
+    //collect done
     request.on('end', () => {
         callback(JSON.parse(body));
     });
@@ -43,7 +40,7 @@ function setResponseHeader(response) {
     response.setHeader('Content-type', 'application/json');
     response.setHeader('Access-Control-Allow-Origin', '*');
 }
-const sever = http.createServer((request, response) => {
+const server = http.createServer((request, response) => {
     var url = request.url;
     var method = request.method;
     switch (url){
@@ -55,7 +52,7 @@ const sever = http.createServer((request, response) => {
             break;
         case '/checkLogin':
             if (method == 'POST') {
-                colectDataFormPost(request, result => {
+                collectDataFromPost(request, result => {
                     setResponseHeader(response);
                     var token = "resu";
                     if (findValidUserPosition(accountArray, result) == -1) {
@@ -69,7 +66,7 @@ const sever = http.createServer((request, response) => {
             break;
         case '/checkToken':
             if (method == "POST") {
-                colectDataFormPost(request, result => {
+                collectDataFromPost(request, result => {
                     setResponseHeader(response);
                     if (result == "resu") {
                         response.end(JSON.stringify(accountArray[0].user));
@@ -87,6 +84,6 @@ const sever = http.createServer((request, response) => {
     }
 });
 
-sever.listen(port, hostname, () => {
+server.listen(port, hostname, () => {
     console.log(`Sever running at http://${hostname}:${port}/`);
 });

@@ -36,6 +36,11 @@ function checkKeyPress(key) {
     }
 }
 
+function alertUserClickSignup() {
+    alert("This feature is in development");
+}
+
 checkLogInAlready();
 addEventListener("keypress",checkKeyPress);
 getById("signin-button").addEventListener("click", alertDataUser);
+getById("link-signup").addEventListener("click", alertUserClickSignup);

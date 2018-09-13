@@ -10,10 +10,28 @@ var product = [
     {id: 3, name: "Snack rong biển Tao Kae Noi Tempura vị Cay 25kg", price: "19.000 ₫", img: "https://i.imgur.com/I753nx1.jpg" },
     {id: 4, name: "Bánh Snack Tôm NongShim Túi Lớn (180kg)", price: "44.000 ₫", img: "https://i.imgur.com/53XhkaO.jpg" }
 ];
-var accountArray = [{
-    user: "test@gmail.com",
-    password: "test1234"
-}];
+var accountArray = [
+    {
+        user: "test@gmail.com",
+        password: "test1234"
+    },
+    {
+        user: "admin@gmail.com",
+        password: "admin1234"
+    },
+    {
+        user: "guest@gmail.com",
+        password: "guest1234"
+    },
+    {
+        user: "server@gmail.com",
+        password: "server1234"
+    },
+    {
+        user: "cilent@gmail.com",
+        password: "cilent1234"
+    }
+];
 
 //Function findUserPosition:
 function findValidUserPosition(accountList, user) {
@@ -40,6 +58,7 @@ function setResponseHeader(response) {
     response.setHeader('Content-type', 'application/json');
     response.setHeader('Access-Control-Allow-Origin', '*');
 }
+
 const server = http.createServer((request, response) => {
     var url = request.url;
     var method = request.method;
@@ -51,10 +70,10 @@ const server = http.createServer((request, response) => {
             }
             break;
         case '/checkLogin':
-            if (method == 'POST') {
+            if (method == "POST") {
                 collectDataFromPost(request, result => {
                     setResponseHeader(response);
-                    var token = "resu";
+                    var token = Buffer.from(accountArray[0].user).toString('base64');
                     if (findValidUserPosition(accountArray, result) == -1) {
                         response.end(JSON.stringify(false));
                     }
@@ -67,8 +86,9 @@ const server = http.createServer((request, response) => {
         case '/checkToken':
             if (method == "POST") {
                 collectDataFromPost(request, result => {
+                    var decodeToken = Buffer.from("dGVzdEBnbWFpbC5jb20=").toString('utf8')
                     setResponseHeader(response);
-                    if (result == "resu") {
+                    if (result == decodeToken) {
                         response.end(JSON.stringify(accountArray[0].user));
                     }
                     else {
@@ -79,7 +99,7 @@ const server = http.createServer((request, response) => {
             break;
         default:
             response.statusCode = 200;
-            response.setHeader('Content-type', 'text/plain');
+            response.setHeader('Content-Type', 'text/plain');
             response.end('Hello world\n');
     }
 });

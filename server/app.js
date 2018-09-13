@@ -73,11 +73,12 @@ const server = http.createServer((request, response) => {
             if (method == "POST") {
                 collectDataFromPost(request, result => {
                     setResponseHeader(response);
-                    var token = Buffer.from(accountArray[0].user).toString('base64');
-                    if (findValidUserPosition(accountArray, result) == -1) {
+                    var position = findValidUserPosition(accountArray, result);
+                    if (position == -1) {
                         response.end(JSON.stringify(false));
                     }
                     else {
+                        var token = Buffer.from(accountArray[position].user).toString('base64');
                         response.end(JSON.stringify(token));
                     }
                 });
@@ -86,10 +87,18 @@ const server = http.createServer((request, response) => {
         case '/checkToken':
             if (method == "POST") {
                 collectDataFromPost(request, result => {
-                    var decodeToken = Buffer.from("dGVzdEBnbWFpbC5jb20=").toString('utf8')
+                    //position == -1 mean don't exist that account
+                    var position = -1;
+                    for (var i in accountArray) {
+                        let token = Buffer.from(accountArray[i].user).toString('base64');
+                        if (token == result) {
+                            position = i;
+                            break;
+                        }
+                    }
                     setResponseHeader(response);
-                    if (result == decodeToken) {
-                        response.end(JSON.stringify(accountArray[0].user));
+                    if (position != -1) {
+                        response.end(JSON.stringify(accountArray[position].user));
                     }
                     else {
                         response.end(JSON.stringify(false));

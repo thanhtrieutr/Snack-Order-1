@@ -6,14 +6,19 @@ function checkLoginInSever(user, password) {
     http.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var token = JSON.parse(this.response);
-            alertAnswerLogIn(user, token);
+            alertAnswerLogIn(user, password, token);
         }
     }
 }
-function alertAnswerLogIn(user, token) {
+function alertAnswerLogIn(user, password, token) {
     console.log(token);
     if (token != false) {
         //flag current account
+        
+        //set local account for save cart
+        var localAccount = [];
+        localAccount.push(createNewAccount(user, password));
+        localStorage.setItem("accountArray", JSON.stringify(localAccount));
         localStorage.setItem("currentAccount", user);
         localStorage.setItem("token", token);
         //redirect

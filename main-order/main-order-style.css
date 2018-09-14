@@ -34,7 +34,7 @@ body {
 [class ^= "main-snack"] {    
     position: absolute;
     display: inline-block;
-    width: 55%;
+    width: 60%;
     font-size: 20px;
 }
 .main-snack-name {

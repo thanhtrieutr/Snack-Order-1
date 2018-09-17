@@ -5,15 +5,33 @@ const port = 3000;
 
 
 var product = [
-    {id: 1, name: "Snack Mực Tẩm Gia Vị Cay Ngọt Bento (24kg)", price: "19.000 ₫", img: "https://i.imgur.com/14LDgbZ.jpg" },
-    {id: 2, name: "Bánh Snack Khoai Tây Ligo (110kg)", price: "35.000 ₫", img: "https://i.imgur.com/XGoBsQd.jpg" },
-    {id: 3, name: "Snack rong biển Tao Kae Noi Tempura vị Cay 25kg", price: "19.000 ₫", img: "https://i.imgur.com/I753nx1.jpg" },
-    {id: 4, name: "Bánh Snack Tôm NongShim Túi Lớn (180kg)", price: "44.000 ₫", img: "https://i.imgur.com/53XhkaO.jpg" }
+    {id: 1, name: "Snack Mực Tẩm Gia Vị Cay Ngọt Bento (24g)", price: "19.000 ₫", img: "https://i.imgur.com/14LDgbZ.jpg", priceInt: 19000 },
+    {id: 2, name: "Bánh Snack Khoai Tây Ligo (110g)", price: "35.000 ₫", img: "https://i.imgur.com/XGoBsQd.jpg", priceInt: 35000 },
+    {id: 3, name: "Snack rong biển Tao Kae Noi Tempura vị Cay (25g)", price: "19.000 ₫", img: "https://i.imgur.com/I753nx1.jpg", priceInt: 19000 },
+    {id: 4, name: "Bánh Snack Tôm NongShim Túi Lớn (180g)", price: "44.000 ₫", img: "https://i.imgur.com/53XhkaO.jpg", priceInt: 44000 }
 ];
-var accountArray = [{
-    user: "test@gmail.com",
-    password: "test1234"
-}];
+var accountArray = [
+    {
+        user: "test@gmail.com",
+        password: "test1234"
+    },
+    {
+        user: "admin@gmail.com",
+        password: "admin1234"
+    },
+    {
+        user: "guest@gmail.com",
+        password: "guest1234"
+    },
+    {
+        user: "server@gmail.com",
+        password: "server1234"
+    },
+    {
+        user: "cilent@gmail.com",
+        password: "cilent1234"
+    }
+];
 
 //Function findUserPosition:
 function findValidUserPosition(accountList, user) {
@@ -40,6 +58,7 @@ function setResponseHeader(response) {
     response.setHeader('Content-type', 'application/json');
     response.setHeader('Access-Control-Allow-Origin', '*');
 }
+
 const server = http.createServer((request, response) => {
     var url = request.url;
     var method = request.method;
@@ -51,14 +70,15 @@ const server = http.createServer((request, response) => {
             }
             break;
         case '/checkLogin':
-            if (method == 'POST') {
+            if (method == "POST") {
                 collectDataFromPost(request, result => {
                     setResponseHeader(response);
-                    var token = "resu";
-                    if (findValidUserPosition(accountArray, result) == -1) {
+                    var position = findValidUserPosition(accountArray, result);
+                    if (position == -1) {
                         response.end(JSON.stringify(false));
                     }
                     else {
+                        var token = Buffer.from(accountArray[position].user).toString('base64');
                         response.end(JSON.stringify(token));
                     }
                 });
@@ -67,9 +87,18 @@ const server = http.createServer((request, response) => {
         case '/checkToken':
             if (method == "POST") {
                 collectDataFromPost(request, result => {
+                    //position == -1 mean don't exist that account
+                    var position = -1;
+                    for (var i in accountArray) {
+                        let token = Buffer.from(accountArray[i].user).toString('base64');
+                        if (token == result) {
+                            position = i;
+                            break;
+                        }
+                    }
                     setResponseHeader(response);
-                    if (result == "resu") {
-                        response.end(JSON.stringify(accountArray[0].user));
+                    if (position != -1) {
+                        response.end(JSON.stringify(accountArray[position].user));
                     }
                     else {
                         response.end(JSON.stringify(false));
@@ -77,9 +106,33 @@ const server = http.createServer((request, response) => {
                 });
             }
             break;
+            case '/submitCart':
+                if (method == "POST") {
+                    collectDataFromPost(request, result => {
+                        var bill = {};
+                        bill.products = [];
+                        bill.totalPrice = 0;
+                        for (var i in result.cartArray) {
+                            for (var j in product) {
+                                // find match 
+                                if (result.cartArray[i].productID == product[j].id) {
+                                    bill.products.push(product[j]);
+                                    // calculate total price
+                                    var currentPrice = product[j].priceInt;
+                                    var currentAmount  = result.cartArray[i].amount;
+                                    bill.totalPrice += currentAmount * currentPrice;
+                                    break;
+                                }
+                            }
+                        }
+                        setResponseHeader(response);
+                        response.end(JSON.stringify(bill));
+                    });
+                }
+            break;
         default:
             response.statusCode = 200;
-            response.setHeader('Content-type', 'text/plain');
+            response.setHeader('Content-Type', 'text/plain');
             response.end('Hello world\n');
     }
 });

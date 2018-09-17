@@ -3,6 +3,9 @@ var currentAccount = localStorage.getItem("currentAccount");
 var isChangeMode;
 checkLogIn();
 
+function alertUserinChangingProfile() {
+    alert("This feature is in development");
+}
 function checkValidTelephone(telephone) {
     if (telephone == "" || telephone == null) {
         return true;

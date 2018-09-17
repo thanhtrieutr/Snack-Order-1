@@ -6,19 +6,24 @@ function checkLoginInSever(user, password) {
     http.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var token = JSON.parse(this.response);
-            alertAnswerLogIn(user, token);
+            alertAnswerLogIn(user, password, token);
         }
     }
 }
-function alertAnswerLogIn(user, token) {
+function alertAnswerLogIn(user, password, token) {
     console.log(token);
     if (token != false) {
         //flag current account
+        
+        //set local account for save cart
+        var localAccount = [];
+        localAccount.push(createNewAccount(user, password));
+        localStorage.setItem("accountArray", JSON.stringify(localAccount));
         localStorage.setItem("currentAccount", user);
         localStorage.setItem("token", token);
         //redirect
         alert("Accept account");
-        window.location = "order.html";
+        window.location.href = "../main-order/order.html";
     }
     else {
         alert("Account don't exist or wrong password");
@@ -36,6 +41,11 @@ function checkKeyPress(key) {
     }
 }
 
+function alertUserClickSignup() {
+    alert("This feature is in development");
+}
+
 checkLogInAlready();
 addEventListener("keypress",checkKeyPress);
 getById("signin-button").addEventListener("click", alertDataUser);
+getById("link-signup").addEventListener("click", alertUserClickSignup);

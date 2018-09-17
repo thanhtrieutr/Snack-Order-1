@@ -5,10 +5,10 @@ const port = 3000;
 
 
 var product = [
-    {id: 1, name: "Snack Mực Tẩm Gia Vị Cay Ngọt Bento (24g)", price: "19.000 ₫", img: "https://i.imgur.com/14LDgbZ.jpg" },
-    {id: 2, name: "Bánh Snack Khoai Tây Ligo (110g)", price: "35.000 ₫", img: "https://i.imgur.com/XGoBsQd.jpg" },
-    {id: 3, name: "Snack rong biển Tao Kae Noi Tempura vị Cay (25g)", price: "19.000 ₫", img: "https://i.imgur.com/I753nx1.jpg" },
-    {id: 4, name: "Bánh Snack Tôm NongShim Túi Lớn (180g)", price: "44.000 ₫", img: "https://i.imgur.com/53XhkaO.jpg" }
+    {id: 1, name: "Snack Mực Tẩm Gia Vị Cay Ngọt Bento (24g)", price: "19.000 ₫", img: "https://i.imgur.com/14LDgbZ.jpg", priceInt: 19000 },
+    {id: 2, name: "Bánh Snack Khoai Tây Ligo (110g)", price: "35.000 ₫", img: "https://i.imgur.com/XGoBsQd.jpg", priceInt: 35000 },
+    {id: 3, name: "Snack rong biển Tao Kae Noi Tempura vị Cay (25g)", price: "19.000 ₫", img: "https://i.imgur.com/I753nx1.jpg", priceInt: 19000 },
+    {id: 4, name: "Bánh Snack Tôm NongShim Túi Lớn (180g)", price: "44.000 ₫", img: "https://i.imgur.com/53XhkaO.jpg", priceInt: 44000 }
 ];
 var accountArray = [
     {

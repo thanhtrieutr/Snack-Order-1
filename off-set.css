@@ -1,0 +1,15 @@
+/* for small device (tablet) */
+@media screen and (min-width: 576px) and (max-width: 767px) {
+    .offset-sm-1 { margin-left: 8.33%;}
+    .offset-sm-2 { margin-left: 16.66%;}
+    .offset-sm-3 { margin-left: 25%;}
+    .offset-sm-4 { margin-left: 33.33%;}
+    .offset-sm-5 { margin-left: 41.66%;}
+    .offset-sm-6 { margin-left: 50%;}
+    .offset-sm-7 { margin-left: 58.33%;}
+    .offset-sm-8 { margin-left: 66.66%;}
+    .offset-sm-9 { margin-left: 75%;}
+    .offset-sm-10 { margin-left: 83.33%;}
+    .offset-sm-11 { margin-left: 91.66%;}
+    .offset-sm-12 { margin-left: 100%;}
+}

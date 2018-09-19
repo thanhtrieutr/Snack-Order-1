@@ -83,3 +83,11 @@
     font-size: 10px;
     padding: 5px 10px;
 }
+@media  (max-width: 767px) {
+    #bill-form {
+        display: none;
+    }
+    #user-bar {
+        display: none;
+    }
+}

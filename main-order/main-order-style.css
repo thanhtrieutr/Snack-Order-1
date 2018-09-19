@@ -7,8 +7,6 @@ body {
 #main-order {
     z-index: 0;
     height: calc(100% - 110px);
-    width: 65%;
-    left: 4%;
     display: inline-block;
     position: absolute;
     padding: 10px;

@@ -2,9 +2,6 @@
     box-sizing: border-box;
 }
 
-[class*="cl-"] {
-    float: left;
-}
 /* Extra small device */
     .cl-xs-1 { width: 8.33%;}
     .cl-xs-2 { width: 16.66%;}

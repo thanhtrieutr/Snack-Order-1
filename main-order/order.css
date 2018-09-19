@@ -14,9 +14,7 @@
     display: block;
     position: absolute;
     box-sizing: border-box;
-    right: 2%;
     height: 40%;
-    width: 30%;
     bottom: 10%;
     text-align: start;
     background-color: #ffe36a;
@@ -43,8 +41,8 @@
     border-radius: 19px;
     font-weight: bold;
     border: transparent;
-    width: 35%;
-    font-size: 19px;
+    width: 39%;
+    font-size: 25%;
 }
 .number-button:disabled {
     background: rgba(158, 158, 158, 0.3);

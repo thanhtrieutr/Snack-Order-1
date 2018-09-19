@@ -1,11 +1,9 @@
 #bill-form {
     height: calc(100% - 120px);
     z-index: 2;
-    width:25%;
     display: inline-block;
     position: fixed;
     top: 16%;
-    left: 71.5%;
     padding: 10px;
     padding-bottom: 0;
     border: 1px solid #ffe36a;

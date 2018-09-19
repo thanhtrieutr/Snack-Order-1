@@ -3,11 +3,46 @@
 }
 
 [class*="cl-"] {
-    position: relative;
     float: left;
     width: 100%;
-    padding: 15px;
+    /* padding: 15px; */
 }
+    .cl-xs-1 {
+        width: 8.33%;
+    }
+    .cl-xs-2 {
+        width: 16.66%;
+    }
+    .cl-xs-3 {
+        width: 25%;
+    }
+    .cl-xs-4 {
+        width: 33.33%;
+    }
+    .cl-xs-5 {
+        width: 41.66%;
+    }
+    .cl-xs-6 {
+        width: 50%;
+    }
+    .cl-xs-7 {
+        width: 58.33%;
+    }
+    .cl-xs-8 {
+        width: 66.66%;
+    }
+    .cl-xs-9 {
+        width: 75%;
+    }
+    .cl-xs-10 {
+        width: 83.33%;
+    }
+    .cl-xs-11 {
+        width: 91.66%;
+    }
+    .cl-xs-12 {
+        width: 100%;
+    }
 
 @media (min-width: 576px) {
     .cl-sm-1 {

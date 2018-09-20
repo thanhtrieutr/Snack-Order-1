@@ -227,3 +227,18 @@ function decreaseAmount(currentID) {
     localStorage.setItem("accountArray", JSON.stringify(localAccount));
     document.getElementById("total-price-number").innerHTML = totalPrice(currentUser.cartArray);
 }   
+
+function popUp() {
+    var bill = document.getElementById("bill-form");
+    var button = document.getElementById("cart-button");
+    if (bill.style.display == "none") {
+        bill.style.display = "inline-block";
+        button.style.background = "red";
+        button.style.color = "white";
+    }
+    else {
+        bill.style.display = "none";
+        button.style.background = "white";
+        button.style.color = "red";
+    }
+}

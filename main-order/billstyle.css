@@ -1,7 +1,6 @@
 #bill-form {
     height: calc(100% - 120px);
     z-index: 2;
-    display: inline-block;
     position: fixed;
     top: 16%;
     padding: 10px;
@@ -85,6 +84,14 @@
 }
 @media  (max-width: 767px) {
     #bill-form {
+        width: 98%;
+        background: rgb(247, 247, 247);
+        border-color: red;
+        border-width: 5px;
+        border-radius: 20px;
+        margin-left: 1%;
+        top: 15%;
+        height: auto;
         display: none;
     }
     #user-bar {

@@ -1,0 +1,51 @@
+* {
+    box-sizing: border-box;
+}
+
+.row::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.one-snack {
+    margin: 0;
+    padding: 15px;
+}
+
+.snack-img {
+    width: 100%;
+    height: auto;
+}
+
+.main-snack-name {
+    text-align: center;
+    font-weight: 700;
+    margin-top: 10px;
+    min-height: 80px;
+}
+
+.main-snack-price {
+    margin-top: 10px; 
+    color: red;
+    font-size: 20px;
+    font-weight: 1000;
+    text-align: center; 
+}
+
+.one-snack:hover, .snack-img:hover {
+    background: rgb(240, 240, 240);
+}
+
+.one-snack input {
+    display: block;
+    margin: auto;
+    margin-top: 10px;
+    width: 30px;
+    height: 30px;
+}
+
+.checkbox-button:checked {
+    background-color: #e2a600;
+    border-radius: 5px;
+}

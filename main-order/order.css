@@ -3,7 +3,7 @@ i {
     -webkit-text-stroke: 2px white;
 }
 .logo {
-    height: auto;
+    height: 100%;
 }
 #title {
     z-index: 2;

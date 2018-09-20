@@ -6,8 +6,9 @@ getById("order-button").addEventListener('click', submitCart);
 ////function
 
 function createNewSnack(snack) {
-    var newSnack = document.createElement('div');
+    var newSnack = document.createElement('label');
     newSnack.setAttribute("class", "one-snack cl-md-3 cl-sm-4 cl-xs-6");
+    newSnack.setAttribute("for", `checkbox-${snack.id}`);
     newSnack.innerHTML = 
     `<img class="snack-img" src=${snack.img} alt="Snack Bento ">
     <div class="main-snack-name" id="snack-name-${snack.id}">

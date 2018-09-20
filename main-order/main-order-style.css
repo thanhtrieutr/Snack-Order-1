@@ -9,50 +9,6 @@ body {
     height: calc(100% - 110px);
     display: inline-block;
     position: absolute;
-    padding: 10px;
-    padding-right: 0;
-    padding-top: 0;
+    padding: 0;
     top: 16%;
-    padding-bottom: 0;
-}
-.one-snack {
-    border: 1px solid #ffe36a;
-    background-color: white;
-    margin-bottom: 10px;
-    width: calc(100% - 10px);
-    position: relative;
-    display: inline-block;
-    box-shadow: 2px 2px 2px #b3b3b3;
-    border-radius: 2px;
-}
-.snack-img {
-    height: 35%;
-    width: 25%;
-}
-[class ^= "main-snack"] {    
-    position: absolute;
-    display: inline-block;
-    width: 60%;
-    font-size: 20px;
-}
-.main-snack-name {
-    padding-left: 10px;
-    top: 20%;
-    font-weight: 700;
-}
-.main-snack-price {
-    top: 60%;
-    color: red;
-    text-align: center;
-}
-.main-snack-price:hover {
-    font-weight: 600;
-    font-size: 26px;
-}
-.one-snack input {
-    position: absolute;
-    top: 35%;
-    right: 4%;
-    width: 30px;
-    height: 30px;
 }

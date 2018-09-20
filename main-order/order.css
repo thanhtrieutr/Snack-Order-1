@@ -2,7 +2,7 @@ i {
     color: red;
 }
 .logo {
-    height: auto;
+    height: 100%;
 }
 #title {
     z-index: 2;

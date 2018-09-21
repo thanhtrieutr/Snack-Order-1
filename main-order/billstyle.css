@@ -1,9 +1,8 @@
 #bill-form {
-    height: auto;
-    min-height: 300px;
-    /* height: calc(100% - 120px); */
-    z-index: 2;
-    position: fixed;
+    position: absolute;
+    height: calc(100% - 85px);
+    z-index: 1;
+    overflow-y: auto;
     top: 11%;
     padding: 10px;
     padding-bottom: 0;
@@ -12,8 +11,6 @@
 }
 .main-bill-form {
     height: auto;
-    min-height: 200px;
-    overflow-y: scroll;
     margin-bottom: 5px;
     display: flex;
     flex-direction: column;
@@ -104,3 +101,11 @@
         display: none;
     }
 }
+
+/* @media (min-width: 768px) {
+    #bill-form {
+        position: absolute;
+        flex-direction: column;
+        overflow-y: auto;
+    }
+} */

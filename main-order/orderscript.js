@@ -241,4 +241,18 @@ function popUp() {
         button.style.background = "white";
         button.style.color = "red";
     }
+
 }
+
+function fixDisplay(billOrder) {
+    if (billOrder.matches) {
+        document.getElementById("bill-form").style.display = "inline-block";
+    } else document.getElementById("bill-form").style.display = "none";
+
+}
+var billOrderNormalDisplay = window.matchMedia("(min-width: 768px)");
+var billOrderSmallDisplay = window.matchMedia("(min-width: 576px)");
+fixDisplay(billOrderNormalDisplay);
+fixDisplay(billOrderSmallDisplay)
+billOrderNormalDisplay.addListener(fixDisplay);
+billOrderSmallDisplay.addListener(fixDisplay);

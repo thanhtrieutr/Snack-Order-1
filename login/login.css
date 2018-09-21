@@ -2,8 +2,15 @@
     font-family: "Lato", "Helvetica Neue", "Helvetica", "Arial", fontawesome;
     line-height: 1.4;
 }
+
 body {
-    background: url("https://preview.ibb.co/eraOhp/Background_Signin.png");
+    background: url("https://preview.ibb.co/eraOhp/Background_Signin.png") no-repeat center center fixed;;
+    height: 100%;
+    overflow: hidden;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     opacity: 10%;
     background-position: center center;
     background-size: cover;
@@ -16,7 +23,7 @@ body {
 }
 .container {
     border-radius: 20px;
-    width: 400px;
+    width: 380px;
     height: auto;
     margin: auto;
     margin-top: 15px;
@@ -73,8 +80,7 @@ button {
     text-decoration: none;
 }
 .logo, .logo-container {
-    width: 468px;
+    width: 470px;
     height: 200px;
-    margin: auto;
     margin-top: 5px;
 }

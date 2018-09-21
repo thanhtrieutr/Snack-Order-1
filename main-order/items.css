@@ -34,7 +34,7 @@
 }
 
 .one-snack:hover, .snack-img:hover {
-    background: rgb(240, 240, 240);
+    background: rgba(255, 211, 90);
 }
 
 .one-snack input {

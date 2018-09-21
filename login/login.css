@@ -4,7 +4,7 @@
 }
 
 body {
-    background: url("https://preview.ibb.co/eraOhp/Background_Signin.png") no-repeat center center fixed;;
+    background: url("../images/background.png") no-repeat center center fixed;;
     height: 100%;
     overflow: hidden;
     -webkit-background-size: cover;

@@ -6,17 +6,18 @@ getById("order-button").addEventListener('click', submitCart);
 ////function
 
 function createNewSnack(snack) {
-    var newSnack = document.createElement('span');
-    newSnack.setAttribute("class", "one-snack");
+    var newSnack = document.createElement('label');
+    newSnack.setAttribute("class", "one-snack cl-md-3 cl-sm-4 cl-xs-6");
+    newSnack.setAttribute("for", `checkbox-${snack.id}`);
     newSnack.innerHTML = 
     `<img class="snack-img" src=${snack.img} alt="Snack Bento ">
-    <span class="main-snack-name" id="snack-name-${snack.id}">
+    <div class="main-snack-name" id="snack-name-${snack.id}">
         ${snack.name}
-    </span>
-    <span class="main-snack-price" id="snack-price-${snack.id}">
+    </div>
+    <div class="main-snack-price" id="snack-price-${snack.id}">
         ${snack.price}
-    </span>
-    <input type="checkbox" id="checkbox-${snack.id}" onclick="chooseSnack(${snack.id})">`;
+    </div>
+    <input class="checkbox-button" type="checkbox" id="checkbox-${snack.id}" onclick="chooseSnack(${snack.id})">`;
     return newSnack;
 }
 // get snack from server

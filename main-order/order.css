@@ -1,5 +1,6 @@
 i {
-    color: red;
+    color: orange;
+    -webkit-text-stroke: 2px white;
 }
 .logo {
     height: auto;

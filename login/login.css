@@ -2,8 +2,15 @@
     font-family: "Lato", "Helvetica Neue", "Helvetica", "Arial", fontawesome;
     line-height: 1.4;
 }
+
 body {
-    background: url("https://preview.ibb.co/eraOhp/Background_Signin.png");
+    background: url("../images/background.png") no-repeat center center fixed;;
+    height: 100%;
+    overflow: hidden;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     opacity: 10%;
     background-position: center center;
     background-size: cover;
@@ -16,10 +23,9 @@ body {
 }
 .container {
     border-radius: 20px;
-    width: 400px;
+    width: 420px;
     height: auto;
-    margin: auto;
-    margin-top: 15px;
+    margin-top: 50px;
     text-align: center;
     background-color: #E9EBEE;
     background: url("https://www.xmple.com/wallpaper/linear-highlight-yellow-green-gradient-1920x1080-c2-fffdc7-c7ffcd-l-50-a-135-f-21.svg");
@@ -72,9 +78,36 @@ button {
 #link-signup {
     text-decoration: none;
 }
-.logo, .logo-container {
-    width: 468px;
+.logo {
+    width: 83.33%;
     height: 200px;
-    margin: auto;
-    margin-top: 5px;
+    margin-top: 20px;
 }
+.logo-container {
+    width: 420px;
+}
+
+@media (min-width: 576px) {
+    .logo {
+        width: 420px;
+        height: 200px;
+        margin-top: 10px;
+    }
+    .container {
+        margin-top: 30px;
+        width: 410px;
+    }
+}
+
+@media  (min-width: 768px) {
+    .logo {
+        width: 400px;
+        height: 200px;
+        margin-top: 10px;
+    }
+    .container {
+        margin-top: 30px;
+        width: 390px;
+    }
+}
+

@@ -227,3 +227,32 @@ function decreaseAmount(currentID) {
     localStorage.setItem("accountArray", JSON.stringify(localAccount));
     document.getElementById("total-price-number").innerHTML = totalPrice(currentUser.cartArray);
 }   
+
+function popUp() {
+    var bill = document.getElementById("bill-form");
+    var button = document.getElementById("cart-button");
+    if (bill.style.display == "none") {
+        bill.style.display = "inline-block";
+        button.style.background = "red";
+        button.style.color = "white";
+    }
+    else {
+        bill.style.display = "none";
+        button.style.background = "white";
+        button.style.color = "red";
+    }
+
+}
+
+function fixCartDisplay(billOrder) {
+    if (billOrder.matches) {
+        document.getElementById("bill-form").style.display = "inline-block";
+    } else document.getElementById("bill-form").style.display = "none";
+
+}
+var billOrderDesktopDisplay = window.matchMedia("(min-width: 768px)");
+var billOrderMobileDisplay = window.matchMedia("(min-width: 100px)");
+fixCartDisplay(billOrderDesktopDisplay);
+fixCartDisplay(billOrderMobileDisplay)
+billOrderDesktopDisplay.addListener(fixCartDisplay);
+billOrderMobileDisplay.addListener(fixCartDisplay);

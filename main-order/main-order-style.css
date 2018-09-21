@@ -1,5 +1,5 @@
 body {
-    background-color: #ffff99;
+    background-color: #fcf7bb;
     opacity: 10%;
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
@@ -10,5 +10,5 @@ body {
     display: inline-block;
     position: absolute;
     padding: 0;
-    top: 16%;
+    top: 11%;
 }

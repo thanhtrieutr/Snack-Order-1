@@ -20,13 +20,13 @@
 
 .main-snack-name {
     text-align: center;
+    font-size: 14px;
     font-weight: 700;
     margin-top: 10px;
-    min-height: 75px;
+    min-height: 51px;
 }
 
 .main-snack-price {
-    margin-top: 10px; 
     color: red;
     font-size: 20px;
     font-weight: 1000;

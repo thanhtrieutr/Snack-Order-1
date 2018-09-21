@@ -244,15 +244,15 @@ function popUp() {
 
 }
 
-function fixDisplay(billOrder) {
+function fixCartDisplay(billOrder) {
     if (billOrder.matches) {
         document.getElementById("bill-form").style.display = "inline-block";
     } else document.getElementById("bill-form").style.display = "none";
 
 }
-var billOrderNormalDisplay = window.matchMedia("(min-width: 768px)");
-var billOrderSmallDisplay = window.matchMedia("(min-width: 576px)");
-fixDisplay(billOrderNormalDisplay);
-fixDisplay(billOrderSmallDisplay)
-billOrderNormalDisplay.addListener(fixDisplay);
-billOrderSmallDisplay.addListener(fixDisplay);
+var billOrderDesktopDisplay = window.matchMedia("(min-width: 768px)");
+var billOrderMobileDisplay = window.matchMedia("(min-width: 100px)");
+fixCartDisplay(billOrderDesktopDisplay);
+fixCartDisplay(billOrderMobileDisplay)
+billOrderDesktopDisplay.addListener(fixCartDisplay);
+billOrderMobileDisplay.addListener(fixCartDisplay);

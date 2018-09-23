@@ -234,13 +234,13 @@ function popUp() {
     var button = document.getElementById("cart-button");
     if (bill.style.display == "none") {
         bill.style.display = "inline-block";
-        button.style.background = "red";
-        button.style.color = "white";
+        button.style.background = "white";
+        button.style.color = "orange";
     }
     else {
         bill.style.display = "none";
-        button.style.background = "white";
-        button.style.color = "red";
+        button.style.background = "orange";
+        button.style.color = "white";
     }
 
 }

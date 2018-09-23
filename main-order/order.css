@@ -105,20 +105,19 @@ i {
     text-align: center;
 }
 #hambuger-box {
+    display: none;
     z-index: 3;
-    position: absolute;
+    position: fixed;
     padding: 0;
     top: 64px;
     left: 0;
     background: #fff8e1;
-    border-bottom: double 5px #ffa31a;
-    border-right: double 5px #ffa31a;
 }
 .hambuger-option {
     text-align: left;
     color: #ff9800;
     padding: 19px;
-    border: solid 1px transparent;
+    border: solid 1px #ff9800;
     font-size: 28px;
 }
 .hambuger-option:hover {

@@ -258,13 +258,16 @@ fixCartDisplay(billOrderMobileDisplay)
 billOrderDesktopDisplay.addListener(fixCartDisplay);
 billOrderMobileDisplay.addListener(fixCartDisplay);
 
-addEventListener('load',fixHambuger)
+addEventListener('load',function() {
+    document.getElementById("hambuger-box").style.display = "none";
+});
 window.addEventListener('resize',fixHambuger);
 document.getElementById("hambuger-button").addEventListener('click',showHambugerBox);
 
 function fixHambuger() {
+    width=window.innerWidth;
     var x = document.getElementById("hambuger-box");
-    x.style.display = "none";
+    if (width >= 768) x.style.display = "none";
 }
 
 function showHambugerBox() {

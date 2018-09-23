@@ -1,6 +1,7 @@
 checkLogIn();
 addEventListener("load", rotateUsername("user-name"));
 getById("log-out-button").addEventListener('click', logOut);
+getById("log-out-button-hambuger").addEventListener('click', logOut);
 //after load  full data
 function afterLoad() {
     showCurrentSnack();
@@ -256,3 +257,20 @@ fixCartDisplay(billOrderDesktopDisplay);
 fixCartDisplay(billOrderMobileDisplay)
 billOrderDesktopDisplay.addListener(fixCartDisplay);
 billOrderMobileDisplay.addListener(fixCartDisplay);
+
+addEventListener('load',fixHambuger)
+window.addEventListener('resize',fixHambuger);
+document.getElementById("hambuger-button").addEventListener('click',showHambugerBox);
+
+function fixHambuger() {
+    var x = document.getElementById("hambuger-box");
+    x.style.display = "none";
+}
+
+function showHambugerBox() {
+    var x = document.getElementById("hambuger-box");
+    if (x.style.display == "none") {
+        x.style.display = "inline-block";
+    }
+    else x.style.display = "none";
+}

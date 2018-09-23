@@ -18,13 +18,19 @@
     </head>
     <body>
         <div id="title" class = "cl-xs-12">
-            <i class="fa cl-xs-2" >&#xf0c9;</i>
+            <a class="fa cl-xs-2" id="hambuger-button">
+                <i class="fa fa-bars"></i>
+            </a>
             <img class="logo offset-xs-2 offset-md-4 cl-xs-4 " src="../images/logo.png" >
             <button class="fa cl-xs-2" id="cart-button" onclick="popUp()">&#xf07a;</button>
             <div class="cl-md-4 offset-md-8" id="user-bar"> 
                 <a href="../profile/profile.html"> <div id="user-name">Username </div> </a>
                 <button id="log-out-button">Log Out</button>
             </div>
+        </div>
+        <div class="fa cl-xs-6" id="hambuger-box">
+            <a href="../profile/profile.html"><div class="hambuger-option cl-xs-12">Profile</div></a>
+            <div class="hambuger-option cl-xs-12" id="log-out-button-hambuger">Log Out</div>
         </div>
         <span class="cl-xs-12 cl-md-9 row" id="main-order">
             <!-- for one snack -->

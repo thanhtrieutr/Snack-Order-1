@@ -16,7 +16,7 @@
     font-size: 14px;
     font-weight: 700;
     margin-top: 10px;
-    min-height: 51px;
+    min-height: 68px;
 }
 .main-snack-price {
     color: red;
@@ -38,4 +38,10 @@
 .checkbox-button:checked {
     background-color: #e2a600;
     border-radius: 5px;
+}
+@media (min-width: 1200px) {
+    .main-snack-name {
+        font-size: 16px;
+        min-height: 50px;
+    }
 }

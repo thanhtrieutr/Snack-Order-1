@@ -277,3 +277,10 @@ function showHambugerBox() {
     }
     else x.style.display = "none";
 }
+
+function autoHide() {
+    if (window.matchMedia("(max-width: 767px)").matches) {
+        document.getElementById("bill-form").style.display = "none";
+    } 
+}
+autoHide();

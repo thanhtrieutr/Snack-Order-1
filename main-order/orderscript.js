@@ -39,7 +39,7 @@ function getUserInLocalAccount(temporary) {
     return -1;
 }
 
-const itemPrice = [19,35,19,44];
+const itemPrice = [19,35,19,44,19,35,19,44,19,35,19,44,19,35,19,44];
 
 function totalPrice(cartArray) {
     var sum = 0;
@@ -63,7 +63,7 @@ function addSnack(ID, amount) {
 
     //name of snack
     oneSpan = document.createElement("span");
-    oneSpan.setAttribute("class", "name-of-snack");
+    oneSpan.setAttribute("class", "name-of-snack cl-xs-12 cl-sm-12 cl-md-12");
     snackName = getById("snack-name-" + ID).innerHTML;
     oneText = document.createTextNode(snackName);
     oneSpan.appendChild(oneText);
@@ -72,7 +72,7 @@ function addSnack(ID, amount) {
     //price of snack
     oneSpan = document.createElement("span");
     oneSpan.setAttribute("id", "price-display-" + ID);
-    oneSpan.setAttribute("class", "price-of-snack");
+    oneSpan.setAttribute("class", "price-of-snack cl-xs-3 cl-sm-3 cl-md-4");
     snackPrice = displayPrice(itemPrice[ID - 1] * 1000);
     oneText = document.createTextNode(snackPrice);
     oneSpan.appendChild(oneText);
@@ -80,7 +80,7 @@ function addSnack(ID, amount) {
 
     //amount of snack
     oneSpan = document.createElement("span");
-    oneSpan.setAttribute("class", "number-of-snack");
+    oneSpan.setAttribute("class", "number-of-snack offset-xs-4 offset-sm-5 cl-sm-4 offset-md-3");
     //- button
     oneButton = document.createElement("button");
     oneButton.setAttribute("class", "number-button");
@@ -103,7 +103,7 @@ function addSnack(ID, amount) {
 
     //+ button
     oneButton = document.createElement("button");
-    oneButton.setAttribute("class", "number-button");
+    oneButton.setAttribute("class", "number-button");   
     oneButton.setAttribute("id","add-button-" + ID);
     oneButton.setAttribute("onclick", "increaseAmount("+ ID +")");
     oneText = document.createTextNode("+");
@@ -233,13 +233,13 @@ function popUp() {
     var button = document.getElementById("cart-button");
     if (bill.style.display == "none") {
         bill.style.display = "inline-block";
-        button.style.background = "red";
+        button.style.background = "orange";
         button.style.color = "white";
     }
     else {
         bill.style.display = "none";
         button.style.background = "white";
-        button.style.color = "red";
+        button.style.color = "orange";
     }
 
 }

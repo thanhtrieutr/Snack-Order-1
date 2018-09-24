@@ -1,7 +1,6 @@
 checkLogIn();
 addEventListener("load", rotateUsername("user-name"));
 getById("log-out-button").addEventListener('click', logOut);
-getById("log-out-button-hambuger").addEventListener('click', logOut);
 //after load  full data
 function afterLoad() {
     showCurrentSnack();
@@ -128,7 +127,7 @@ function showCurrentSnack() {
         currentUser.cartArray = []; 
     }
     //hidd all
-    for (var i = 1; i <= 4; i++) {
+    for (var i = 1; i <= 12; i++) {
         removeSnack(i);
     }
     //show in data
@@ -257,30 +256,3 @@ fixCartDisplay(billOrderDesktopDisplay);
 fixCartDisplay(billOrderMobileDisplay)
 billOrderDesktopDisplay.addListener(fixCartDisplay);
 billOrderMobileDisplay.addListener(fixCartDisplay);
-
-addEventListener('load',function() {
-    document.getElementById("hambuger-box").style.display = "none";
-});
-window.addEventListener('resize',fixHambuger);
-document.getElementById("hambuger-button").addEventListener('click',showHambugerBox);
-
-function fixHambuger() {
-    width=window.innerWidth;
-    var x = document.getElementById("hambuger-box");
-    if (width >= 768) x.style.display = "none";
-}
-
-function showHambugerBox() {
-    var x = document.getElementById("hambuger-box");
-    if (x.style.display == "none") {
-        x.style.display = "inline-block";
-    }
-    else x.style.display = "none";
-}
-
-function autoHide() {
-    if (window.matchMedia("(max-width: 767px)").matches) {
-        document.getElementById("bill-form").style.display = "none";
-    } 
-}
-autoHide();

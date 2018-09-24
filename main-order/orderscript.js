@@ -1,6 +1,7 @@
 checkLogIn();
 addEventListener("load", rotateUsername("user-name"));
 getById("log-out-button").addEventListener('click', logOut);
+getById("log-out-button-hambuger").addEventListener('click', logOut);
 //after load  full data
 function afterLoad() {
     showCurrentSnack();
@@ -233,13 +234,13 @@ function popUp() {
     var button = document.getElementById("cart-button");
     if (bill.style.display == "none") {
         bill.style.display = "inline-block";
-        button.style.background = "red";
-        button.style.color = "white";
+        button.style.background = "white";
+        button.style.color = "orange";
     }
     else {
         bill.style.display = "none";
-        button.style.background = "white";
-        button.style.color = "red";
+        button.style.background = "orange";
+        button.style.color = "white";
     }
 
 }
@@ -256,3 +257,23 @@ fixCartDisplay(billOrderDesktopDisplay);
 fixCartDisplay(billOrderMobileDisplay)
 billOrderDesktopDisplay.addListener(fixCartDisplay);
 billOrderMobileDisplay.addListener(fixCartDisplay);
+
+addEventListener('load',function() {
+    document.getElementById("hambuger-box").style.display = "none";
+});
+window.addEventListener('resize',fixHambuger);
+document.getElementById("hambuger-button").addEventListener('click',showHambugerBox);
+
+function fixHambuger() {
+    width=window.innerWidth;
+    var x = document.getElementById("hambuger-box");
+    if (width >= 768) x.style.display = "none";
+}
+
+function showHambugerBox() {
+    var x = document.getElementById("hambuger-box");
+    if (x.style.display == "none") {
+        x.style.display = "inline-block";
+    }
+    else x.style.display = "none";
+}

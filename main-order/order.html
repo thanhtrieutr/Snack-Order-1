@@ -1,68 +1,86 @@
 <html>
     <head>
-        <title>Order</title>
+        <title> Order </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
         <link rel="stylesheet" type="text/css" href="../responsive-design/build-column.css">
         <link rel="stylesheet" type="text/css" href="../responsive-design/off-set.css">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="../main-order/order.css">
-        
-        <link href='https://fonts.googleapis.com/css?family=Monofett' rel='stylesheet'>
-        <link href="../main-order/main-order-style.css" rel="stylesheet" type="text/css">
-        <link rel="stylesheet" type="text/css" href="items.css">
 
-        <!-- Huy -->
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <link rel="stylesheet" type="text/css" media="screen" href="../main-order/billstyle.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Monofett'>        
+        
+        <link rel="stylesheet" type="text/css" href="../main-order/order.css">
+        <link rel="stylesheet" type="text/css" href="../main-order/main-order-style.css">
+        <link rel="stylesheet" type="text/css" href="../main-order/items.css">
+        <link rel="stylesheet" type="text/css" media="screen" href="../main-order/billstyle.css">
     </head>
+
     <body>
-        <div id="title" class = "cl-xs-12">
-            <i class="fa cl-xs-2" >&#xf0c9;</i>
-            <img class="logo offset-xs-2 offset-md-4 cl-xs-4 " src="../images/logo.png" >
+        <div class="title cl-xs-12">
+            <a class="fa cl-xs-2" id="hambuger-button">
+                <i class="fa fa-bars"></i>
+            </a>
+            <div class="cl-xs-8 offset-md-4 cl-md-4">
+                <div class="logo-container">
+                    <img class="logo" src="../images/logo.png" >
+                </div>
+            </div>
             <button class="fa cl-xs-2" id="cart-button" onclick="popUp()">&#xf07a;</button>
-            <div class="cl-md-4 offset-md-8" id="user-bar"> 
+            <div class="cl-md-4" id="user-bar"> 
                 <a href="../profile/profile.html"> <div id="user-name">Username </div> </a>
                 <button id="log-out-button">Log Out</button>
             </div>
         </div>
-        <span class="cl-xs-12 cl-md-9 row" id="main-order">
-            <!-- for one snack -->
-            <!-- <label class="one-snack cl-md-3 cl-sm-4 cl-xs-6" for="checkbox-1">
-                <img class="snack-img" src="https://i.imgur.com/14LDgbZ.jpg" alt="Snack Bento">
-                <div class="main-snack-name" id="snack-name-1">
-                    Snack Mực Tẩm Gia Vị Cay Ngọt Bento (24g)
-                </div>    
-                <div class="main-snack-price" id="snack-price-1">
-                    19.000 ₫
-                </div>
-                <input class="checkbox-button" type="checkbox" id="checkbox-1" onclick="chooseSnack(1)">
-            </label> -->
-        </span>
 
-        <!-- Huy -->
-        <div class="cl-xs-12 cl-md-3 offset-md-9" id="bill-form">
-            <h1>Cart</h1>
-            <div class="main-bill-form" id="still-main-bill-form">
-                <!-- <div class="order-thing" id="cart-1"> 
-                    <span class="name-of-snack">Snack Mực Tẩm Gia Vị Cay Ngọt Bento (24g)</span>
-                    <span class="price-of-snack">19.000 ₫</span>
-                    <span class="number-of-snack">
-                        <button class="number-button">-</button>
-                        1
-                        <button class="number-button">+</button>
-                    </span>
-                </div> -->
+        <div class="cl-xs-6" id="hambuger-box">
+            <a href="../profile/profile.html"><div class="hambuger-option cl-xs-12">Profile</div></a>
+            <div class="hambuger-option cl-xs-12" id="log-out-button-hambuger">Log Out</div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="cl-xs-12 cl-md-8 cl-xl-9" id="main-order">
+                    <!-- for one snack -->
+                    <!-- <label class="one-snack cl-md-3 cl-sm-4 cl-xs-6" for="checkbox-1">
+                        <img class="snack-img" src="https://i.imgur.com/14LDgbZ.jpg" alt="Snack Bento">
+                        <div class="main-snack-name" id="snack-name-1">
+                            Snack Mực Tẩm Gia Vị Cay Ngọt Bento (24g)
+                        </div>    
+                        <div class="main-snack-price" id="snack-price-1">
+                            19.000 ₫
+                        </div>
+                        <input class="checkbox-button" type="checkbox" id="checkbox-1" onclick="chooseSnack(1)">
+                    </label> -->
+                </div>
+
+                <!-- Huy -->
+                <div class="cl-xs-12 cl-md-4 cl-xl-3" id="bill-form">
+                    <h1>Cart</h1>
+                    <div class="main-bill-form" id="still-main-bill-form">
+                        <!-- <div class="order-thing" id="cart-1"> 
+                            <span class="name-of-snack">Snack Mực Tẩm Gia Vị Cay Ngọt Bento (24g)</span>
+                            <span class="price-of-snack">19.000 ₫</span>
+                            <span class="number-of-snack">
+                                <button class="number-button">-</button>
+                                1
+                                <button class="number-button">+</button>
+                            </span>
+                        </div> -->
+                    </div>
+                    <div class="total">
+                        <div id="total-price">Total price: </div>
+                        <div id="total-price-number">15000d</div>
+                    </div>
+                    <button class="my-button" id="order-button">Order</button>
+                </div>
             </div>
-            <div>
-                <span id="total-price">Total price: </span>
-                <span id="total-price-number">15000d</span>
-            </div>
-            <button class="my-button" id="order-button">Order</button>
         </div>
     </body>
+
     <script src="../others/utilityFunction.js"></script>
-    <script src="../main-order/orderscript.js"> </script>
+    <script src="../main-order/orderscript.js"></script>
     <script src="../others/orderscript.test.js"></script>
     <script src="../main-order/orderserver.js"></script>
 </html>

@@ -1,6 +1,7 @@
 checkLogIn();
 addEventListener("load", rotateUsername("user-name"));
 getById("log-out-button").addEventListener('click', logOut);
+getById("log-out-button-hambuger").addEventListener('click', logOut);
 //after load  full data
 function afterLoad() {
     showCurrentSnack();
@@ -39,7 +40,7 @@ function getUserInLocalAccount(temporary) {
     return -1;
 }
 
-const itemPrice = [19,35,19,44];
+const itemPrice = [19,35,19,44,19,35,19,44,19,35,19,44,19,35,19,44];
 
 function totalPrice(cartArray) {
     var sum = 0;
@@ -63,7 +64,7 @@ function addSnack(ID, amount) {
 
     //name of snack
     oneSpan = document.createElement("span");
-    oneSpan.setAttribute("class", "name-of-snack");
+    oneSpan.setAttribute("class", "name-of-snack cl-xs-12 cl-sm-12 cl-md-12");
     snackName = getById("snack-name-" + ID).innerHTML;
     oneText = document.createTextNode(snackName);
     oneSpan.appendChild(oneText);
@@ -72,7 +73,7 @@ function addSnack(ID, amount) {
     //price of snack
     oneSpan = document.createElement("span");
     oneSpan.setAttribute("id", "price-display-" + ID);
-    oneSpan.setAttribute("class", "price-of-snack");
+    oneSpan.setAttribute("class", "price-of-snack cl-xs-3 cl-sm-3 cl-md-4");
     snackPrice = displayPrice(itemPrice[ID - 1] * 1000);
     oneText = document.createTextNode(snackPrice);
     oneSpan.appendChild(oneText);
@@ -80,7 +81,7 @@ function addSnack(ID, amount) {
 
     //amount of snack
     oneSpan = document.createElement("span");
-    oneSpan.setAttribute("class", "number-of-snack");
+    oneSpan.setAttribute("class", "number-of-snack offset-xs-4 offset-sm-5 cl-sm-4 offset-md-3");
     //- button
     oneButton = document.createElement("button");
     oneButton.setAttribute("class", "number-button");
@@ -103,7 +104,7 @@ function addSnack(ID, amount) {
 
     //+ button
     oneButton = document.createElement("button");
-    oneButton.setAttribute("class", "number-button");
+    oneButton.setAttribute("class", "number-button");   
     oneButton.setAttribute("id","add-button-" + ID);
     oneButton.setAttribute("onclick", "increaseAmount("+ ID +")");
     oneText = document.createTextNode("+");
@@ -127,7 +128,7 @@ function showCurrentSnack() {
         currentUser.cartArray = []; 
     }
     //hidd all
-    for (var i = 1; i <= 4; i++) {
+    for (var i = 1; i <= 12; i++) {
         removeSnack(i);
     }
     //show in data
@@ -233,13 +234,13 @@ function popUp() {
     var button = document.getElementById("cart-button");
     if (bill.style.display == "none") {
         bill.style.display = "inline-block";
-        button.style.background = "red";
+        button.style.background = "orange";
         button.style.color = "white";
     }
     else {
         bill.style.display = "none";
         button.style.background = "white";
-        button.style.color = "red";
+        button.style.color = "orange";
     }
 
 }
@@ -256,3 +257,30 @@ fixCartDisplay(billOrderDesktopDisplay);
 fixCartDisplay(billOrderMobileDisplay)
 billOrderDesktopDisplay.addListener(fixCartDisplay);
 billOrderMobileDisplay.addListener(fixCartDisplay);
+
+addEventListener('load',function() {
+    document.getElementById("hambuger-box").style.display = "none";
+});
+window.addEventListener('resize',fixHambuger);
+document.getElementById("hambuger-button").addEventListener('click',showHambugerBox);
+
+function fixHambuger() {
+    width=window.innerWidth;
+    var x = document.getElementById("hambuger-box");
+    if (width >= 768) x.style.display = "none";
+}
+
+function showHambugerBox() {
+    var x = document.getElementById("hambuger-box");
+    if (x.style.display == "none") {
+        x.style.display = "inline-block";
+    }
+    else x.style.display = "none";
+}
+
+function autoHide() {
+    if (window.matchMedia("(max-width: 767px)").matches) {
+        document.getElementById("bill-form").style.display = "none";
+    } 
+}
+autoHide();

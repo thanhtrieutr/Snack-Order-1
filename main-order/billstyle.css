@@ -98,7 +98,7 @@
         border-width: 2px;
         height: auto;
         right: 0;
-        position: absolute;
+        position: fixed;
         display: none;
     }
     #user-bar {

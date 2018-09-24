@@ -127,7 +127,7 @@ function showCurrentSnack() {
         currentUser.cartArray = []; 
     }
     //hidd all
-    for (var i = 1; i <= 4; i++) {
+    for (var i = 1; i <= 12; i++) {
         removeSnack(i);
     }
     //show in data

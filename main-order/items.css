@@ -27,6 +27,7 @@
 .one-snack:hover {
     box-shadow: 1px 1px 20px 2px rgba(255, 211, 90);
     filter: brightness(110%);
+    cursor: pointer;
 }
 .one-snack input {
     display: block;
@@ -34,6 +35,7 @@
     margin-top: 10px;
     width: 30px;
     height: 30px;
+    cursor: pointer;
 }
 .checkbox-button:checked {
     background-color: #e2a600;
@@ -43,5 +45,10 @@
     .main-snack-name {
         font-size: 16px;
         min-height: 50px;
+    }
+}
+@media (min-width: 768px) {
+    #main-order {
+        padding-right: 15px;
     }
 }

@@ -44,7 +44,7 @@ function alertDataUser() {
 
         // redirect
         alert("Signup successful");
-        window.location.href = "../login/login.html";
+        window.location.href = "/order.com/login";
     }
     else {
         alert("User existed");

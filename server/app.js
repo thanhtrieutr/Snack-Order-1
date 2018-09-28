@@ -22,8 +22,7 @@ var product = [
     {id: 12, name: "Snack Tôm NongShim Túi Lớn (180g)", price: "44.000 ₫", img: "../images/tomghim.png", priceInt: 44000 }
 ];
 var accountArray = [
-    {
-        user: "test@gmail.com",
+    {   user: "test@gmail.com",
         password: "test1234"
     },
     {
@@ -44,6 +43,14 @@ var accountArray = [
     }
 ];
 
+var routeFile = [
+    {   routeUrl: "/order.com",
+        routeFileName: "/main-order/order.html"},
+    {   routeUrl: "/order.com/login",
+        routeFileName: "/login/login.html"},
+    {   routeUrl: "/order.com/profile",
+        routeFileName: "/profile/profile.html"},
+];
 //Function findUserPosition:
 function findValidUserPosition(accountList, user) {
     for (var i in accountList) {
@@ -69,48 +76,73 @@ function setResponseHeader(response) {
     response.setHeader('Content-type', 'application/json');
     response.setHeader('Access-Control-Allow-Origin', '*');
 }
+
+///get static file
+////////////////////////////////////////
 //css router
 function serveCss(request, response) {
     if (request.url.match("\.css$")) {
         var cssPath = path.join(__dirname, request.url);
-        console.log(`.${cssPath}`)
-        var file = fs.readFileSync(cssPath, {'encoding' : 'utf8'});
-        response.writeHead(200, {"Content-Type": "text/css"});
-        response.write(file);
-        response.end();
+        console.log(`.${cssPath}`);
+        try {
+            var file = fs.readFileSync(cssPath, {'encoding' : 'utf8'});
+            response.writeHead(200, {"Content-Type": "text/css"});
+            response.write(file);
+            console.log(file);
+            response.end();
+            check404 = false;
+        }
+        catch (error) {
+        }
     }
 }
 //js router
 function serveJs(request, response) {
     if (request.url.match("\.js$")) {
         var jsPath = path.join(__dirname, request.url);
-        console.log(`.${jsPath}`)
-        var file = fs.readFileSync(jsPath, {'encoding' : 'utf8'});
-        response.writeHead(200, {"Content-Type": "text/javascript"});
-        response.write(file);
-        response.end();
+        console.log(`.${jsPath}`);
+        try {
+            var file = fs.readFileSync(jsPath, {'encoding' : 'utf8'});
+            response.writeHead(200, {"Content-Type": "text/javascript"});
+            response.write(file);
+            response.end();
+            check404 = false;
+        }
+        catch (error) {
+        }
     } 
 }
 //image router
 function serveImage(request, response) {
     if (request.url.match("\.png$")) {
         var imagePath = path.join(__dirname, request.url);
-        var file = fs.readFileSync(imagePath);
-        response.writeHead(200, {"Content-Type": "image/png"});
-        response.write(file);
-        response.end();
+        try {
+            var file = fs.readFileSync(imagePath);
+            response.writeHead(200, {"Content-Type": "image/png"});
+            response.write(file);
+            response.end();
+            check404 = false;
+        }
+        catch (error) {
+        }
     }
 }
 //html router
-function serveHtml(request, response) {
-    if (request.url.match("\.html$")) {
-        var htmlPath = path.join(__dirname, request.url);
-        var file = fs.readFileSync(htmlPath, {'encoding' : 'utf8'});
-        response.writeHead(200, {"Content-Type": "text/html"});
-        response.write(file);
-        response.end();
+function serveHtml(request, response, fileName) {
+    if (fileName.match("\.html$")) {
+        var htmlPath = path.join(__dirname, fileName);
+        try {
+            var file = fs.readFileSync(htmlPath, {'encoding' : 'utf8'});
+            response.writeHead(200, {"Content-Type": "text/html"});
+            response.write(file);
+            response.end();
+            check404 = false;
+        }
+        catch (error) {
+        }
     }
 }
+/////////////////////////////////////////////
 
 //function for feature
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -184,7 +216,7 @@ function defaultHandler(response) {
 }
 ///////////////////////////////////////////////////////////////////////////////////////
 
-function mainrouter(url, method, request, response) {
+function mainRouter(url, method, request, response) {
     var route = [{
         routeUrl:"/checkLogin",
         routeMethod:"POST",
@@ -204,27 +236,33 @@ function mainrouter(url, method, request, response) {
     }];
     var routeId = route.findIndex(item => item.routeUrl === url);
     if (routeId == -1) {
-        //defaultHandler(response);
+        if (check404 == true)
+            defaultHandler(response);
     } else {
         route[routeId].routeHandler(request, response);
     }
 }
 
-const server = http.createServer((request, response) => {
-
-    setResponseHeader(response);
-    serveHtml(request, response);
-    serveCss(request, response);
-    serveJs(request, response);
-    serveImage(request, response);
-    
-    if (request.url === "/order.com") {
-        var html = fs.readFile("../main-order/order.html", "UTF-8", function(err, html){
-            response.writeHead(200, {"Content-Type": "text/html"});
-            response.end(html);
-        });
+function fileRouter(url, request, response) {
+    debugger;
+    var routeId = routeFile.findIndex(item => item.routeUrl === url);
+    if (routeId != -1) {
+        setResponseHeader(response);
+        serveHtml(request, response, routeFile[routeId].routeFileName);
+        check404 = false;
     }
-    mainrouter(request.url, request.method, request, response);
+    else {
+        // file css, imgage, js have url == file name 
+        serveCss(request, response);
+        serveImage(request, response);
+        serveJs(request, response);
+    }
+}
+var check404;
+const server = http.createServer((request, response) => {
+    check404 = true;
+    fileRouter(request.url, request, response);
+    mainRouter(request.url, request.method, request, response);
 });
 
 server.listen(port, hostname, () => {

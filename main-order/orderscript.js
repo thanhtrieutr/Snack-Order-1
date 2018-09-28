@@ -9,7 +9,7 @@ function afterLoad() {
 function logOut() {
     localStorage.removeItem("currentAccount");
     localStorage.removeItem('token');
-    window.location.href = "../login/login.html";
+    window.location.href = "/order.com/login";
 }
 
 function rotateUsername(id) {

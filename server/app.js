@@ -1,10 +1,9 @@
 const http = require('http');
-// const querystring = require('querystring');
 const hostname = "127.0.0.1";
-const port = 3000;
-
 var fs = require('fs');
 var path = require('path');
+
+const port = 3000;
 
 __dirname = path.dirname(__dirname);
 
@@ -112,11 +111,108 @@ function serveHtml(request, response) {
         response.end();
     }
 }
+
+//function for feature
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function checkLoginHandler(request, response) {
+    collectDataFromPost(request, result => {
+        setResponseHeader(response);
+        var position = findValidUserPosition(accountArray, result);
+        if (position == -1) {
+            response.end(JSON.stringify(false));
+        }
+        else {
+            var token = Buffer.from(accountArray[position].user).toString('base64');
+            response.end(JSON.stringify(token));
+        }
+    });
+}
+
+function checkTokenHandler(request, response) {
+    collectDataFromPost(request, result => {
+        //position == -1 mean don't exist that account
+        var position = -1;
+        for (var i in accountArray) {
+            let token = Buffer.from(accountArray[i].user).toString('base64');
+            if (token == result) {
+                position = i;
+                break;
+            }
+        }
+        setResponseHeader(response);
+        if (position != -1) {
+            response.end(JSON.stringify(accountArray[position].user));
+        }
+        else {
+            response.end(JSON.stringify(false));
+        }
+    });
+}
+
+function productHandler(request, response) {
+    setResponseHeader(response);
+    response.end(JSON.stringify(product));
+}
+
+function submitCartHandler(request, response) {
+    collectDataFromPost(request, result => {
+        var bill = {};
+        bill.products = [];
+        bill.totalPrice = 0;
+        for (var i in result.cartArray) {
+            for (var j in product) {
+                // find match 
+                if (result.cartArray[i].productID == product[j].id) {
+                    bill.products.push(product[j]);
+                    // calculate total price
+                    var currentPrice = product[j].priceInt;
+                    var currentAmount  = result.cartArray[i].amount;
+                    bill.totalPrice += currentAmount * currentPrice;
+                    break;
+                }
+            }
+        }
+        setResponseHeader(response);
+        response.end(JSON.stringify(bill));
+    });
+}
+
+function defaultHandler(response) {
+    response.statusCode = 404;
+    response.setHeader('Content-Type', 'text/plain');
+    response.end('No Page found\n');
+}
+///////////////////////////////////////////////////////////////////////////////////////
+
+function mainrouter(url, method, request, response) {
+    var route = [{
+        routeUrl:"/checkLogin",
+        routeMethod:"POST",
+        routeHandler:checkLoginHandler
+    }, {
+        routeUrl:"/checkToken",
+        routeMethod:"POST",
+        routeHandler:checkTokenHandler
+    }, {
+        routeUrl:"/submitCart",
+        routeMethod:"POST",
+        routeHandler:submitCartHandler
+    }, {
+        routeUrl:"/products",
+        routeMethod:"GET",
+        routeHandler:productHandler
+    }];
+    var routeId = route.findIndex(item => item.routeUrl === url);
+    if (routeId == -1) {
+        //defaultHandler(response);
+    } else {
+        route[routeId].routeHandler(request, response);
+    }
+}
+
 const server = http.createServer((request, response) => {
-    var method = request.method;
 
     setResponseHeader(response);
-
     serveHtml(request, response);
     serveCss(request, response);
     serveJs(request, response);
@@ -124,81 +220,11 @@ const server = http.createServer((request, response) => {
     
     if (request.url === "/order.com") {
         var html = fs.readFile("../main-order/order.html", "UTF-8", function(err, html){
-        response.writeHead(200, {"Content-Type": "text/html"});
-        response.end(html);
-    });
+            response.writeHead(200, {"Content-Type": "text/html"});
+            response.end(html);
+        });
     }
-    else if (request.url === '/products') {
-        if (method == 'GET') {
-            setResponseHeader(response);
-            response.end(JSON.stringify(product));
-        }
-    }
-    else if (request.url === '/checkLogin') {
-        if (method == "POST") {
-            collectDataFromPost(request, result => {
-                setResponseHeader(response);
-                var position = findValidUserPosition(accountArray, result);
-                if (position == -1) {
-                    response.end(JSON.stringify(false));
-                }
-                else {
-                    var token = Buffer.from(accountArray[position].user).toString('base64');
-                    response.end(JSON.stringify(token));
-                }
-            });
-        }
-    }
-    else if (request.url === '/checkToken') {
-        if (method == "POST") {
-            collectDataFromPost(request, result => {
-                //position == -1 mean don't exist that account
-                var position = -1;
-                for (var i in accountArray) {
-                    let token = Buffer.from(accountArray[i].user).toString('base64');
-                    if (token == result) {
-                        position = i;
-                        break;
-                    }
-                }
-                setResponseHeader(response);
-                if (position != -1) {
-                    response.end(JSON.stringify(accountArray[position].user));
-                }
-                else {
-                    response.end(JSON.stringify(false));
-                }
-            });
-        }
-    }
-    else if  (request.url === '/submitCart') {
-        if (method == "POST") {
-            collectDataFromPost(request, result => {
-                    var bill = {};
-                    bill.products = [];
-                    bill.totalPrice = 0;
-                    for (var i in result.cartArray) {
-                        for (var j in product) {
-                            // find match 
-                            if (result.cartArray[i].productID == product[j].id) {
-                                bill.products.push(product[j]);
-                                // calculate total price
-                                var currentPrice = product[j].priceInt;
-                                var currentAmount  = result.cartArray[i].amount;
-                                bill.totalPrice += currentAmount * currentPrice;
-                                break;
-                            }
-                        }
-                    }
-                setResponseHeader(response);
-                response.end(JSON.stringify(bill));
-            });
-        }
-    }
-    // else {
-    //     response.writeHead(404, {"Content-Type": "text/html"});
-    //     response.end("No Page Found");
-    // }
+    mainrouter(request.url, request.method, request, response);
 });
 
 server.listen(port, hostname, () => {

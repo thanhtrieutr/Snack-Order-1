@@ -83,12 +83,10 @@ function setResponseHeader(response) {
 function serveCss(request, response) {
     if (request.url.match("\.css$")) {
         var cssPath = path.join(__dirname, request.url);
-        console.log(`.${cssPath}`);
         try {
             var file = fs.readFileSync(cssPath, {'encoding' : 'utf8'});
             response.writeHead(200, {"Content-Type": "text/css"});
             response.write(file);
-            console.log(file);
             response.end();
             check404 = false;
         }
@@ -100,7 +98,6 @@ function serveCss(request, response) {
 function serveJs(request, response) {
     if (request.url.match("\.js$")) {
         var jsPath = path.join(__dirname, request.url);
-        console.log(`.${jsPath}`);
         try {
             var file = fs.readFileSync(jsPath, {'encoding' : 'utf8'});
             response.writeHead(200, {"Content-Type": "text/javascript"});
@@ -244,7 +241,6 @@ function mainRouter(url, method, request, response) {
 }
 
 function fileRouter(url, request, response) {
-    debugger;
     var routeId = routeFile.findIndex(item => item.routeUrl === url);
     if (routeId != -1) {
         setResponseHeader(response);
@@ -267,4 +263,5 @@ const server = http.createServer((request, response) => {
 
 server.listen(port, hostname, () => {
     console.log(`Server running at http://${hostname}:${port}/`);
+    console.log(`Can go to main page at http://${hostname}:${port}/order.com`);
 });

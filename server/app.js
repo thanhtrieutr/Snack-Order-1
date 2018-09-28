@@ -6,7 +6,7 @@ const port = 3000;
 var fs = require('fs');
 var path = require('path');
 
-__dirname = 'C:/Users/tedot/OneDrive/Máy tính/Snack-Order';
+__dirname = path.dirname(__dirname);
 
 var product = [
     {id: 1, name: "Snack Mực Tẩm Gia Vị Cay Ngọt Bento (24g)", price: "19.000 ₫", img: "../images/bento.png", priceInt: 19000 },
@@ -102,18 +102,31 @@ function serveImage(request, response) {
         response.end();
     }
 }
+//html router
+function serveHtml(request, response) {
+    if (request.url.match("\.html$")) {
+        var htmlPath = path.join(__dirname, request.url);
+        var file = fs.readFileSync(htmlPath, {'encoding' : 'utf8'});
+        response.writeHead(200, {"Content-Type": "text/html"});
+        response.write(file);
+        response.end();
+    }
+}
 const server = http.createServer((request, response) => {
     var method = request.method;
 
     setResponseHeader(response);
+
+    serveHtml(request, response);
     serveCss(request, response);
     serveJs(request, response);
     serveImage(request, response);
+    
     if (request.url === "/order.com") {
-            var html = fs.readFile("../main-order/order.html", "UTF-8", function(err, html){
-            response.writeHead(200, {"Content-Type": "text/html"});
-            response.end(html);
-        });
+        var html = fs.readFile("../main-order/order.html", "UTF-8", function(err, html){
+        response.writeHead(200, {"Content-Type": "text/html"});
+        response.end(html);
+    });
     }
     else if (request.url === '/products') {
         if (method == 'GET') {
@@ -153,7 +166,7 @@ const server = http.createServer((request, response) => {
                     response.end(JSON.stringify(accountArray[position].user));
                 }
                 else {
-                    response.end(JSON.stringify(true));
+                    response.end(JSON.stringify(false));
                 }
             });
         }

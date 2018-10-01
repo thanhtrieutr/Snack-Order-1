@@ -1,14 +1,14 @@
 var MongoClient = require('mongodb').MongoClient;
-var urldb = "mongodb://localhost:27017/";
+var urldb = "mongodb://test:123456789a@ds119523.mlab.com:19523/snack-order";
 var db;
 
 function connectDatabase(callback) {
-    MongoClient.connect(urldb, {useNewUrlParser:true}, function(err,dbo) {
+    MongoClient.connect(urldb, function(err,dbo) {
         db = dbo;
-        callback(dbo.db("snack-order"));
+        callback(dbo.db('snack-order'));
     });
 }
-
+    
 function readDatabase(collection, callback) {
     connectDatabase(function(dbo) {
         dbo.collection(collection).find({}).toArray(function(err, result) {

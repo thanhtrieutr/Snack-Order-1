@@ -4,7 +4,13 @@
 }
 
 body {
-    background: url("../images/background.png");
+    background: url("../images/background.png") no-repeat center center fixed;;
+    height: 100%;
+    overflow: hidden;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     opacity: 10%;
     background-position: center center;
     background-size: cover;
@@ -12,12 +18,10 @@ body {
 }
 
 .main-content {
-    height: 68%; 
+    height: 73%; 
     border-radius: 20px;
-    width: 400px;
     position: relative;
-    top: 15%;
-    margin: auto;
+    top: 10%;
     margin-top: 15px;
     text-align: center;
     background-color: #E9EBEE;
@@ -36,8 +40,9 @@ body {
     padding: 10px;
     display: block;
     width: 40%;
-    height: 35%;
+    height: 45%;
     margin: auto;
+    margin-top: 5px;
 }
 
 .user-zone p {
@@ -53,8 +58,7 @@ body {
 button {
     background-color: #ffe36a;
     color: black;
-    padding: 5px 20px;
-    width: 30%;
+    padding: 5px 10px;
     margin-bottom: 0px;
     border: none;
     border-radius: 8px;
@@ -62,6 +66,43 @@ button {
     font-size: 18px;
     font-weight: bold;
     opacity: 0.9;
-    margin-left: 5%;
-    margin-right: 5%;
+
+}
+
+@media (max-width: 450px) {
+    .avatar {
+        width: 50%;
+        height: 40%;
+    }
+}
+
+@media (min-width: 576px) {
+    .avatar {
+        width: 40%;
+        height: 45%;
+    }
+    button {
+        padding: 5px 20px;
+    }
+}
+
+@media (min-width: 768px) {
+    .avatar {
+        width: 40%;
+        height: 45%;
+        padding: 20px;
+        margin-top: 10px;
+    }
+}
+
+@media (min-width: 992px) {
+    .avatar {
+        width: 40%;
+        height: 45%;
+        padding: 20px;
+        margin-top: 5px;
+    }
+    button {
+        padding: 5px 15px;
+    }
 }

@@ -39,8 +39,8 @@ body {
 .avatar {
     padding: 10px;
     display: block;
-    width: 40%;
-    height: 45%;
+    width: 35%;
+    height: 40%;
     margin: auto;
     margin-top: 5px;
 }
@@ -69,13 +69,6 @@ button {
 
 }
 
-@media (max-width: 450px) {
-    .avatar {
-        width: 50%;
-        height: 40%;
-    }
-}
-
 @media (min-width: 576px) {
     .avatar {
         width: 40%;
@@ -91,16 +84,6 @@ button {
         width: 40%;
         height: 45%;
         padding: 20px;
-        margin-top: 10px;
-    }
-}
-
-@media (min-width: 992px) {
-    .avatar {
-        width: 40%;
-        height: 45%;
-        padding: 20px;
-        margin-top: 5px;
     }
     button {
         padding: 5px 15px;

@@ -23,7 +23,7 @@ function alertAnswerLogIn(user, password, token) {
         localStorage.setItem("token", token);
         //redirect
         alert("Accept account");
-        window.location.href = "/order.com";
+        window.location.href = "/";
     }
     else {
         alert("Account don't exist or wrong password");

@@ -1,0 +1,14 @@
+Read
+
+Read("product", function(item) {
+    console.log(item);
+    item là dãy các document
+    Cái function là hàm xử lý nó.
+});
+
+delete,create,update
+
+CreateDocument("product",obj);
+obj là 1 var có chứa các atribute .
+với update thì sẽ có thêm 1 obj nữa để thê hiên data sau khi đổi.
+

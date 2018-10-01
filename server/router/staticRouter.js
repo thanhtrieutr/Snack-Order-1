@@ -14,18 +14,19 @@ var routeFile = [
 ];
 
 module.exports = function fileRouter(url, request, response) {
-    debugger
+    var check404 = true;
     var routeId = routeFile.findIndex(item => item.routeUrl === url);
     if (routeId != -1) {
         utilities.setResponseHeader(response);
-        serve.serveHtml(request, response, routeFile[routeId].routeFileName);
-        check404 = false;
+        check404 = serve.serveHtml(request, response, routeFile[routeId].routeFileName);
     }
     else {
         // file css, imgage, js have url == file name 
-        serve.serveCss(request, response);
-        serve.serveImage(request, response);
-        serve.serveJs(request, response);
+        //when there is suitable file, 404 is false
+        check404 = check404 & serve.serveCss(request, response);
+        check404 = check404 & serve.serveImage(request, response);
+        check404 = check404 & serve.serveJs(request, response);
     }
+    return check404;
 }
 

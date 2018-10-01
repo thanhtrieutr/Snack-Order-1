@@ -8,7 +8,7 @@ function defaultHandler(response) {
     response.end('No Page found\n');
 }
 
-module.exports = function mainRouter(url, method, request, response) {
+module.exports = function mainRouter(url, method, request, response, check404) {
     var route = [{
         routeUrl:"/checkLogin",
         routeMethod:"POST",

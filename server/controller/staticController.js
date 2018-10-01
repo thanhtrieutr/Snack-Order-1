@@ -16,11 +16,14 @@ function serveCss(request, response) {
             response.writeHead(200, {"Content-Type": "text/css"});
             response.write(file);
             response.end();
-            check404 = false;
+            //404 is false 
+            return false;
         }
         catch (error) {
         }
     }
+    //404 is still true
+    return true;
 }
 //js router
 function serveJs(request, response) {
@@ -31,11 +34,14 @@ function serveJs(request, response) {
             response.writeHead(200, {"Content-Type": "text/javascript"});
             response.write(file);
             response.end();
-            check404 = false;
+            //404 is false 
+            return false;
         }
         catch (error) {
         }
     } 
+    //404 is still true
+    return true;
 }
 //image router
 function serveImage(request, response) {
@@ -46,11 +52,14 @@ function serveImage(request, response) {
             response.writeHead(200, {"Content-Type": "image/png"});
             response.write(file);
             response.end();
-            check404 = false;
+            //404 is false 
+            return false;
         }
         catch (error) {
         }
     }
+    //404 is still true
+    return true;
 }
 //html router
 function serveHtml(request, response, fileName) {
@@ -61,11 +70,14 @@ function serveHtml(request, response, fileName) {
             response.writeHead(200, {"Content-Type": "text/html"});
             response.write(file);
             response.end();
-            check404 = false;
+            //404 is false 
+            return false;
         }
         catch (error) {
         }
     }
+    //404 is still true
+    return true;
 }
 
 module.exports = {

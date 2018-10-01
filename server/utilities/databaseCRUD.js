@@ -2,25 +2,24 @@ var MongoClient = require('mongodb').MongoClient;
 var urldb = "mongodb://localhost:27017/";
 var db;
 
-function Connect(callback) {
+function connectDatabase(callback) {
     MongoClient.connect(urldb, {useNewUrlParser:true}, function(err,dbo) {
         db = dbo;
-        callback(dbo.db("Snack-Order"));
+        callback(dbo.db("snack-order"));
     });
 }
 
-function Read(collection, callback) {
-    Connect(function(dbo) {
+function readDatabase(collection, callback) {
+    connectDatabase(function(dbo) {
         dbo.collection(collection).find({}).toArray(function(err, result) {
-            debugger;
             callback(result);
             db.close();
         });
     });
 }
 
-function CreateDocument(collection, object, callback) {
-    Connect(function(dbo) {
+function createDocument(collection, object, callback) {
+    connectDatabase(function(dbo) {
         dbo.collection(collection).insertOne(object, function(err, result) {
             db.close();
             if (callback) callback();
@@ -28,8 +27,8 @@ function CreateDocument(collection, object, callback) {
     });
 }
 
-function Delete1Document(collection, object, callback) {
-    Connect(function(dbo) {
+function deleteOneDocument(collection, object, callback) {
+    connectDatabase(function(dbo) {
         dbo.collection(collection).deleteOne(object, function(err, result) {
             db.close();
             if (callback) callback();
@@ -37,13 +36,12 @@ function Delete1Document(collection, object, callback) {
     });
 }
 
-function Update1Document(collection, object, newValues, callback) {
-    Connect(function(dbo) {
+function updateOneDocument(collection, object, newValues, callback) {
+    connectDatabase(function(dbo) {
         var newData = {
             $set: newValues
         };
         dbo.collection(collection).updateOne(object, newData, function(err, result) {
-            debugger;
             db.close();
             if (callback) callback();
         });
@@ -51,8 +49,8 @@ function Update1Document(collection, object, newValues, callback) {
 }
 
 module.exports = {
-    Read: Read,
-    CreateDocument: CreateDocument,
-    Delete1Document: Delete1Document,
-    Update1Document: Update1Document
+    readDatabase: readDatabase,
+    createDocument: createDocument,
+    deleteOneDocument: deleteOneDocument,
+    updateOneDocument: updateOneDocument
 }

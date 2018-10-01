@@ -1,12 +1,14 @@
 <html>
     <head>
         <title> Profile </title>
+        <link rel="stylesheet" type="text/css" href="../responsive-design/build-column.css">
+        <link rel="stylesheet" type="text/css" href="../responsive-design/off-set.css">
         <link rel="stylesheet" type="text/css" href="../profile/profile.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
     <body>
-        <div class="main-content">
+        <div class="main-content offset-xs-1 cl-xs-10 offset-sm-2 cl-sm-8 offset-md-3 cl-md-6">
             <div class="user-zone">
                 <img class="avatar" src="https://i.imgur.com/S2IRHcz.png" alt="User Avatar">
                 <p>Username: 
@@ -23,10 +25,10 @@
             </div>
 
             <div class = "button">
-                <button type="submit" id="change-button" onclick="alertUserinChangingProfile()"> Change</button>  
+                <button type="submit" id="change-button" class = "offset-xs-1 cl-xs-4 offset-sm-2 cl-sm-3 offset-md-2 cl-md-3" onclick="alertUserinChangingProfile()"> Change</button>  
                 <!-- <button type="submit" id="change-button" onclick="goToChangeMode()"> Change</button>   -->
-                <button type="submit" id="save-button" onclick="goToNormalMode(true)"> Save</button>  
-                <a href="/"> <button type="submit" id="return-button"> Return</button>  </a>
+                <button type="submit" id="save-button" class = "offset-xs-2 cl-xs-4 offset-sm-2 cl-sm-3 offset-md-2 cl-md-3" onclick="goToNormalMode(true)"> Save</button>  
+                <a href="/order.com"> <button type="submit" id="return-button" class = "offset-xs-2 cl-xs-4 offset-sm-2 cl-sm-3 offset-md-2 cl-md-3" > Return</button>  </a>
             </div>
         </div>
     </body>

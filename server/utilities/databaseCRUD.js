@@ -1,5 +1,5 @@
 var MongoClient = require('mongodb').MongoClient;
-var urldb = "mongodb://test:123456789a@ds119523.mlab.com:19523/snack-order";
+var urldb = "mongodb://localhost:27017/";
 var db;
 
 function connectDatabase(callback) {

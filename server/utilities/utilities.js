@@ -1,4 +1,5 @@
 //Function findUserPosition:
+var http = require("http");
 function findValidUserPosition(accountList, user) {
     for (var i in accountList) {
         if (accountList[i].user == user.user && accountList[i].password == user.password) {

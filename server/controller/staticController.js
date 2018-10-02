@@ -20,6 +20,7 @@ function serveCss(request, response) {
             return false;
         }
         catch (error) {
+            console.log(`file ${request.url} is not exist`);
         }
     }
     //404 is still true
@@ -38,6 +39,7 @@ function serveJs(request, response) {
             return false;
         }
         catch (error) {
+            console.log(`file ${request.url} is not exist`);
         }
     } 
     //404 is still true
@@ -56,6 +58,7 @@ function serveImage(request, response) {
             return false;
         }
         catch (error) {
+            console.log(`file ${request.url} is not exist`);
         }
     }
     //404 is still true
@@ -74,6 +77,7 @@ function serveHtml(request, response, fileName) {
             return false;
         }
         catch (error) {
+            console.log(`file ${request.url} is not exist`);
         }
     }
     //404 is still true

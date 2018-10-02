@@ -11,6 +11,8 @@ var routeFile = [
         routeFileName: "/login/login.html"},
     {   routeUrl: "/profile",
         routeFileName: "/profile/profile.html"},
+    {   routeUrl: "/signup",
+        routeFileName: "/signup/signup.html"}
 ];
 
 module.exports = function fileRouter(url, request, response) {

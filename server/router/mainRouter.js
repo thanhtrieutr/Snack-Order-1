@@ -2,6 +2,7 @@ var checkLogin = require("../controller/loginHandler")
 var getProduct = require("../controller/getProduct")
 var cartHandler = require("../controller/cartHandler")
 var updatePassword = require("../controller/updatePassword")
+var createAccount = require("../controller/createAccount");
 
 function defaultHandler(response) {
     response.statusCode = 404;
@@ -11,17 +12,17 @@ function defaultHandler(response) {
 
 module.exports = function mainRouter(url, method, request, response, check404) {
     var route = [{
-        routeUrl:"/checkLogin",
-        routeMethod:"POST",
+        routeUrl: "/checkLogin",
+        routeMethod: "POST",
         routeHandler: checkLogin.checkLogin
     }, {
-        routeUrl:"/checkToken",
-        routeMethod:"POST",
+        routeUrl: "/checkToken",
+        routeMethod: "POST",
         routeHandler: checkLogin.checkToken
     }, {
-        routeUrl:"/submitCart",
-        routeMethod:"POST",
-        routeHandler:cartHandler
+        routeUrl: "/submitCart",
+        routeMethod: "POST",
+        routeHandler: cartHandler
     }, {
         routeUrl:"/products",
         routeMethod:"GET",
@@ -30,6 +31,10 @@ module.exports = function mainRouter(url, method, request, response, check404) {
         routeUrl:"/updatePassword",
         routeMethod:"POST",
         routeHandler:updatePassword
+    }, {
+        routeUrl: "/createUser",
+        routeMethod: "POST",
+        routeHandler: createAccount.createUser
     }];
     var routeId = route.findIndex(item => item.routeUrl === url);
     if (routeId == -1) {

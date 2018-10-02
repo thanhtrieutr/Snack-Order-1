@@ -13,8 +13,8 @@ function connectDatabase(callback) {
 function readDatabase(collection, callback) {
     connectDatabase(function(dbo) {
         dbo.collection(collection).find({}).toArray(function(err, result) {
-            callback(result);
             db.close();
+            callback(result);
         });
     });
 }
@@ -31,6 +31,18 @@ function createDocument(collection, object, callback) {
 function deleteOneDocument(collection, object, callback) {
     connectDatabase(function(dbo) {
         dbo.collection(collection).deleteOne(object, function(err, result) {
+            db.close();
+            if (callback) callback();
+        });
+    });
+}
+
+function deleteOneCollection(collection, callback) {
+    connectDatabase(function(dbo) {
+        dbo.collection(collection).drop(function(err, deleteOK) {
+            // if (err) {
+            //     throw err;
+            // }
             db.close();
             if (callback) callback();
         });
@@ -64,4 +76,5 @@ module.exports = {
     deleteOneDocument: deleteOneDocument,
     updateOneDocument: updateOneDocument,
     readOneDocument: readOneDocument
+    deleteOneCollection: deleteOneCollection
 }

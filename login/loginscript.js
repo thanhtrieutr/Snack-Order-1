@@ -1,5 +1,6 @@
 function checkLoginInSever(user, password) {
     var account = createNewAccount(user, password);
+    console.log(account);
     var http = new XMLHttpRequest();
     http.open('POST', "http://127.0.0.1:3000/checkLogin", true);
     http.send(JSON.stringify(account));

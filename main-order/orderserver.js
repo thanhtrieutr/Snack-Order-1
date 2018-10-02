@@ -42,16 +42,22 @@ function submitCart() {
     var http = new XMLHttpRequest();
     http.open("POST", "http://127.0.0.1:3000/submitCart", true);
     var currentUser = getUserInLocalAccount(user);
+    console.log(currentUser);
     http.send(JSON.stringify(currentUser));
     http.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200){
-            var bill = JSON.parse(this.response);
-            var answer = "Bill: \n";
-            for (var i in bill.products) {
-                answer += bill.products[i].name + ": " + currentUser.cartArray[i].amount + "\n";
+            var result = JSON.parse(this.response);
+            if (result == 'Fail') {
+                alert ("Something went wrong with your cart! Please try again!");
             }
-            answer += "Total price: " + bill.totalPrice + "₫";
-            alert(answer);
+            else {
+                var answer = "Bill: \n";
+                for (var i in result.products) {
+                    answer += result.products[i].name + ":" + currentUser.cartArray[i].amount + "\n";
+                }
+                answer += "Total price: " + result.totalPrice + "đ" ;
+                alert(answer);
+            }
         }
     }
 }

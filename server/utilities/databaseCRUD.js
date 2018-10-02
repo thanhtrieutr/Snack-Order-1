@@ -1,5 +1,6 @@
 var MongoClient = require('mongodb').MongoClient;
-var urldb = "mongodb://test:123456789a@ds119523.mlab.com:19523/snack-order";
+//var urldb = "mongodb://test:123456789a@ds119523.mlab.com:19523/snack-order";
+var urldb = "mongodb://localhost:27017/";
 var db;
 
 function connectDatabase(callback) {
@@ -48,9 +49,19 @@ function updateOneDocument(collection, object, newValues, callback) {
     });
 }
 
+function readOneDocument(collection, object, callback) {
+    connectDatabase(function(dbo) {
+        dbo.collection(collection).findOne(object , function(err, result) {
+            callback(result);
+            db.close();
+        });
+    });
+}
+
 module.exports = {
     readDatabase: readDatabase,
     createDocument: createDocument,
     deleteOneDocument: deleteOneDocument,
-    updateOneDocument: updateOneDocument
+    updateOneDocument: updateOneDocument,
+    readOneDocument: readOneDocument
 }

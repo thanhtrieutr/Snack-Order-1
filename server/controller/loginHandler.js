@@ -1,11 +1,7 @@
 var crud = require("../utilities/databaseCRUD");
-var accountArray;
 var utilities = require("../utilities/utilities");
-crud.readDatabase("account", function(item) { 
-    accountArray  = item;
-});
 
-function checkLoginHandler(request, response) {
+function checkLogin(request, response, accountArray) {
     utilities.collectDataFromPost(request, result => {
         utilities.setResponseHeader(response);
         var position = utilities.findValidUserPosition(accountArray, result);
@@ -18,8 +14,14 @@ function checkLoginHandler(request, response) {
         }
     });
 }
+function checkLoginHandler(request, response) {
+    // don't read 1 time at beginning because accounts can change
+    crud.readDatabase("account", function(accountArray) { 
+        checkLogin(request, response, accountArray);
+    });
+}
 
-function checkTokenHandler(request, response) {
+function checkToken(request, response, accountArray) {
     utilities.collectDataFromPost(request, result => {
         //position == -1 mean don't exist that account
         var position = -1;
@@ -37,6 +39,12 @@ function checkTokenHandler(request, response) {
         else {
             response.end(JSON.stringify(false));
         }
+    });
+}
+function checkTokenHandler(request, response) {
+    // don't read 1 time at beginning because accounts can change
+    crud.readDatabase("account", function(accountArray) { 
+        checkToken(request, response, accountArray);
     });
 }
 

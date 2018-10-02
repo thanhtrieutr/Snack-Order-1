@@ -41,11 +41,11 @@ function checkKeyPress(key) {
     }
 }
 
-function alertUserClickSignup() {
-    alert("This feature is in development");
+function goToSignup() {
+    window.location.href = "/signup";
 }
 
 checkLogInAlready();
 addEventListener("keypress",checkKeyPress);
 getById("signin-button").addEventListener("click", alertDataUser);
-getById("link-signup").addEventListener("click", alertUserClickSignup);
+getById("link-signup").addEventListener("click", goToSignup);

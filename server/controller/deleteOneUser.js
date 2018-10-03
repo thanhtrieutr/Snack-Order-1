@@ -5,7 +5,7 @@ function deleteAccount(request, response, accountArray) {
     utilities.collectDataFromPost(request, result => {
         var position = utilities.findValidUserPosition(accountArray, result);
         if (position == -1) {
-            response.end("Cannot delete non-exist user");
+            response.end("Cannot delete user (non-exist user or wrong password)");
         }
         else {
             crud.deleteOneDocument("account" ,accountArray[position]);

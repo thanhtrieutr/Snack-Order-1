@@ -3,7 +3,7 @@ var getProduct = require("../controller/getProduct")
 var cartHandler = require("../controller/cartHandler")
 var updatePassword = require("../controller/updatePassword")
 var createAccount = require("../controller/createAccount");
-var deleteOneUser = require("../testDelete");
+var deleteOneUser = require("../controller/deleteOneUser");
 
 function defaultHandler(response) {
     response.statusCode = 404;

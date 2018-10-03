@@ -5,6 +5,7 @@ var fileRouter = require("./router/staticRouter");
 var mainRouter = require("./router/mainRouter");
 
 const server = http.createServer((request, response) => {
+    response.setHeader('Access-Control-Allow-Origin', '*');
     var check404 = fileRouter(request.url, request, response);
     mainRouter(request.url, request.method, request, response, check404);
 });

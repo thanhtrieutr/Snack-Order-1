@@ -75,6 +75,6 @@ module.exports = {
     createDocument: createDocument,
     deleteOneDocument: deleteOneDocument,
     updateOneDocument: updateOneDocument,
-    readOneDocument: readOneDocument
+    readOneDocument: readOneDocument,
     deleteOneCollection: deleteOneCollection
 }

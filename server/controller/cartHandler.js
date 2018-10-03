@@ -73,7 +73,9 @@ function submitCart(request, response) {
 }
 module.exports = function submitCartHandler(request, response) {
     // read data first because they can change
-    readData(submitCart(request, response));
+    readData(() => {
+        submitCart(request, response);
+    });
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////

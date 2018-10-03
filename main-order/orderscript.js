@@ -151,7 +151,6 @@ function findProductPosition(currentUser, currentID) {
 function chooseSnack(currentID) {
     var checkBox = getById("checkbox-" + currentID);
     var currentUser = getUserInLocalAccount(user);
-    console.log(currentUser);
     if (checkBox.checked == true) {
         var product = findProductPosition(currentUser, currentID);
         if (product == -1) {

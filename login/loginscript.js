@@ -1,6 +1,5 @@
 function checkLoginInSever(user, password) {
     var account = createNewAccount(user, password);
-    console.log(account);
     var http = new XMLHttpRequest();
     http.open('POST', "http://127.0.0.1:3000/checkLogin", true);
     http.send(JSON.stringify(account));
@@ -12,7 +11,6 @@ function checkLoginInSever(user, password) {
     }
 }
 function alertAnswerLogIn(user, password, token) {
-    console.log(token);
     if (token != false) {
         //flag current account
         

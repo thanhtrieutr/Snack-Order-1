@@ -2,15 +2,18 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 var crud = require("../utilities/databaseCRUD");
 var utilities = require("../utilities/utilities");
-var product;
-crud.readDatabase("product", function(item) {
-    product = item;
-});
-crud.readDatabase("account", function(item) { 
-    accountArray  = item;
-});
-
-module.exports = function submitCartHandler(request, response) {
+var product, accountArray;
+function readData(callback) {
+    crud.readDatabase("product", function(item) {
+        product = item;
+        crud.readDatabase("account", function(item) { 
+            accountArray  = item;
+            if (callback) callback();
+        });
+    });
+    
+}
+function submitCart(request, response) {
     utilities.collectDataFromPost(request, result => {
         var position = utilities.findValidUserPosition(accountArray, result);
         if (position == -1) {
@@ -67,6 +70,10 @@ module.exports = function submitCartHandler(request, response) {
             return;
         }
     });
+}
+module.exports = function submitCartHandler(request, response) {
+    // read data first because they can change
+    readData(submitCart(request, response));
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////

@@ -1,16 +1,13 @@
 var utilities = require("../utilities/utilities");
 var crud = require("../utilities/databaseCRUD");
 
-function deleteOneUser(request, response) {
-    var accountArray;
-    crud.readDatabase("account", function(item) { 
-        accountArray  = item;
-    });
-
+function deleteAccount(request, response, accountArray) {
     utilities.collectDataFromPost(request, result => {
         var position = -1;
+        console.log(accountArray.length);
         for (var i in accountArray) {
-            if (result.id == accountArray[i].id) {
+            console.log(accountArray[i]._id);
+            if (result._id == accountArray[i]._id) {
                 position = i;
                 break;
             }    
@@ -19,9 +16,16 @@ function deleteOneUser(request, response) {
             response.end("Cannot delete non-exist user");
         }
         else {
-            crud.deleteOneDocument("account" ,accountArray[position], callback);
+            crud.deleteOneDocument("account" ,accountArray[position]);
             response.end("Delete successfully");
         }
+    });
+}
+function deleteOneUser(request, response) {
+    var accountArray;
+    crud.readDatabase("account", function(item) { 
+        accountArray  = item;
+        deleteAccount(request, response, accountArray);
     });
 }
 module.exports = {

@@ -29,7 +29,7 @@ module.exports = function mainRouter(url, method, request, response, check404) {
     }, {
         routeUrl: "/deleteUser",
         routeMethod: "POST",
-        routeHandler: deleteOneUser
+        routeHandler: deleteOneUser.deleteOneUser
     }];
     var routeId = route.findIndex(item => item.routeUrl === url);
     if (routeId == -1) {

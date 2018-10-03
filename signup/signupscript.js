@@ -1,3 +1,16 @@
+function signupInSever(user, password, callback) {
+    var account = createNewAccount(user, password);
+    var http = new XMLHttpRequest();
+    http.open('POST', "http://127.0.0.1:3000/createUser", true);
+    http.send(JSON.stringify(account));
+    http.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var result = this.response;
+            if (callback) return callback(result);
+        }
+    }
+}
+
 function alertDataUser() {
     var user = getById("input-user").value;
     var password = getById("input-password").value;
@@ -24,32 +37,14 @@ function alertDataUser() {
         alert("Password and repeat password are not match");
         return;
     }
-    //get from storage
-    var localAccount;
-    localAccount = JSON.parse(localStorage.getItem("accountArray"));
-    if (localAccount == null) {
-        localAccount = [];
-    }
-
-    //check exist
-    if (findUserPosition(localAccount, user) == -1) {
-
-        //change
-        var newAccount = createNewAccount(user, password);
-        localAccount.push(newAccount);
-        localStorage.setItem("accountArray", JSON.stringify(localAccount));
-
-        //flag current account
-        localStorage.setItem("currentAccount", user);
-
-        // redirect
-        alert("Signup successful");
-        window.location.href = "/order.com/login";
-    }
-    else {
-        alert("User existed");
-    }
     
+    signupInSever(user, password, result => {
+        if (result == "create succeed") {
+            alert("Signup successful");
+            window.location.href = "/login";
+        }
+        else alert(result);
+    });
 }
 
 function emailCheck(user) {
@@ -69,47 +64,4 @@ checkLogInAlready();
 addEventListener("keypress", checkKeyPress);
 getById("sign-up-button").addEventListener("click", alertDataUser);
 
-//UNIT TEST
-let passText = 'background: #222; color: #61B97F';
-let failText = 'background: #222; color: #E42A1B';
 
-// check email character
-function emailCheck(user) {
-    return /^[a-zA-Z0-9_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(user)
-}
-
-// unit test for email_check:
-
-//unit test for email_check:
-
-
-//unit test for email_check:
-
-function testEmailCheck(description, expectation, func) {
-    if(func == expectation) {
-      console.log(`%cPass: ${description}`, passText)
-    } else {
-      console.log(`%cFail: actual: ${func}, expectation: ${expectation}`, failText)
-    }
-}
-testEmailCheck("Email must only contain characters a->z,A->Z,0->9", true, emailCheck("aaa@aaa.aaa"));
-testEmailCheck("Email must only contain characters a->z,A->Z,0->9", true, emailCheck("dylan00433@gmail.com"));
-testEmailCheck("Email must only contain characters a->z,A->Z,0->9", true, emailCheck("aaaaaaa"));
-
-//check password character
-function passwordCheck(password) {
-    return /^[[a-zA-Z0-9!#$%&'*+-/=?^_`{|}]+$/.test(password);
-}
-
-//unit test for password_check:
-function testPasswordCheck(expect, funcCheck) {
-    var descript = "Password can only contains characters a->z,A->Z,0->9 and symbol !#$%&'*+-/=?^_`{|}";
-    if(funcCheck == expect) {
-        console.log(`%cPass: ${descript}`, passText)
-      } else {
-        console.log(`%cFail: actual: ${funcCheck}, expect: ${expect}`, failText)
-      }
-}
-testPasswordCheck(true, passwordCheck("akkajskajaaaa"));
-testPasswordCheck(true, passwordCheck("akkaj   skajaaaa"));
-testPasswordCheck(true, passwordCheck("akkajsk###!!!!!!!ajaaaa"))

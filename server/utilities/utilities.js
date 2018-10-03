@@ -1,4 +1,5 @@
 //Function findUserPosition:
+var http = require("http");
 function findValidUserPosition(accountList, user) {
     for (var i in accountList) {
         if (accountList[i].user == user.user && accountList[i].password == user.password) {
@@ -15,7 +16,13 @@ function collectDataFromPost(request, callback) {
     });
     //collect done
     request.on('end', () => {
-        callback(JSON.parse(body));
+        try {
+            body = JSON.parse(body);
+        }
+        catch (error) {
+            console.log(`There is error: ${error} at parse data\n`);
+        }
+        if (callback) callback(body);
     });
 }
 function setResponseHeader(response) {

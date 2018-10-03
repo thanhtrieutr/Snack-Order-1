@@ -1,5 +1,6 @@
 var MongoClient = require('mongodb').MongoClient;
-var urldb = "mongodb://test:123456789a@ds119523.mlab.com:19523/snack-order";
+//var urldb = "mongodb://test:123456789a@ds119523.mlab.com:19523/snack-order";
+var urldb = "mongodb://localhost:27017/";
 var db;
 
 function connectDatabase(callback) {
@@ -12,8 +13,8 @@ function connectDatabase(callback) {
 function readDatabase(collection, callback) {
     connectDatabase(function(dbo) {
         dbo.collection(collection).find({}).toArray(function(err, result) {
-            callback(result);
             db.close();
+            callback(result);
         });
     });
 }
@@ -36,6 +37,18 @@ function deleteOneDocument(collection, object, callback) {
     });
 }
 
+function deleteOneCollection(collection, callback) {
+    connectDatabase(function(dbo) {
+        dbo.collection(collection).drop(function(err, deleteOK) {
+            // if (err) {
+            //     throw err;
+            // }
+            db.close();
+            if (callback) callback();
+        });
+    });
+}
+
 function updateOneDocument(collection, object, newValues, callback) {
     connectDatabase(function(dbo) {
         var newData = {
@@ -48,9 +61,20 @@ function updateOneDocument(collection, object, newValues, callback) {
     });
 }
 
+function readOneDocument(collection, object, callback) {
+    connectDatabase(function(dbo) {
+        dbo.collection(collection).findOne(object , function(err, result) {
+            callback(result);
+            db.close();
+        });
+    });
+}
+
 module.exports = {
     readDatabase: readDatabase,
     createDocument: createDocument,
     deleteOneDocument: deleteOneDocument,
-    updateOneDocument: updateOneDocument
+    updateOneDocument: updateOneDocument,
+    readOneDocument: readOneDocument,
+    deleteOneCollection: deleteOneCollection
 }

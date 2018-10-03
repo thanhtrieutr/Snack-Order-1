@@ -151,7 +151,6 @@ function findProductPosition(currentUser, currentID) {
 function chooseSnack(currentID) {
     var checkBox = getById("checkbox-" + currentID);
     var currentUser = getUserInLocalAccount(user);
-    console.log(currentUser);
     if (checkBox.checked == true) {
         var product = findProductPosition(currentUser, currentID);
         if (product == -1) {
@@ -232,24 +231,28 @@ function decreaseAmount(currentID) {
 function popUp() {
     var bill = document.getElementById("bill-form");
     var button = document.getElementById("cart-button");
+    var body = document.getElementsByTagName("BODY")[0];
     if (bill.style.display == "none") {
         bill.style.display = "inline-block";
         button.style.background = "orange";
         button.style.color = "white";
+        body.style.position = "fixed";
     }
     else {
         bill.style.display = "none";
         button.style.background = "white";
         button.style.color = "orange";
+        body.style.position = "sticky";
     }
 
 }
 
 function fixCartDisplay(billOrder) {
+    var body = document.getElementsByTagName("BODY")[0];
     if (billOrder.matches) {
         document.getElementById("bill-form").style.display = "inline-block";
+        body.style.position = "sticky";
     } else document.getElementById("bill-form").style.display = "none";
-
 }
 var billOrderDesktopDisplay = window.matchMedia("(min-width: 768px)");
 var billOrderMobileDisplay = window.matchMedia("(min-width: 100px)");

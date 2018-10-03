@@ -3,13 +3,7 @@ var crud = require("../utilities/databaseCRUD");
 
 function deleteAccount(request, response, accountArray) {
     utilities.collectDataFromPost(request, result => {
-        var position = -1;
-        for (var i in accountArray) {
-            if (result._id == accountArray[i]._id) {
-                position = i;
-                break;
-            }    
-        }
+        var position = utilities.findValidUserPosition(accountArray, result);
         if (position == -1) {
             response.end("Cannot delete non-exist user");
         }

@@ -4,9 +4,7 @@ var crud = require("../utilities/databaseCRUD");
 function deleteAccount(request, response, accountArray) {
     utilities.collectDataFromPost(request, result => {
         var position = -1;
-        console.log(accountArray.length);
         for (var i in accountArray) {
-            console.log(accountArray[i]._id);
             if (result._id == accountArray[i]._id) {
                 position = i;
                 break;

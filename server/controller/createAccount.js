@@ -21,7 +21,7 @@ function validateAccount(account) {
 function createUser(request, response) {
     utilities.collectDataFromPost(request, newAccount => {
         crud.readDatabase("account", accounts => {
-            if (validateAccount(newAccount) == false) {
+            if (validateAccount(newAccount) == false || Object.keys(newAccount).length != 2) {
                 response.end("not valid account");
                 return;
             }

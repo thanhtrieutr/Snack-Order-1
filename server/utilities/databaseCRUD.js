@@ -12,8 +12,8 @@ function connectDatabase(callback) {
 function readDatabase(collection, callback) {
     connectDatabase(function(dbo) {
         dbo.collection(collection).find({}).toArray(function(err, result) {
-            callback(result);
             db.close();
+            callback(result);
         });
     });
 }

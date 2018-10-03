@@ -24,7 +24,21 @@ module.exports = function submitCartHandler(request, response) {
             bill.totalPrice = 0;  
             var checkProduct = 0;
             for (var i in result.cartArray) {
+                for (var j in result.cartArray) {
+                    if (i != j && result.cartArray[i].productID == result.cartArray[j].productID) {
+                        utilities.setResponseHeader(response);
+                        response.end("Fail");
+                        return;
+                    }
+                }
+            }
+            for (var i in result.cartArray) {
                 checkProduct = 0;
+                if (!result.cartArray[i].productID) {
+                    utilities.setResponseHeader(response);
+                    response.end("Fail");
+                    return; 
+                }
                 for (var j in product) {
                     // find match 
                     if (result.cartArray[i].productID == product[j].id) {
@@ -33,7 +47,7 @@ module.exports = function submitCartHandler(request, response) {
                         // calculate total price
                         var currentPrice = product[j].priceInt;
                         var currentAmount  = result.cartArray[i].amount;
-                        if (currentAmount <= 0)
+                        if (!currentAmount || typeof currentAmount !== "number" || currentAmount <= 0 || currentAmount >=100)
                         {
                             utilities.setResponseHeader(response);
                             response.end("Fail");

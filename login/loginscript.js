@@ -16,7 +16,13 @@ function alertAnswerLogIn(user, password, token) {
         
         //set local account for save cart
         var localAccount = [];
-        localAccount.push(createNewAccount(user, password));
+
+        var account = {};
+        account.user = user;
+        account.cartArray = [];
+        account.token = token;
+        localAccount.push(account);
+        // localAccount.push(createNewAccount(user, password));
         localStorage.setItem("accountArray", JSON.stringify(localAccount));
         localStorage.setItem("currentAccount", user);
         localStorage.setItem("token", token);

@@ -16,11 +16,13 @@ function readData(callback) {
 function submitCart(request, response) {
     utilities.collectDataFromPost(request, result => {
         var checkUser = 0;
+        var currentUser;
         for (var i in accountArray)
         {
             let token = Buffer.from(accountArray[i].user).toString('base64');
-            if (result.token !== token){
+            if (result.token == token){
                 checkUser = 1;
+                currentUser = accountArray[i].user;
             } 
         }
         if (checkUser == 0) {
@@ -29,6 +31,7 @@ function submitCart(request, response) {
             return;
         }
         var bill = {};
+        bill.user = currentUser;
         bill.products = [];
         bill.totalPrice = 0;  
         var checkProduct = 0;

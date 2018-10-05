@@ -175,6 +175,6 @@ input {
 
 @media (min-width: 768px) {
     .profile-content {
-        min-height: 63%;
+        min-height: 65%;
     }
 }

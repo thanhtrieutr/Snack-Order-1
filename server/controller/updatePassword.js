@@ -6,7 +6,6 @@ function passwordCheck(password) {
 }
 
 module.exports = function updatePassword(request, response) {
-    debugger;
     var currentId;
     utilities.collectDataFromPost(request, result => {
         var checkOldPassword = false;
@@ -18,11 +17,9 @@ module.exports = function updatePassword(request, response) {
         crud.readDatabase("account", function(object) {
             for (var i = 0 ; i < object.length ; i++) {
                 let token = Buffer.from(object[i].user).toString('base64');
-                debugger;
                 if (result.oldPassword === object[i].password && result.token === token) {
                     checkOldPassword = true;
                     currentId = object[i];
-                    debugger;
                     break;
                 }
             }

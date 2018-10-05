@@ -12,6 +12,15 @@ function createNewAccount(user, password) {
   return newAccount;
 }
 
+//Function changePassword:
+function changePasswordUser(oldPassword, newPassword, token) {
+    var changePassword = {};
+    changePassword.oldPassword = oldPassword;
+    changePassword.newPassword = newPassword;
+    changePassword.token = token;
+    return changePassword;
+  }
+
 //Function findUserPosition:
 function findUserPosition(localAccount, user) {
   for (var i in localAccount) {

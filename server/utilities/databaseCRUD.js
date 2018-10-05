@@ -31,9 +31,6 @@ function deleteOneDocument(collection, object, callback) {
 
 function deleteOneCollection(collection, callback) {
     db.collection(collection).drop(function(err, deleteOK) {
-        // if (err) {
-        //     throw err;
-        // }
         if (callback) callback();
     });
 }

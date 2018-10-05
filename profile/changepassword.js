@@ -1,3 +1,4 @@
+//Password check function
 function passwordCheck(password) {
   return /^[[a-zA-Z0-9!#$%&'*+-/=?^_`{|}]+$/.test(password);
 }

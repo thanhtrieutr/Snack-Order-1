@@ -20,31 +20,6 @@ function checkValidTelephone(telephone) {
     }
     return /^[0-9- ]+$/.test(telephone);
 }
-//normal mode
-function goToNormalMode(isSave) {
-    isChangeMode = false;
-    //button
-    document.getElementById("change-button").style.display = "inline";
-    document.getElementById("save-button").style.display = "none";
-
-}
-//default
-goToNormalMode(false);
-
-//change mode
-function goToChangeMode() {
-    isChangeMode = true;
-    var account = localAccount[ findUserPosition(localAccount, currentAccount)];
-    if (account.telephone == null) {
-        account.telephone = "";
-    }
-    if (account.address == null) {
-        account.address = "";
-    }
-    //button
-    document.getElementById("change-button").style.display = "none";
-    document.getElementById("save-button").style.display = "inline";
-}
 
 function checkKeyPress(key) {
     if (key.keyCode == 13 ) {

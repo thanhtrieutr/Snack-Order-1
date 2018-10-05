@@ -6,12 +6,10 @@ var db;
 function connectDatabase() {
     MongoClient.connect(urldb, function(err,dbo) {
         db = dbo.db('snack-order');
-        debugger;
     });
 }
     
 function readDatabase(collection, callback) {
-    debugger
     db.collection(collection).find({}).toArray(function(err, result) {
         callback(result);
     });

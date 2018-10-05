@@ -85,7 +85,7 @@ function goToChangeMode() {
 }
 
 function checkKeyPress(key) {
-    if (key.keyCode == 13 && isChangeMode) {
+    if (key.keyCode == 13 ) {
         goToNormalMode(true);
     }
 }

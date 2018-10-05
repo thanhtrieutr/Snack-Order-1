@@ -3,74 +3,55 @@ var MongoClient = require('mongodb').MongoClient;
 var urldb = "mongodb://localhost:27017/";
 var db;
 
-function connectDatabase(callback) {
+function connectDatabase() {
     MongoClient.connect(urldb, function(err,dbo) {
-        db = dbo;
-        callback(dbo.db('snack-order'));
+        db = dbo.db('snack-order');
+        debugger;
     });
 }
     
 function readDatabase(collection, callback) {
-    connectDatabase(function(dbo) {
-        dbo.collection(collection).find({}).toArray(function(err, result) {
-            db.close();
-            callback(result);
-        });
+    debugger
+    db.collection(collection).find({}).toArray(function(err, result) {
+        callback(result);
     });
 }
 
 function createDocument(collection, object, callback) {
-    connectDatabase(function(dbo) {
-        dbo.collection(collection).insertOne(object, function(err, result) {
-            db.close();
-            if (callback) callback();
-        });
+    db.collection(collection).insertOne(object, function(err, result) {
+        if (callback) callback();
     });
 }
 
 function deleteOneDocument(collection, object, callback) {
-    connectDatabase(function(dbo) {
-        dbo.collection(collection).deleteOne(object, function(err, result) {
-            db.close();
-            if (callback) callback();
-        });
+    db.collection(collection).deleteOne(object, function(err, result) {
+        if (callback) callback();
     });
 }
 
 function deleteOneCollection(collection, callback) {
-    connectDatabase(function(dbo) {
-        dbo.collection(collection).drop(function(err, deleteOK) {
-            // if (err) {
-            //     throw err;
-            // }
-            db.close();
-            if (callback) callback();
-        });
+    db.collection(collection).drop(function(err, deleteOK) {
+        if (callback) callback();
     });
 }
 
 function updateOneDocument(collection, object, newValues, callback) {
-    connectDatabase(function(dbo) {
-        var newData = {
-            $set: newValues
-        };
-        dbo.collection(collection).updateOne(object, newData, function(err, result) {
-            db.close();
-            if (callback) callback();
-        });
+    var newData = {
+        $set: newValues
+    };
+    db.collection(collection).updateOne(object, newData, function(err, result) {
+        if (callback) callback();
     });
 }
 
 function readOneDocument(collection, object, callback) {
-    connectDatabase(function(dbo) {
-        dbo.collection(collection).findOne(object , function(err, result) {
-            callback(result);
-            db.close();
-        });
+    db.collection(collection).findOne(object , function(err, result) {
+        callback(result);
     });
 }
 
 module.exports = {
+    connectDatabase: connectDatabase,
     readDatabase: readDatabase,
     createDocument: createDocument,
     deleteOneDocument: deleteOneDocument,

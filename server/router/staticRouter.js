@@ -12,12 +12,17 @@ var routeFile = [
     {   routeUrl: "/profile",
         routeFileName: "/profile/profile.html"},
     {   routeUrl: "/signup",
-        routeFileName: "/signup/signup.html"}
+        routeFileName: "/signup/signup.html"},
+    {   routeUrl: "/profile/change-password",
+        routeFileName: "/profile/change-password.html"},
+    {   routeUrl: "/profile/delete-account",
+        routeFileName: "/profile/delete-account.html"}
 ];
 
 module.exports = function fileRouter(url, request, response) {
     var check404 = true;
     var routeId = routeFile.findIndex(item => item.routeUrl === url);
+    debugger
     if (routeId != -1) {
         utilities.setResponseHeader(response);
         check404 = serve.serveHtml(request, response, routeFile[routeId].routeFileName);

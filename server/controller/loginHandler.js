@@ -10,6 +10,7 @@ function checkLogin(request, response, accountArray) {
         }
         else {
             var token = Buffer.from(accountArray[position].user).toString('base64');
+            console.log(token);
             response.end(JSON.stringify(token));
         }
     });

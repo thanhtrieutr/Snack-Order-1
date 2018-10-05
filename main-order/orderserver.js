@@ -42,7 +42,6 @@ function submitCart() {
     var http = new XMLHttpRequest();
     http.open("POST", "http://127.0.0.1:3000/submitCart", true);
     var currentUser = getUserInLocalAccount(user);
-    console.log(currentUser);
     http.send(JSON.stringify(currentUser));
     http.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200){

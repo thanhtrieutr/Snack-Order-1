@@ -21,9 +21,9 @@ function checkValidTelephone(telephone) {
     return /^[0-9- ]+$/.test(telephone);
 }
 
-function checkKeyPress(key) {
-    if (key.keyCode == 13 ) {
-        goToNormalMode(true);
-    }
-}
-addEventListener("keypress",checkKeyPress);
+// function checkKeyPress(key) {
+//     if (key.keyCode == 13 ) {
+//         goToNormalMode(true);
+//     }
+// }
+// addEventListener("keypress",checkKeyPress);

@@ -1,3 +1,4 @@
+//Password check function
 function passwordCheck(password) {
   return /^[[a-zA-Z0-9!#$%&'*+-/=?^_`{|}]+$/.test(password);
 }
@@ -53,9 +54,9 @@ function changePasswordValidation () {
 //Add click button by press enter button
 function checkKeyPress(key) {
   if (key.keyCode == 13) {
-      alertDataUser();
+    changePasswordValidation();
   }
 }
 
-addEventListener("keypress", changePasswordValidation);
+addEventListener("keypress", checkKeyPress);
 document.getElementById("change-pass-button").addEventListener("click", changePasswordValidation);

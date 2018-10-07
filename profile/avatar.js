@@ -6,7 +6,7 @@ function submitAvatar() {
     var http = new XMLHttpRequest();
     var fileSend = new FormData();
     fileSend.append("file" , avatar);
-    fileSend.append("token" , token);
+    // fileSend.append("token" , token);
     debugger;
     http.open('POST', "http://127.0.0.1:3000/upload-file", true);
     http.send(fileSend);

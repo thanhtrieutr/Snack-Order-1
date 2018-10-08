@@ -4,6 +4,8 @@ var cartHandler = require("../controller/cartHandler")
 var updatePassword = require("../controller/updatePassword")
 var createAccount = require("../controller/createAccount");
 var deleteOneUser = require("../controller/deleteOneUser");
+var getFile = require("../controller/getFile");
+var getUserInfo = require("../controller/getUserInfo");
 
 function defaultHandler(response) {
     response.statusCode = 404;
@@ -40,6 +42,15 @@ module.exports = function mainRouter(url, method, request, response, check404) {
         routeUrl: "/deleteUser",
         routeMethod: "POST",
         routeHandler: deleteOneUser.deleteOneUser
+    }, {
+        routeUrl: "/upload-file",
+        routeMethod: "POST",
+        routeHandler: getFile.getFile
+    },
+    {
+        routeUrl: "/get-user-info",
+        routeMethod: "POST",
+        routeHandler: getUserInfo
     }];
     var routeId = route.findIndex(item => item.routeUrl === url);
     if (routeId == -1) {

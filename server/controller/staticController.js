@@ -64,6 +64,27 @@ function serveImage(request, response) {
     //404 is still true
     return true;
 }
+
+//image router
+function serveImageJpg(request, response) {
+    if (request.url.match("\.jpg$")) {
+        var imagePath = path.join(__dirname, request.url);
+        try {
+            var file = fs.readFileSync(imagePath);
+            response.writeHead(200, {"Content-Type": "image/jpg"});
+            response.write(file);
+            response.end();
+            //404 is false 
+            return false;
+        }
+        catch (error) {
+            console.log(`file ${request.url} is not exist`);
+        }
+    }
+    //404 is still true
+    return true;
+}
+
 //html router
 function serveHtml(request, response, fileName) {
     if (fileName.match("\.html$")) {
@@ -88,5 +109,6 @@ module.exports = {
     serveCss: serveCss,
     serveHtml: serveHtml,
     serveImage: serveImage,
+    serveImageJpg: serveImageJpg,
     serveJs: serveJs
 }

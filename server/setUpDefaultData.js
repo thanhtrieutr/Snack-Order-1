@@ -40,7 +40,7 @@ var accountArray = [
 function addProduct(position, callback) {
     if (position < product.length) {
         crud.createDocument("product", product[position], () => {
-            addProduct(position+1, callback)
+            addProduct(position+1, callback);
         });
     }
     else return callback();
@@ -51,16 +51,21 @@ function addAccount(position, callback) {
     }
     else return callback();
 }
-var checkDone = false;
-crud.deleteOneCollection("product", function() {
-    addProduct(0, () => {
-        if (checkDone) console.log("done");
-        else checkDone = true;
+function resetData() {
+    var checkDone = false;
+    crud.deleteOneCollection("product", function() {
+        addProduct(0, () => {
+            if (checkDone) console.log("done");
+            else checkDone = true;
+        });
     });
-});
-crud.deleteOneCollection("account", function() {
-    addAccount(0, () => {
-        if (checkDone) console.log("done");
-        else checkDone = true;
-    })
+    crud.deleteOneCollection("account", function() {
+        addAccount(0, () => {
+            if (checkDone) console.log("done");
+            else    checkDone = true;
+        })
+    });
+}
+crud.connectDatabase(() => {
+    resetData();
 });

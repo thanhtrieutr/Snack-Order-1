@@ -22,7 +22,6 @@ var routeFile = [
 module.exports = function fileRouter(url, request, response) {
     var check404 = true;
     var routeId = routeFile.findIndex(item => item.routeUrl === url);
-    debugger
     if (routeId != -1) {
         utilities.setResponseHeader(response);
         check404 = serve.serveHtml(request, response, routeFile[routeId].routeFileName);
@@ -32,6 +31,7 @@ module.exports = function fileRouter(url, request, response) {
         //when there is suitable file, 404 is false
         check404 = check404 & serve.serveCss(request, response);
         check404 = check404 & serve.serveImage(request, response);
+        check404 = check404 & serve.serveImageJpg(request, response);
         check404 = check404 & serve.serveJs(request, response);
     }
     return check404;

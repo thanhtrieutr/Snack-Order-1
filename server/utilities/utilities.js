@@ -31,7 +31,7 @@ function collectDataFromPost(request, callback) {
 }
 
 function savePhoto(filename, data, token, callback) {
-    if (typeof(filename) != 'string' || typeof(token) != 'string' || data != 'string') {
+    if (typeof(filename) != 'string' || typeof(token) != 'string' || typeof(data) != 'string') {
         callback("not valid data");
         return;
     }

@@ -6,20 +6,20 @@ function submitAvatar() {
     reader.readAsDataURL(avatar);
     reader.onload = function () {
         var http = new XMLHttpRequest();
-        fileSend.append("file" , reader.result);
-        fileSend.append("token" , 1234);
         var object = {
             file:reader.result,
-            token:localStorage.getItem("token")
+            token:localStorage.getItem("token"),
+            fileName: avatar.name
         };
         http.open('POST', "http://127.0.0.1:3000/upload-file", true);
         http.send(JSON.stringify(object));
         http.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                var result = JSON.parse(this.response);
-            }
-            if (result == "Success!") {
-                alert("Image has loaded!");
+                debugger
+                if (this.response == "Success!") {
+                    alert("Image has loaded!");
+                    window.location = "/profile"
+                }
             }
         }
     };  

@@ -34,39 +34,51 @@ function collectDataFromPost(request, callback) {
 
 function savePhoto(filename, data, token, callback) {
     var checkWriteFile = false;
-
-    var filePath = path.join(__dirname, filename);
+    var filePath = '../../images/' + filename;
+    console.log(filePath);
     var data = data.replace(/^data:image\/\w+;base64,/, "");
     var buf = new Buffer(data, 'base64');
-    fs.writeFile(filePath, buf, function(err) {
+    fs.writeFile(path.join(__dirname,'../../images/' + filename), buf, function(err) {
+        debugger
         if (err) {
             return callback(err);
         }
         checkWriteFile = true;
-    })
-    if (checkWriteFile) {
-        savePath(token, filePath);
-    } else {
-        return "Fail";
-    }
+        savePath(token, filePath, err);
+        return callback(err);
+    });
 }
 
-function savePath(user, filePath) {
+function savePath(token, filePath, err) {
+    err = true;
     var position = -1;
     crud.readDatabase("account", function(accountArray) {
-        for (var i in accountArray) {
-            if (user === accountArray[i].user) {
+        var checkUser = 0;
+        for (var i in accountArray)
+        {
+            let currentToken = Buffer.from(accountArray[i].user).toString('base64');
+            if (token == currentToken){
+                checkUser = 1;
                 position = i;
+                currentUser = accountArray[i].user;
                 break;
-            }
+            } 
         }
-    })
-    var avatarValue = {
-        avatarAddress: filePath
-    }
-    crud.updateOneDocument("account", accountArray[position], avatarValue, function() {
-        return "Success";
-    })
+        if (checkUser == 0) {
+            err = false;
+            return;
+        }
+        debugger
+        var avatarValue = {
+            avatarAddress: filePath
+        };
+        debugger
+        crud.updateOneDocument("account", accountArray[position], avatarValue, function() {
+            err = true;
+            return;
+        });
+    });
+    
 }
 
 module.exports = {
@@ -155,4 +167,5 @@ module.exports = {
     collectDataFromPost: collectDataFromPost,
     collectDataFromPostFormData: collectDataFromPostFormData,
     setResponseHeader: setResponseHeader,
+    savePhoto : savePhoto
 }

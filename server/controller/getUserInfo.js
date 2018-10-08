@@ -12,7 +12,6 @@ function checkToken(request, response, accountArray) {
                 break;
             }
         }
-        debugger
         utilities.setResponseHeader(response);
         if (position != -1) {
             var obj = {};

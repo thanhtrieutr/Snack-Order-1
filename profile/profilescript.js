@@ -121,28 +121,23 @@ function checkValidPhone(telephone) {
     if (telephone == "" || telephone == null) {
         return true;
     }
-    if (telephone.length < 8 || telephone.length > 15) {
-        return false;
-    }
-    var pattern = /[0-9]/g;
-    var number = telephone.match(pattern);
-    if (number.length < 8 || number.length > 12) {
-        return false;
-    }
-    return /^[0-9- ]+$/.test(telephone);
+    else return /^[0-9\s- \+]{8,13}$/.test(telephone);
 }
 function checkValidFullName(fullName) {
-    if (fullName == null || fullName == "")
-        return false;
-    return true;
+    if (fullName == "" || fullName == null) {
+        return true;
+    }
+    else return /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/.test(fullName);
 }
 function checkValidBirthday(birthday) {
-    if (birthday == null || birthday == "")
-        return false;
-    return true;
+    if (birthday == "" || birthday == null) {
+        return true;
+    }
+    else return /^\d{1,2}\/\d{1,2}\/\d{4}$/.test(birthday);
 }
 function checkValidAddress(address) {
-    if (address == null || address == "")
-        return false;
-    return true;
+    if (address == "" || address == null) {
+        return true;
+    } 
+    else return /^\s*\S+(?:\s+\S+){1}/.test(address);
 }

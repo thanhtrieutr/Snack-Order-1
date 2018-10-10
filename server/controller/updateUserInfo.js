@@ -26,6 +26,7 @@ module.exports = function updateUserInfo(request, response) {
                 }
             }
             if (position > -1) {
+                delete result.token;
                 crud.updateOneDocument("account", {_id:currentID._id}, result, function() {
                     utilities.setResponseHeader(response);
                     response.end("Update Successful");

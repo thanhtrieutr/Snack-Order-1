@@ -54,7 +54,7 @@ module.exports = function mainRouter(url, method, request, response, check404) {
     }, {
         routeUrl: "/update-user-info",
         routeMethod: "POST",
-        routeHandler: updateUserInfo.updateUserInfo
+        routeHandler: updateUserInfo
     }];
     var routeId = route.findIndex(item => item.routeUrl === url);
     if (routeId == -1) {

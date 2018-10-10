@@ -17,7 +17,7 @@ module.exports = function updateUserInfo(request, response) {
                     break;
                 }
             }
-            crud.updateOneDocument("account", {_id:currentID._id}, {fullName:result.fullName}, {phoneNumber:result.phoneNumber}, {birthday:result.birthday}, {address:result.address}, function() {
+            crud.updateOneDocument("account", {_id:currentID._id}, result, function() {
                 utilities.setResponseHeader(response);
                 response.end("Update Successful");
             });

@@ -20,7 +20,6 @@ function alertAnswerLogIn(user, password, token) {
         var account = {};
         account.user = user;
         account.cartArray = [];
-        account.token = token;
         localAccount.push(account);
         localStorage.setItem("accountArray", JSON.stringify(localAccount));
         localStorage.setItem("currentAccount", user);

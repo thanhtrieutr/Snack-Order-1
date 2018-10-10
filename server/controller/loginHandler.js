@@ -21,7 +21,6 @@ function checkLoginHandler(request, response) {
         checkLogin(request, response, accountArray);
     });
 }
-
 function checkToken(request, response, accountArray) {
     utilities.collectDataFromPost(request, result => {
         //position == -1 mean don't exist that account

@@ -17,10 +17,9 @@ function submitCart(request, response) {
     utilities.collectDataFromPost(request, result => {
         var checkUser = 0;
         var currentUser;
-        for (var i in accountArray)
-        {
+        for (var i in accountArray) {
             let token = Buffer.from(accountArray[i].user).toString('base64');
-            if (result.token == token){
+            if (result.token == token) {
                 checkUser = 1;
                 currentUser = accountArray[i].user;
             } 

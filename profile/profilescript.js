@@ -12,7 +12,6 @@ function loadUserData() {
     http.send(JSON.stringify(obj));
     http.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            debugger
             var result = JSON.parse(this.response);
             if (result.avatarAddress) {
                 avatar.setAttribute("src", result.avatarAddress);    

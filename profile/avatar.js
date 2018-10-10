@@ -15,7 +15,6 @@ function submitAvatar() {
         http.send(JSON.stringify(object));
         http.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                debugger
                 if (this.response == "Success!") {
                     alert("Image has loaded!");
                     window.location = "/profile"

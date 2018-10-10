@@ -102,7 +102,7 @@ function goToShowMode(isSave) {
             }
             else {
                 validInput = false;
-                alert(`The ${listInfo[i].propertyName} input is not valid`);
+                alert(`One of many input data is not valid`);
                 break;
             }
         }

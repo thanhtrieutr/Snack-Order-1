@@ -8,10 +8,12 @@ function loadUserData() {
     var http = new XMLHttpRequest();
     http.open('POST', "http://127.0.0.1:3000/get-user-info", true);
     var obj = {};
+    debugger;
     obj.token = token;
     http.send(JSON.stringify(obj));
     http.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
+            debugger
             var result = JSON.parse(this.response);
             if (result.avatarAddress) {
                 avatar.setAttribute("src", result.avatarAddress);    

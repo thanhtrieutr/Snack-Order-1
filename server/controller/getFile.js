@@ -17,7 +17,7 @@ function getFile(request, response) {
         }
         utilities.savePhoto(fileName, result.file, result.token, function(err) {
             if (err !== true)  {
-                response.end("Success!");
+                response.end('../../images/' + fileName);
             }
             else {
                 response.end("Fail!");

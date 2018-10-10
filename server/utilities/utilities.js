@@ -85,9 +85,29 @@ function setResponseHeader(response) {
     response.setHeader('Access-Control-Allow-Origin', '*');
 }
 
+function validateFileName(filename) {
+    return filename.replace(/[^a-zA-Z0-9.]/gi, "");
+}
+  
+function authenticateFileName(filename) {
+    if (filename.match("\.png$") || filename.match("\.jpg$") || filename.match("\jpeg$")) {
+      return true;
+    }
+    return false;
+}
+
+function modifyFileName(filename) {
+    if (authenticateFileName(filename)) {
+      return validateFileName(filename) 
+    } else {
+        return false;
+    }
+}
+
 module.exports = {
     findValidUserPosition: findValidUserPosition,
     collectDataFromPost: collectDataFromPost,
     setResponseHeader: setResponseHeader,
-    savePhoto : savePhoto
+    savePhoto: savePhoto,
+    modifyFileName: modifyFileName
 }

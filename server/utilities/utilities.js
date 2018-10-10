@@ -57,7 +57,7 @@ function savePath(token, filePath, err) {
         for (var i in accountArray)
         {
             let currentToken = Buffer.from(accountArray[i].user).toString('base64');
-            if (token == currentToken){
+            if (token == currentToken) {
                 checkUser = 1;
                 position = i;
                 currentUser = accountArray[i].user;

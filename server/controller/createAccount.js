@@ -19,7 +19,6 @@ function validateAccount(account) {
     return false;
 }
 function createUser(request, response) {
-    debugger;
     utilities.collectDataFromPost(request, newAccount => {
         if (typeof(newAccount) != "object" || newAccount == null) {
             response.end("Not valid data");

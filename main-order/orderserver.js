@@ -42,7 +42,11 @@ function submitCart() {
     var http = new XMLHttpRequest();
     http.open("POST", "http://127.0.0.1:3000/submitCart", true);
     var currentUser = getUserInLocalAccount(user);
-    http.send(JSON.stringify(currentUser));
+    var obj = {};
+    obj.cartArray = currentUser.cartArray;
+    obj.token = localStorage.getItem("token");
+    http.send(JSON.stringify(obj));
+    console.log(obj);
     http.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200){
             var result = JSON.parse(this.response);

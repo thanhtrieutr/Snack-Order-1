@@ -8,6 +8,7 @@ function loadUserData() {
     var http = new XMLHttpRequest();
     http.open('POST', "http://127.0.0.1:3000/get-user-info", true);
     var obj = {};
+    debugger;
     obj.token = token;
     http.send(JSON.stringify(obj));
     http.onreadystatechange = function() {

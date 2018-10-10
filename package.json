@@ -18,5 +18,8 @@
   "homepage": "https://github.com/SmithWinter/Snack-Order#readme",
   "dependencies": {
     "mongodb": "^3.1.6"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.4"
   }
 }

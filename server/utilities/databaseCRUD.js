@@ -1,6 +1,6 @@
 var MongoClient = require('mongodb').MongoClient;
 var db;
-if (process.env.ENV == "production") {
+if (process.env.ENV =="production") {
     var urldb = "mongodb://test:123456789a@ds119523.mlab.com:19523/snack-order";
 }
 else {
@@ -8,6 +8,7 @@ else {
 }
 function connectDatabase() {
     MongoClient.connect(urldb, function(err,dbo) {
+       console.log(urldb);
         db = dbo.db('snack-order');
     });
 }

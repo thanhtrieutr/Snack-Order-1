@@ -27,7 +27,6 @@ function loadUserData() {
         if (result.avatarAddress) {
             avatar.setAttribute("src", result.avatarAddress);    
         }    
-        // debugger;
         showNewUserInfo(result);       
     });
 }

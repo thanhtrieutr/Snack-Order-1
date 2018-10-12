@@ -12,6 +12,7 @@ function findValidUserPosition(accountList, user) {
     }
     return -1;
 }
+
 function collectDataFromPost(request, callback) {
     let body = '';
     // collect data

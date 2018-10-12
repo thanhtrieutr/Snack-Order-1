@@ -115,20 +115,29 @@ i {
     padding: 0;
     top: 64px;
     left: 0;
-    background: #fff8e1;
+    background: #ffd54f;
+    height: 100%;
+    opacity: 0.95;
+    filter: alpha(opacity=95);
 }
 .hambuger-option {
     text-align: left;
-    color: #fff8e1;
-    background: #ffd54f;
+    color: #ffffff;
+    font-style: italic;
+    font-weight: 900;
+    text-transform: uppercase;
     padding: 19px;
-    border: solid 1px #ff9800;
     font-size: 28px;
     cursor: pointer;
 }
 .hambuger-option:hover {
     filter: brightness(69%);
     border: solid 1px #ffa31a;
+}
+.selection-container {
+    width: 100%;
+    height: 300px;
+    margin-top: 30px;
 }
 @media (min-width: 1200px) {
     .container {

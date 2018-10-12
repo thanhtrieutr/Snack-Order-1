@@ -37,17 +37,14 @@ function alertDataUser() {
     var password = getById("input-password").value;
     checkLoginInSever(user, password);
 }
-
 function checkKeyPress(key) {
     if (key.keyCode == 13) {
         alertDataUser();
     }
 }
-
 function goToSignup() {
     window.location.href = "/signup";
 }
-
 checkLogInAlready();
 addEventListener("keypress",checkKeyPress);
 getById("signin-button").addEventListener("click", alertDataUser);

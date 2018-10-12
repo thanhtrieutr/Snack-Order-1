@@ -10,11 +10,8 @@ body {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    opacity: 10%;
     background-position: center center;
-    background-size: cover;
     background-repeat: no-repeat;
-
 }
 .main-content {
     position: relative;
@@ -80,6 +77,9 @@ button {
     font-size: 18px;
     font-weight: bold;
     opacity: 0.9;
+}
+button:hover {
+    filter: brightness(105%);
 }
 #redirect-login {
     padding-top: 0;

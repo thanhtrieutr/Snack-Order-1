@@ -30,24 +30,27 @@ function loadUserData() {
     });
 }
 
-var listInfo = [
-    {id: "user-fullname",
+var listInfo = [ {
+    id: "user-fullname",
     propertyName: "fullName",
     default: "Full name shows here",
-    check: checkValidFullName}, 
-    {id: "user-phonenumber",
+    check: checkValidFullName
+    }, {
+    id: "user-phonenumber",
     propertyName: "phoneNumber",
     default: "Phone number shows here",
-    check: checkValidPhone}, 
-    {id: "user-birthday",
+    check: checkValidPhone
+    }, { 
+    id: "user-birthday",
     propertyName: "birthday",
     default: "Birthday shows here",
-    check: checkValidBirthday}, 
-    {id: "user-address",
+    check: checkValidBirthday
+    }, {
+    id: "user-address",
     propertyName: "address",
     default: "Address shows here",
-    check: checkValidAddress} 
-];
+    check: checkValidAddress
+    } ];
 
 function goToChangeMode() {
     for (var i in listInfo) {
@@ -79,8 +82,9 @@ function sendNewUserInfo(userInfo) {
     http.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var result = this.response;
-            if (result == 'Fail!')
+            if (result == 'Fail!') {
                 alert("Update fail");
+            }
         }
     };
 }
@@ -114,7 +118,7 @@ function goToShowMode(isSave) {
     }
 }
 
-//check
+//check user input
 function checkValidPhone(telephone) {
     if (telephone == "" || telephone == null) {
         return true;

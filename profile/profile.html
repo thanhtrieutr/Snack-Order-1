@@ -20,6 +20,8 @@
         </div>
         <div class="container">
             <div class="profile">
+                
+                <!-- side bar -->
                 <div class="cl-xs-12 cl-md-3">
                     <div class="profile-sidebar">
                         <div class="profile-user-avatar">
@@ -40,6 +42,8 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- main content -->
                 <div class="cl-xs-12 cl-md-9">
                     <div class="profile-content">
                         <div class="cl-xs-2 cl-md-2"></div>
@@ -48,30 +52,35 @@
                             <div class="info-bar">
                                 <label class="property cl-xs-12 cl-sm-4 cl-md-4">Name : </label>
                                 <div class="cl-xs-12 cl-sm-8 cl-md-8">
-                                    <h4>Full name shows here</h4>
+                                    <!-- <h4 id="">Full name shows here</h4> -->
+                                    <input  id="user-fullname" class="cl-xs-12" disabled>
                                 </div>
                             </div>
                             <div class="info-bar">
                                 <label class="property cl-xs-12 cl-sm-4 cl-md-4">Phone : </label>
                                 <div class="cl-xs-12 cl-sm-8 cl-md-8">
-                                    <h4>Phone number shows here</h4>
+                                    <!-- <h4>Phone number shows here</h4> -->
+                                    <input  id="user-phonenumber" class="cl-xs-12" disabled> 
                                 </div>
                             </div>
                             <div class="info-bar">
                                 <label class="property cl-xs-12 cl-sm-4 cl-md-4">Birthday : </label>
                                 <div class="cl-xs-12 cl-sm-8 cl-md-8">
-                                    <h4>Birthday shows here</h4>
+                                    <!-- <h4>Birthday shows here</h4> -->
+                                    <input  id="user-birthday" class="cl-xs-12" disabled>
                                 </div>
                             </div>
                             <div class="info-bar">
                                 <label class="property cl-xs-12 cl-sm-4 cl-md-4">Address : </label>
                                 <div class="cl-xs-12 cl-sm-8 cl-md-8">
-                                    <h4>Address shows here</h4>
+                                    <!-- <h4>Address shows here</h4> -->
+                                    <input id="user-address" class="cl-xs-12" disabled>
                                 </div>
                             </div>
                             <div class = "button">
                                 <a href="/"> <button type="submit" id="return-button" class = "cl-xs-12 offset-sm-1 cl-sm-4 offset-md-1 cl-md-5" > Return to <br> Homepage</button>  </a>
-                                <button type="submit" id="change-button" class = "cl-xs-12 offset-sm-3 cl-sm-3 offset-md-1 cl-md-5" onclick="alertUserinChangingProfile()"> Change <br> info</button>  
+                                <button type="submit" id="change-button" class = "cl-xs-12 offset-sm-3 cl-sm-3 offset-md-1 cl-md-5" onclick="goToChangeMode()"> Change <br> info</button>
+                                <button type="submit" id="save-button" class = "cl-xs-12 offset-sm-3 cl-sm-3 offset-md-1 cl-md-5" onclick="goToShowMode(true)"> Save <br> info</button>  
                             </div>
                         </div>
                         <div class="cl-md-2"></div>
@@ -80,6 +89,7 @@
             </div>
         </div>
     </body>
+    
     <script src="../others/utilityFunction.js"></script>
     <script src="../profile/profilescript.js"> </script>
     <script src="../profile/avatar.js"></script>

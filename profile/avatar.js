@@ -15,13 +15,9 @@ function submitAvatar() {
         http.send(JSON.stringify(object));
         http.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                if (this.response != "Fail!") {
+                if (this.response == "Success!") {
                     alert("Image has loaded!");
-                    var avatar = document.getElementById("avatar");
-                    avatar.setAttribute("src", this.response);
-                }
-                else {
-                    alert("Image Upload Fail!");
+                    window.location = "/profile"
                 }
             }
         }

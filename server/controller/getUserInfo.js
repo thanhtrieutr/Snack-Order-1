@@ -1,6 +1,6 @@
 var crud = require("../utilities/databaseCRUD");
 var utilities = require("../utilities/utilities");
-
+var listInfo = ["fullName", "phoneNumber", "birthday", "address", "avatarAddress"];
 function checkToken(request, response, accountArray) {
     utilities.collectDataFromPost(request, result => {
         //position == -1 mean don't exist that account
@@ -15,7 +15,10 @@ function checkToken(request, response, accountArray) {
         utilities.setResponseHeader(response);
         if (position != -1) {
             var obj = {};
-            obj.avatarAddress = accountArray[i].avatarAddress;
+            for (var j in listInfo) {
+                if (accountArray[position][listInfo[j]] )
+                    obj[listInfo[j]] = accountArray[i][listInfo[j]];
+            }
             response.end(JSON.stringify(obj));
         }
         else {

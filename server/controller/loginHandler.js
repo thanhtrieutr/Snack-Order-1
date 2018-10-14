@@ -2,16 +2,21 @@ var crud = require("../utilities/databaseCRUD");
 var utilities = require("../utilities/utilities");
 
 function checkLogin(request, response, accountArray) {
-    utilities.collectDataFromPost(request, result => {
+    utilities.collectDataFromPost(request, (result) => {
         utilities.setResponseHeader(response);
         var position = utilities.findValidUserPosition(accountArray, result);
         if (position == -1) {
             response.end(JSON.stringify(false));
         }
         else {
-            var token = Buffer.from(accountArray[position].user).toString('base64');
-            console.log(token);
-            response.end(JSON.stringify(token));
+            utilities.createToken((newToken) => {
+                newToken += Buffer.from(accountArray[position].user).toString('base64');
+                var currentId = accountArray[position]._id;
+                crud.updateOneDocument("account", {_id: currentId}, {token: newToken}, () => {
+                    response.end(JSON.stringify(newToken)); 
+                    console.log("Current token: " + newToken);
+                });
+            });
         }
     });
 }
@@ -23,15 +28,7 @@ function checkLoginHandler(request, response) {
 }
 function checkToken(request, response, accountArray) {
     utilities.collectDataFromPost(request, result => {
-        //position == -1 mean don't exist that account
-        var position = -1;
-        for (var i in accountArray) {
-            let token = Buffer.from(accountArray[i].user).toString('base64');
-            if (token == result) {
-                position = i;
-                break;
-            }
-        }
+        var position = utilities.findAccountByToken(accountArray, result);
         utilities.setResponseHeader(response);
         if (position != -1) {
             response.end(JSON.stringify(accountArray[position].user));

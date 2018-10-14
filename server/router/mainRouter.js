@@ -7,6 +7,7 @@ var deleteOneUser = require("../controller/deleteOneUser");
 var getFile = require("../controller/getFile");
 var getUserInfo = require("../controller/getUserInfo");
 var updateUserInfo = require("../controller/updateUserInfo");
+var deleteToken = require("../controller/deleteToken");
 
 function defaultHandler(response) {
     response.statusCode = 404;
@@ -55,6 +56,10 @@ module.exports = function mainRouter(url, method, request, response, check404) {
         routeUrl: "/update-user-info",
         routeMethod: "POST",
         routeHandler: updateUserInfo
+    }, {
+        routeUrl: "/remove-token",
+        routeMethod: "POST",
+        routeHandler: deleteToken.deleteToken
     }];
     var routeId = route.findIndex(item => item.routeUrl === url);
     if (routeId == -1) {

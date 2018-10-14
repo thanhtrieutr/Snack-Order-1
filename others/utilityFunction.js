@@ -1,3 +1,4 @@
+
 // Function for getElementById:
 function getById(field) {
     return document.getElementById(field);

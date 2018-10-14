@@ -6,9 +6,11 @@ if (process.env.ENV == "production") {
 else {
     var urldb = "mongodb://localhost:27017/";
 }
-function connectDatabase() {
-    MongoClient.connect(urldb, function(err,dbo) {
+function connectDatabase(callback) {
+    console.log(`At ${urldb}`);
+    MongoClient.connect(urldb, { useNewUrlParser: true }, function(err,dbo) {
         db = dbo.db('snack-order');
+        if (callback) callback();
     });
 }
     

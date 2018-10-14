@@ -18,7 +18,7 @@ function submitCart(request, response) {
         var checkUser = 0;
         var currentUser;
         for (var i in accountArray) {
-            let token = Buffer.from(accountArray[i].user).toString('base64');
+            let token = accountArray[i].token;
             if (result.token == token) {
                 checkUser = 1;
                 currentUser = accountArray[i].user;

@@ -16,7 +16,7 @@ module.exports = function updatePassword(request, response) {
         }
         crud.readDatabase("account", function(object) {
             for (var i = 0 ; i < object.length ; i++) {
-                let token = Buffer.from(object[i].user).toString('base64');
+                let token = object[i].token;
                 if (result.oldPassword === object[i].password && result.token === token) {
                     checkOldPassword = true;
                     currentId = object[i];

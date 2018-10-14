@@ -126,13 +126,13 @@ function checkValidFullName(fullName) {
     if (fullName == "" || fullName == null) {
         return true;
     }
-    else return /^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$/.test(fullName);
+    else return /^[a-zA-Z]+(([a-zA-Z ])?[a-zA-Z]*)*$/.test(fullName);
 }
 function checkValidBirthday(birthday) {
     if (birthday == "" || birthday == null) {
         return true;
     }
-    else return /^\d{1,2}\/\d{1,2}\/\d{4}$/.test(birthday);
+    else return /^\s*(3[01]|[12][0-9]|0?[1-9])\/(1[012]|0?[1-9])\/((?:19|20)\d{2})\s*$/.test(birthday);
 }
 function checkValidAddress(address) {
     if (address == "" || address == null) {

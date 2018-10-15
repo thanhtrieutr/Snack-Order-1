@@ -34,7 +34,6 @@ module.exports = function updatePassword(request, response) {
                 });
             }
             catch (error) {
-                debugger;
                 errorHandler(error,response);
                 return;
             }

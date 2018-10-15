@@ -48,7 +48,6 @@ function checkLoginHandler(request, response) {
 }
 function checkToken(request, response, accountArray) {
     try {
-        debugger;
         utilities.collectDataFromPost(request, result => {
             try {
                 //position == -1 mean don't exist that account

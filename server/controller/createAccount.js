@@ -1,5 +1,6 @@
 var utilities = require("../utilities/utilities");
 var crud = require("../utilities/databaseCRUD");
+var errorHandler = require("../errorHandler/controllerError");
 
 function emailCheck(user) {
     if (user.length < 6 || user.length > 100) {
@@ -19,34 +20,43 @@ function validateAccount(account) {
     return false;
 }
 function createUser(request, response) {
-    utilities.collectDataFromPost(request, newAccount => {
-        if (typeof(newAccount) != "object" || newAccount == null) {
-            response.end("Not valid data");
-            return;
-        }
-        crud.readDatabase("account", accounts => {
-            if (validateAccount(newAccount) == false || Object.keys(newAccount).length > 3) {
-                response.end("not valid account");
-                return;
-            }
-            var checkConflict = false;
-            for (var i in accounts) {
-                if (accounts[i].user == newAccount.user) {
-                    checkConflict = true;
-                    break;
+    try{
+        utilities.collectDataFromPost(request, newAccount => {
+            try {
+                if (typeof(newAccount) != "object" || newAccount == null) {
+                    throw new Error ("Wrong Data Input");
                 }
-            }
-            if (checkConflict) {
-                response.end("conflict account");
-                return;
-            }
-            else {
-                crud.createDocument("account", newAccount, () => {
-                    response.end("create succeed");     
+                crud.readDatabase("account", accounts => {
+                    if (validateAccount(newAccount) == false || Object.keys(newAccount).length > 3) {
+                        throw new Error ("Wrong Data Input");
+                    }
+                    var checkConflict = false;
+                    for (var i in accounts) {
+                        if (accounts[i].user == newAccount.user) {
+                            checkConflict = true;
+                            break;
+                        }
+                    }
+                    if (checkConflict) {
+                        throw new Error ("Account Existed");
+                    }
+                    else {
+                        crud.createDocument("account", newAccount, () => {
+                            response.end("create succeed");     
+                        });
+                    }
                 });
             }
+            catch (error) {
+                errorHandler(error,response);
+                return;
+            }
         });
-    });
+    }
+    catch (error) {
+        errorHandler(error,response);
+        return;
+    }
 }
 
 module.exports = {

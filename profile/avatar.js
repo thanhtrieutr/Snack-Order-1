@@ -15,10 +15,13 @@ function submitAvatar() {
         http.send(JSON.stringify(object));
         http.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {
-                if (this.response == "Success!") {
+                if (this.response != "Wrong Data Input") {
                     alert("Image has loaded!");
                     window.location = "/profile"
                 }
+            }
+            else if (this.readyState == 4 && this.status != 200) {
+                alert();
             }
         }
     };  

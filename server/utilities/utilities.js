@@ -3,6 +3,7 @@ var http = require("http");
 var fs = require('fs');
 var path = require('path');
 var crud = require('../utilities/databaseCRUD');
+var crypto = require("crypto");
 
 function findValidUserPosition(accountList, user) {
     for (var i in accountList) {
@@ -12,6 +13,7 @@ function findValidUserPosition(accountList, user) {
     }
     return -1;
 }
+
 function collectDataFromPost(request, callback) {
     let body = '';
     // collect data
@@ -56,8 +58,8 @@ function savePath(token, filePath, err) {
         var checkUser = 0;
         for (var i in accountArray)
         {
-            let currentToken = Buffer.from(accountArray[i].user).toString('base64');
-            if (token == currentToken){
+            let currentToken = accountArray[i].token;
+            if (token == currentToken) {
                 checkUser = 1;
                 position = i;
                 currentUser = accountArray[i].user;
@@ -103,8 +105,36 @@ function modifyFileName(filename) {
         return false;
     }
 }
+function generateToken() {
+    return new Promise((resolve, reject) => {
+        crypto.randomBytes(48, (err, buffer) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve(buffer.toString('base64'));
+          }
+        });
+    });
+}
+async function createToken(callback) {
+    var token = await generateToken();
+    if (callback) return callback(token);
+}
 
+function findAccountByToken(accountArray, newToken) {
+    var position = -1;
+    for (var i in accountArray) {
+        let token = accountArray[i].token;
+        if (token == newToken) {
+            position = i;
+            return position;
+        }
+    }
+    return position;
+}
 module.exports = {
+    findAccountByToken: findAccountByToken,
+    createToken: createToken,
     findValidUserPosition: findValidUserPosition,
     collectDataFromPost: collectDataFromPost,
     setResponseHeader: setResponseHeader,

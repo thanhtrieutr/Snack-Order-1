@@ -46,7 +46,6 @@ function submitCart() {
     obj.cartArray = currentUser.cartArray;
     obj.token = localStorage.getItem("token");
     http.send(JSON.stringify(obj));
-    console.log(obj);
     http.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200){
             var result = JSON.parse(this.response);
@@ -62,5 +61,6 @@ function submitCart() {
                 alert(answer);
             }
         }
+        if (this.readyState == 4 && this.status != 200) alert ("Something went wrong with your cart! Please try again!");
     }
 }

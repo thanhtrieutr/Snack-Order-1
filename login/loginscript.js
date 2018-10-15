@@ -6,11 +6,14 @@ function checkLoginInSever(user, password) {
     http.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var token = JSON.parse(this.response);
-            alertAnswerLogIn(user, password, token);
+            alertAnswerLogIn(user, token);
         }
+        if (this.readyState == 4 && this.status != 200) {
+            alertAnswerLogIn(user, false);
+        } 
     }
 }
-function alertAnswerLogIn(user, password, token) {
+function alertAnswerLogIn(user, token) {
     if (token != false) {
         //flag current account
         
@@ -37,17 +40,15 @@ function alertDataUser() {
     var password = getById("input-password").value;
     checkLoginInSever(user, password);
 }
-
 function checkKeyPress(key) {
     if (key.keyCode == 13) {
         alertDataUser();
     }
 }
-
 function goToSignup() {
-    window.location.href = "/signup";
+    // window.location.href = "/signup";
+    alert('Sign-up feature is disabled');
 }
-
 checkLogInAlready();
 addEventListener("keypress",checkKeyPress);
 getById("signin-button").addEventListener("click", alertDataUser);

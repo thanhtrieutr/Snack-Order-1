@@ -1,4 +1,6 @@
 var crud = require("./utilities/databaseCRUD");
+var crypto = require("crypto");
+
 
 var product = [
     {id: 1, name: "Snack Mực Tẩm Gia Vị Cay Ngọt Bento (24g)", price: "19.000 ₫", img: "../images/bento.png", priceInt: 19000 },
@@ -36,6 +38,8 @@ var accountArray = [
         password: "cilent1234"
     }
 ];
+var listInfo = ["fullName", "phoneNumber", "birthday", "address", "avatarAddress"];
+
 //function add product (want to follow order)
 function addProduct(position, callback) {
     if (position < product.length) {
@@ -44,6 +48,19 @@ function addProduct(position, callback) {
         });
     }
     else return callback();
+}
+
+function createFull(position, callback) {
+    if (position >= accountArray.length)
+        return callback();
+    var oneAccount = accountArray[position];
+    for (var i in listInfo) {
+        oneAccount[listInfo[i]] = "";
+    }
+    crypto.randomBytes(48, function(err, buffer) {
+        oneAccount.token = buffer.toString('hex');
+        createFull(position+1, callback);
+    });
 }
 function addAccount(position, callback) {
     if (position < accountArray.length) {
@@ -67,5 +84,7 @@ function resetData() {
     });
 }
 crud.connectDatabase(() => {
-    resetData();
+    createFull(0, () => {
+        resetData();
+    });
 });

@@ -6,8 +6,24 @@ getById("log-out-button-hambuger").addEventListener('click', logOut);
 function afterLoad() {
     showCurrentSnack();
 }
+function removeTokenOnServe(token) {
+    var http = new XMLHttpRequest();
+    http.open("POST", "http://127.0.0.1:3000/remove-token", true);
+    http.send(JSON.stringify(token));
+    http.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var result = this.response;
+            if (result == 'Fail!')
+                console.log("Remove token on server is fail!");
+        }
+        if (this.readyState == 4 && this.status != 200)
+            console.log("Remove token on server is fail!");
+    }
+}
 function logOut() {
     localStorage.removeItem("currentAccount");
+    var token = localStorage.getItem("token");
+    removeTokenOnServe(token);
     localStorage.removeItem('token');
     window.location.href = "/login";
 }

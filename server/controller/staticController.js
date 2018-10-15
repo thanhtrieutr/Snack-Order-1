@@ -4,6 +4,8 @@
 
 var fs = require('fs');
 var path = require('path');
+var errorHandler = require("../errorHandler/controllerError");
+
 
 __dirname = path.join(__dirname, '../../')
 console.log(__dirname)
@@ -21,6 +23,7 @@ function serveCss(request, response) {
         }
         catch (error) {
             console.log(`file ${request.url} is not exist`);
+            errorHandler(error,response);
         }
     }
     //404 is still true
@@ -40,6 +43,7 @@ function serveJs(request, response) {
         }
         catch (error) {
             console.log(`file ${request.url} is not exist`);
+            errorHandler(error,response);
         }
     } 
     //404 is still true
@@ -59,6 +63,7 @@ function serveImage(request, response) {
         }
         catch (error) {
             console.log(`file ${request.url} is not exist`);
+            errorHandler(error,response);
         }
     }
     //404 is still true
@@ -79,6 +84,7 @@ function serveImageJpg(request, response) {
         }
         catch (error) {
             console.log(`file ${request.url} is not exist`);
+            errorHandler(error,response);
         }
     }
     //404 is still true
@@ -99,6 +105,7 @@ function serveHtml(request, response, fileName) {
         }
         catch (error) {
             console.log(`file ${request.url} is not exist`);
+            errorHandler(error,response);
         }
     }
     //404 is still true

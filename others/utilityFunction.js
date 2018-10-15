@@ -1,3 +1,4 @@
+
 // Function for getElementById:
 function getById(field) {
     return document.getElementById(field);
@@ -39,6 +40,10 @@ function checkToken(token, callback) {
         if (this.readyState == 4 && this.status == 200) {
             var result = JSON.parse(this.response);
             callback(result);
+        }
+        if (this.readyState == 4 && this.status != 200) {
+            alert(token + this.status);
+            callback(false);
         }
     }
 }

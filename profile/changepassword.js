@@ -15,6 +15,8 @@ function changeUserPassword(oldPassword, newPassword, token, callback) {
         var result = this.response;
         if (callback) return callback(result);
       }
+      if (this.readyState == 4 && this.status !=200)
+        if (callback) return callback(false);
   }
 }
 

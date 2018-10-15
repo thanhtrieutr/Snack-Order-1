@@ -7,10 +7,11 @@ else {
     var urldb = "mongodb://localhost:27017/";
 }
 
-function connectDatabase() {
+function connectDatabase(callback) {
     MongoClient.connect(urldb, function(err,dbo) {
        console.log(urldb);
         db = dbo.db('snack-order');
+        if (callback) return callback();
     });
 }
     

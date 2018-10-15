@@ -61,5 +61,6 @@ function submitCart() {
                 alert(answer);
             }
         }
+        if (this.readyState == 4 && this.status != 200) alert ("Something went wrong with your cart! Please try again!");
     }
 }

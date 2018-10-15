@@ -18,6 +18,8 @@ function getUserInfo(callback) {
             var result = JSON.parse(this.response);
             if (callback) callback(result);
         }
+        if (this.readyState == 4 && this.status != 200)
+            console.log("load user info fail");
     };
 }
 function loadUserData() {
@@ -86,6 +88,8 @@ function sendNewUserInfo(userInfo) {
                 alert("Update fail");
             }
         }
+        if (this.readyState == 4 && this.status != 200)
+            alert("Update fail");
     };
 }
 function goToShowMode(isSave) {

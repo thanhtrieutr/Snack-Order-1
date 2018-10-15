@@ -47,23 +47,14 @@ function checkLoginHandler(request, response) {
     }
 }
 function checkToken(request, response, accountArray) {
-    utilities.collectDataFromPost(request, result => {
-        var position = utilities.findAccountByToken(accountArray, result);
-        utilities.setResponseHeader(response);
-        if (position != -1) {
-            response.end(JSON.stringify(accountArray[position].user));
-        }
-        else {
-            response.end(JSON.stringify(false));
-        }
-    });
     try {
+        debugger;
         utilities.collectDataFromPost(request, result => {
             try {
                 //position == -1 mean don't exist that account
                 var position = -1;
                 for (var i in accountArray) {
-                    let token = Buffer.from(accountArray[i].user).toString('base64');
+                    let token = accountArray[i].token;
                     if (token == result) {
                         position = i;
                         break;

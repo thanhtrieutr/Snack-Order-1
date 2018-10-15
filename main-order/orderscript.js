@@ -16,6 +16,8 @@ function removeTokenOnServe(token) {
             if (result == 'Fail!')
                 console.log("Remove token on server is fail!");
         }
+        if (this.readyState == 4 && this.status != 200)
+            console.log("Remove token on server is fail!");
     }
 }
 function logOut() {

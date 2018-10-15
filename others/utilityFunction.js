@@ -41,6 +41,10 @@ function checkToken(token, callback) {
             var result = JSON.parse(this.response);
             callback(result);
         }
+        if (this.readyState == 4 && this.status != 200) {
+            alert(token + this.status);
+            callback(false);
+        }
     }
 }
 // Function checkLogIn (already):

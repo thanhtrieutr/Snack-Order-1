@@ -8,6 +8,9 @@ function checkLoginInSever(user, password) {
             var token = JSON.parse(this.response);
             alertAnswerLogIn(user, token);
         }
+        if (this.readyState == 4 && this.status != 200) {
+            alertAnswerLogIn(user, false);
+        } 
     }
 }
 function alertAnswerLogIn(user, token) {

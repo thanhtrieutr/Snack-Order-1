@@ -30,24 +30,27 @@ function loadUserData() {
     });
 }
 
-var listInfo = [
-    {id: "user-fullname",
+var listInfo = [ {
+    id: "user-fullname",
     propertyName: "fullName",
     default: "Full name shows here",
-    check: checkValidFullName}, 
-    {id: "user-phonenumber",
+    check: checkValidFullName
+    }, {
+    id: "user-phonenumber",
     propertyName: "phoneNumber",
     default: "Phone number shows here",
-    check: checkValidPhone}, 
-    {id: "user-birthday",
+    check: checkValidPhone
+    }, { 
+    id: "user-birthday",
     propertyName: "birthday",
     default: "Birthday shows here",
-    check: checkValidBirthday}, 
-    {id: "user-address",
+    check: checkValidBirthday
+    }, {
+    id: "user-address",
     propertyName: "address",
     default: "Address shows here",
-    check: checkValidAddress} 
-];
+    check: checkValidAddress
+    } ];
 
 function goToChangeMode() {
     for (var i in listInfo) {
@@ -79,8 +82,9 @@ function sendNewUserInfo(userInfo) {
     http.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var result = this.response;
-            if (result == 'Fail!')
+            if (result == 'Fail!') {
                 alert("Update fail");
+            }
         }
     };
 }
@@ -114,7 +118,7 @@ function goToShowMode(isSave) {
     }
 }
 
-//check
+//check user input
 function checkValidPhone(telephone) {
     if (telephone == "" || telephone == null) {
         return true;
@@ -131,7 +135,7 @@ function checkValidBirthday(birthday) {
     if (birthday == "" || birthday == null) {
         return true;
     }
-    else return /^\s*(3[01]|[12][0-9]|0?[1-9])\/(1[012]|0?[1-9])\/((?:19|20)\d{2})\s*$/.test(birthday);
+    else return /\b(?:(?:0[1-9]|1\d|2[0-8]|[1-9])\/(?:0?2)\/(?:\d+)|(?:0[1-9]|1\d|2\d|[1-9])\/(?:0?2)\/(?:(?:\d*?(?:(?:0[48]|[13579][26]|[2468][048])|(?:(?:[02468][048]|[13579][26])00))|[48]00|[48])(?=\D|\b))|(?:0[1-9]|1\d|2\d|30|[1-9])\/(?:0?[469]|11)\/(?:\d+)|(?:0[1-9]|1\d|2\d|3[01]|[1-9])\/(?:0?[13578]|1[02])\/(?:\d+))\b/.test(birthday);
 }
 function checkValidAddress(address) {
     if (address == "" || address == null) {

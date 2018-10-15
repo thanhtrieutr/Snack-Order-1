@@ -22,40 +22,14 @@ function readData(callback) {
     }
 }
 
-function submitCart(request, response) {
-    utilities.collectDataFromPost(request, result => {
-        var checkUser = 0;
-        var currentUser;
-        for (var i in accountArray) {
-            let token = accountArray[i].token;
-            if (result.token == token) {
-                checkUser = 1;
-                currentUser = accountArray[i].user;
-            } 
-        }
-        if (checkUser == 0) {
-            utilities.setResponseHeader(response);
-            response.end("Fail");
-            return;
-        }
-        var bill = {};
-        bill.user = currentUser;
-        bill.products = [];
-        bill.totalPrice = 0;  
-        var checkProduct = 0;
-        for (var i in result.cartArray) {
-            for (var j in result.cartArray) {
-                if (i != j && result.cartArray[i].productID == result.cartArray[j].productID) {
-                    utilities.setResponseHeader(response);
-                    response.end("Fail");
-                    return;
+function submitCart(request, response) {  
     try {
         utilities.collectDataFromPost(request, result => {
             try {
                 var checkUser = 0;
                 var currentUser;
                 for (var i in accountArray) {
-                    let token = Buffer.from(accountArray[i].user).toString('base64');
+                    let token = accountArray[i].token;                    
                     if (result.token == token) {
                         checkUser = 1;
                         currentUser = accountArray[i].user;

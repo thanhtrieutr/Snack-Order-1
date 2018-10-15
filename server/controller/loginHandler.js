@@ -3,23 +3,6 @@ var utilities = require("../utilities/utilities");
 var errorHandler = require("../errorHandler/controllerError");
 
 function checkLogin(request, response, accountArray) {
-    utilities.collectDataFromPost(request, (result) => {
-        utilities.setResponseHeader(response);
-        var position = utilities.findValidUserPosition(accountArray, result);
-        if (position == -1) {
-            response.end(JSON.stringify(false));
-        }
-        else {
-            utilities.createToken((newToken) => {
-                newToken += Buffer.from(accountArray[position].user).toString('base64');
-                var currentId = accountArray[position]._id;
-                crud.updateOneDocument("account", {_id: currentId}, {token: newToken}, () => {
-                    response.end(JSON.stringify(newToken)); 
-                    console.log("Current token: " + newToken);
-                });
-            });
-        }
-    });
     try{
         utilities.collectDataFromPost(request, result => {
             try{
@@ -29,9 +12,14 @@ function checkLogin(request, response, accountArray) {
                     throw new Error("Authentication Error");
                 }
                 else {
-                    var token = Buffer.from(accountArray[position].user).toString('base64');
-                    console.log(token);
-                    response.end(JSON.stringify(token));
+                    utilities.createToken((newToken) => {
+                        newToken += Buffer.from(accountArray[position].user).toString('base64');
+                        var currentId = accountArray[position]._id;
+                        crud.updateOneDocument("account", {_id: currentId}, {token: newToken}, () => {
+                            response.end(JSON.stringify(newToken)); 
+                            console.log("Current token: " + newToken);
+                        });
+                    });
                 }
             }
             catch (error) {

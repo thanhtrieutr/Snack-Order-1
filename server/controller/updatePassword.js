@@ -8,20 +8,6 @@ function passwordCheck(password) {
 
 module.exports = function updatePassword(request, response) {
     var currentId;
-    utilities.collectDataFromPost(request, result => {
-        var checkOldPassword = false;
-        if (!result.oldPassword || !result.token || !result.newPassword || Object.keys(result).length != 3) {
-            utilities.setResponseHeader(response);
-            response.end("Fail");
-            return;
-        }
-        crud.readDatabase("account", function(object) {
-            for (var i = 0 ; i < object.length ; i++) {
-                let token = object[i].token;
-                if (result.oldPassword === object[i].password && result.token === token) {
-                    checkOldPassword = true;
-                    currentId = object[i];
-                    break;
     try {
         utilities.collectDataFromPost(request, result => {
             try {
@@ -31,7 +17,7 @@ module.exports = function updatePassword(request, response) {
                 }
                 crud.readDatabase("account", function(object) {
                     for (var i = 0 ; i < object.length ; i++) {
-                        let token = Buffer.from(object[i].user).toString('base64');
+                        let token = object[i].token;
                         if (result.oldPassword === object[i].password && result.token === token) {
                             checkOldPassword = true;
                             currentId = object[i];

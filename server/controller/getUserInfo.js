@@ -3,21 +3,13 @@ var utilities = require("../utilities/utilities");
 var errorHandler = require("../errorHandler/controllerError");
 
 function checkToken(request, response, accountArray) {
-    utilities.collectDataFromPost(request, result => {
-        //position == -1 mean don't exist that account
-        var position = -1;
-        for (var i in accountArray) {
-            let token = accountArray[i].token;
-            if (token == result.token) {
-                position = i;
-                break;
     try {
         utilities.collectDataFromPost(request, result => {
             //position == -1 mean don't exist that account
             try {
                 var position = -1;
                 for (var i in accountArray) {
-                    let token = Buffer.from(accountArray[i].user).toString('base64');
+                    let token = accountArray[i].token;
                     if (token == result.token) {
                         position = i;
                         break;

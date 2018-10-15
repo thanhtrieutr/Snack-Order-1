@@ -81,7 +81,6 @@ function sendNewUserInfo(userInfo) {
             var result = this.response;
             if (result == 'Fail!')
                 alert("Update fail");
-            // if (callback) callback(result);
         }
     };
 }

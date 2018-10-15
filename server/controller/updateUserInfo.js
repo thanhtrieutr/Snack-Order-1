@@ -18,7 +18,7 @@ module.exports = function updateUserInfo(request, response) {
         }
         crud.readDatabase("account", function(object) {
             for (var i = 0 ; i < object.length ; i++) {
-                let token = Buffer.from(object[i].user).toString('base64');
+                let token = object[i].token;
                 if (result.token === token) {
                     position = i;
                     currentID = object[i];

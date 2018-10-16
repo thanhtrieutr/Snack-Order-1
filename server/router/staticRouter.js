@@ -15,8 +15,6 @@ var routeFile = [
         routeFileName: "/signup/signup.html"},
     {   routeUrl: "/profile/change-password",
         routeFileName: "/profile/change-password.html"},
-    {   routeUrl: "/profile/delete-account",
-        routeFileName: "/profile/delete-account.html"}
 ];
 
 module.exports = function fileRouter(url, request, response) {

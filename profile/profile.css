@@ -172,7 +172,7 @@ input {
     }
     body {
         font-size: 13px;
-        overflow: auto;
+        overflow: scroll;
     }
 
 }
@@ -180,7 +180,7 @@ input {
 @media (min-width: 576px) {
     body {
         font-size: 13px;
-        overflow: auto;
+        overflow: scroll;
     }
     .profile-menu {
         text-align: center;

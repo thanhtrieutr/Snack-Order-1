@@ -127,8 +127,6 @@ function checkKeyPress(key) {
   }
   
   addEventListener("keypress", checkKeyPress);
-  document.getElementById("change-button").addEventListener("click", goToChangeMode());
-  document.getElementById("save-button").addEventListener("click", goToShowMode(true));
 
 //check user input
 function checkValidPhone(telephone) {

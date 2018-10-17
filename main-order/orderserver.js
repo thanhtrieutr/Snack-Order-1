@@ -5,6 +5,18 @@ getById("order-button").addEventListener('click', submitCart);
 
 ////function
 
+function removeTokenOnServe(token) {
+    var http = new XMLHttpRequest();
+    http.open("POST", "http://127.0.0.1:3000/remove-token", true);
+    http.send(JSON.stringify(token));
+    http.onreadystatechange = function() {
+        if (this.readyState == 4) {
+            var result = this.response;
+            console.log(result);
+        }
+    }
+}
+
 function createNewSnack(snack) {
     var newSnack = document.createElement('label');
     newSnack.setAttribute("class", "one-snack cl-md-3 cl-sm-4 cl-xs-6");
@@ -35,6 +47,8 @@ function loadSnack() {
             });
             afterLoad();
         }
+        if (this.readyState == 4 && this.status != 200)
+            alertError(this.response);
     }
 }
 //when click order
@@ -47,10 +61,10 @@ function submitCart() {
     obj.token = localStorage.getItem("token");
     http.send(JSON.stringify(obj));
     http.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200){
+        if (this.readyState == 4){
             var result = JSON.parse(this.response);
-            if (result == 'Fail') {
-                alert ("Something went wrong with your cart! Please try again!");
+            if (this.status != 200) {
+                alertError(this.response);
             }
             else {
                 var answer = "Bill: \n";
@@ -61,6 +75,5 @@ function submitCart() {
                 alert(answer);
             }
         }
-        if (this.readyState == 4 && this.status != 200) alert ("Something went wrong with your cart! Please try again!");
     }
 }

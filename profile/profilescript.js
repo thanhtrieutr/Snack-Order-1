@@ -21,7 +21,7 @@ function getUserInfo(callback) {
             if (callback) callback(result);
         }
         if (this.readyState == 4 && this.status != 200)
-            console.log("Load user info fail");
+            console.log(this.response);
     };
 }
 function loadUserData() {
@@ -81,12 +81,9 @@ function sendNewUserInfo(userInfo) {
     http.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var result = this.response;
-            if (result == 'Fail!') {
-                alert("Update fail");
-            }
         }
         if (this.readyState == 4 && this.status != 200)
-            alert("Update fail");
+            alertError(this.response);
     };
 }
 function goToShowMode(isSave) {

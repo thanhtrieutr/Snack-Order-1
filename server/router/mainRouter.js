@@ -63,17 +63,23 @@ module.exports = function mainRouter(url, method, request, response, check404) {
         routeMethod: "POST",
         routeHandler: deleteToken.deleteToken
     }];
-    var routeId = route.findIndex(item => item.routeUrl === url);
-    if (routeId == -1) {
-        if (check404 == true)
-            errorHandler(new Error ("File not found"),response);
-    } else {
-        if (route[routeId].routeMethod === method) {
-        route[routeId].routeHandler(request, response);
-        } 
-        else {
-            errorHandler(new Error ("File not found"),response);
+    try {
+        var routeId = route.findIndex(item => item.routeUrl === url);
+        if (routeId == -1) {
+            if (check404 == true)
+                throw new Error("File not found");
+        } else {
+            if (route[routeId].routeMethod === method) {
+            route[routeId].routeHandler(request, response);
+            } 
+            else {
+                throw new Error("File not found");
+            }
         }
-    }
+    }  
+    catch (error) {
+        errorHandler(error,response);
+        return;
+    } 
 }
 /////////////////////////////////////////////

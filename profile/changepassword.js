@@ -3,6 +3,39 @@ function passwordCheck(password) {
   return /^[[a-zA-Z0-9!#$%&'*+-/=?^_`{|}]+$/.test(password);
 }
 
+//Fix error alert in developer console
+var currentUsername = document.createTextNode(localStorage.getItem("currentAccount"));
+var token = localStorage.getItem("token");
+document.getElementById("user-field").appendChild(currentUsername);
+loadUserData();
+
+//Load user avatar
+function loadUserData() {
+  var avatar = document.getElementById("avatar");
+  getUserInfo( function (result) {
+      if (result.avatarAddress) {
+          avatar.setAttribute("src", result.avatarAddress);    
+      }     
+  });
+}
+
+//Function Get User Info
+function getUserInfo(callback) {
+  var http = new XMLHttpRequest();
+  http.open('POST', "http://127.0.0.1:3000/get-user-info");
+  var obj = {};
+  obj.token = token;
+  http.send(JSON.stringify(obj));
+  http.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+          var result = JSON.parse(this.response);
+          if (callback) callback(result);
+      }
+      if (this.readyState == 4 && this.status != 200)
+          console.log(this.response);
+  };
+}
+
 function changeUserPassword(oldPassword, newPassword, token, callback) {
   //Using changePasswordUser function at others/utilities.js
   //This function stringtify oldPassword, newPassword and token

@@ -3,13 +3,15 @@ var currentAccount = localStorage.getItem("currentAccount");
 var token = localStorage.getItem("token");
 var currentUserInfo = {};
 
-checkLogIn();
 loadUserData();
 goToShowMode(false);
 
+var currentUsername = document.createTextNode(localStorage.getItem("currentAccount"));
+document.getElementById("user-field").appendChild(currentUsername);
+
 function getUserInfo(callback) {
     var http = new XMLHttpRequest();
-    http.open('POST', "http://127.0.0.1:3000/get-user-info", true);
+    http.open('POST', "http://127.0.0.1:3000/get-user-info");
     var obj = {};
     obj.token = token;
     http.send(JSON.stringify(obj));
@@ -19,7 +21,7 @@ function getUserInfo(callback) {
             if (callback) callback(result);
         }
         if (this.readyState == 4 && this.status != 200)
-            console.log("load user info fail");
+            console.log(this.response);
     };
 }
 function loadUserData() {
@@ -35,22 +37,18 @@ function loadUserData() {
 var listInfo = [ {
     id: "user-fullname",
     propertyName: "fullName",
-    default: "Full name shows here",
     check: checkValidFullName
     }, {
     id: "user-phonenumber",
     propertyName: "phoneNumber",
-    default: "Phone number shows here",
     check: checkValidPhone
     }, { 
     id: "user-birthday",
     propertyName: "birthday",
-    default: "Birthday shows here",
     check: checkValidBirthday
     }, {
     id: "user-address",
     propertyName: "address",
-    default: "Address shows here",
     check: checkValidAddress
     } ];
 
@@ -67,7 +65,6 @@ function showNewUserInfo(result) {
         if (result[listInfo[i].propertyName])
             inputField.value = result[listInfo[i].propertyName];
         else {
-            inputField.placeholder = listInfo[i].default;
             inputField.value = null;
         }
     }
@@ -84,12 +81,9 @@ function sendNewUserInfo(userInfo) {
     http.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var result = this.response;
-            if (result == 'Fail!') {
-                alert("Update fail");
-            }
         }
         if (this.readyState == 4 && this.status != 200)
-            alert("Update fail");
+            alertError(this.response);
     };
 }
 function goToShowMode(isSave) {
@@ -121,6 +115,15 @@ function goToShowMode(isSave) {
         });
     }
 }
+
+//Add click button by press enter button
+function checkKeyPress(key) {
+    if (key.keyCode == 13) {
+        goToShowMode(true);
+    }
+  }
+  
+  addEventListener("keypress", checkKeyPress);
 
 //check user input
 function checkValidPhone(telephone) {

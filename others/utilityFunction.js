@@ -42,7 +42,6 @@ function checkToken(token, callback) {
             callback(result);
         }
         if (this.readyState == 4 && this.status != 200) {
-            alert(token + this.status);
             callback(false);
         }
     }
@@ -76,4 +75,8 @@ function checkLogIn() {
         }
     }
   });
+}
+
+function alertError(error) {
+    alert(error);
 }

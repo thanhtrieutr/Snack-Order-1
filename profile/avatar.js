@@ -17,11 +17,11 @@ function submitAvatar() {
             if (this.readyState == 4 && this.status == 200) {
                 if (this.response != "Wrong Data Input") {
                     alert("Image has loaded!");
-                    window.location = "/profile"
+                    loadUserData();
                 }
             }
             else if (this.readyState == 4 && this.status != 200) {
-                alert("Image loaded fail!");
+                alertError(this.response);
             }
         }
     };  

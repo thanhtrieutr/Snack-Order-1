@@ -6,20 +6,7 @@ getById("log-out-button-hambuger").addEventListener('click', logOut);
 function afterLoad() {
     showCurrentSnack();
 }
-function removeTokenOnServe(token) {
-    var http = new XMLHttpRequest();
-    http.open("POST", "http://127.0.0.1:3000/remove-token", true);
-    http.send(JSON.stringify(token));
-    http.onreadystatechange = function() {
-        if (this.readyState == 4 && this.status == 200) {
-            var result = this.response;
-            if (result == 'Fail!')
-                console.log("Remove token on server is fail!");
-        }
-        if (this.readyState == 4 && this.status != 200)
-            console.log("Remove token on server is fail!");
-    }
-}
+
 function logOut() {
     localStorage.removeItem("currentAccount");
     var token = localStorage.getItem("token");
@@ -97,7 +84,7 @@ function addSnack(ID, amount) {
 
     //amount of snack
     oneSpan = document.createElement("span");
-    oneSpan.setAttribute("class", "number-of-snack offset-xs-4 offset-sm-5 cl-sm-4 offset-md-3");
+    oneSpan.setAttribute("class", "number-of-snack offset-xs-4 offset-sm-7 cl-sm-2 offset-md-1 cl-md-3");
     //- button
     oneButton = document.createElement("button");
     oneButton.setAttribute("class", "number-button");

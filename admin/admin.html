@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Admin</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
+        <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+        <link rel="stylesheet" href="../css/mystyles.css">
+        <link rel="stylesheet" href="admin.css">
+    </head>
+    <body>
+        <div class="container is-fullhd">
+            <div class="columns">
+                <div class="column is-2 is-hidden-mobile">
+                    <thead>
+                        <nav class="navbar" role="navigation" aria-label="main navigation">
+                            <div class="logo-container">
+                                <a>
+                                  <img class="logo" src="../images/logo.png">
+                                </a>
+                                <!-- <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                                    <span aria-hidden="true"></span>
+                                    <span aria-hidden="true"></span>
+                                    <span aria-hidden="true"></span>
+                                </a> -->
+                            </div>
+                        </nav>
+                    </thead>
+                    <tbody>
+                    <aside class="menu">
+                        <ul class="menu-list">
+                            <li><a id="today-order" class="choice is-active" onclick="showContent(event,'today-content','table')">Today Order</a></li>
+                            <li>
+                                <a id="order-history" class="choice" onclick="showContent(event, 'order-content','block')">Order history</a>
+                                <ul>
+                                    <li> <p id="order-detail-label" class="menu-label">Order history detail</p></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a id="users" class="choice" onclick="showContent(event, 'user-content','block')">Users</a>
+                                <ul>
+                                    <li><p  id="user-detail-label" class="menu-label">User detail</p></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a id="product" class="choice" onclick="showContent(event,'product-content','block')">Product list</a>
+                                <ul>
+                                    <li> <p  id="product-detail-label" class="menu-label">Product detail</p></li>
+                                </ul>
+                            </li>
+                        </ul>
+                      </aside>
+                    </tbody>
+                    </div>
+                    <div class="column is-10" id="body">
+                        <thead>
+                            <nav class="navbar" role="navigation" aria-label="main navigation">
+                                <div class="navbar-end">
+                                    <div class="navbar-item">
+                                        <div class="">
+                                            <div class="media">
+                                                <div class="media-left">
+                                                    <figure class="image is-48x48">
+                                                      <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                                                    </figure>
+                                                </div>
+                                                <div class="media-content">
+                                                    <p class="title is-4">John Smith</p>
+                                                    <p class="subtitle is-6">@johnsmith</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </nav>
+                        </thead>
+                        <tbody>
+                            <table id="today-content" class="tab table is-striped is-fullwidth">
+                                <tr class="has-background-grey-lighter">
+                                    <th>Product name</th>
+                                    <th>Quantity</th>
+                                    <th>Unit price</th>
+                                    <th>Total</th>
+                                    <th>Buyer</th>
+                                    <th>Actions</th>
+                                </tr> 
+                                <tr>
+                                    <td>Snack something</td>
+                                    <td>2</td>
+                                    <td>19.000đ</td>
+                                    <td>38.000đ</td>
+                                    <td>test@gmail.com</td>
+                                    <td>In progress</td>
+                                </tr>
+                                <tr>
+                                    <td>Snack something</td>
+                                    <td>2</td>
+                                    <td>19.000đ</td>
+                                    <td>38.000đ</td>
+                                    <td>test@gmail.com</td>
+                                    <td>In progress</td>
+                                </tr>
+                                <tr>
+                                    <td>Snack something</td>
+                                    <td>2</td>
+                                    <td>19.000đ</td>
+                                    <td>38.000đ</td>
+                                    <td>test@gmail.com</td>
+                                    <td>In progress</td>
+                                </tr>
+                            </table>
+                            <div id="order-content" class="tab" onclick="showDetail('order-detail')">
+                                <div>
+                                    <div id="user-container">
+                                        <span id="user-item">
+                                            ID: 123456789
+                                        </span>
+                                        <span id="user-item">
+                                            test@gmail.com
+                                        </span>
+                                        <span id="user-item">
+                                            Total: 15,000đ
+                                        </span>
+                                    </div>
+                                </div>  
+                                <div id="order-detail" class="detail">
+                                    <table class="table is-striped is-fullwidth">
+                                        <tr class="has-background-grey-lighter">
+                                            <th>Product name</th>
+                                            <th>Quantity</th>
+                                            <th>Unit price</th>
+                                            <th>Total</th>
+                                            <th>Buyer</th>
+                                            <th>Actions</th>
+                                        </tr> 
+                                        <tr>
+                                            <td>Snaing</td>
+                                            <td>2</td>
+                                            <td>19.000đ</td>
+                                            <td>38.000đ</td>
+                                            <td>test@gmail.com</td>
+                                            <td>In progress</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Snack something</td>
+                                            <td>2</td>
+                                            <td>19.000đ</td>
+                                            <td>38.000đ</td>
+                                            <td>test@gmail.com</td>
+                                            <td>In progress</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Snack something</td>
+                                            <td>2</td>
+                                            <td>19.000đ</td>
+                                            <td>38.000đ</td>
+                                            <td>test@gmail.com</td>
+                                            <td>In progress</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div id="user-content" class="tab" onclick="showDetail('user-detail')">
+                                <div>
+                                    <div id="user-container">
+                                        <span id="user-item">
+                                            ID: 123789
+                                        </span>
+                                        <span id="user-item">
+                                            test@gmail.com
+                                        </span>
+                                    </div>
+                                </div>  
+                                <div id="user-detail" class="detail">
+                                    <table class="table is-striped is-fullwidth">
+                                        <tr class="has-background-grey-lighter">
+                                            <th>Username</th>
+                                            <th>Full name</th>
+                                            <th>Phone</th>
+                                            <th>Address</th>
+                                            <th>Birthday</th>
+                                        </tr> 
+                                        <tr>
+                                            <td>test@gmail.com</td>
+                                            <td>TEST</td>
+                                            <td>1234654</td>
+                                            <td>3525131aksdhaksjdhasd</td>
+                                            <td>01/01/1000</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div id="product-content" class="tab product" onclick="showDetail('product-detail')">
+                                <div>
+                                    <div id="user-container">
+                                        <span id="user-item">
+                                            ID:56789
+                                        </span>
+                                        <span id="user-item">
+                                            Snack Rong biển Nongshim
+                                        </span>
+                                    </div>
+                                </div>  
+                                <div id="product-detail" class="detail">
+                                    <table class="table is-striped is-fullwidth">
+                                        <tr class="has-background-grey-lighter">
+                                            <th>Product name</th>
+                                            <th>Unit price</th>
+                                            <th>In stock</th>
+                                            <th>Image</th>
+                                        </tr> 
+                                        <tr>
+                                            <td>Snack something</td>
+                                            <td>19.000đ</td>
+                                            <td>100</td>
+                                            <td>snack.jpg</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div id="product-content" class="tab product" onclick="showDetail('product-detail')">
+                                <div>
+                                    <div id="user-container">
+                                        <span id="user-item">
+                                            ID:56789
+                                        </span>
+                                        <span id="user-item">
+                                            Snack Rong biển Nongshim
+                                        </span>
+                                    </div>
+                                </div>  
+                                <div id="product-detail" class="detail">
+                                    <table class="table is-striped is-fullwidth">
+                                        <tr class="has-background-grey-lighter">
+                                            <th>Product name</th>
+                                            <th>Unit price</th>
+                                            <th>In stock</th>
+                                            <th>Image</th>
+                                        </tr> 
+                                        <tr>
+                                            <td>Snack something</td>
+                                            <td>19.000đ</td>
+                                            <td>100</td>
+                                            <td>snack.jpg</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </tbody> 
+                    </div>
+                </div>
+            </div>
+    </body>
+    <script src="admin.js"></script>
+</html>

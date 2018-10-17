@@ -1,0 +1,56 @@
+#body{
+    height: 100%;
+}
+#user-container{
+    border: solid;
+    border-width: 1px;
+    text-align: center;
+    width: 100%;
+    padding: 20px;
+    background: white;
+}
+#user-item{
+    padding: 0 10%;
+}
+#today-content{
+    /* display: none; */
+}
+#order-content{
+    display: none;
+}
+#user-content{
+    display: none;
+}
+#product-content{
+    display: none;
+}
+#order-detail{
+    display: none;
+}
+#user-detail{
+    display: none;
+}
+#product-detail{
+    display: none;
+}
+.menu-label{
+    display: none;
+}
+.detail {
+    width: 100%;
+}
+.navbar {
+    background: transparent !important;
+}
+.logo-container {
+    height: auto;
+    width: auto;
+    display: block;
+    margin: auto;
+    align-items: center;
+    background: transparent;
+}
+.logo {
+    width: auto;
+    height: 56px;
+}

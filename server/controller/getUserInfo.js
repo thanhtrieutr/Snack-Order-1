@@ -1,23 +1,20 @@
 var crud = require("../utilities/databaseCRUD");
 var utilities = require("../utilities/utilities");
 var errorHandler = require("../errorHandler/controllerError");
+var listInfo = ["fullName", "phoneNumber", "birthday", "address"];
 
 function checkToken(request, response, accountArray) {
     try {
         utilities.collectDataFromPost(request, result => {
             //position == -1 mean don't exist that account
             try {
-                var position = -1;
-                for (var i in accountArray) {
-                    let token = accountArray[i].token;
-                    if (token == result.token) {
-                        position = i;
-                        break;
-                    }
-                }
+                var position = utilities.findAccountByToken(accountArray, result.token);
                 if (position != -1) {
                     var obj = {};
-                    obj.avatarAddress = accountArray[i].avatarAddress;
+                    obj.avatarAddress = accountArray[position].avatarAddress;
+                    for (var i in listInfo) {
+                        obj[listInfo[i]] = accountArray[position][listInfo[i]];
+                    }
                     utilities.setResponseHeader(response);
                     response.end(JSON.stringify(obj));
                 }

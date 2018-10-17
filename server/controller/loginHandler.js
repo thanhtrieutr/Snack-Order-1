@@ -9,7 +9,7 @@ function checkLogin(request, response, accountArray) {
                 utilities.setResponseHeader(response);
                 var position = utilities.findValidUserPosition(accountArray, result);
                 if (position == -1) {
-                    throw new Error("Authentication Error");
+                    throw new Error("Account Doesn't Exist");
                 }
                 else {
                     utilities.createToken((newToken) => {

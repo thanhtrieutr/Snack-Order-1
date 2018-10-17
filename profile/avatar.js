@@ -21,7 +21,7 @@ function submitAvatar() {
                 }
             }
             else if (this.readyState == 4 && this.status != 200) {
-                alert("Image loaded fail!");
+                alertError(this.response);
             }
         }
     };  

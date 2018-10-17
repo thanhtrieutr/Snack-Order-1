@@ -84,7 +84,7 @@ function addSnack(ID, amount) {
 
     //amount of snack
     oneSpan = document.createElement("span");
-    oneSpan.setAttribute("class", "number-of-snack offset-xs-4 offset-sm-5 cl-sm-4 offset-md-3");
+    oneSpan.setAttribute("class", "number-of-snack offset-xs-4 offset-sm-7 cl-sm-2 offset-md-1 cl-md-3");
     //- button
     oneButton = document.createElement("button");
     oneButton.setAttribute("class", "number-button");

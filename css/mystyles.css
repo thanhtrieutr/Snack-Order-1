@@ -1528,8 +1528,8 @@ a.has-text-danger:hover, a.has-text-danger:focus {
   position: relative; }
   @media screen and (min-width: 1088px) {
     .container {
-      max-width: 960px;
-      width: 960px; }
+      max-width: 1340px;
+      width: auto; }
       .container.is-fluid {
         margin-left: 64px;
         margin-right: 64px;

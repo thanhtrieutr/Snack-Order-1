@@ -27,6 +27,7 @@ function collectDataFromPost(request, callback) {
         }
         catch (error) {
             console.log(`There is error: ${error} at parse data\n`);
+            if (callback) callback(error);
         }
         if (callback) callback(body);
     });

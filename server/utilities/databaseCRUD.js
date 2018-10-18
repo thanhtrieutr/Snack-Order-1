@@ -11,31 +11,31 @@ function connectDatabase(callback) {
     MongoClient.connect(urldb, function(err,dbo) {
        console.log(urldb);
         db = dbo.db('snack-order');
-        if (callback) return callback();
+        if (callback) return callback(err);
     });
 }
     
 function readDatabase(collection, callback) {
     db.collection(collection).find({}).toArray(function(err, result) {
-        callback(result);
+        callback(result,err);
     });
 }
 
 function createDocument(collection, object, callback) {
     db.collection(collection).insertOne(object, function(err, result) {
-        if (callback) callback();
+        if (callback) callback(err);
     });
 }
 
 function deleteOneDocument(collection, object, callback) {
     db.collection(collection).deleteOne(object, function(err, result) {
-        if (callback) callback();
+        if (callback) callback(err);
     });
 }
 
 function deleteOneCollection(collection, callback) {
     db.collection(collection).drop(function(err, deleteOK) {
-        if (callback) callback();
+        if (callback) callback(err);
     });
 }
 
@@ -44,13 +44,13 @@ function updateOneDocument(collection, object, newValues, callback) {
         $set: newValues
     };
     db.collection(collection).updateOne(object, newData, function(err, result) {
-        if (callback) callback();
+        if (callback) callback(err);
     });
 }
 
 function readOneDocument(collection, object, callback) {
     db.collection(collection).findOne(object , function(err, result) {
-        callback(result);
+        callback(result,err);
     });
 }
 

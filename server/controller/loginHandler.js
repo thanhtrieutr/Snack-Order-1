@@ -3,36 +3,40 @@ var utilities = require("../utilities/utilities");
 var errorHandler = require("../errorHandler/controllerError");
 
 function checkLogin(request, response, accountArray) {
-    try{
+    var promise1 = new Promise(function(resolve, reject) {
         utilities.collectDataFromPost(request, result => {
-            try{
-                utilities.setResponseHeader(response);
-                var position = utilities.findValidUserPosition(accountArray, result);
-                if (position == -1) {
-                    throw new Error("Account Doesn't Exist");
-                }
-                else {
-                    utilities.createToken((newToken) => {
-                        newToken += Buffer.from(accountArray[position].user).toString('base64');
-                        var currentId = accountArray[position]._id;
-                        crud.updateOneDocument("account", {_id: currentId}, {token: newToken}, () => {
-                            response.end(JSON.stringify(newToken)); 
-                            console.log("Current token: " + newToken);
-                        });
-                    });
-                }
+            if (result instanceof Error) {
+                reject(result);
             }
-            catch (error) {
-                errorHandler(error,response);
-                return;
-            }
+            else {
+                resolve(result);
+            }   
         });
-    }
-    catch (error) {
-        errorHandler(error,response);
+    });
+    Promise.all([promise1])
+    .then(result => {
+        utilities.setResponseHeader(response);
+        var position = utilities.findValidUserPosition(accountArray, result);
+        if (position == -1) {
+            reject(new Error("Account Doesn't Exist"));
+        }
+        else {
+            utilities.createToken((newToken) => {
+                newToken += Buffer.from(accountArray[position].user).toString('base64');
+                var currentId = accountArray[position]._id;
+                crud.updateOneDocument("account", {_id: currentId}, {token: newToken}, () => {
+                    response.end(JSON.stringify(newToken)); 
+                    console.log("Current token: " + newToken);
+                });
+            });
+        }
+    })
+    .catch(error => {
+        errorHandler(error, response);
         return;
-    }
+    });
 }
+
 function checkLoginHandler(request, response) {
     
     try {

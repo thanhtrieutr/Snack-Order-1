@@ -37,6 +37,14 @@
     background: transparent;
 }
 .logo {
+    position: relative;
+    padding: 5px;
     width: auto;
-    height: 56px;
+    height: 60px;
+}
+.title {
+    padding: 11px 10px;
+}
+img {
+    padding: 5px;
 }

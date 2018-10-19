@@ -12,15 +12,15 @@ var errorHandler = require("../errorHandler/controllerError");
 
 module.exports = function mainRouter(url, method, request, response, check404) {
     var route = [{
-        routeUrl: "/checkLogin",
+        routeUrl: "/check-login",
         routeMethod: "POST",
         routeHandler: checkLogin.checkLogin
     }, {
-        routeUrl: "/checkToken",
+        routeUrl: "/check-token",
         routeMethod: "POST",
         routeHandler: checkLogin.checkToken
     }, {
-        routeUrl: "/submitCart",
+        routeUrl: "/submit-cart",
         routeMethod: "POST",
         routeHandler: cartHandler
     }, {
@@ -28,15 +28,15 @@ module.exports = function mainRouter(url, method, request, response, check404) {
         routeMethod:"GET",
         routeHandler:getProduct
     }, {
-        routeUrl:"/updatePassword",
+        routeUrl:"/update-password",
         routeMethod:"POST",
         routeHandler:updatePassword
     }, {
-        routeUrl: "/createUser",
+        routeUrl: "/create-user",
         routeMethod: "POST",
         routeHandler: createAccount.createUser
     }, {
-        routeUrl: "/deleteUser",
+        routeUrl: "/delete-user",
         routeMethod: "POST",
         routeHandler: deleteOneUser.deleteOneUser
     }, {

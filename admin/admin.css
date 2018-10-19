@@ -53,3 +53,7 @@ img {
     height: 650px;
     overflow-y: auto;
 }
+
+.product-img{
+    height: 100px;
+}

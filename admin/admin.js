@@ -89,7 +89,9 @@ function createNewProduct(product, currentID) {
             <tr>
                 <td style="width: 50%;">${product.name}</td>
                 <td style="width: 20%;">${product.price}</td>
-                <td style="width: 30%;">${product.img}</td>
+                <td style="width: 30%;">
+                    <img class="product-img" src="${product.img}">
+                </td>
             </tr>
         </table>
     </div>`
@@ -159,7 +161,9 @@ function createNewUser(user, currentID) {
                 <td style="width: 16%;">${user.phoneNumber}</td>
                 <td style="width: 20%;">${user.address}</td>
                 <td style="width: 16%;">${user.birthday}</td>
-                <td style="width: 16%;">${user.avatarAddress}</td>
+                <td style="width: 16%;">
+                    <img src="${user.avatarAddress}">
+                </td>
             </tr>
         </table>
     </div>`

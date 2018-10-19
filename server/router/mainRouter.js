@@ -10,13 +10,6 @@ var updateUserInfo = require("../controller/updateUserInfo");
 var deleteToken = require("../controller/deleteToken");
 var errorHandler = require("../errorHandler/controllerError");
 
-
-// function defaultHandler(response) {
-//     response.statusCode = 404;
-//     response.setHeader('Content-Type', 'text/plain');
-//     response.end('No Page found\n');
-// }
-
 module.exports = function mainRouter(url, method, request, response, check404) {
     var route = [{
         routeUrl: "/checkLogin",

@@ -6,7 +6,7 @@ function checkLogin(request, response, accountArray) {
     var promise = new Promise(function(resolve, reject) {
         utilities.collectDataFromPost(request, result => {
             if (result instanceof Error) {
-                reject(new Error ('Wrong Data Input'));
+                reject(result);
             }
             else {
                 utilities.setResponseHeader(response);

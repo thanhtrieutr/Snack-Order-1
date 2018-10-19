@@ -8,7 +8,7 @@ else {
 }
 
 function connectDatabase(callback) {
-    MongoClient.connect(urldb, function(err,dbo) {
+    MongoClient.connect(urldb, { useNewUrlParser: true }, function(err,dbo) {
        console.log(urldb);
         db = dbo.db('snack-order');
         if (callback) return callback();

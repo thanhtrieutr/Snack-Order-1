@@ -37,7 +37,7 @@ module.exports = function mainRouter(url, method, request, response, check404) {
         routeMethod:"GET",
         routeHandler:getProduct
     }, {
-        routeUrl:"/updatePassword",
+        routeUrl:"/update-password",
         routeMethod:"POST",
         routeHandler:updatePassword
     }, {

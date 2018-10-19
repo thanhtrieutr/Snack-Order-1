@@ -41,7 +41,7 @@ module.exports = function updateUserInfo(request, response) {
     var currentID, position = -1;
     var promise1 = new Promise(function(resolve, reject) {
         utilities.collectDataFromPost(request, result =>{
-            if (result instanceof Error) reject(result)
+            if (result instanceof Error) reject(new Error ("Wrong Data Input"));
             resolve(result);
         });
     });
@@ -61,9 +61,9 @@ module.exports = function updateUserInfo(request, response) {
     .then(result => {
         debugger;
         if (!result[0].token || Object.keys(result[0]).length != 5 || checkUserInfo(result[0]) == false) {
-            reject(new Error ("Wrong Data Input"));
+            throw (new Error ("Wrong Data Input"));
+            debugger;
         }
-        debugger;
         for (var i = 0 ; i < result[1].length ; i++) {
             let token = result[1][i].token;
             if (result[0].token === token) {
@@ -72,7 +72,6 @@ module.exports = function updateUserInfo(request, response) {
                 break;
             }
         }
-        debugger;
         if (position > -1) {
             delete result[0].token;
             crud.updateOneDocument("account", {_id:currentID._id}, result[0], function(error) {
@@ -83,11 +82,10 @@ module.exports = function updateUserInfo(request, response) {
             });
         }
         else {
-            reject(new Error ("Authentication Error"));
+            throw (new Error ("Wrong Data Input"));
         }
     })
     .catch(error=> {
-        errorHandler(error);
-        return;
+        errorHandler(error,response);
     });
 }

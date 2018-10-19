@@ -1,6 +1,7 @@
 var crud = require("../utilities/databaseCRUD");
 var utilities = require("../utilities/utilities");
 var listInfo = ["fullName", "phoneNumber", "birthday", "address"];
+var errorHandler = require("../errorHandler/controllerError");
 
 //check user input
 function checkValidPhone(telephone) {
@@ -37,37 +38,54 @@ function checkUserInfo(result) {
 }
 
 module.exports = function updateUserInfo(request, response) {
-  var currentID, position = -1;
-    utilities.collectDataFromPost(request, result => {
-        try{
-            if (!result.token || Object.keys(result).length != 5 || checkUserInfo(result) == false) {
-                throw new Error ("Wrong Data Input");
-            }
-            crud.readDatabase("account", function(object) {
-                for (var i = 0 ; i < object.length ; i++) {
-                    let token = object[i].token;
-                    if (result.token === token) {
-                        position = i;
-                        currentID = object[i];
-                        break;
-                    }
-                }
+    var currentID, position = -1;
+    var promise1 = new Promise(function(resolve, reject) {
+        utilities.collectDataFromPost(request, result =>{
+            if (result instanceof Error) reject(new Error ("Wrong Data Input"));
+            resolve(result);
+        });
+    });
 
-                if (position > -1) {
-                    delete result.token;
-                    crud.updateOneDocument("account", {_id:currentID._id}, result, function() {
-                        utilities.setResponseHeader(response);
-                        response.end("Update Successful");
-                    });
-                }
-                else {
-                    throw new Error ("Authentication Error");
-                }
-            })
+    var promise2 = new Promise(function(resolve, reject) {
+        crud.readDatabase("account", function(object,error) {
+            if (error) {
+                reject(error);
+            } 
+            else {
+                resolve(object);
+            }
+        });
+    });
+
+    Promise.all([promise1,promise2])
+    .then(result => {
+        debugger;
+        if (!result[0].token || Object.keys(result[0]).length != 5 || checkUserInfo(result[0]) == false) {
+            throw (new Error ("Wrong Data Input"));
+            debugger;
         }
-        catch(error) {
-            errorHandler(error,response);
-            return;
+        for (var i = 0 ; i < result[1].length ; i++) {
+            let token = result[1][i].token;
+            if (result[0].token === token) {
+                position = i;
+                currentID = result[1][i];
+                break;
+            }
+        }
+        if (position > -1) {
+            delete result[0].token;
+            crud.updateOneDocument("account", {_id:currentID._id}, result[0], function(error) {
+                if (error) reject(error);
+                utilities.setResponseHeader(response);
+                response.end("Update Successful");
+                debugger;
+            });
+        }
+        else {
+            throw (new Error ("Wrong Data Input"));
         }
     })
+    .catch(error=> {
+        errorHandler(error,response);
+    });
 }

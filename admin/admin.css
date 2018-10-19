@@ -1,7 +1,7 @@
 #body{
     height: 100%;
 }
-#user-container{
+#display-container{
     border: solid;
     border-width: 1px;
     text-align: center;
@@ -9,34 +9,20 @@
     padding: 20px;
     background: white;
 }
-#user-item{
-    padding: 0 10%;
+.display-item{
+    text-align: center; 
 }
-#today-content{
-    /* display: none; */
-}
-#order-content{
-    display: none;
-}
-#user-content{
-    display: none;
-}
-#product-content{
-    display: none;
-}
-#order-detail{
-    display: none;
-}
-#user-detail{
-    display: none;
-}
-#product-detail{
-    display: none;
-}
+
 .menu-label{
+    padding-top: 8px;
+    padding-bottom: 8px;
+    padding-right: 0;
+    padding-left: 10%;
     display: none;
 }
+
 .detail {
+    display: none;
     width: 100%;
 }
 .navbar {
@@ -51,6 +37,19 @@
     background: transparent;
 }
 .logo {
+    position: relative;
+    padding: 5px;
     width: auto;
-    height: 56px;
+    height: 60px;
+}
+.title {
+    padding: 11px 10px;
+}
+img {
+    padding: 5px;
+}
+#product-content, #user-content {
+    /* max-height: 50%; */
+    height: 650px;
+    overflow-y: auto;
 }

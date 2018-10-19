@@ -3,54 +3,62 @@ var utilities = require("../utilities/utilities");
 var errorHandler = require("../errorHandler/controllerError");
 
 function checkLogin(request, response, accountArray) {
-    try{
+    var promise = new Promise(function(resolve, reject) {
         utilities.collectDataFromPost(request, result => {
-            try{
+            if (result instanceof Error) {
+                reject(result);
+            }
+            else {
                 utilities.setResponseHeader(response);
                 var position = utilities.findValidUserPosition(accountArray, result);
                 if (position == -1) {
-                    throw new Error("Account Doesn't Exist");
+                    reject (new Error("Email or Password is incorrect"));
                 }
                 else {
                     utilities.createToken((newToken) => {
-                        newToken += Buffer.from(accountArray[position].user).toString('base64');
-                        var currentId = accountArray[position]._id;
+                    newToken += Buffer.from(accountArray[position].user).toString('base64');
+                    var currentId = accountArray[position]._id;
                         crud.updateOneDocument("account", {_id: currentId}, {token: newToken}, () => {
                             response.end(JSON.stringify(newToken)); 
                             console.log("Current token: " + newToken);
                         });
                     });
                 }
-            }
-            catch (error) {
-                errorHandler(error,response);
-                return;
-            }
+            }   
         });
-    }
-    catch (error) {
-        errorHandler(error,response);
+    });
+
+    promise.catch(error => {
+        errorHandler(error, response);
         return;
-    }
+    });
 }
+
 function checkLoginHandler(request, response) {
-    
-    try {
+    var promise = new Promise(function(resolve, reject) {
         // don't read 1 time at beginning because accounts can change
-        crud.readDatabase("account", function(accountArray) { 
-            checkLogin(request, response, accountArray);
+        crud.readDatabase("account", function(accountArray, error) {
+            if (error) {
+                reject(error);
+            } 
+            else {
+                checkLogin(request, response, accountArray);
+            }
         });
-    }
-    catch (error) {
-        errorHandler(error,response);
+    });
+    promise.catch (error => {
+        errorHandler(error, response);
         return;
-    }
+    })
 }
+
 function checkToken(request, response, accountArray) {
-    try {
+    var promise = new Promise(function(resolve, reject) {
         utilities.collectDataFromPost(request, result => {
-            try {
-                //position == -1 mean don't exist that account
+            if (result instanceof Error) {
+                reject(new Error ('Wrong Data Input'));
+            }
+            else {
                 var position = -1;
                 for (var i in accountArray) {
                     let token = accountArray[i].token;
@@ -64,31 +72,32 @@ function checkToken(request, response, accountArray) {
                     response.end(JSON.stringify(accountArray[position].user));
                 }
                 else {
-                    throw new Error("Authentication Error");
+                    reject (new Error("Authentication Error"));
                 }
-            }
-            catch (error) {
-                errorHandler(error,response);
-                return;
-            }
+            }   
         });
-    }
-    catch (error) {
+    });
+    promise.catch (error => {
         errorHandler(error,response);
         return;
-    }
+    })
 }
 function checkTokenHandler(request, response) {
     // don't read 1 time at beginning because accounts can change
-    try {
-        crud.readDatabase("account", function(accountArray) { 
-            checkToken(request, response, accountArray);
-        });
-    }
-    catch (error) {
+    var promise = new Promise(function(resolve, reject) {
+        crud.readDatabase("account", function(accountArray, error) { 
+            if (error) {
+                reject(error);
+            } 
+            else {
+                checkToken(request, response, accountArray);
+            }
+        })
+    })
+    promise.catch (error => {
         errorHandler(error,response);
         return;
-    }
+    })
 }
 
 module.exports = {

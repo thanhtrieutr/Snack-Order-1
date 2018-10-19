@@ -34,7 +34,7 @@ function findUserPosition(localAccount, user) {
 
 function checkToken(token, callback) {
     var http = new XMLHttpRequest();
-    http.open('POST', "http://127.0.0.1:3000/checkToken", true);
+    http.open('POST', "http://127.0.0.1:3000/check-token", true);
     http.send(JSON.stringify(token));
     http.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -51,7 +51,7 @@ function checkLogInAlready() {
   var token = localStorage.getItem("token");
   checkToken(token, result => {
     if (result) {
-        alert("You already login");
+        alert("You have already logged in");
         window.location.href = "/";
     }
   });
@@ -63,7 +63,7 @@ function checkLogIn() {
   var token = localStorage.getItem("token");
   checkToken(token, result => {
     if (result == false) {
-        alert("You haven't login");
+        alert("You haven't logged in");
         window.location.href = "/login";
     }
     else {

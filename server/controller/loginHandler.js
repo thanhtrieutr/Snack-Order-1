@@ -12,7 +12,7 @@ function checkLogin(request, response, accountArray) {
                 utilities.setResponseHeader(response);
                 var position = utilities.findValidUserPosition(accountArray, result);
                 if (position == -1) {
-                    reject (new Error("Account Doesn't Exist"));
+                    reject (new Error("Email or Password is incorrect"));
                 }
                 else {
                     utilities.createToken((newToken) => {

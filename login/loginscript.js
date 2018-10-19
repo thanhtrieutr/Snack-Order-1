@@ -15,11 +15,9 @@ function checkLoginInSever(user, password) {
 }
 function alertAnswerLogIn(user, token) {
     if (token != false) {
-        //flag current account
-        
+        //flag current account      
         //set local account for save cart
         var localAccount = [];
-
         var account = {};
         account.user = user;
         account.cartArray = [];
@@ -28,11 +26,8 @@ function alertAnswerLogIn(user, token) {
         localStorage.setItem("currentAccount", user);
         localStorage.setItem("token", token);
         //redirect
-        alert("Accept account");
+        alert("Login Success");
         window.location.href = "/";
-    }
-    else {
-        alert("Account don't exist or wrong password");
     }
 }
 function alertDataUser() {

@@ -52,20 +52,22 @@ function loadProduct(){
         http.onerror = () => reject(http.response);
     });
     loadProducts.then((response) => {
-        debugger
         var listProduct = JSON.parse(response);
         var contentContainer = document.getElementById("product-content");
+        if (contentContainer.style.display == "none" || contentContainer.style.display == "") {
+            contentContainer.style.display = "block";
+        }
         listProduct.forEach(product => {
             var newProduct = createNewProduct(product, product._id);
             contentContainer.appendChild(newProduct);
         }); 
+        document.getElementById("user-content").style.display = "none";
     }).catch((error) => {
         alertError(error);
     });
 }
 
 function createNewProduct(product, currentID) {
-    debugger
     var newProduct = document.createElement('div');
     var productDetail = document.createElement('div');
     productDetail.innerHTML = 
@@ -93,7 +95,6 @@ function createNewProduct(product, currentID) {
     </div>`
     newProduct.appendChild(productDetail);
     newProduct.appendChild(productTable);
-    debugger
     return newProduct;
 }
 
@@ -118,10 +119,14 @@ function loadUser(){
     loadUsers.then((response) => {
         var listUser = JSON.parse(response);
         var contentContainer = document.getElementById("user-content");
+        if (contentContainer.style.display == "none" || contentContainer.style.display == "") {
+            contentContainer.style.display = "block";
+        }
         listUser.forEach(user => {
             var newUser = createNewUser(user, user._id);
             contentContainer.appendChild(newUser);
         }); 
+        document.getElementById("product-content").style.display = "none";
     }).catch((error) => {
         alertError(error);
     });

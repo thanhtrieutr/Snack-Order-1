@@ -54,7 +54,7 @@ function loadSnack() {
 //when click order
 function submitCart() {
     var http = new XMLHttpRequest();
-    http.open("POST", "http://127.0.0.1:3000/submitCart", true);
+    http.open("POST", "http://127.0.0.1:3000/submit-cart", true);
     var currentUser = getUserInLocalAccount(user);
     var obj = {};
     obj.cartArray = currentUser.cartArray;

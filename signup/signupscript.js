@@ -1,7 +1,7 @@
 function signupInSever(user, password, callback) {
     var account = createNewAccount(user, password);
     var http = new XMLHttpRequest();
-    http.open('POST', "http://127.0.0.1:3000/createUser", true);
+    http.open('POST', "http://127.0.0.1:3000/create-user", true);
     http.send(JSON.stringify(account));
     http.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {

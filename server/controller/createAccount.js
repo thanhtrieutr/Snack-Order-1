@@ -20,43 +20,42 @@ function validateAccount(account) {
     return false;
 }
 function createUser(request, response) {
-    try{
+    var readPost = new Promise((resolve, reject) => {
         utilities.collectDataFromPost(request, newAccount => {
-            try {
-                if (typeof(newAccount) != "object" || newAccount == null) {
-                    throw new Error ("Wrong Data Input");
-                }
-                crud.readDatabase("account", accounts => {
-                    if (validateAccount(newAccount) == false || Object.keys(newAccount).length > 3) {
-                        throw new Error ("Wrong Data Input");
-                    }
-                    var checkConflict = false;
-                    for (var i in accounts) {
-                        if (accounts[i].user == newAccount.user) {
-                            checkConflict = true;
-                            break;
-                        }
-                    }
-                    if (checkConflict) {
-                        throw new Error ("Account Existed");
-                    }
-                    else {
-                        crud.createDocument("account", newAccount, () => {
-                            response.end("create succeed");     
-                        });
-                    }
-                });
+            if (typeof(newAccount) != "object" || newAccount == null) {
+                reject(new Error ("Wrong Data Input"));
             }
-            catch (error) {
-                errorHandler(error,response);
-                return;
+            if (validateAccount(newAccount) == false || Object.keys(newAccount).length > 3) {
+                reject(new Error ("Wrong Data Input"));
             }
+            resolve(newAccount);
         });
-    }
-    catch (error) {
+    });
+    var readData = new Promise((resolve, reject) => {
+        crud.readDatabase("account", accounts => {
+            resolve(accounts);
+        });
+    });
+    Promise.all([readPost, readData]).then(result => {
+        debugger;
+        var newAccount = result[0], accounts = result[1];
+        var checkConflict = false;
+        for (var i in accounts) {
+            if (accounts[i].user == newAccount.user) {
+                checkConflict = true;
+                break;
+            }
+        }
+        if (checkConflict) {
+            throw new Error ("Account Existed");
+        }
+        else {
+            response.end("create succeed");     
+        }
+    }).catch(error => {
         errorHandler(error,response);
         return;
-    }
+    });
 }
 
 module.exports = {

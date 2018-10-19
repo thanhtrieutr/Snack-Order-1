@@ -30,7 +30,7 @@
                     <tbody>
                     <aside class="menu">
                         <ul class="menu-list">
-                            <li><a id="today-order" class="choice is-active">Today Order</a></li>
+                            <li><a id="today-order" class="choice is-active" onclick="loadTodayOrders()">Today Order</a></li>
                             <li>
                                 <a id="order-history" class="choice">Order history</a>
                                 <ul>
@@ -76,40 +76,7 @@
                             </nav>
                         </thead>
                         <tbody>
-                            <table id="today-content" class="tab table is-striped is-fullwidth">
-                                <tr class="has-background-grey-lighter">
-                                    <th>Product name</th>
-                                    <th>Quantity</th>
-                                    <th>Unit price</th>
-                                    <th>Total</th>
-                                    <th>Buyer</th>
-                                    <th>Actions</th>
-                                </tr> 
-                                <tr>
-                                    <td>Snack something</td>
-                                    <td>2</td>
-                                    <td>19.000đ</td>
-                                    <td>38.000đ</td>
-                                    <td>test@gmail.com</td>
-                                    <td>In progress</td>
-                                </tr>
-                                <tr>
-                                    <td>Snack something</td>
-                                    <td>2</td>
-                                    <td>19.000đ</td>
-                                    <td>38.000đ</td>
-                                    <td>test@gmail.com</td>
-                                    <td>In progress</td>
-                                </tr>
-                                <tr>
-                                    <td>Snack something</td>
-                                    <td>2</td>
-                                    <td>19.000đ</td>
-                                    <td>38.000đ</td>
-                                    <td>test@gmail.com</td>
-                                    <td>In progress</td>
-                                </tr>
-                            </table>
+                            <div id="today-content-container" class="tab"></div>
                             <div id="order-content" class="tab" onclick="showDetail('order-detail')">
                                 <div>
                                     <div id="user-container">

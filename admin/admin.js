@@ -1,5 +1,6 @@
+loadTodayOrders();
+
 function showDetail(id, labelID){
-    debugger
     var current = document.getElementById(id);
     if (current.style.display == "none" || current.style.display == "") {
         var temporaryArray = document.getElementsByClassName("detail");
@@ -162,3 +163,65 @@ function createNewUser(user, currentID) {
     return newUser;
 }
 
+//today-order
+function loadTodayOrders(){
+    var choiceList = document.getElementsByClassName("choice");
+    for (var i = 0; i < choiceList.length; i++) {
+        choiceList[i].className = choiceList[i].className.replace(" is-active", "");
+    }
+    var currentChoice = document.getElementById("today-order");
+    currentChoice.className = currentChoice.className + " is-active";
+    removeAll();
+    var loadTodayOrder = new Promise((resolve, reject) => {
+        var http = new XMLHttpRequest();
+        http.open("POST", "http://127.0.0.1:3000/admin/get-today-order", true);
+        var obj = {};
+        obj.token = "token";
+        http.send(JSON.stringify(obj));
+        http.onload = () => resolve(http.response);
+        http.onerror = () => reject(http.response);
+    });
+    
+    loadTodayOrder.then((response) => {
+        var listProduct = JSON.parse(response);
+        var productContainer = document.getElementById("today-content-container");
+        var tableHeader = createTable();
+        productContainer.appendChild(tableHeader);
+        var productTable = document.getElementById("today-content");
+        listProduct.forEach(product => {
+            var newProduct = createTodayOrderProduct(product);
+            productTable.appendChild(newProduct);
+        }); 
+    }).catch((error) => {
+        alertError(error);
+    });
+    
+}
+
+function createTable(){
+    var newTable = document.createElement("table");
+    newTable.setAttribute("id", "today-content");
+    newTable.setAttribute("class", "tab table is-striped is-fullwidth" );
+    newTable.innerHTML = 
+        `<tr class="has-background-grey-lighter">
+            <th>Product name</th>
+            <th>Quantity</th>
+            <th>Unit price</th>
+            <th>Total</th>
+            <th>Buyer</th>
+            <th>Actions</th>
+        </tr> `
+    return newTable;                   
+}
+
+function createTodayOrderProduct(product) {
+    var newProduct = document.createElement("TR");
+    newProduct.innerHTML =
+    `<td>${product.name}</td>
+    <td>${product.amount}</td>
+    <td>${product.price}</td>
+    <td>${product.totalPrice}</td>
+    <td>${product.user}</td>
+    <td>${product.state}</td>`;
+    return newProduct;
+}

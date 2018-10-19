@@ -1,7 +1,7 @@
 #body{
     height: 100%;
 }
-#user-container{
+#display-container{
     border: solid;
     border-width: 1px;
     text-align: center;
@@ -9,34 +9,16 @@
     padding: 20px;
     background: white;
 }
-#user-item{
-    padding: 0 10%;
+.display-item{
+    text-align: center; 
 }
-#today-content{
-    /* display: none; */
-}
-#order-content{
-    display: none;
-}
-#user-content{
-    display: none;
-}
-#product-content{
-    display: none;
-}
-#order-detail{
-    display: none;
-}
-#user-detail{
-    display: none;
-}
-#product-detail{
-    display: none;
-}
+
 .menu-label{
     display: none;
 }
+
 .detail {
+    display: none;
     width: 100%;
 }
 .navbar {

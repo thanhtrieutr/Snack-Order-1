@@ -7,7 +7,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
         <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
         <link rel="stylesheet" href="../css/mystyles.css">
-        <link rel="stylesheet" href="admin.css">
+        <link rel="stylesheet" href="../admin/admin.css">
     </head>
     <body>
         <div class="container is-fullhd">
@@ -30,21 +30,21 @@
                     <tbody>
                     <aside class="menu">
                         <ul class="menu-list">
-                            <li><a id="today-order" class="choice is-active" onclick="showContent(event,'today-content','table')">Today Order</a></li>
+                            <li><a id="today-order" class="choice is-active">Today Order</a></li>
                             <li>
-                                <a id="order-history" class="choice" onclick="showContent(event, 'order-content','block')">Order history</a>
+                                <a id="order-history" class="choice">Order history</a>
                                 <ul>
                                     <li> <p id="order-detail-label" class="menu-label">Order history detail</p></li>
                                 </ul>
                             </li>
                             <li>
-                                <a id="users" class="choice" onclick="showContent(event, 'user-content','block')">Users</a>
+                                <a id="users" class="choice" onclick="loadUser()">Users</a>
                                 <ul>
                                     <li><p  id="user-detail-label" class="menu-label">User detail</p></li>
                                 </ul>
-                            </li>
+                            </li>   
                             <li>
-                                <a id="product" class="choice" onclick="showContent(event,'product-content','block')">Product list</a>
+                                <a id="product" class="choice" onclick="loadProduct()">Product list</a>
                                 <ul>
                                     <li> <p  id="product-detail-label" class="menu-label">Product detail</p></li>
                                 </ul>
@@ -161,96 +161,13 @@
                                     </table>
                                 </div>
                             </div>
-                            <div id="user-content" class="tab" onclick="showDetail('user-detail')">
-                                <div>
-                                    <div id="user-container">
-                                        <span id="user-item">
-                                            ID: 123789
-                                        </span>
-                                        <span id="user-item">
-                                            test@gmail.com
-                                        </span>
-                                    </div>
-                                </div>  
-                                <div id="user-detail" class="detail">
-                                    <table class="table is-striped is-fullwidth">
-                                        <tr class="has-background-grey-lighter">
-                                            <th>Username</th>
-                                            <th>Full name</th>
-                                            <th>Phone</th>
-                                            <th>Address</th>
-                                            <th>Birthday</th>
-                                        </tr> 
-                                        <tr>
-                                            <td>test@gmail.com</td>
-                                            <td>TEST</td>
-                                            <td>1234654</td>
-                                            <td>3525131aksdhaksjdhasd</td>
-                                            <td>01/01/1000</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                            <div id="product-content" class="tab product" onclick="showDetail('product-detail')">
-                                <div>
-                                    <div id="user-container">
-                                        <span id="user-item">
-                                            ID:56789
-                                        </span>
-                                        <span id="user-item">
-                                            Snack Rong biển Nongshim
-                                        </span>
-                                    </div>
-                                </div>  
-                                <div id="product-detail" class="detail">
-                                    <table class="table is-striped is-fullwidth">
-                                        <tr class="has-background-grey-lighter">
-                                            <th>Product name</th>
-                                            <th>Unit price</th>
-                                            <th>In stock</th>
-                                            <th>Image</th>
-                                        </tr> 
-                                        <tr>
-                                            <td>Snack something</td>
-                                            <td>19.000đ</td>
-                                            <td>100</td>
-                                            <td>snack.jpg</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
-                            <div id="product-content" class="tab product" onclick="showDetail('product-detail')">
-                                <div>
-                                    <div id="user-container">
-                                        <span id="user-item">
-                                            ID:56789
-                                        </span>
-                                        <span id="user-item">
-                                            Snack Rong biển Nongshim
-                                        </span>
-                                    </div>
-                                </div>  
-                                <div id="product-detail" class="detail">
-                                    <table class="table is-striped is-fullwidth">
-                                        <tr class="has-background-grey-lighter">
-                                            <th>Product name</th>
-                                            <th>Unit price</th>
-                                            <th>In stock</th>
-                                            <th>Image</th>
-                                        </tr> 
-                                        <tr>
-                                            <td>Snack something</td>
-                                            <td>19.000đ</td>
-                                            <td>100</td>
-                                            <td>snack.jpg</td>
-                                        </tr>
-                                    </table>
-                                </div>
-                            </div>
+                            <div id="user-content" class="content tab"></div>
+                            <div id="product-content" class="content tab" ></div>
                         </tbody> 
                     </div>
                 </div>
             </div>
     </body>
-    <script src="admin.js"></script>
+    <script src="../others/utilityFunction.js"></script>
+    <script src="../admin/admin.js"></script>
 </html>

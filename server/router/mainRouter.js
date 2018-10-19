@@ -8,6 +8,8 @@ var getFile = require("../controller/getFile");
 var getUserInfo = require("../controller/getUserInfo");
 var updateUserInfo = require("../controller/updateUserInfo");
 var deleteToken = require("../controller/deleteToken");
+var getAdminProduct = require("../adminController/getAdminProduct")
+var getAdminUser = require("../adminController/getAdminUser")
 var errorHandler = require("../errorHandler/controllerError");
 
 
@@ -62,6 +64,14 @@ module.exports = function mainRouter(url, method, request, response, check404) {
         routeUrl: "/remove-token",
         routeMethod: "POST",
         routeHandler: deleteToken.deleteToken
+    },{
+        routeUrl: "/admin/products",
+        routeMethod: "POST",
+        routeHandler: getAdminProduct.getAdminProduct
+    },{
+        routeUrl: "/admin/users",
+        routeMethod: "POST",
+        routeHandler: getAdminUser.getAdminUser
     }];
     try {
         var routeId = route.findIndex(item => item.routeUrl === url);

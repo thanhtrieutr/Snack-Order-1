@@ -28,8 +28,7 @@ function checkLogin(request, response, accountArray) {
         });
     });
 
-    Promise.all([promise])
-    .catch(error => {
+    promise.catch(error => {
         errorHandler(error, response);
         return;
     });
@@ -47,8 +46,7 @@ function checkLoginHandler(request, response) {
             }
         });
     });
-    Promise.all([promise])
-    .catch (error => {
+    promise.catch (error => {
         errorHandler(error, response);
         return;
     })
@@ -79,8 +77,7 @@ function checkToken(request, response, accountArray) {
             }   
         });
     });
-    Promise.all([promise])
-    .catch (error => {
+    promise.catch (error => {
         errorHandler(error,response);
         return;
     })
@@ -97,8 +94,7 @@ function checkTokenHandler(request, response) {
             }
         })
     })
-    Promise.all([promise])
-    .catch (error => {
+    promise.catch (error => {
         errorHandler(error,response);
         return;
     })

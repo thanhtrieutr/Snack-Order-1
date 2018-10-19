@@ -1,120 +1,170 @@
 ///get static file
 ////////////////////////////////////////
-//css router
 
 var fs = require('fs');
 var path = require('path');
 var errorHandler = require("../errorHandler/controllerError");
 
+__dirname = path.join(__dirname, '../../');
+console.log(__dirname);
 
-__dirname = path.join(__dirname, '../../')
-console.log(__dirname)
-
+//css router
 function serveCss(request, response) {
     if (request.url.match("\.css$")) {
         var cssPath = path.join(__dirname, request.url);
-        try {
-            var file = fs.readFileSync(cssPath, {'encoding' : 'utf8'});
+        var promise = new Promise(function(resolve, reject) {
+            fs.readFile(cssPath, {'encoding' : 'utf8'}, (error, data) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(data);
+                }
+            });
+        });
+        promise.then(data => {
             response.writeHead(200, {"Content-Type": "text/css"});
-            response.write(file);
+            response.write(data);
             response.end();
             //404 is false 
             return false;
-        }
-        catch (error) {
-            console.log(`file ${request.url} is not exist`);
+        });
+        promise.catch(error => {
+            //404 will be processed in errorHandler if no file is found
+            console.log(`File ${request.url} is not exist`);
             errorHandler(error,response);
+            //404 is false
             return false;
-        }
+        });
+    } else {
+        //404 is true
+        return true;
     }
-    //404 is still true
-    return true;
 }
 //js router
 function serveJs(request, response) {
     if (request.url.match("\.js$")) {
         var jsPath = path.join(__dirname, request.url);
-        try {
-            var file = fs.readFileSync(jsPath, {'encoding' : 'utf8'});
+        var promise = new Promise(function(resolve, reject) {
+            fs.readFile(jsPath, {'encoding' : 'utf8'}, (error, data) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(data);
+                }
+            });
+        });
+        promise.then(data => {
             response.writeHead(200, {"Content-Type": "text/javascript"});
-            response.write(file);
+            response.write(data);
             response.end();
-            //404 is false 
-            return false;
-        }
-        catch (error) {
-            console.log(`file ${request.url} is not exist`);
+            //404 is false
+            return false
+        });
+        promise.catch(error => {
+            console.log(`File ${request.url} is not exist`);
             errorHandler(error,response);
+            //404 is false
             return false;
-        }
-    } 
-    //404 is still true
-    return true;
+        }); 
+    } else {
+        //404 is true
+        return true;
+    }
 }
 //image router
 function serveImage(request, response) {
     if (request.url.match("\.png$")) {
         var imagePath = path.join(__dirname, request.url);
-        try {
-            var file = fs.readFileSync(imagePath);
+        var promise = new Promise(function(resolve, reject) {
+            fs.readFile(imagePath, (error, data) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(data);
+                }
+            });
+        });
+        promise.then(data => {
             response.writeHead(200, {"Content-Type": "image/png"});
-            response.write(file);
+            response.write(data);
             response.end();
+            //404 is false
+            return false
+        });
+        promise.catch(error => {
+            console.log(`File ${request.url} is not exist`);
+            errorHandler(error,response);
             //404 is false 
             return false;
-        }
-        catch (error) {
-            console.log(`file ${request.url} is not exist`);
-            errorHandler(error,response);
-            return false;
-        }
+        });   
+    } else {
+        //404 is true
+        return true;
     }
-    //404 is still true
-    return true;
 }
 
 //image router
 function serveImageJpg(request, response) {
     if (request.url.match("\.jpg$")) {
         var imagePath = path.join(__dirname, request.url);
-        try {
-            var file = fs.readFileSync(imagePath);
+        var promise = new Promise(function(resolve, reject) {
+            fs.readFile(imagePath, (error, data) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(data);
+                }
+            });
+        });
+        promise.then(data => {
             response.writeHead(200, {"Content-Type": "image/jpg"});
-            response.write(file);
+            response.write(data);
             response.end();
+            //404 is false
+            return false
+        });
+        promise.catch(error => {
+            console.log(`File ${request.url} is not exist`);
+            errorHandler(error,response);
             //404 is false 
             return false;
-        }
-        catch (error) {
-            console.log(`file ${request.url} is not exist`);
-            errorHandler(error,response);
-            return false;
-        }
+        });
+    } else {
+        //404 is true
+        return true;
     }
-    //404 is still true
-    return true;
 }
 
 //html router
 function serveHtml(request, response, fileName) {
     if (fileName.match("\.html$")) {
         var htmlPath = path.join(__dirname, fileName);
-        try {
-            var file = fs.readFileSync(htmlPath, {'encoding' : 'utf8'});
+        var promise = new Promise(function(resolve, reject) {
+            fs.readFile(htmlPath, {'encoding' : 'utf8'}, (error, data) => {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(data);
+                }
+            });
+        });
+        promise.then(data => {
             response.writeHead(200, {"Content-Type": "text/html"});
-            response.write(file);
+            response.write(data);
             response.end();
-            //404 is false 
+            //404 is false
             return false;
-        }
-        catch (error) {
-            console.log(`file ${request.url} is not exist`);
+        });
+        promise.catch(error => {
+            console.log(`File ${request.url} is not exist`);
             errorHandler(error,response);
+            //404 is false
             return false;
-        }
+        });
+    } else {
+        //404 is true
+        return true;
     }
-    //404 is still true
-    return true;
 }
 
 module.exports = {

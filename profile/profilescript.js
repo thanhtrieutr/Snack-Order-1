@@ -3,6 +3,7 @@ var currentAccount = localStorage.getItem("currentAccount");
 var token = localStorage.getItem("token");
 var currentUserInfo = {};
 
+checkLogIn();
 loadUserData();
 goToShowMode(false);
 

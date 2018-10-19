@@ -7,6 +7,8 @@ function passwordCheck(password) {
 var currentUsername = document.createTextNode(localStorage.getItem("currentAccount"));
 var token = localStorage.getItem("token");
 document.getElementById("user-field").appendChild(currentUsername);
+
+checkLogIn();
 loadUserData();
 
 //Load user avatar
@@ -41,7 +43,7 @@ function changeUserPassword(oldPassword, newPassword, token, callback) {
   //This function stringtify oldPassword, newPassword and token
   var changePassword = changePasswordUser(oldPassword, newPassword, token);
   var http = new XMLHttpRequest();
-  http.open('POST', "http://127.0.0.1:3000/updatePassword", true);
+  http.open('POST', "http://127.0.0.1:3000/update-password", true);
   http.send(JSON.stringify(changePassword));
   http.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {       

@@ -13,24 +13,17 @@ var getAdminUser = require("../adminController/getAdminUser")
 var getTodayOrder = require("../adminController/getTodayOrder");
 var errorHandler = require("../errorHandler/controllerError");
 
-
-// function defaultHandler(response) {
-//     response.statusCode = 404;
-//     response.setHeader('Content-Type', 'text/plain');
-//     response.end('No Page found\n');
-// }
-
 module.exports = function mainRouter(url, method, request, response, check404) {
     var route = [{
-        routeUrl: "/checkLogin",
+        routeUrl: "/check-login",
         routeMethod: "POST",
         routeHandler: checkLogin.checkLogin
     }, {
-        routeUrl: "/checkToken",
+        routeUrl: "/check-token",
         routeMethod: "POST",
         routeHandler: checkLogin.checkToken
     }, {
-        routeUrl: "/submitCart",
+        routeUrl: "/submit-cart",
         routeMethod: "POST",
         routeHandler: cartHandler
     }, {
@@ -42,11 +35,11 @@ module.exports = function mainRouter(url, method, request, response, check404) {
         routeMethod:"POST",
         routeHandler:updatePassword
     }, {
-        routeUrl: "/createUser",
+        routeUrl: "/create-user",
         routeMethod: "POST",
         routeHandler: createAccount.createUser
     }, {
-        routeUrl: "/deleteUser",
+        routeUrl: "/delete-user",
         routeMethod: "POST",
         routeHandler: deleteOneUser.deleteOneUser
     }, {

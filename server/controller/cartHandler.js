@@ -39,13 +39,13 @@ function submitCart(request, response, product, accountArray) {
     var readPost = new Promise((resolve, reject) => {
         utilities.collectDataFromPost(request, result => {
             var checkUser = 0;
-            var currentUser = {};
+            var currentUser;
             for (var i in accountArray) {
                 let token = accountArray[i].token;                    
                 if (result.token == token) {
                     checkUser = 1;
-                    currentUser.userName = accountArray[i].user;
-                    currentUser.id=accountArray[i]._id;
+                    currentUser=accountArray[i]._id;
+                    break;
                 } 
             }
             if (checkUser == 0) {
@@ -88,7 +88,7 @@ function submitCart(request, response, product, accountArray) {
                         throw new Error ("Wrong Data Input");
                     }
                     product[j].amount=currentAmount;
-                    bill.products.push(product[j]);
+                    bill.products.push({_id:product[j]._id,quantity:currentAmount});
                     bill.totalPrice += currentAmount * currentPrice;
                 }
             }

@@ -1,7 +1,8 @@
-#body{
+#body {
     height: 100%;
 }
-#display-container{
+
+#display-container {
     border: solid;
     border-width: 1px;
     text-align: center;
@@ -9,11 +10,12 @@
     padding: 20px;
     background: white;
 }
-.display-item{
-    text-align: center; 
+
+.display-item {
+    text-align: center;
 }
 
-.menu-label{
+.menu-label {
     padding-top: 8px;
     padding-bottom: 8px;
     padding-right: 0;
@@ -25,9 +27,11 @@
     display: none;
     width: 100%;
 }
+
 .navbar {
     background: transparent !important;
 }
+
 .logo-container {
     height: auto;
     width: auto;
@@ -36,20 +40,60 @@
     align-items: center;
     background: transparent;
 }
+
 .logo {
     position: relative;
     padding: 5px;
     width: auto;
     height: 60px;
 }
+
 .title {
     padding: 11px 10px;
 }
+
 img {
     padding: 5px;
 }
-#product-content, #user-content {
+
+#product-content,
+#user-content {
     /* max-height: 50%; */
     height: 650px;
     overflow-y: auto;
+}
+
+.navbar-burger {
+    margin-left: 0;
+    margin-right: auto !important;
+    /* display: inline-block; */
+}
+
+.title {
+    max-width: 200px;
+    margin-left: auto;
+    text-align: right;
+}
+
+#nav-menu {
+    background: #EFF0EB;
+}
+
+@media (max-width: 1087.98px) {
+    #nav-menu {
+        display: none;
+        background: hsl(0, 0%, 96%);
+    }
+
+    #body {
+        width: 100%;
+    }
+}
+
+@media (min-width: 1088px) {
+    #nav-menu {
+        display: block;
+        flex: none;
+        width: 16.66667%;
+    }
 }

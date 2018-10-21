@@ -22,10 +22,6 @@ var accountArray = [
         password: "test1234"
     },
     {
-        user: "admin@gmail.com",
-        password: "admin1234"
-    },
-    {
         user: "guest@gmail.com",
         password: "guest1234"
     },
@@ -38,6 +34,11 @@ var accountArray = [
         password: "cilent1234"
     }
 ];
+var adminList = [{
+    user: "admin@gmail.com",
+    password: "admin1234",
+    token: "duck"
+}]
 var listInfo = ["fullName", "phoneNumber", "birthday", "address", "avatarAddress"];
 
 //function add product (want to follow order)
@@ -57,6 +58,7 @@ function createFull(position, callback) {
     for (var i in listInfo) {
         oneAccount[listInfo[i]] = "";
     }
+    oneAccount.avatarAddress = "https://i.imgur.com/S2IRHcz.png";
     crypto.randomBytes(48, function(err, buffer) {
         oneAccount.token = buffer.toString('hex');
         createFull(position+1, callback);
@@ -67,6 +69,11 @@ function addAccount(position, callback) {
         crud.createDocument("account", accountArray[position], addAccount(position+1, callback));
     }
     else return callback();
+}
+function addAdmin() {
+    for (var i in adminList) {
+        crud.createDocument("adminAccount", adminList[i]);
+    }
 }
 function resetData() {
     var checkDone = false;
@@ -81,6 +88,9 @@ function resetData() {
             if (checkDone) console.log("done");
             else    checkDone = true;
         })
+    });
+    crud.deleteOneCollection("adminAccount", () => {
+        addAdmin();
     });
 }
 crud.connectDatabase(() => {

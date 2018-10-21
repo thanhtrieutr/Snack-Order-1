@@ -159,7 +159,9 @@ button {
 input {
     padding: 6px 12px;
 }
-
+input:disabled {
+    cursor: not-allowed;
+}
 @media (max-width: 575px) {
     .property {
         text-align: left;

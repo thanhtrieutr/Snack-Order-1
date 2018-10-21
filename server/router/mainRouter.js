@@ -80,7 +80,7 @@ module.exports = function mainRouter(url, method, request, response, check404) {
         routeMethod: "POST",
         routeHandler: loginAdmin.checkToken
     }, {
-        routeUrl: "/remove-token",
+        routeUrl: "/admin/remove-token",
         routeMethod: "POST",
         routeHandler: loginAdmin.deleteToken
     }];

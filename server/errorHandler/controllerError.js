@@ -7,6 +7,7 @@ module.exports = function(error,response) {
         {statusCode: 409, message: "Account Existed"},
         {statusCode: 400, message: "Account Doesn't Exist"},
         {statusCode: 500, message: "Problem with saving photo"},
+        {statusCode: 500, message: "Problem with database"},
     ];
     for (var i in errorList) {
         if (error.message == errorList[i].message) {

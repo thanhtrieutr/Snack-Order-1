@@ -44,7 +44,8 @@ function submitCart(request, response, product, accountArray) {
                 let token = accountArray[i].token;                    
                 if (result.token == token) {
                     checkUser = 1;
-                    currentUser = accountArray[i].user;
+                    currentUser=accountArray[i]._id;
+                    break;
                 } 
             }
             if (checkUser == 0) {
@@ -65,6 +66,7 @@ function submitCart(request, response, product, accountArray) {
         var currentUser = result[0];
         result = result[1];
         var bill = {};
+        bill.time=new Date();
         bill.user = currentUser;
         bill.products = [];
         bill.totalPrice = 0;  
@@ -78,7 +80,6 @@ function submitCart(request, response, product, accountArray) {
                 // find match 
                 if (result.cartArray[i].productID == product[j].id) {
                     checkProduct = 1;
-                    bill.products.push(product[j]);
                     // calculate total price
                     var currentPrice = product[j].priceInt;
                     var currentAmount  = result.cartArray[i].amount;
@@ -86,14 +87,22 @@ function submitCart(request, response, product, accountArray) {
                     {
                         throw new Error ("Wrong Data Input");
                     }
+                    product[j].amount=currentAmount;
+                    bill.products.push({_id:product[j]._id,quantity:currentAmount});
                     bill.totalPrice += currentAmount * currentPrice;
                 }
             }
             if (checkProduct == 0) {
                 throw new Error ("Wrong Data Input");
             }
+            bill.status="Pending";
         }
+        crud.createDocument("order",bill,error => {
+            if (error) throw new Error ("Problem with database");
+        });
+        
         utilities.setResponseHeader(response);
+        console.log(bill);
         response.end(JSON.stringify(bill));
         return;
     }).catch(error => {

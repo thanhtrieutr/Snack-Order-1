@@ -11,6 +11,7 @@ var deleteToken = require("../controller/deleteToken");
 var getAdminProduct = require("../adminController/getAdminProduct")
 var getAdminUser = require("../adminController/getAdminUser")
 var getTodayOrder = require("../adminController/getTodayOrder");
+var checkProduct = require("../adminController/checkProduct");
 var errorHandler = require("../errorHandler/controllerError");
 var loginAdmin = require("../adminController/loginAdmin");
 
@@ -83,6 +84,18 @@ module.exports = function mainRouter(url, method, request, response, check404) {
         routeUrl: "/admin/remove-token",
         routeMethod: "POST",
         routeHandler: loginAdmin.deleteToken
+    }, {
+        routeUrl: "/admin/check-product-name",
+        routeMethod: "POST",
+        routeHandler: checkProduct.checkProductName
+    }, {
+        routeUrl: "/admin/create-new-product",
+        routeMethod: "POST",
+        routeHandler: checkProduct.checkProduct
+    }, {
+        routeUrl: "/admin/update-product",
+        routeMethod: "POST",
+        routeHandler: checkProduct.updateProduct
     }];
     try {
         var routeId = route.findIndex(item => item.routeUrl === url);

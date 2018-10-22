@@ -59,10 +59,12 @@ function submitCart() {
     var obj = {};
     obj.cartArray = currentUser.cartArray;
     obj.token = localStorage.getItem("token");
+    debugger;
     http.send(JSON.stringify(obj));
     http.onreadystatechange = function () {
         if (this.readyState == 4){
             var result = JSON.parse(this.response);
+            debugger;
             if (this.status != 200) {
                 alertError(this.response);
             }
@@ -71,8 +73,8 @@ function submitCart() {
                 for (var i in result.products) {
                     answer += result.products[i].name + ":" + currentUser.cartArray[i].amount + "\n";
                 }
-                answer += "Total price: " + result.totalPrice + "đ" ;
-                alert("Success");
+                answer += "Total price: " +  result.estimateTotalPrice + "đ" ;
+                alert(answer);
             }
         }
     }

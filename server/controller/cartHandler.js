@@ -44,7 +44,7 @@ function submitCart(request, response, product, accountArray) {
                 let token = accountArray[i].token;                    
                 if (result.token == token) {
                     checkUser = 1;
-                    currentUser=accountArray[i]._id;
+                    currentUser=accountArray[i];
                     break;
                 } 
             }
@@ -65,11 +65,16 @@ function submitCart(request, response, product, accountArray) {
     readPost.then((result) => {
         var currentUser = result[0];
         result = result[1];
+        var returnBill = {};
         var bill = {};
         bill.time=new Date();
-        bill.user = currentUser;
+        returnBill.time=new Date();
+        bill.user = currentUser._id;
         bill.products = [];
-        bill.estimateTotalPrice = 0;  
+        bill.estimateTotalPrice = 0;
+        returnBill.user = currentUser._id;
+        returnBill.products = [];
+        returnBill.estimateTotalPrice = 0;
         bill.actualTotalPrice = 0;
         var checkProduct = 0;
         for (var i in result.cartArray) {
@@ -90,7 +95,9 @@ function submitCart(request, response, product, accountArray) {
                     }
                     product[j].amount=currentAmount;
                     bill.products.push({_id:product[j]._id,quantity:currentAmount,status:"pending"});
+                    returnBill.products.push(product[j]);
                     bill.estimateTotalPrice += currentAmount * currentPrice;
+                    returnBill.estimateTotalPrice = bill.estimateTotalPrice;
                 }
             }
             if (checkProduct == 0) {
@@ -102,8 +109,8 @@ function submitCart(request, response, product, accountArray) {
         });
         
         utilities.setResponseHeader(response);
-        console.log(bill);
-        response.end(JSON.stringify(bill));
+        console.log(returnBill);
+        response.end(JSON.stringify(returnBill));
         return;
     }).catch(error => {
         errorHandler(error,response);

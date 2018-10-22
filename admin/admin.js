@@ -26,7 +26,6 @@ function removeOneContainer(id) {
 
 function removeAll() {
     var temporaryArray = document.getElementsByClassName("tab");
-    debugger
     for (var i = 0; i<temporaryArray.length; i++) { 
         removeOneContainer(temporaryArray[i].id);
     }
@@ -252,7 +251,6 @@ function loadAddForm(){
 }
 
 function checkValidProductName() {
-    debugger
     var check;
     var productName = document.getElementById("product-name").value;
     if (productName == "" || productName == null || productName.length > 40) {
@@ -322,7 +320,7 @@ function productInfoField() {
             </div>
         </div>
     </div>
-    <div class="file has-name is-right">
+    <div class="file has-name">
         <div class="field-label is-medium">
             <label class="label">Product image</label>
         </div>
@@ -355,7 +353,6 @@ function createProduct() {
         obj.productPrice = document.getElementById("product-price").value;
         obj.productImage = object;
         var sendProduct = new Promise((resolve, reject) => {
-            debugger
             var http = new XMLHttpRequest();
             http.open("POST", "http://127.0.0.1:3000/admin/create-new-product", true);
             http.send(JSON.stringify(obj));

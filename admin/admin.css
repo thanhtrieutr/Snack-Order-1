@@ -48,11 +48,22 @@
 img {
     padding: 5px;
 }
-/* #product-content, #user-content {
-    height: 650px;
-    overflow-y: auto;
-} */
 
 .product-img{
     height: 100px;
+}
+
+input[type="file"] {
+    padding: 5px;
+}
+
+.field-label {
+    max-width: 150px;
+    padding-top: 0 !important;
+}
+
+.button {
+    max-width: 100px;
+    display: block !important;
+    margin: auto;
 }

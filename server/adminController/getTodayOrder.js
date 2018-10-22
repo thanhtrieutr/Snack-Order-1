@@ -8,8 +8,17 @@ var errorHandler = require("../errorHandler/controllerError");
 //     {name: "Snack something", amount: 2, price: "19.000đ", totalPrice: "38.000đ", user: "HuuDuc", state: "In progress"},
 //     {name: "Snack something", amount: 2, price: "19.000đ", totalPrice: "38.000đ", user: "HuuDuc", state: "In progress"}
 // ];
+function clone(obj) {
+    if (null == obj || "object" != typeof obj) return obj;
+    var copy = obj.constructor();
+    for (var attr in obj) {
+        if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+    }
+    return copy;
+}
+
 function commonProduct(a, b) {
-    if (a.productId == b.productId && a.user == b.user && a.status == b.status)
+    if (a.productId.equals(b.productId) && a.user == b.user && a.status == b.status)
         return true;
     return false;
 }
@@ -86,21 +95,21 @@ function getTodayOrder(request, response) {
         if (token != "token")
             throw new Error("Authentication Error");
         for (var i in order) {
-            let obj = {}, oneOrder = order[i];
+            var obj = {}, oneOrder = order[i];
             obj.time = `${oneOrder.time.getHours()}:${oneOrder.time.getMinutes()}`;
-            let position = utilities.findObjectById(account, oneOrder.user);
+            var position = utilities.findObjectById(account, oneOrder.user);
             obj.user = account[position].user;
             obj.orderId = [oneOrder._id];
             for (var j in oneOrder.products) {
-                let position = utilities.findObjectById(product, oneOrder.products[j]._id);
-                let oneProduct = product[position];
+                var position = utilities.findObjectById(product, oneOrder.products[j]._id);
+                var oneProduct = product[position];
                 obj.name = oneProduct.name;
                 obj.quantity = oneOrder.products[j].quantity;
                 obj.price = oneProduct.price;
                 obj.status = oneOrder.products[j].status;
                 obj.productId = oneOrder.products[j]._id;
                 obj.totalPrice = oneProduct.priceInt * obj.quantity;
-                //join
+                //join 
                 position = -1;
                 for (var k in orderList) {
                     if (commonProduct(orderList[k], obj)) {
@@ -108,7 +117,8 @@ function getTodayOrder(request, response) {
                     }
                 }
                 if (position == -1) {
-                    orderList.push(obj);
+                    var newObj = clone(obj);
+                    orderList.push(newObj);
                 }
                 else {
                     orderList[k].quantity += obj.quantity;

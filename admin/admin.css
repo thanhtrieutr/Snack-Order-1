@@ -48,11 +48,10 @@
 img {
     padding: 5px;
 }
-#product-content, #user-content {
-    /* max-height: 50%; */
+/* #product-content, #user-content {
     height: 650px;
     overflow-y: auto;
-}
+} */
 
 .product-img{
     height: 100px;

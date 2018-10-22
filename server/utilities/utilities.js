@@ -38,7 +38,6 @@ function savePhoto(filename, data, token, callback) {
         callback("not valid data");
         return;
     }
-    var checkWriteFile = false;
     var filePath = '../../images/' + filename;
     var data = data.replace(/^data:image\/\w+;base64,/, "");
     var buf = new Buffer(data, 'base64');
@@ -79,7 +78,6 @@ function savePath(token, filePath, err) {
             return;
         });
     });
-    
 }
 
 function setResponseHeader(response) {

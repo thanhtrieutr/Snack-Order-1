@@ -38,7 +38,6 @@ function savePhoto(filename, data, token, callback) {
         callback("not valid data");
         return;
     }
-    var checkWriteFile = false;
     var filePath = '../../images/' + filename;
     var data = data.replace(/^data:image\/\w+;base64,/, "");
     var buf = new Buffer(data, 'base64');
@@ -79,7 +78,6 @@ function savePath(token, filePath, err) {
             return;
         });
     });
-    
 }
 
 function setResponseHeader(response) {
@@ -133,6 +131,18 @@ function findAccountByToken(accountArray, newToken) {
     }
     return position;
 }
+
+function findObjectById(objList, id) {
+    var position = -1;
+    for (var i in objList) {
+        let currentId = objList[i]._id;
+        if (currentId.equals(id)) {
+            position = i;
+            return position;
+        }
+    }
+    return position;
+}
 module.exports = {
     findAccountByToken: findAccountByToken,
     createToken: createToken,
@@ -140,5 +150,6 @@ module.exports = {
     collectDataFromPost: collectDataFromPost,
     setResponseHeader: setResponseHeader,
     savePhoto: savePhoto,
-    modifyFileName: modifyFileName
+    modifyFileName: modifyFileName,
+    findObjectById: findObjectById
 }

@@ -14,6 +14,8 @@ function getFile(request, response) {
             if (fileName == false) {
                 reject (new Error ("Wrong Data Input"));
             }
+            console.log(fileName);
+            debugger;
             for (var i = 0; i < 4; i++) {
                 var randomNumber = Math.floor((Math.random() * 10000) + 1);
                 randomNumber = randomNumber.toString();

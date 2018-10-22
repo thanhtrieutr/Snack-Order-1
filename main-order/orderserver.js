@@ -72,7 +72,7 @@ function submitCart() {
                     answer += result.products[i].name + ":" + currentUser.cartArray[i].amount + "\n";
                 }
                 answer += "Total price: " + result.totalPrice + "đ" ;
-                alert(answer);
+                alert("Success");
             }
         }
     }

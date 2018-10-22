@@ -54,6 +54,12 @@ function readOneDocument(collection, object, callback) {
     });
 }
 
+function readSomeDocument(collection, object, callback) {
+    db.collection(collection).find(object).toArray(function(err, result) {
+        callback(result,err);
+    });
+}
+
 module.exports = {
     connectDatabase: connectDatabase,
     readDatabase: readDatabase,
@@ -61,5 +67,6 @@ module.exports = {
     deleteOneDocument: deleteOneDocument,
     updateOneDocument: updateOneDocument,
     readOneDocument: readOneDocument,
-    deleteOneCollection: deleteOneCollection
+    deleteOneCollection: deleteOneCollection,
+    readSomeDocument: readSomeDocument
 }

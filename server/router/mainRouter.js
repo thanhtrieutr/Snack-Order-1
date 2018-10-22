@@ -12,6 +12,7 @@ var getAdminProduct = require("../adminController/getAdminProduct")
 var getAdminUser = require("../adminController/getAdminUser")
 var getTodayOrder = require("../adminController/getTodayOrder");
 var errorHandler = require("../errorHandler/controllerError");
+var loginAdmin = require("../adminController/loginAdmin");
 
 module.exports = function mainRouter(url, method, request, response, check404) {
     var route = [{
@@ -70,6 +71,18 @@ module.exports = function mainRouter(url, method, request, response, check404) {
         routeUrl: "/admin/get-today-order",
         routeMethod: "POST",
         routeHandler: getTodayOrder.getTodayOrder
+    }, {
+        routeUrl: "/admin/check-login",
+        routeMethod: "POST",
+        routeHandler: loginAdmin.checkLogin
+    }, {
+        routeUrl: "/admin/check-token",
+        routeMethod: "POST",
+        routeHandler: loginAdmin.checkToken
+    }, {
+        routeUrl: "/admin/remove-token",
+        routeMethod: "POST",
+        routeHandler: loginAdmin.deleteToken
     }];
     try {
         var routeId = route.findIndex(item => item.routeUrl === url);

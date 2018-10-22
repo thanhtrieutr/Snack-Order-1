@@ -180,13 +180,19 @@ function loadTodayOrders() {
         var http = new XMLHttpRequest();
         http.open("POST", "http://127.0.0.1:3000/admin/get-today-order", true);
         var obj = {};
-        obj.token = "token";
+        obj.token = localStorage.getItem("token");
         http.send(JSON.stringify(obj));
-        http.onload = () => resolve(http.response);
+        http.onload = () => resolve(http);
         http.onerror = () => reject(http.response);
     });
-
-    loadTodayOrder.then((response) => {
+    
+    loadTodayOrder.then((http) => {
+        if (http.status == 200) {
+            var response = http.response;
+        }
+        else {
+            return;
+        }
         var listProduct = JSON.parse(response);
         var productContainer = document.getElementById("today-content-container");
         var tableHeader = createTable();
@@ -213,6 +219,7 @@ function createTable() {
             <th>Unit price</th>
             <th>Total</th>
             <th>Buyer</th>
+            <th>Time</th>
             <th>Actions</th>
         </tr> `
     return newTable;
@@ -221,12 +228,13 @@ function createTable() {
 function createTodayOrderProduct(product) {
     var newProduct = document.createElement("TR");
     newProduct.innerHTML =
-        `<td>${product.name}</td>
-    <td>${product.amount}</td>
+    `<td>${product.name}</td>
+    <td>${product.quantity}</td>
     <td>${product.price}</td>
-    <td>${product.totalPrice}</td>
+    <td>${product.totalPrice}đ</td>
     <td>${product.user}</td>
-    <td>${product.state}</td>`;
+    <td>${product.time}</td>
+    <td>${product.status}</td>`;
     return newProduct;
 }
 

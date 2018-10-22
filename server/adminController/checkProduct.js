@@ -25,6 +25,7 @@ function checkFile(productImage) {
         return true;
     }
     var fileName = utilities.modifyFileName(productImage.fileName);
+    debugger;
     if (fileName == false) {
         return true;
     }
@@ -108,7 +109,7 @@ function checkProduct(request, response) {
                 throw new Error("Wrong Data Input");
             }
         }
-        var fileName = productImage.fileName;
+        var fileName = utilities.modifyFileName(productImage.fileName);
         for (var i = 0; i < 4; i++) {
             var randomNumber = Math.floor((Math.random() * 10000) + 1);
             randomNumber = randomNumber.toString();
@@ -121,7 +122,10 @@ function checkProduct(request, response) {
         obj.price = displayPrice(productPrice);
         crud.createDocument("product", obj, err => {
             if (err) throw err;
-            
+            adminUtilities.savePhoto(obj, fileName, productImage.file, err => {
+                if (err) throw err;
+                response.end("OK");
+            });
         });
     }).catch(error => {
         errorHandler(error,response);

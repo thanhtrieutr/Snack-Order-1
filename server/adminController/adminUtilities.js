@@ -10,7 +10,7 @@ function savePhoto(object, filename, data, callback) {
         callback("not valid data");
         return;
     }
-    var filePath = '../../images/' + filename;
+    var filePath = '../images/' + filename;
     var data = data.replace(/^data:image\/\w+;base64,/, "");
     var buf = new Buffer(data, 'base64');
     fs.writeFile(path.join(__dirname,'../../images/' + filename), buf, function(err) {
@@ -19,12 +19,15 @@ function savePhoto(object, filename, data, callback) {
         }
         checkWriteFile = true;
         var avatarValue = {
-            avatarAddress: filePath
+            img: filePath
         };
-        crud.updateOneDocument("account", accountArray[position], avatarValue, function() {
-            err = true;
-            return;
+        crud.updateOneDocument("product", object, avatarValue, function(err) {
+            if (err) callback(err);
         });
         return callback(err);
     });
+}
+
+module.exports = {
+    savePhoto: savePhoto
 }

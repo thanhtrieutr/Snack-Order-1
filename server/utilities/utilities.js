@@ -131,6 +131,18 @@ function findAccountByToken(accountArray, newToken) {
     }
     return position;
 }
+
+function findObjectById(objList, id) {
+    var position = -1;
+    for (var i in objList) {
+        let currentId = objList[i]._id;
+        if (currentId.equals(id)) {
+            position = i;
+            return position;
+        }
+    }
+    return position;
+}
 module.exports = {
     findAccountByToken: findAccountByToken,
     createToken: createToken,
@@ -138,5 +150,6 @@ module.exports = {
     collectDataFromPost: collectDataFromPost,
     setResponseHeader: setResponseHeader,
     savePhoto: savePhoto,
-    modifyFileName: modifyFileName
+    modifyFileName: modifyFileName,
+    findObjectById: findObjectById
 }

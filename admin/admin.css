@@ -61,6 +61,9 @@ img {
     /* max-height: 50%; */
     height: 650px;
     overflow-y: auto;
+
+.product-img{
+    height: 100px;
 }
 
 .navbar-burger {
@@ -96,4 +99,19 @@ img {
         flex: none;
         width: 16.66667%;
     }
+}
+
+input[type="file"] {
+    padding: 5px;
+}
+
+.field-label {
+    max-width: 150px;
+    padding-top: 0 !important;
+}
+
+.button {
+    max-width: 100px;
+    display: block !important;
+    margin: auto;
 }

@@ -53,7 +53,6 @@
 }
 #icon-dropdown {
     position: relative;
-    top : -10px;
 }
 .dropdown {
     padding-top: 6px;
@@ -65,6 +64,7 @@
 }
 .media-content {
     overflow-x: visible;
+    max-width: 250px;
 }
 
 img {
@@ -127,7 +127,7 @@ input[type="file"] {
 }
 
 .button {
-    max-width: 100px;
+    max-width: 250px;
     display: block !important;
     margin: auto;
 }

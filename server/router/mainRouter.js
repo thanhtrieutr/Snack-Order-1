@@ -79,6 +79,10 @@ module.exports = function mainRouter(url, method, request, response, check404) {
         routeUrl: "/admin/create-new-product",
         routeMethod: "POST",
         routeHandler: checkProduct.checkProduct
+    }, {
+        routeUrl: "/admin/update-product",
+        routeMethod: "POST",
+        routeHandler: checkProduct.updateProduct
     }];
     try {
         var routeId = route.findIndex(item => item.routeUrl === url);

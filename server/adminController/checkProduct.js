@@ -118,11 +118,75 @@ function checkProduct(request, response) {
         var obj = {};
         obj.name = productName;
         obj.priceInt = productPrice;
-        obj.id = productList.length;
+        obj.id = productList.length+1;
         obj.price = displayPrice(productPrice);
         crud.createDocument("product", obj, err => {
             if (err) throw err;
             adminUtilities.savePhoto(obj, fileName, productImage.file, err => {
+                if (err) throw err;
+                response.end("OK");
+            });
+        });
+    }).catch(error => {
+        errorHandler(error,response);
+        return;
+    });
+}
+
+function updateProduct(request,response){
+    var collectClient = new Promise((resolve, reject) => { 
+        utilities.collectDataFromPost(request, result => {
+            if (result instanceof Error) {
+                reject(result);
+            }
+            resolve(result);
+        });
+    });
+    var collectProductList = new Promise(function(resolve, reject) {
+        crud.readDatabase("product", function(object,error) {
+            if (error) {
+                reject(error);
+            } 
+            else {
+                resolve(object);
+            }
+        });
+    });
+    Promise.all([collectClient, collectProductList]).then(result => {
+        var productPrice = result[0].productPrice;
+        var productImage = result[0].productImage;
+        var currentProduct = result[0].id;
+        var productList = result[1];
+        var token = result[0].token;
+        if (token != "token") {
+            throw new Error("Authentication Error");
+        }
+        if (checkPrice(productPrice) || checkFile(productImage)) { 
+            throw new Error("Wrong Data Input");
+        }
+        var position = -1;
+        for (var i = 0; i < productList.length; i++) {
+            if (productList[i]._id == currentProduct) {
+                position = i;
+            }
+        }
+        if (position == -1) {
+            throw new Error("Wrong Data Input");
+        }
+        var fileName = utilities.modifyFileName(productImage.fileName);
+        for (var i = 0; i < 4; i++) {
+            var randomNumber = Math.floor((Math.random() * 10000) + 1);
+            randomNumber = randomNumber.toString();
+            fileName = randomNumber + "-" + fileName;
+        }
+        var obj = {};
+        obj.priceInt = productPrice;
+        obj.price = displayPrice(productPrice);
+        console.log(productList[position]._id);
+        crud.updateOneDocument("product", {_id:productList[position]._id}, obj, err => {
+            if (err) throw err;
+            console.log(fileName);
+            adminUtilities.savePhoto({_id:productList[position]._id}, fileName, productImage.file, err => {
                 if (err) throw err;
                 response.end("OK");
             });
@@ -145,6 +209,7 @@ function displayPrice(x) {
 
 module.exports = {
     checkProductName: checkProductName,
-    checkProduct: checkProduct
+    checkProduct: checkProduct,
+    updateProduct: updateProduct
 };
 

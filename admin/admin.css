@@ -61,6 +61,7 @@ img {
     /* max-height: 50%; */
     height: 650px;
     overflow-y: auto;
+}
 
 .product-img{
     height: 100px;

@@ -88,14 +88,13 @@ function submitCart(request, response, product, accountArray) {
                         throw new Error ("Wrong Data Input");
                     }
                     product[j].amount=currentAmount;
-                    bill.products.push({_id:product[j]._id,quantity:currentAmount});
+                    bill.products.push({_id:product[j]._id,quantity:currentAmount,status:"pending"});
                     bill.totalPrice += currentAmount * currentPrice;
                 }
             }
             if (checkProduct == 0) {
                 throw new Error ("Wrong Data Input");
             }
-            bill.status="Pending";
         }
         crud.createDocument("order",bill,error => {
             if (error) throw new Error ("Problem with database");

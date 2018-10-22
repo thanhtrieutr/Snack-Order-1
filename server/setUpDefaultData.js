@@ -77,6 +77,9 @@ function addAdmin() {
 }
 function resetData() {
     var checkDone = false;
+    crud.deleteOneCollection('order', () => {
+        
+    });
     crud.deleteOneCollection("product", function() {
         addProduct(0, () => {
             if (checkDone) console.log("done");

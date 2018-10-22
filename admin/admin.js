@@ -183,11 +183,17 @@ function loadTodayOrders(){
         var obj = {};
         obj.token = localStorage.getItem("token");
         http.send(JSON.stringify(obj));
-        http.onload = () => resolve(http.response);
+        http.onload = () => resolve(http);
         http.onerror = () => reject(http.response);
     });
     
-    loadTodayOrder.then((response) => {
+    loadTodayOrder.then((http) => {
+        if (http.status == 200) {
+            var response = http.response;
+        }
+        else {
+            return;
+        }
         var listProduct = JSON.parse(response);
         var productContainer = document.getElementById("today-content-container");
         var tableHeader = createTable();
@@ -214,8 +220,8 @@ function createTable(){
             <th>Unit price</th>
             <th>Total</th>
             <th>Buyer</th>
-            <th>Actions</th>
             <th>Time</th>
+            <th>Actions</th>
         </tr> `
     return newTable;                   
 }
@@ -228,7 +234,7 @@ function createTodayOrderProduct(product) {
     <td>${product.price}</td>
     <td>${product.totalPrice}đ</td>
     <td>${product.user}</td>
-    <td>${product.status}</td>
-    <td>${product.time}</td>`;
+    <td>${product.time}</td>
+    <td>${product.status}</td>`;
     return newProduct;
 }

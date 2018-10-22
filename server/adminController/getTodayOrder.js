@@ -8,7 +8,16 @@ var errorHandler = require("../errorHandler/controllerError");
 //     {name: "Snack something", amount: 2, price: "19.000đ", totalPrice: "38.000đ", user: "HuuDuc", state: "In progress"},
 //     {name: "Snack something", amount: 2, price: "19.000đ", totalPrice: "38.000đ", user: "HuuDuc", state: "In progress"}
 // ];
-
+function commonProduct(a, b) {
+    if (a.productId == b.productId && a.user == b.user && a.status == b.status)
+        return true;
+    return false;
+}
+function getMax(a, b) {
+    if (a >= b)
+        return a;
+    return b;
+}
 function getTodayOrder(request, response) {
     //in future will receive token of admin
     var collectClient = new Promise((resolve, reject) => { 
@@ -72,29 +81,44 @@ function getTodayOrder(request, response) {
         }
     });
     Promise.all([collectClient, collectOrderList, collectAccount, collectProduct]).then(result => {
-        debugger;
         var token = result[0].token, order = result[1], account = result[2], product = result[3];
         var orderList = [];
         if (token != "token")
             throw new Error("Authentication Error");
         for (var i in order) {
             let obj = {}, oneOrder = order[i];
-            obj.status = oneOrder.status;
             obj.time = `${oneOrder.time.getHours()}:${oneOrder.time.getMinutes()}`;
             let position = utilities.findObjectById(account, oneOrder.user);
             obj.user = account[position].user;
+            obj.orderId = [oneOrder._id];
             for (var j in oneOrder.products) {
                 let position = utilities.findObjectById(product, oneOrder.products[j]._id);
                 let oneProduct = product[position];
                 obj.name = oneProduct.name;
                 obj.quantity = oneOrder.products[j].quantity;
                 obj.price = oneProduct.price;
+                obj.status = oneOrder.products[j].status;
+                obj.productId = oneOrder.products[j]._id;
                 obj.totalPrice = oneProduct.priceInt * obj.quantity;
-                orderList.push(obj);
+                //join
+                position = -1;
+                for (var k in orderList) {
+                    if (commonProduct(orderList[k], obj)) {
+                        position = k; break;
+                    }
+                }
+                if (position == -1) {
+                    orderList.push(obj);
+                }
+                else {
+                    orderList[k].quantity += obj.quantity;
+                    orderList[k].totalPrice += obj.totalPrice;
+                    orderList[k].time = getMax(orderList[k].time, obj.time);
+                    orderList[k].orderId = orderList[k].orderId.concat(obj.orderId); 
+                }
             }
         }
         response.end(JSON.stringify(orderList));
-        console.log(orderList);
     }).catch(error => {
         errorHandler(error,response);
         return;

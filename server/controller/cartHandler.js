@@ -69,7 +69,8 @@ function submitCart(request, response, product, accountArray) {
         bill.time=new Date();
         bill.user = currentUser;
         bill.products = [];
-        bill.totalPrice = 0;  
+        bill.estimateTotalPrice = 0;  
+        bill.actualTotalPrice = 0;
         var checkProduct = 0;
         for (var i in result.cartArray) {
             checkProduct = 0;
@@ -89,7 +90,7 @@ function submitCart(request, response, product, accountArray) {
                     }
                     product[j].amount=currentAmount;
                     bill.products.push({_id:product[j]._id,quantity:currentAmount,status:"pending"});
-                    bill.totalPrice += currentAmount * currentPrice;
+                    bill.estimateTotalPrice += currentAmount * currentPrice;
                 }
             }
             if (checkProduct == 0) {

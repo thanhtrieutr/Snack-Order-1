@@ -50,8 +50,27 @@
                                     <span></span>
                                 </div>
                                 <div class="media-content">
-                                    <p class="title is-4">John Smith</p>
-                                    <!-- <p class="subtitle is-6">@johnsmith</p> -->
+                                     <!-- drop down  -->
+                                     <div class="dropdown is-hoverable">
+                                        <!-- drop down button -->
+                                        <div class="dropdown-trigger">
+                                            <button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
+                                                <span class="title is-4" id="admin-name">Admin</span>
+                                                <span class="icon is-small" id="icon-dropdown">
+                                                    <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                                </span>
+                                            </button>
+                                        </div>
+                                        <!-- drop down content -->
+                                        <div class="dropdown-menu" id="dropdown-menu4" role="menu">
+                                            <div class="dropdown-content">
+                                                <div class="dropdown-item">
+                                                    <p onclick="logoutAdmin()"> Log Out</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
                                 </div>
                                 <div class="media-left">
                                     <figure class="image is-48x48">
@@ -124,5 +143,6 @@
 </body>
 <script src="../others/utilityFunction.js"></script>
 <script src="../admin/admin.js"></script>
+<script src="../admin/adminServer.js"></script>
 
 </html>

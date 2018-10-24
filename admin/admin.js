@@ -475,3 +475,90 @@ function checkKeyPress(key) {
 }
 
 addEventListener("keypress",checkKeyPress);
+function createUserContainer(oneOrder) {
+    var userOrder = document.createElement("div");
+    userOrder.setAttribute("id", "user-container");
+    userOrder.innerHTML =
+        `<span>
+            ${oneOrder.user}
+        </span>
+        <span>
+            Total: ${displayPrice(oneOrder.actualTotalPrice)}
+        </span>
+        <span>
+            Time: ${oneOrder.time}
+        </span>`;
+    return userOrder;
+}
+function createRowProdct(oneProduct) {
+    var oneRowProduct = document.createElement('TR');
+    oneRowProduct.innerHTML = 
+    `<td>${oneProduct.name}</td>
+    <td>${oneProduct.quantity}</td>
+    <td>${oneProduct.price}</td>
+    <td>${displayPrice(oneProduct.totalPrice)}</td>
+    <td>${oneProduct.status}</td>`;
+    return oneRowProduct;
+}
+function createOrderDetail(oneOrder) {
+    var orderDetail = document.createElement('div');
+    orderDetail.setAttribute("id", "order-detail");
+    orderDetail.setAttribute("class", "detail");
+
+    var orderTable = document.createElement('TABLE');
+    orderTable.setAttribute("class", "table is-striped is-fullwidth");
+
+    var oneRow = document.createElement("TR");
+    oneRow.setAttribute("class", "has-background-grey-lighter");
+    oneRow.innerHTML = `<th>Product name</th>
+    <th>Quantity</th>
+    <th>Unit price</th>
+    <th>Total</th>
+    <th>Actions</th>`;
+    orderTable.appendChild(oneRow);
+
+    for (var i in oneOrder.products) {
+        oneRow = createRowProdct(oneOrder.products[i]);
+        orderTable.appendChild(oneRow);
+    }
+
+    orderDetail.appendChild(orderTable);
+    return orderDetail;
+}
+function loadOrderHistory() {
+    var choiceList = document.getElementsByClassName("choice");
+    for (var i = 0; i < choiceList.length; i++) {
+        choiceList[i].className = choiceList[i].className.replace(" is-active", "");
+    }
+    var currentChoice = document.getElementById("order-history");
+    currentChoice.className = currentChoice.className + " is-active";
+    removeAll();
+    var loadOrder = new Promise((resolve, reject) => {
+        var http = new XMLHttpRequest();
+        http.open("POST", "http://127.0.0.1:3000/admin/get-order-history", true);
+        var obj = {};
+        obj.token = localStorage.getItem("token");
+        http.send(JSON.stringify(obj));
+        http.onload = () => resolve(http);
+        http.onerror = () => reject(http.response);
+    });
+
+    loadOrder.then((http) => {
+        if (http.status == 200) {
+            var response = http.response;
+        }
+        else {
+            return;
+        }
+        var listProduct = JSON.parse(response);
+        var orderContainer = document.getElementById("order-content");
+        listProduct.forEach(oneOrder => {
+            var oneUserContainer = createUserContainer(Order);
+            var oneOrderDetail = createOrderDetail(oneOrder);
+            orderContainer.appendChild(oneUserContainer);
+            orderContainer.appendChild(oneOrderDetail);
+        });
+    }).catch((error) => {
+        alertError(error);
+    });
+}

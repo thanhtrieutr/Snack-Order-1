@@ -74,7 +74,6 @@ img {
 #product-content,
 #user-content {
     /* max-height: 50%; */
-    height: 650px;
     overflow-y: auto;
 }
 

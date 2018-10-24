@@ -47,7 +47,7 @@ function loadProduct() {
         var http = new XMLHttpRequest();
         http.open("POST", "http://127.0.0.1:3000/admin/products", true);
         var obj = {};
-        obj.token = "token";
+        obj.token = localStorage.getItem("token");
         http.send(JSON.stringify(obj));
         http.onload = () => resolve(http.response);
         http.onerror = () => reject(http.response);
@@ -114,7 +114,7 @@ function loadUser() {
         var http = new XMLHttpRequest();
         http.open("POST", "http://127.0.0.1:3000/admin/users", true);
         var obj = {};
-        obj.token = "token";
+        obj.token = localStorage.getItem("token");
         http.send(JSON.stringify(obj));
         http.onload = () => resolve(http.response);
         http.onerror = () => reject(http.response);
@@ -347,7 +347,7 @@ function sendProductname(productName) {
         var http = new XMLHttpRequest();
         http.open("POST", "http://127.0.0.1:3000/admin/check-product-name", true);
         var obj = {};
-        obj.token = "token";
+        obj.token = localStorage.getItem("token");
         obj.productName = productName;
         http.send(JSON.stringify(obj));
         http.onload = () => resolve(http.response);
@@ -424,7 +424,7 @@ function createProduct() {
             fileName: productImage.name
         };
         var obj = {};
-        obj.token = "token";
+        obj.token = localStorage.getItem("token");
         obj.productName = document.getElementById("product-name").value;
         obj.productPrice = document.getElementById("product-price").value;
         obj.productImage = object;

@@ -25,7 +25,6 @@ function checkFile(productImage) {
         return true;
     }
     var fileName = utilities.modifyFileName(productImage.fileName);
-    debugger;
     if (fileName == false) {
         return true;
     }
@@ -52,10 +51,30 @@ function checkProductName(request, response) {
             }
         });
     });
-    Promise.all([collectClient, collectProductList]).then(result => {
+    var collectAccountList = new Promise(function(resolve, reject) {
+        crud.readDatabase("adminAccount", function(object,error) {
+            if (error) {
+                reject(error);
+            } 
+            else {
+                resolve(object);
+            }
+        });
+    });
+    Promise.all([collectClient, collectProductList, collectAccountList]).then(result => {
         var token = result[0].token;
         var products = result[1];
-        if (token != "token")
+        var accountList = result[2];
+
+        var position = -1;
+        for (var i = 0; i < accountList.length; i++) {
+            if (token == accountList[i].token) {
+                position = i;
+                break;
+            }
+        }
+
+        if (position == -1)
             throw new Error("Authentication Error");
         if (checkValidProduct(result[0].productName)) {
             throw new Error("Wrong Data Input");
@@ -75,7 +94,6 @@ function checkProductName(request, response) {
 function checkProduct(request, response) {
     var collectClient = new Promise((resolve, reject) => { 
         utilities.collectDataFromPost(request, result => {
-            debugger
             if (result instanceof Error) {
                 reject(result);
             }
@@ -92,13 +110,33 @@ function checkProduct(request, response) {
             }
         });
     });
-    Promise.all([collectClient, collectProductList]).then(result => {
+    var collectAccountList = new Promise(function(resolve, reject) {
+        crud.readDatabase("adminAccount", function(object,error) {
+            if (error) {
+                reject(error);
+            } 
+            else {
+                resolve(object);
+            }
+        });
+    });
+    Promise.all([collectClient, collectProductList, collectAccountList]).then(result => {
         var productName = result[0].productName;
         var productPrice = result[0].productPrice;
         var productImage = result[0].productImage;
         var productList = result[1];
         var token = result[0].token;
-        if (token != "token") {
+        var accountList = result[2];
+
+        var position = -1;
+        for (var i = 0; i < accountList.length; i++) {
+            if (token == accountList[i].token) {
+                position = i;
+                break;
+            }
+        }
+
+        if (position == -1) {
             throw new Error("Authentication Error");
         }
         if (checkValidProduct(productName) || checkPrice(productPrice) || checkFile(productImage)) { 
@@ -152,13 +190,33 @@ function updateProduct(request,response){
             }
         });
     });
-    Promise.all([collectClient, collectProductList]).then(result => {
+    var collectAccountList = new Promise(function(resolve, reject) {
+        crud.readDatabase("adminAccount", function(object,error) {
+            if (error) {
+                reject(error);
+            } 
+            else {
+                resolve(object);
+            }
+        });
+    });
+    Promise.all([collectClient, collectProductList, collectAccountList]).then(result => {
         var productPrice = result[0].productPrice;
         var productImage = result[0].productImage;
         var currentProduct = result[0].id;
         var productList = result[1];
         var token = result[0].token;
-        if (token != "token") {
+        var accountList = result[2];
+
+        var position = -1;
+        for (var i = 0; i < accountList.length; i++) {
+            if (token == accountList[i].token) {
+                position = i;
+                break;
+            }
+        }
+
+        if (position == -1) {
             throw new Error("Authentication Error");
         }
         var position = -1;
@@ -208,7 +266,7 @@ function displayPrice(x) {
     x = x.toString();
     var pattern = /(-?\d+)(\d{3})/;
     while (pattern.test(x)) {
-        x = x.replace(pattern, "$1,$2");
+        x = x.replace(pattern, "$1.$2");
     }
     return x + " đ";
 }

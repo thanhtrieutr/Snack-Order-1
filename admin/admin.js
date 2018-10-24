@@ -475,19 +475,26 @@ function checkKeyPress(key) {
 }
 
 addEventListener("keypress",checkKeyPress);
-function createUserContainer(oneOrder) {
+function createUserContainer(oneOrder, currentId) {
     var userOrder = document.createElement("div");
-    userOrder.setAttribute("id", "user-container");
-    userOrder.innerHTML =
-        `<span>
-            ${oneOrder.user}
-        </span>
-        <span>
-            Total: ${displayPrice(oneOrder.actualTotalPrice)}
-        </span>
-        <span>
-            Time: ${oneOrder.time}
-        </span>`;
+    userOrder.setAttribute("id", "display-container");
+    userOrder.setAttribute("onclick", `showDetail('order-detail-${currentId}', "order-detail-label")`);
+    userOrder.innerHTML = 
+    `<table class="table is-fullwidth"> 
+        <tbody>
+            <tr>
+                <td class="display-item" style="width: 30%;">
+                    ${oneOrder.user}
+                </td>
+                <td class="display-item" style="width: 35%;">
+                    Total: ${displayPrice(oneOrder.actualTotalPrice)}
+                </td>
+                <td class="display-item" style="width: 35%;">
+                    Time: ${oneOrder.time}
+                </td>
+            </tr>
+        </tbody>
+    </table>`;
     return userOrder;
 }
 function createRowProdct(oneProduct) {
@@ -500,9 +507,9 @@ function createRowProdct(oneProduct) {
     <td>${oneProduct.status}</td>`;
     return oneRowProduct;
 }
-function createOrderDetail(oneOrder) {
+function createOrderDetail(oneOrder, currentId) {
     var orderDetail = document.createElement('div');
-    orderDetail.setAttribute("id", "order-detail");
+    orderDetail.setAttribute("id", `order-detail-${currentId}`);
     orderDetail.setAttribute("class", "detail");
 
     var orderTable = document.createElement('TABLE');
@@ -535,7 +542,7 @@ function loadOrderHistory() {
     removeAll();
     var loadOrder = new Promise((resolve, reject) => {
         var http = new XMLHttpRequest();
-        http.open("POST", "http://127.0.0.1:3000/admin/get-order-history", true);
+        http.open("POST", "http://127.0.0.1:3000/admin/history", true);
         var obj = {};
         obj.token = localStorage.getItem("token");
         http.send(JSON.stringify(obj));
@@ -552,11 +559,16 @@ function loadOrderHistory() {
         }
         var listProduct = JSON.parse(response);
         var orderContainer = document.getElementById("order-content");
+        var currentId = 0;
         listProduct.forEach(oneOrder => {
-            var oneUserContainer = createUserContainer(Order);
-            var oneOrderDetail = createOrderDetail(oneOrder);
-            orderContainer.appendChild(oneUserContainer);
-            orderContainer.appendChild(oneOrderDetail);
+            var oneUserContainer = createUserContainer(oneOrder, currentId);
+            var oneOrderDetail = createOrderDetail(oneOrder, currentId);
+            var oneDiv = document.createElement("div");
+            oneDiv.appendChild(oneUserContainer);
+            oneDiv.appendChild(oneOrderDetail);
+            currentId++;
+            orderContainer.appendChild(oneDiv);
+            // orderContainer.appendChild(oneOrderDetail);
         });
     }).catch((error) => {
         alertError(error);

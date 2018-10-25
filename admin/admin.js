@@ -1,5 +1,6 @@
 loadTodayOrders();
 var orderIdList = [];
+var userList = [];
 
 function showDetail(id, labelID) {
     var current = document.getElementById(id);
@@ -176,6 +177,8 @@ function createNewUser(user, currentID) {
 
 //today-order
 function loadTodayOrders() {
+    orderIdList = [];
+    userList = [];
     var choiceList = document.getElementsByClassName("choice");
     for (var i = 0; i < choiceList.length; i++) {
         choiceList[i].className = choiceList[i].className.replace(" is-active", "");
@@ -220,10 +223,12 @@ function loadTodayOrders() {
 function changeStatus() {
     var selectionList = document.getElementsByClassName("selections");
     var updateList = [];
-    for (var i = 0; i < orderIdList.length; i++) {
+    for (var i = 0; i < selectionList.length; i++) {
+        debugger
         var obj = {};
         obj.productId = selectionList[i].id.substr(7);
         obj.orderId = orderIdList[i];
+        obj.user = userList[i];
         var selectAnswer = document.getElementById(selectionList[i].id);
         obj.status = selectAnswer.options[selectAnswer.selectedIndex].value;
         updateList.push(obj);
@@ -238,6 +243,7 @@ function changeTodayStatus(updateList) {
         var obj = {};
         obj.token = localStorage.getItem("token");
         obj.updateList = updateList;
+        debugger
         console.log(obj);
         http.send(JSON.stringify(obj));
         http.onload = () => resolve(http);
@@ -297,7 +303,7 @@ function createTodayOrderProduct(product, productTable) {
     <td>${product.time}</td>
     <td>
         <div class="select">
-            <select class="selections" id="select-${currentId}">
+            <select class="selections" id="select-${currentId}-${product.user}">
             <option value="pending">pending</option>
             <option value="accept">accept</option>
             <option value="reject">reject</option>
@@ -305,12 +311,13 @@ function createTodayOrderProduct(product, productTable) {
         </div>
     </td>`;
     orderIdList.push(product.orderId);
+    userList.push(product.user);
     productTable.appendChild(newProduct);
     var index;
     if (product.status == "pending") index = 0;
     else if (product.status == "accept") index = 1;
     else index = 2;
-    document.getElementById("select-" + currentId).selectedIndex = index;
+    document.getElementById("select-" + currentId + "-" + product.user).selectedIndex = index;
     debugger
 }
 

@@ -1,4 +1,5 @@
 loadTodayOrders();
+var orderIdList = [];
 
 function showDetail(id, labelID) {
     var current = document.getElementById(id);
@@ -208,7 +209,6 @@ function loadTodayOrders() {
             createTodayOrderProduct(product, productTable);
         });
         todaySubmit();
-        
     }).catch((error) => {
         alertError(error);
     });
@@ -216,8 +216,46 @@ function loadTodayOrders() {
 
 function changeStatus() {
     var selectionList = document.getElementsByClassName("selections");
-
+    var updateList = [];
+    debugger
+    for (var i = 0; i < orderIdList.length; i++) {
+        var obj = {};
+        obj.productId = selectionList[i].id.substr(7);
+        obj.orderId = orderIdList[i];
+        var selectAnswer = document.getElementById(selectionList[i].id);
+        debugger
+        obj.status = selectAnswer.options[selectAnswer.selectedIndex].value;
+        updateList.push(obj);
+    }
+    changeTodayStatus(updateList);
 }
+
+function changeTodayStatus(updateList) {
+    var changeOrderStatus = new Promise((resolve, reject) => {
+        var http = new XMLHttpRequest();
+        http.open("POST", "http://127.0.0.1:3000/admin/change-status", true);
+        var obj = {};
+        obj.token = "token";
+        obj.updateList = updateList;
+        console.log(obj);
+        http.send(JSON.stringify(obj));
+        http.onload = () => resolve(http);
+        http.onerror = () => reject(http.response);
+    });
+    
+    changeOrderStatus.then((http) => {
+        if (http.status == 200) {
+            var response = http.response;
+            if (response == "Success") {
+                alert("Update success");
+            }
+            else alert("Update Fail");
+        }
+    }).catch((error) => {
+        alertError(error);
+    });
+}
+
 
 function todaySubmit() {
     var newButton = document.createElement('a');
@@ -226,7 +264,7 @@ function todaySubmit() {
     newButton.setAttribute("onclick", "changeStatus()")
     newButton.innerHTML = 
     `Submit`
-    document.getElementById("body").appendChild(newButton);
+    document.getElementById("today-content").appendChild(newButton);
 }
 
 function createTable() {
@@ -249,6 +287,9 @@ function createTable() {
 function createTodayOrderProduct(product, productTable) {
     var currentId = product.productId.toString();
     var newProduct = document.createElement("TR");
+    // <option class="selection-${currentId}" id="pending-${currentId}" value="pending">pending</option>
+    // <option class="selection-${currentId}" id="accept-${currentId}" value="accept">accept</option>
+    // <option class="selection-${currentId}" id="reject-${currentId}" value="reject">reject</option>
     newProduct.innerHTML =
     `<td>${product.name}</td>
     <td>${product.quantity}</td>
@@ -259,18 +300,17 @@ function createTodayOrderProduct(product, productTable) {
     <td>
         <div class="select">
             <select class="selections" id="select-${currentId}">
-                <option class="selection-${currentId}" id="pending-${currentId}" value="pending">pending</option>
-                <option class="selection-${currentId}" id="accept-${currentId}" value="accept">accept</option>
-                <option class="selection-${currentId}" id="reject-${currentId}" value="reject">reject</option>
+            <option value="pending">pending</option>
+            <option value="accept">accept</option>
+            <option value="reject">reject</option>
             </select>
         </div>
     </td>`;
+    orderIdList.push(product.orderId);
     productTable.appendChild(newProduct);
-    var selection = document.getElementsByClassName("selection-" + currentId);
-    for (var i = 0; i < selection.length; i++) {
-        document.getElementById(selection[i].id).removeAttribute("selected");
-    }
-    document.getElementById(product.status + "-" + currentId).setAttribute("selected", "selected");   
+    debugger
+    // var selection = document.getElementsByClassName("selection-" + currentId);
+    // document.getElementById(product.status + "-" + currentId).setAttribute("selected", "selected");   
 }
 
 //Fix burger responsive ---------------------------------------------------------------------

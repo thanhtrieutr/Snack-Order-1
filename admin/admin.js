@@ -1,4 +1,6 @@
 loadTodayOrders();
+var orderIdList = [];
+var userList = [];
 
 function showDetail(id, labelID) {
     var current = document.getElementById(id);
@@ -47,7 +49,7 @@ function loadProduct() {
         var http = new XMLHttpRequest();
         http.open("POST", "http://127.0.0.1:3000/admin/products", true);
         var obj = {};
-        obj.token = "token";
+        obj.token = localStorage.getItem("token");
         http.send(JSON.stringify(obj));
         http.onload = () => resolve(http.response);
         http.onerror = () => reject(http.response);
@@ -114,7 +116,7 @@ function loadUser() {
         var http = new XMLHttpRequest();
         http.open("POST", "http://127.0.0.1:3000/admin/users", true);
         var obj = {};
-        obj.token = "token";
+        obj.token = localStorage.getItem("token");
         http.send(JSON.stringify(obj));
         http.onload = () => resolve(http.response);
         http.onerror = () => reject(http.response);
@@ -175,6 +177,8 @@ function createNewUser(user, currentID) {
 
 //today-order
 function loadTodayOrders() {
+    orderIdList = [];
+    userList = [];
     var choiceList = document.getElementsByClassName("choice");
     for (var i = 0; i < choiceList.length; i++) {
         choiceList[i].className = choiceList[i].className.replace(" is-active", "");
@@ -204,14 +208,70 @@ function loadTodayOrders() {
         var tableHeader = createTable();
         productContainer.appendChild(tableHeader);
         var productTable = document.getElementById("today-content");
+        var check = 0;
         listProduct.forEach(product => {
-            var newProduct = createTodayOrderProduct(product);
-            productTable.appendChild(newProduct);
+            createTodayOrderProduct(product, productTable);
+            check += 1;
         });
+        if (check > 0) 
+            todaySubmit();
     }).catch((error) => {
         alertError(error);
     });
+}
 
+function changeStatus() {
+    var selectionList = document.getElementsByClassName("selections");
+    var updateList = [];
+    for (var i = 0; i < selectionList.length; i++) {
+        debugger
+        var obj = {};
+        obj.productId = selectionList[i].id.substr(7);
+        obj.orderId = orderIdList[i];
+        obj.user = userList[i];
+        var selectAnswer = document.getElementById(selectionList[i].id);
+        obj.status = selectAnswer.options[selectAnswer.selectedIndex].value;
+        updateList.push(obj);
+    }
+    changeTodayStatus(updateList);
+}
+
+function changeTodayStatus(updateList) {
+    var changeOrderStatus = new Promise((resolve, reject) => {
+        var http = new XMLHttpRequest();
+        http.open("POST", "http://127.0.0.1:3000/admin/change-status", true);
+        var obj = {};
+        obj.token = localStorage.getItem("token");
+        obj.updateList = updateList;
+        debugger
+        console.log(obj);
+        http.send(JSON.stringify(obj));
+        http.onload = () => resolve(http);
+        http.onerror = () => reject(http.response);
+    });
+    
+    changeOrderStatus.then((http) => {
+        if (http.status == 200) {
+            var response = http.response;
+            if (response == "Success") {
+                alert("Update success");
+            }
+            else alert("Update Fail");
+        }
+    }).catch((error) => {
+        alertError(error);
+    });
+}
+
+
+function todaySubmit() {
+    var newButton = document.createElement('a');
+    newButton.setAttribute("class", "button is-info");
+    newButton.setAttribute("id", "today-button");
+    newButton.setAttribute("onclick", "changeStatus()")
+    newButton.innerHTML = 
+    `Submit`
+    document.getElementById("today-content-container").appendChild(newButton);
 }
 
 function createTable() {
@@ -231,7 +291,8 @@ function createTable() {
     return newTable;
 }
 
-function createTodayOrderProduct(product) {
+function createTodayOrderProduct(product, productTable) {
+    var currentId = product.productId.toString();
     var newProduct = document.createElement("TR");
     newProduct.innerHTML =
     `<td>${product.name}</td>
@@ -240,8 +301,24 @@ function createTodayOrderProduct(product) {
     <td>${product.totalPrice}đ</td>
     <td>${product.user}</td>
     <td>${product.time}</td>
-    <td>${product.status}</td>`;
-    return newProduct;
+    <td>
+        <div class="select">
+            <select class="selections" id="select-${currentId}-${product.user}">
+            <option value="pending">pending</option>
+            <option value="accept">accept</option>
+            <option value="reject">reject</option>
+            </select>
+        </div>
+    </td>`;
+    orderIdList.push(product.orderId);
+    userList.push(product.user);
+    productTable.appendChild(newProduct);
+    var index;
+    if (product.status == "pending") index = 0;
+    else if (product.status == "accept") index = 1;
+    else index = 2;
+    document.getElementById("select-" + currentId + "-" + product.user).selectedIndex = index;
+    debugger
 }
 
 //Fix burger responsive ---------------------------------------------------------------------
@@ -347,7 +424,7 @@ function sendProductname(productName) {
         var http = new XMLHttpRequest();
         http.open("POST", "http://127.0.0.1:3000/admin/check-product-name", true);
         var obj = {};
-        obj.token = "token";
+        obj.token = localStorage.getItem("token");
         obj.productName = productName;
         http.send(JSON.stringify(obj));
         http.onload = () => resolve(http.response);
@@ -424,7 +501,7 @@ function createProduct() {
             fileName: productImage.name
         };
         var obj = {};
-        obj.token = "token";
+        obj.token = localStorage.getItem("token");
         obj.productName = document.getElementById("product-name").value;
         obj.productPrice = document.getElementById("product-price").value;
         obj.productImage = object;
@@ -475,3 +552,102 @@ function checkKeyPress(key) {
 }
 
 addEventListener("keypress",checkKeyPress);
+function createUserContainer(oneOrder, currentId) {
+    var userOrder = document.createElement("div");
+    userOrder.setAttribute("id", "display-container");
+    userOrder.setAttribute("onclick", `showDetail('order-detail-${currentId}', "order-detail-label")`);
+    userOrder.innerHTML = 
+    `<table class="table is-fullwidth"> 
+        <tbody>
+            <tr>
+                <td class="display-item" style="width: 30%;">
+                    ${oneOrder.user}
+                </td>
+                <td class="display-item" style="width: 35%;">
+                    Total: ${displayPrice(oneOrder.actualTotalPrice)}
+                </td>
+                <td class="display-item" style="width: 35%;">
+                    Time: ${oneOrder.time}
+                </td>
+            </tr>
+        </tbody>
+    </table>`;
+    return userOrder;
+}
+function createRowProdct(oneProduct) {
+    var oneRowProduct = document.createElement('TR');
+    oneRowProduct.innerHTML = 
+    `<td>${oneProduct.name}</td>
+    <td>${oneProduct.quantity}</td>
+    <td>${oneProduct.price}</td>
+    <td>${displayPrice(oneProduct.totalPrice)}</td>
+    <td>${oneProduct.status}</td>`;
+    return oneRowProduct;
+}
+function createOrderDetail(oneOrder, currentId) {
+    var orderDetail = document.createElement('div');
+    orderDetail.setAttribute("id", `order-detail-${currentId}`);
+    orderDetail.setAttribute("class", "detail");
+
+    var orderTable = document.createElement('TABLE');
+    orderTable.setAttribute("class", "table is-striped is-fullwidth");
+
+    var oneRow = document.createElement("TR");
+    oneRow.setAttribute("class", "has-background-grey-lighter");
+    oneRow.innerHTML = `<th>Product name</th>
+    <th>Quantity</th>
+    <th>Unit price</th>
+    <th>Total</th>
+    <th>Actions</th>`;
+    orderTable.appendChild(oneRow);
+
+    for (var i in oneOrder.products) {
+        oneRow = createRowProdct(oneOrder.products[i]);
+        orderTable.appendChild(oneRow);
+    }
+
+    orderDetail.appendChild(orderTable);
+    return orderDetail;
+}
+function loadOrderHistory() {
+    var choiceList = document.getElementsByClassName("choice");
+    for (var i = 0; i < choiceList.length; i++) {
+        choiceList[i].className = choiceList[i].className.replace(" is-active", "");
+    }
+    var currentChoice = document.getElementById("order-history");
+    currentChoice.className = currentChoice.className + " is-active";
+    removeAll();
+    var loadOrder = new Promise((resolve, reject) => {
+        var http = new XMLHttpRequest();
+        http.open("POST", "http://127.0.0.1:3000/admin/history", true);
+        var obj = {};
+        obj.token = localStorage.getItem("token");
+        http.send(JSON.stringify(obj));
+        http.onload = () => resolve(http);
+        http.onerror = () => reject(http.response);
+    });
+
+    loadOrder.then((http) => {
+        if (http.status == 200) {
+            var response = http.response;
+        }
+        else {
+            return;
+        }
+        var listProduct = JSON.parse(response);
+        var orderContainer = document.getElementById("order-content");
+        var currentId = 0;
+        listProduct.forEach(oneOrder => {
+            var oneUserContainer = createUserContainer(oneOrder, currentId);
+            var oneOrderDetail = createOrderDetail(oneOrder, currentId);
+            var oneDiv = document.createElement("div");
+            oneDiv.appendChild(oneUserContainer);
+            oneDiv.appendChild(oneOrderDetail);
+            currentId++;
+            orderContainer.appendChild(oneDiv);
+            // orderContainer.appendChild(oneOrderDetail);
+        });
+    }).catch((error) => {
+        alertError(error);
+    });
+}

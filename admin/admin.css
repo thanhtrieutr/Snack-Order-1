@@ -71,10 +71,14 @@ img {
     padding: 5px;
 }
 
+#today-button { 
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100px;
+}
 #product-content,
 #user-content {
     /* max-height: 50%; */
-    height: 650px;
     overflow-y: auto;
 }
 
@@ -96,6 +100,7 @@ img {
 
 #nav-menu {
     background: #EFF0EB;
+    z-index: 2;
 }
 
 @media (max-width: 1087.98px) {
@@ -123,11 +128,17 @@ input[type="file"] {
 
 .field-label {
     max-width: 150px;
+    min-width: 140px;
+    padding-left: 10px; 
     padding-top: 0 !important;
 }
 
 .button {
-    max-width: 250px;
+    max-width: 220px;
     display: block !important;
     margin: auto;
+}
+
+.content {
+    z-index: 1 !important;
 }

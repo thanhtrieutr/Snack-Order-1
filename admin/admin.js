@@ -1,4 +1,5 @@
 loadTodayOrders();
+var orderIdList = [];
 
 function showDetail(id, labelID) {
     var current = document.getElementById(id);
@@ -204,14 +205,67 @@ function loadTodayOrders() {
         var tableHeader = createTable();
         productContainer.appendChild(tableHeader);
         var productTable = document.getElementById("today-content");
+        var check = 0;
         listProduct.forEach(product => {
-            var newProduct = createTodayOrderProduct(product);
-            productTable.appendChild(newProduct);
+            createTodayOrderProduct(product, productTable);
+            check += 1;
         });
+        if (check > 0) 
+            todaySubmit();
     }).catch((error) => {
         alertError(error);
     });
+}
 
+function changeStatus() {
+    var selectionList = document.getElementsByClassName("selections");
+    var updateList = [];
+    for (var i = 0; i < orderIdList.length; i++) {
+        var obj = {};
+        obj.productId = selectionList[i].id.substr(7);
+        obj.orderId = orderIdList[i];
+        var selectAnswer = document.getElementById(selectionList[i].id);
+        obj.status = selectAnswer.options[selectAnswer.selectedIndex].value;
+        updateList.push(obj);
+    }
+    changeTodayStatus(updateList);
+}
+
+function changeTodayStatus(updateList) {
+    var changeOrderStatus = new Promise((resolve, reject) => {
+        var http = new XMLHttpRequest();
+        http.open("POST", "http://127.0.0.1:3000/admin/change-status", true);
+        var obj = {};
+        obj.token = localStorage.getItem("token");
+        obj.updateList = updateList;
+        console.log(obj);
+        http.send(JSON.stringify(obj));
+        http.onload = () => resolve(http);
+        http.onerror = () => reject(http.response);
+    });
+    
+    changeOrderStatus.then((http) => {
+        if (http.status == 200) {
+            var response = http.response;
+            if (response == "Success") {
+                alert("Update success");
+            }
+            else alert("Update Fail");
+        }
+    }).catch((error) => {
+        alertError(error);
+    });
+}
+
+
+function todaySubmit() {
+    var newButton = document.createElement('a');
+    newButton.setAttribute("class", "button is-info");
+    newButton.setAttribute("id", "today-button");
+    newButton.setAttribute("onclick", "changeStatus()")
+    newButton.innerHTML = 
+    `Submit`
+    document.getElementById("today-content-container").appendChild(newButton);
 }
 
 function createTable() {
@@ -231,7 +285,8 @@ function createTable() {
     return newTable;
 }
 
-function createTodayOrderProduct(product) {
+function createTodayOrderProduct(product, productTable) {
+    var currentId = product.productId.toString();
     var newProduct = document.createElement("TR");
     newProduct.innerHTML =
     `<td>${product.name}</td>
@@ -240,8 +295,23 @@ function createTodayOrderProduct(product) {
     <td>${product.totalPrice}đ</td>
     <td>${product.user}</td>
     <td>${product.time}</td>
-    <td>${product.status}</td>`;
-    return newProduct;
+    <td>
+        <div class="select">
+            <select class="selections" id="select-${currentId}">
+            <option value="pending">pending</option>
+            <option value="accept">accept</option>
+            <option value="reject">reject</option>
+            </select>
+        </div>
+    </td>`;
+    orderIdList.push(product.orderId);
+    productTable.appendChild(newProduct);
+    var index;
+    if (product.status == "pending") index = 0;
+    else if (product.status == "accept") index = 1;
+    else index = 2;
+    document.getElementById("select-" + currentId).selectedIndex = index;
+    debugger
 }
 
 //Fix burger responsive ---------------------------------------------------------------------

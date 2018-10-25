@@ -14,6 +14,8 @@ var getTodayOrder = require("../adminController/getTodayOrder");
 var checkProduct = require("../adminController/checkProduct");
 var errorHandler = require("../errorHandler/controllerError");
 var loginAdmin = require("../adminController/loginAdmin");
+var changeStatus = require("../adminController/changeStatus");
+
 
 module.exports = function mainRouter(url, method, request, response, check404) {
     var route = [{
@@ -96,6 +98,10 @@ module.exports = function mainRouter(url, method, request, response, check404) {
         routeUrl: "/admin/update-product",
         routeMethod: "POST",
         routeHandler: checkProduct.updateProduct
+    }, {
+        routeUrl: "/admin/change-status",
+        routeMethod: "POST",
+        routeHandler: changeStatus.changeStatus
     }];
     try {
         var routeId = route.findIndex(item => item.routeUrl === url);

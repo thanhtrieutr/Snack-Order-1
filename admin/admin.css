@@ -71,10 +71,14 @@ img {
     padding: 5px;
 }
 
+#today-button { 
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100px;
+}
 #product-content,
 #user-content {
     /* max-height: 50%; */
-    height: 650px;
     overflow-y: auto;
 }
 

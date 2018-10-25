@@ -21,11 +21,30 @@ function getAdminProduct(request, response) {
             }
         });
     });
-    Promise.all([collectClient, collectProductList]).then(result => {
-        debugger
+    var collectAccountList = new Promise(function(resolve, reject) {
+        crud.readDatabase("adminAccount", function(object,error) {
+            if (error) {
+                reject(error);
+            } 
+            else {
+                resolve(object);
+            }
+        });
+    });
+    Promise.all([collectClient, collectProductList, collectAccountList]).then(result => {
         var token = result[0].token;
         var products = result[1];
-        if (token != "token")
+        var accountList = result[2];
+
+        var position = -1;
+        for (var i = 0; i < accountList.length; i++) {
+            if (token == accountList[i].token) {
+                position = i;
+                break;
+            }
+        }
+
+        if (position == -1)
             throw new Error("Authentication Error");
         response.end(JSON.stringify(products));
     }).catch(error => {

@@ -135,7 +135,6 @@ function getHistory(request, response) {
     });
     Promise.all([collectAdmin, collectAccount, collectProduct, collectOrderHistory]).then(result => {
         var currentAdminToken = result[0].token;
-        currentAdminToken = "token";
         var accountArray = result[1];
         var productArray = result[2];
         var orderHistoryArray = result[3];

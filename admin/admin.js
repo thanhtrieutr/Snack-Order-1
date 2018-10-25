@@ -235,7 +235,7 @@ function changeTodayStatus(updateList) {
         var http = new XMLHttpRequest();
         http.open("POST", "http://127.0.0.1:3000/admin/change-status", true);
         var obj = {};
-        obj.token = "token";
+        obj.token = localStorage.getItem("token");
         obj.updateList = updateList;
         console.log(obj);
         http.send(JSON.stringify(obj));

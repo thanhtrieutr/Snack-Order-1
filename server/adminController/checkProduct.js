@@ -161,9 +161,6 @@ function updateProduct(request,response){
         if (token != "token") {
             throw new Error("Authentication Error");
         }
-        if (checkPrice(productPrice) || checkFile(productImage)) { 
-            throw new Error("Wrong Data Input");
-        }
         var position = -1;
         for (var i = 0; i < productList.length; i++) {
             if (productList[i]._id == currentProduct) {
@@ -173,24 +170,34 @@ function updateProduct(request,response){
         if (position == -1) {
             throw new Error("Wrong Data Input");
         }
-        var fileName = utilities.modifyFileName(productImage.fileName);
-        for (var i = 0; i < 4; i++) {
-            var randomNumber = Math.floor((Math.random() * 10000) + 1);
-            randomNumber = randomNumber.toString();
-            fileName = randomNumber + "-" + fileName;
+        if (productPrice) {
+            if (checkPrice(productPrice)) {
+                throw new Error("Wrong Data Input");
+            }
+            var obj = {};
+            obj.priceInt = productPrice;
+            obj.price = displayPrice(productPrice);
+            console.log(productList[position]._id);
+            crud.updateOneDocument("product", {_id:productList[position]._id}, obj, err => {
+                if (err) throw err;
+            });
         }
-        var obj = {};
-        obj.priceInt = productPrice;
-        obj.price = displayPrice(productPrice);
-        console.log(productList[position]._id);
-        crud.updateOneDocument("product", {_id:productList[position]._id}, obj, err => {
-            if (err) throw err;
-            console.log(fileName);
+        if (productImage) {
+            if (checkFile(productImage)) {
+                throw new Error("Wrong Data Input");
+            }
+            var fileName = utilities.modifyFileName(productImage.fileName);
+            for (var i = 0; i < 4; i++) {
+                var randomNumber = Math.floor((Math.random() * 10000) + 1);
+                randomNumber = randomNumber.toString();
+                fileName = randomNumber + "-" + fileName;
+            }
             adminUtilities.savePhoto({_id:productList[position]._id}, fileName, productImage.file, err => {
                 if (err) throw err;
-                response.end("OK");
             });
-        });
+        }
+        utilities.setResponseHeader(response);
+        response.end("OK");
     }).catch(error => {
         errorHandler(error,response);
         return;

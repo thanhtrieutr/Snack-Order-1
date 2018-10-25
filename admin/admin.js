@@ -205,10 +205,13 @@ function loadTodayOrders() {
         var tableHeader = createTable();
         productContainer.appendChild(tableHeader);
         var productTable = document.getElementById("today-content");
+        var check = 0;
         listProduct.forEach(product => {
             createTodayOrderProduct(product, productTable);
+            check += 1;
         });
-        todaySubmit();
+        if (check > 0) 
+            todaySubmit();
     }).catch((error) => {
         alertError(error);
     });
@@ -217,7 +220,6 @@ function loadTodayOrders() {
 function changeStatus() {
     var selectionList = document.getElementsByClassName("selections");
     var updateList = [];
-    debugger
     for (var i = 0; i < orderIdList.length; i++) {
         var obj = {};
         obj.productId = selectionList[i].id.substr(7);
@@ -264,7 +266,7 @@ function todaySubmit() {
     newButton.setAttribute("onclick", "changeStatus()")
     newButton.innerHTML = 
     `Submit`
-    document.getElementById("today-content").appendChild(newButton);
+    document.getElementById("today-content-container").appendChild(newButton);
 }
 
 function createTable() {
@@ -287,9 +289,6 @@ function createTable() {
 function createTodayOrderProduct(product, productTable) {
     var currentId = product.productId.toString();
     var newProduct = document.createElement("TR");
-    // <option class="selection-${currentId}" id="pending-${currentId}" value="pending">pending</option>
-    // <option class="selection-${currentId}" id="accept-${currentId}" value="accept">accept</option>
-    // <option class="selection-${currentId}" id="reject-${currentId}" value="reject">reject</option>
     newProduct.innerHTML =
     `<td>${product.name}</td>
     <td>${product.quantity}</td>
@@ -309,8 +308,6 @@ function createTodayOrderProduct(product, productTable) {
     orderIdList.push(product.orderId);
     productTable.appendChild(newProduct);
     debugger
-    // var selection = document.getElementsByClassName("selection-" + currentId);
-    // document.getElementById(product.status + "-" + currentId).setAttribute("selected", "selected");   
 }
 
 //Fix burger responsive ---------------------------------------------------------------------

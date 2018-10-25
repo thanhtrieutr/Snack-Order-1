@@ -19,7 +19,7 @@
                     <ul class="menu-list">
                         <li><a id="today-order" class="choice is-active" onclick="loadTodayOrders()">Today Order</a></li>
                         <li>
-                            <a id="order-history" class="choice">Order history</a>
+                            <a id="order-history" class="choice" onclick="loadOrderHistory()">Order history</a>
                         <li>
                             <p id="order-detail-label" class="menu-label">| Order history detail</p>
                         </li>
@@ -84,8 +84,9 @@
                 </thead>
                 <tbody>
                     <div id="today-content-container" class="tab"></div>
-                    <div id="order-content" class="tab" onclick="showDetail('order-detail')">
-                        <div>
+                    <div id="order-content" class="content tab">
+                            <!-- onclick="showDetail('order-detail')" -->
+                        <!-- <div>
                             <div id="user-container">
                                 <span id="user-item">
                                     ID: 123456789
@@ -133,7 +134,7 @@
                                     <td>In progress</td>
                                 </tr>
                             </table>
-                        </div>
+                        </div> -->
                     </div>
                     <div id="add-product-content" class="content tab" ></div>
                     <div id="user-content" class="content tab"></div>

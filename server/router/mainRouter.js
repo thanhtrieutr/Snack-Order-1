@@ -14,6 +14,7 @@ var getTodayOrder = require("../adminController/getTodayOrder");
 var checkProduct = require("../adminController/checkProduct");
 var errorHandler = require("../errorHandler/controllerError");
 var loginAdmin = require("../adminController/loginAdmin");
+var getHistory = require("../adminController/getHistory");
 var changeStatus = require("../adminController/changeStatus");
 
 
@@ -98,6 +99,10 @@ module.exports = function mainRouter(url, method, request, response, check404) {
         routeUrl: "/admin/update-product",
         routeMethod: "POST",
         routeHandler: checkProduct.updateProduct
+    },{
+        routeUrl: "/admin/history",
+        routeMethod: "POST",
+        routeHandler: getHistory.getHistory
     }, {
         routeUrl: "/admin/change-status",
         routeMethod: "POST",

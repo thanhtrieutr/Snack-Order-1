@@ -225,7 +225,6 @@ function changeStatus() {
         obj.productId = selectionList[i].id.substr(7);
         obj.orderId = orderIdList[i];
         var selectAnswer = document.getElementById(selectionList[i].id);
-        debugger
         obj.status = selectAnswer.options[selectAnswer.selectedIndex].value;
         updateList.push(obj);
     }
@@ -307,6 +306,11 @@ function createTodayOrderProduct(product, productTable) {
     </td>`;
     orderIdList.push(product.orderId);
     productTable.appendChild(newProduct);
+    var index;
+    if (product.status == "pending") index = 0;
+    else if (product.status == "accept") index = 1;
+    else index = 2;
+    document.getElementById("select-" + currentId).selectedIndex = index;
     debugger
 }
 

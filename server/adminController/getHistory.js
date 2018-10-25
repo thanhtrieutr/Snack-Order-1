@@ -158,7 +158,7 @@ function getHistory(request, response) {
                 for (var j in accountArray) {
                     if (currentOrder.user.toString() == accountArray[j]._id.toString()) {
                         var currentUsername = accountArray[j].user;
-                        obj.user.name = currentUsername;
+                        obj.user = currentUsername;
                         break;
                     }
                 }

@@ -93,7 +93,6 @@ function getHistory(request, response) {
                     }
                     resolve({token: "token"});
                 })
-                resolve(result);
             });
         } catch(error) {
             reject(error);
@@ -153,9 +152,9 @@ function getHistory(request, response) {
                 obj.month = obj.time.getMonth()+1;
                 obj.year = obj.time.getFullYear();
                 obj.hours = obj.time.getHours();
-                obj.timeString = obj.date + "/" + obj.month + "/" + obj.year;
+                obj.time = obj.date + "/" + obj.month + "/" + obj.year;
                 obj.products = currentOrder.products;
-                obj.finalPrice = currentOrder.actualTotalPrice;
+                obj.actualTotalPrice = currentOrder.actualTotalPrice;
                 for (var j in accountArray) {
                     if (currentOrder.user.toString() == accountArray[j]._id.toString()) {
                         var currentUsername = accountArray[j].user;
@@ -169,7 +168,7 @@ function getHistory(request, response) {
                     for (var k in productArray) {
                         if (obj.products[j]._id.toString() == productArray[k]._id.toString()) {
                             obj.products[j].name = productArray[k].name;
-                            obj.products[j].price = productArray[k].price;
+                            obj.products[j].price = productArray[k].priceInt;
                             obj.products[j].totalPrice = obj.products[j].price * obj.products[j].quantity;
                             break;
                         }

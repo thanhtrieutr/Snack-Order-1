@@ -22,11 +22,13 @@ function init(updateList) {
     var orderList = [];
     var productList = [];
     var statusList = [];
+    var userList = [];
     for (var i in updateList) {
         var currentList = updateList[i].orderId;
         for (var j in currentList) {
             if (orderList.indexOf(currentList[j]) == -1) {
                 orderList.push(currentList[j]);
+                userList.push(updateList[i].user);
                 productList.push([]);
                 statusList.push([]);
             }
@@ -36,6 +38,7 @@ function init(updateList) {
         }
     }
     var combineList = {};
+    combineList.userList = userList;
     combineList.orderList = orderList;
     combineList.productList = productList;
     combineList.statusList = statusList;
@@ -72,10 +75,12 @@ function changeStatus(request,response){
         });
     });
     Promise.all([collectClient, collectOrderList, collectAccountList]).then(result => {
+        debugger
         var orderListDb = result[1];
         var accountList = result[2];
         var token = result[0].token;
         var updateList = result[0].updateList;
+        var userList = result[0].user;
         var position = -1;
         for (var i = 0; i < accountList.length; i++) {
             if (token == accountList[i].token) {
@@ -93,13 +98,15 @@ function changeStatus(request,response){
         var orderList = temporaryList.orderList;
         var productList = temporaryList.productList;
         var statusList = temporaryList.statusList;
+        var userList = temporaryList.userList;
         for (var i in orderListDb) {
+            debugger
             var currentOrder = orderListDb[i];
             var position = orderList.indexOf(currentOrder._id.toString());
             if (position != -1) {
                 var currentProductList = currentOrder.products;
                 for (var j in currentProductList) {
-                    var productPosition = productList[position].indexOf(currentProductList[j]._id.toString());
+                    var productPosition = productList[position].indexOf(currentProductList[j]._id.toString() + '-' + userList[position]);
                     if (productPosition != -1) {
                         currentProductList[j].status = statusList[position][productPosition];
                     }

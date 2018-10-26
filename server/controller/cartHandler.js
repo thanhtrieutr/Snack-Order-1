@@ -109,7 +109,6 @@ function submitCart(request, response, product, accountArray) {
         });
         
         utilities.setResponseHeader(response);
-        console.log(returnBill);
         response.end(JSON.stringify(returnBill));
         return;
     }).catch(error => {

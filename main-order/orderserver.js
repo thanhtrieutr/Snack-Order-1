@@ -59,8 +59,9 @@ function submitCart() {
     http.open("POST", "http://127.0.0.1:3000/submit-cart", true);
     var currentUser = getUserInLocalAccount(user);
     var obj = {};
-    obj.cartArray = currentUser.cartArray;
-    addInTrueId(obj.cartArray);
+    var temp=Object.assign({},currentUser);
+    addInTrueId(temp.cartArray);
+    obj.cartArray = temp.cartArray;
     obj.token = localStorage.getItem("token");
     debugger;
     http.send(JSON.stringify(obj));
@@ -81,7 +82,6 @@ function submitCart() {
             }
         }
     }
-    deleteTrueId(obj.cartArray);
 }
 
 function addInTrueId(cartArray) {
@@ -93,10 +93,10 @@ function addInTrueId(cartArray) {
     debugger;
 }
 
-function deleteTrueId(cartArray) {
-    cartArray.forEach(product => {
-        var checkBox = getById("checkbox-" + product.productID);
-        product.productTrueID=checkBox.getAttribute("data-position");
-    });
-    debugger;
-}
+// function deleteTrueId(cartArray) {
+//     cartArray.forEach(product => {
+//         var checkBox = getById("checkbox-" + product.productID);
+//         product.productTrueID=checkBox.getAttribute("data-position");
+//     });
+//     debugger;
+// }

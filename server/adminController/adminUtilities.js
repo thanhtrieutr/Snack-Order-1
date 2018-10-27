@@ -29,6 +29,27 @@ function savePhoto(object, filename, data, callback) {
     });
 }
 
+function emailCheck(user) {
+    if (user.length < 6 || user.length > 100) {
+        return false;
+    }
+    return /^[a-zA-Z0-9_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(user)
+}
+
+function passwordCheck(password) {
+    if (password.length < 8 || password.length > 16) {
+        return false;
+    }
+    return /^[[a-zA-Z0-9!#$%&'*+-/=?^_`{|}]+$/.test(password);
+}
+
+function validateAccount(account) {
+    if (emailCheck(account.user) && passwordCheck(account.password))
+        return true;
+    return false;
+}
+
 module.exports = {
-    savePhoto: savePhoto
+    savePhoto: savePhoto,
+    validateAccount: validateAccount
 }

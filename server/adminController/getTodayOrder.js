@@ -9,7 +9,9 @@ var errorHandler = require("../errorHandler/controllerError");
 //     {name: "Snack something", amount: 2, price: "19.000đ", totalPrice: "38.000đ", user: "HuuDuc", state: "In progress"}
 // ];
 function clone(obj) {
-    if (null == obj || "object" != typeof obj) return obj;
+    if (null == obj || "object" != typeof obj) {
+        return obj;
+    }
     var copy = obj.constructor();
     for (var attr in obj) {
         if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
@@ -18,13 +20,15 @@ function clone(obj) {
 }
 
 function commonProduct(a, b) {
-    if (a.productId.equals(b.productId) && a.user == b.user && a.status == b.status)
+    if (a.productId.equals(b.productId) && a.user == b.user && a.status == b.status) {
         return true;
+    }
     return false;
 }
 function getMax(a, b) {
-    if (a >= b)
+    if (a >= b) {
         return a;
+    }
     return b;
 }
 function getTodayOrder(request, response) {

@@ -9,6 +9,7 @@ body {
     width: 100%;
     padding: 20px;
     background: white;
+    cursor: pointer;
 }
 
 .display-item {

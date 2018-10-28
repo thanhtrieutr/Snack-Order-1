@@ -156,7 +156,6 @@ function checkProduct(request, response) {
         var obj = {};
         obj.name = productName;
         obj.priceInt = productPrice;
-        obj.id = productList.length+1;
         obj.price = displayPrice(productPrice);
         crud.createDocument("product", obj, err => {
             if (err) throw err;

@@ -1,5 +1,5 @@
 function checkAdminLogInAlready() {
-    var token = localStorage.getItem("token");
+    var token = { token: localStorage.getItem("token")};
     var http = new XMLHttpRequest();
     http.open('POST', "http://127.0.0.1:3000/admin/check-token", true);
     http.send(JSON.stringify(token));

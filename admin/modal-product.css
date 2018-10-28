@@ -45,6 +45,7 @@
   background: darkgray;
 }
 .modal-card-body {
+  overflow-x: hidden;
   overflow-y: auto;
 }
 .name {

@@ -1,8 +1,8 @@
 
 
-function loadNewProductData(currentID) {
+function loadNewProductData(currentID, trueID) {
   adminGetProductInfo(function (result) {
-      showNewProductData(result, currentID);
+      showNewProductData(result, currentID, trueID);
   }); 
 }
 
@@ -22,7 +22,7 @@ function adminGetProductInfo(callback) {
   };
 }
 
-function sendNewProductPrice(result, currentID) {
+function sendNewProductPrice(result, currentID, trueID) {
   var http = new XMLHttpRequest();
   http.open('POST', "http://127.0.0.1:3000/admin/update-product", true);
   http.send(JSON.stringify(result));
@@ -30,7 +30,7 @@ function sendNewProductPrice(result, currentID) {
       if (this.readyState == 4 && this.status == 200) {
           var result = this.response;
           alert("Update info successful");
-          loadNewProductData(currentID);
+          loadNewProductData(currentID, trueID);
       }
       if (this.readyState == 4 && this.status != 200)
           alertError(this.response);
@@ -39,6 +39,7 @@ function sendNewProductPrice(result, currentID) {
 
 function submitImage(currentID) {
   var image = document.getElementById("edit-product-image-"+currentID).files[0];
+  var trueImageID = document.getElementById("edit-product-image-"+currentID).getAttribute("data-id");
   var reader = new FileReader();
   reader.readAsDataURL(image);
 
@@ -50,7 +51,7 @@ function submitImage(currentID) {
       var http = new XMLHttpRequest();
       var object = {        
           token: localStorage.getItem("token"),
-          id: currentID,
+          id: trueImageID,
           productImage: imageObject
       };
       http.open('POST', "http://127.0.0.1:3000/admin/update-product", true);
@@ -59,7 +60,7 @@ function submitImage(currentID) {
           if (this.readyState == 4 && this.status == 200) {
               if (this.response != "Wrong Data Input") {
                   alert("Update image successful");   
-                  loadNewProductData(currentID);
+                  loadNewProductData(currentID, trueImageID);
               }
           }
           else if (this.readyState == 4 && this.status != 200) {
@@ -70,14 +71,14 @@ function submitImage(currentID) {
 }
 
 function checkPrice(productPrice){
-if (productPrice == "" || productPrice == null || productPrice.length > 6) {
-    return true; 
-} 
-if (isNaN(productPrice)) 
-{
-    return true
-}
-return false;
+    if (productPrice == "" || productPrice == null || productPrice.length > 6) {
+        return true; 
+    } 
+    if (isNaN(productPrice)) 
+    {
+        return true
+    }
+    return false;
 }
 
 function editMode (currentID){
@@ -87,7 +88,9 @@ function editMode (currentID){
 }
 
 function showMode (currentID){
-  var result = {}, validInput = true ;
+  var result = {};
+  var validInput = true ;
+  var trueProductID = document.getElementById("product-price-"+currentID).getAttribute("data-id");
   var newPrice = document.getElementById("product-price-"+currentID).value;
   if (checkPrice(newPrice) || newPrice == "") {
       validInput = false;
@@ -95,29 +98,39 @@ function showMode (currentID){
       return;
   } else {
       result.token = localStorage.getItem("token");
-      result.id = currentID;
+      result.id = trueProductID;
       result.productPrice = newPrice;
   }
   if (validInput) {
       document.getElementById("product-price-"+currentID).disabled = true;
       document.getElementById("edit-mode-"+currentID).disabled = false;
       document.getElementById("show-mode-"+currentID).disabled = true;  
-      sendNewProductPrice(result, currentID);
+      sendNewProductPrice(result, currentID, trueProductID);
   } else {
-      loadNewProductData(currentID); 
+      loadNewProductData(currentID, trueProductID); 
   }
 }
 
+function checkEnterKey(event, currentID) {
+    if (event.keyCode == 13) {
+
+        showMode(currentID);
+    }
+  }
+  
+
 function defaultInputStatus (currentID) {
+    var trueModalID = document.getElementById("product-price-"+currentID).getAttribute("data-id");
+    loadNewProductData(currentID, trueModalID); 
     document.getElementById("product-price-"+ currentID).disabled = true;
     document.getElementById("edit-mode-"+ currentID).disabled = false;
     document.getElementById("show-mode-"+ currentID).disabled = true;
 }
 
-function showNewProductData(result, currentID) {
+function showNewProductData(result, currentID, trueID) {
   var position;
   for (var i=0; i<result.length; ++i) {
-      if (currentID == result[i]._id) {
+      if (trueID == result[i]._id) {
           position = i;
       }
   }
@@ -125,7 +138,6 @@ function showNewProductData(result, currentID) {
   var newProductImage = document.getElementById("product-img-" + currentID);
   newProductImage.setAttribute("src", result[position].img);
   priceDisplay.value = result[position].price;
-  
 }
 
 

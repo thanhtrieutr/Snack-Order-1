@@ -1,6 +1,8 @@
 loadTodayOrders();
 var orderIdList = [];
 var userList = [];
+var productRank;
+var userRank;
 
 
 function showDetail(id, labelID) {
@@ -27,8 +29,7 @@ function showModal(id, labelID){
     }
     document.getElementById(labelID).style.display = "none";
     current.style.display = "none";
-    if (current.style.display == "none") {      
-        
+    if (current.style.display == "none") {        
         document.getElementById(labelID).style.display = "block";
         current.style.display = "inline-block";
     }
@@ -66,6 +67,7 @@ function removeAll() {
 
 //products
 function loadProduct() {
+    productRank = 0;
     var choiceList = document.getElementsByClassName("choice");
     for (var i = 0; i < choiceList.length; i++) {
         choiceList[i].className = choiceList[i].className.replace(" is-active", "");
@@ -100,10 +102,11 @@ function loadProduct() {
 
 //Function create new modal to check product information with product database
 function createNewProduct(product, currentID) {
+    productRank++;
     var newProduct = document.createElement('div');
     var productDetail = document.createElement('div');
     productDetail.innerHTML = 
-    `<div id="display-container" onclick="showModal('product-detail-${currentID}', 'product-detail-label')">
+    `<div id="display-container" onclick="showModal('product-detail-${productRank}', 'product-detail-label')">
         <table class="table is-fullwidth">
             <td class="display-item" style="width: 60%;">${product.name}</td>
             <td class="display-item" style="width: 40%;">${product.price}</td>
@@ -111,7 +114,7 @@ function createNewProduct(product, currentID) {
     </div>`
     var productTable = document.createElement('div');
     productTable.innerHTML = 
-    `<div id="product-detail-${currentID}" class="modal">
+    `<div id="product-detail-${productRank}" class="modal">
          <div class= "columns is-mobile">
             <div class="modal-background"></div>
             <div class="modal-card ">
@@ -123,8 +126,8 @@ function createNewProduct(product, currentID) {
                 <div id="product-picture" class="column is-5">
                     <div id="product-description"> <u> <b> Product Image </b> </u> </div>
                     <div id="product-border-box">
-                        <img id="product-img-${currentID}" class="product" src=${product.img} alt="Product Image">
-                        <input type="file" id="edit-product-image-${currentID}" onchange="submitImage('${currentID}')">  
+                        <img id="product-img-${productRank}" class="product" src=${product.img} alt="Product Image">
+                        <input type="file" id="edit-product-image-${productRank}" data-id="${currentID}" onchange="submitImage('${productRank}')">  
                     </div>
                 </div>
                 <div id="product-detail-information" class="column is-7">
@@ -136,20 +139,19 @@ function createNewProduct(product, currentID) {
                         </div>  
                         <div id="product-information" class="columns is-mobile">
                             <label class="name column is-3"> <b> Price: </b> </label>
-                            <input id="product-price-${currentID}" class="text column is-7" value="${product.price}" disabled> </input>
+                            <input id="product-price-${productRank}" class="text column is-7" data-id="${currentID}" value="${product.price}" onkeypress="checkEnterKey(event, '${productRank}')" disabled> </input>
                         </div>  
                     </div>           
                 </section>
                 <footer class="modal-card-foot">
                     <div class="columns is-mobile is-multiline">
-                    <button class="button column is-12-mobile" id="edit-mode-${currentID}" onclick="editMode('${currentID}')"> <b> Edit Product </b> </button>
-                    <button class="button column is-12-mobile" id="show-mode-${currentID}" onclick="showMode('${currentID}')" disabled> <b> Save Info  </b> </button>
-                    <button id="cancel-edit" class="button column is-12-mobile" onclick="closeModal('product-detail-${currentID}', 'product-detail-label');defaultInputStatus('${currentID}')"> <b> Close </b> </button>
+                    <button class="button column is-12-mobile" id="edit-mode-${productRank}" onclick="editMode('${productRank}')"> <b> Edit Product </b> </button>
+                    <button class="button column is-12-mobile" id="show-mode-${productRank}" onclick="showMode('${productRank}')" disabled> <b> Save Info  </b> </button>
+                    <button id="cancel-edit" class="button column is-12-mobile" onclick="closeModal('product-detail-${productRank}', 'product-detail-label');defaultInputStatus('${productRank}')"> <b> Close </b> </button>
                     </div>
                 </footer>
             </div>
         </div>
-        <script src="../admin/edit-product.js"> </script>
     </div>`
     newProduct.appendChild(productDetail);
     newProduct.appendChild(productTable);
@@ -158,6 +160,7 @@ function createNewProduct(product, currentID) {
 
 //user
 function loadUser() {
+    userRank = 0;
     var choiceList = document.getElementsByClassName("choice");
     for (var i = 0; i < choiceList.length; i++) {
         choiceList[i].className = choiceList[i].className.replace(" is-active", "");
@@ -192,17 +195,18 @@ function loadUser() {
 
 //Function create modal to check user information with user database
 function createNewUser(user, currentID) {
+    userRank++;
     var newUser = document.createElement('div');
     var userDetail = document.createElement('div');
     userDetail.innerHTML = 
-    `<div id="display-container" onclick="showModal('user-detail-${currentID}', 'user-detail-label')">
+    `<div id="display-container" onclick="showModal('user-detail-${userRank}', 'user-detail-label')">
         <table class="table is-fullwidth">
             <td class="display-item" style="width: 100%;">${user.user}</td>
         </table>
     </div>`
     var userTable = document.createElement('div');
     userTable.innerHTML = 
-    `<div id="user-detail-${currentID}" class="modal">
+    `<div id="user-detail-${userRank}" class="modal">
         <div class="columns is-mobile">
             <div class="modal-background"></div>
             <div class="modal-card">
@@ -243,7 +247,7 @@ function createNewUser(user, currentID) {
                 </div>
                 </section>
                 <footer class="modal-card-foot">
-                    <button class="button" onclick="closeModal('user-detail-${currentID}', 'user-detail-label')"> <b> Close </b> </button>
+                    <button class="button" onclick="closeModal('user-detail-${userRank}', 'user-detail-label')"> <b> Close </b> </button>
                 </footer>
             </div>
         </div>

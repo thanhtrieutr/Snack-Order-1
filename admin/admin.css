@@ -1,4 +1,4 @@
-#body {
+body {
     height: 100%;
 }
 
@@ -28,9 +28,6 @@
     width: 100%;
 }
 
-.navbar {
-    background: transparent !important;
-}
 
 .logo-container {
     height: auto;
@@ -76,9 +73,7 @@ img {
     margin-bottom: 10px;
     width: 100px;
 }
-#product-content,
-#user-content {
-    /* max-height: 50%; */
+#product-content, #user-content {
     overflow-y: auto;
 }
 
@@ -89,7 +84,6 @@ img {
 .navbar-burger {
     margin-left: 0;
     margin-right: auto !important;
-    /* display: inline-block; */
 }
 
 .title {
@@ -141,4 +135,17 @@ input[type="file"] {
 
 .content {
     z-index: 1 !important;
+}
+
+.sticky {
+    background-color: #EFF0EB;
+    position: sticky;
+    top: 0;
+}
+
+.modal-card {
+    margin-top: 40px;
+}
+.modal-card-title {
+    text-align: center;
 }

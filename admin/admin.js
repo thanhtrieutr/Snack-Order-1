@@ -2,6 +2,7 @@ loadTodayOrders();
 var orderIdList = [];
 var userList = [];
 
+
 function showDetail(id, labelID) {
     var current = document.getElementById(id);
     if (current.style.display == "none" || current.style.display == "") {
@@ -15,8 +16,35 @@ function showDetail(id, labelID) {
         document.getElementById(labelID).style.display = "none";
         current.style.display = "none";
     }
-
 }
+
+// Show and close modal of product and user 
+function showModal(id, labelID){
+    var current = document.getElementById(id);
+    var temporaryArray = document.getElementsByClassName("modal");
+    for (var i = 0; i < temporaryArray.length; i++) {
+        document.getElementById(temporaryArray[i].id).style.display = "none";
+    }
+    document.getElementById(labelID).style.display = "none";
+    current.style.display = "none";
+    if (current.style.display == "none") {      
+        
+        document.getElementById(labelID).style.display = "block";
+        current.style.display = "inline-block";
+    }
+}
+function closeModal(id, labelID) {
+    var current = document.getElementById(id);
+    var temporaryArray = document.getElementsByClassName("modal");
+    if (current.style.display == "inline-block") {      
+        for (var i = 0; i < temporaryArray.length; i++) {
+            document.getElementById(temporaryArray[i].id).style.display = "none";
+        }
+        document.getElementById(labelID).style.display = "none";
+        current.style.display = "none";
+    }
+}
+//------------------------------------------------------------------------------
 
 function removeOneContainer(id) {
     var myNode = document.getElementById(id);
@@ -70,33 +98,58 @@ function loadProduct() {
     });
 }
 
+//Function create new modal to check product information with product database
 function createNewProduct(product, currentID) {
     var newProduct = document.createElement('div');
     var productDetail = document.createElement('div');
-    productDetail.innerHTML =
-        `<div id="display-container" onclick="showDetail('product-detail-${currentID}', 'product-detail-label')">
+    productDetail.innerHTML = 
+    `<div id="display-container" onclick="showModal('product-detail-${currentID}', 'product-detail-label')">
         <table class="table is-fullwidth">
             <td class="display-item" style="width: 60%;">${product.name}</td>
             <td class="display-item" style="width: 40%;">${product.price}</td>
         </table>
     </div>`
     var productTable = document.createElement('div');
-    productTable.innerHTML =
-        `<div id="product-detail-${currentID}" class="detail">
-        <table class="table is-striped is-fullwidth">
-            <tr class="has-background-grey-lighter">
-                <th style="width: 50%;">Product name</th>
-                <th style="width: 20%;">Unit price</th>
-                <th style="width: 30%;">Image</th>
-            </tr> 
-            <tr>
-                <td style="width: 50%;">${product.name}</td>
-                <td style="width: 20%;">${product.price}</td>
-                <td style="width: 30%;">
-                    <img class="product-img" src="${product.img}">
-                </td>
-            </tr>
-        </table>
+    productTable.innerHTML = 
+    `<div id="product-detail-${currentID}" class="modal">
+         <div class= "columns is-mobile">
+            <div class="modal-background"></div>
+            <div class="modal-card ">
+                <header class="modal-card-head">
+                    <p class="modal-card-title"> <b> Product Information </b> </p>
+                </header>
+                <section class="modal-card-body">
+                <div class="columns">
+                <div id="product-picture" class="column is-5">
+                    <div id="product-description"> <u> <b> Product Image </b> </u> </div>
+                    <div id="product-border-box">
+                        <img id="product-img-${currentID}" class="product" src=${product.img} alt="Product Image">
+                        <input type="file" id="edit-product-image-${currentID}" onchange="submitImage('${currentID}')">  
+                    </div>
+                </div>
+                <div id="product-detail-information" class="column is-7">
+                    <div id="product-description"> <u> <b> Product Details </b> </u> </div>
+                    <div id="product-information-box" class="is-multiline">
+                        <div id="product-information" class="columns is-mobile">
+                            <label class="name column is-3"> <b>Name: </b> </label>
+                            <p id="product-name" class="text column is-9" > ${product.name} </p>
+                        </div>  
+                        <div id="product-information" class="columns is-mobile">
+                            <label class="name column is-3"> <b> Price: </b> </label>
+                            <input id="product-price-${currentID}" class="text column is-7" value="${product.price}" disabled> </input>
+                        </div>  
+                    </div>           
+                </section>
+                <footer class="modal-card-foot">
+                    <div class="columns is-mobile is-multiline">
+                    <button class="button column is-12-mobile" id="edit-mode-${currentID}" onclick="editMode('${currentID}')"> <b> Edit Product </b> </button>
+                    <button class="button column is-12-mobile" id="show-mode-${currentID}" onclick="showMode('${currentID}')" disabled> <b> Save Info  </b> </button>
+                    <button id="cancel-edit" class="button column is-12-mobile" onclick="closeModal('product-detail-${currentID}', 'product-detail-label');defaultInputStatus('${currentID}')"> <b> Close </b> </button>
+                    </div>
+                </footer>
+            </div>
+        </div>
+        <script src="../admin/edit-product.js"> </script>
     </div>`
     newProduct.appendChild(productDetail);
     newProduct.appendChild(productTable);
@@ -137,38 +190,63 @@ function loadUser() {
     });
 }
 
+//Function create modal to check user information with user database
 function createNewUser(user, currentID) {
     var newUser = document.createElement('div');
     var userDetail = document.createElement('div');
-    userDetail.innerHTML =
-        `<div id="display-container" onclick="showDetail('user-detail-${currentID}', 'user-detail-label')">
+    userDetail.innerHTML = 
+    `<div id="display-container" onclick="showModal('user-detail-${currentID}', 'user-detail-label')">
         <table class="table is-fullwidth">
             <td class="display-item" style="width: 100%;">${user.user}</td>
         </table>
     </div>`
     var userTable = document.createElement('div');
-    userTable.innerHTML =
-        `<div id="user-detail-${currentID}" class="detail">
-        <table class="table is-striped is-fullwidth">
-            <tr class="has-background-grey-lighter">
-                <th style="width: 16%;">Username</th>
-                <th style="width: 16%;">Full name</th>
-                <th style="width: 16%;">Phone</th>
-                <th style="width: 20%;">Address</th>
-                <th style="width: 16%;">Birthday</th>
-                <th style="width: 16%;">Avatar</th>
-            </tr> 
-            <tr>
-                <td style="width: 16%;">${user.user}</td>
-                <td style="width: 16%;">${user.fullName}</td>
-                <td style="width: 16%;">${user.phoneNumber}</td>
-                <td style="width: 20%;">${user.address}</td>
-                <td style="width: 16%;">${user.birthday}</td>
-                <td style="width: 16%;">
-                    <img src="${user.avatarAddress}">
-                </td>
-            </tr>
-        </table>
+    userTable.innerHTML = 
+    `<div id="user-detail-${currentID}" class="modal">
+        <div class="columns is-mobile">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <p class="modal-card-title"> <b> User Information </b> </p>
+                </header>
+                <section class="modal-card-body">
+                <div class="columns">
+                    <div id="profile-user-picture" class="column is-5">
+                        <div id="profile-description"> <u> <b> Profile Picture </b> </u> </div>
+                        <div id="profile-border-box">
+                            <img id="avatar" class="avatar" src=${user.avatarAddress} alt="User Avatar">
+                        </div>
+                    </div>
+                <div id="profile-user-information" class="column is-7">
+                    <div id="profile-description"> <u> <b> Profile Information </b> </u> </div>
+                    <div id="user-information-box" class="is-multiline">
+                        <div id="user-information" class="columns is-mobile">
+                            <div class="property column is-3"> <b> Name: </b> </div>
+                            <div class="description column is-9">${user.fullName} </div>
+                        </div>  
+                        <div id="user-information" class="columns is-mobile">
+                            <div class="property column is-3"> <b> Email:</b> </div>
+                            <div class="description column is-9"> ${user.user} </div>
+                        </div>  
+                        <div id="user-information" class="columns is-mobile">
+                            <div class="property column is-3"> <b> Phone:</b> </div>
+                            <div class="description column is-9"> ${user.phoneNumber} </div>
+                        </div> 
+                        <div id="user-information" class="columns is-mobile">
+                            <div class="property column is-3"> <b> Birthday:</b> </div>
+                            <div class="description column is-9"> ${user.birthday} </div>
+                        </div> 
+                        <div id="user-information" class="columns is-mobile">
+                            <div class="property column is-3"> <b> Address:</b> </div>
+                            <div class="description column is-9"> ${user.address} </div>
+                        </div>          
+                </div>
+                </section>
+                <footer class="modal-card-foot">
+                    <button class="button" onclick="closeModal('user-detail-${currentID}', 'user-detail-label')"> <b> Close </b> </button>
+                </footer>
+            </div>
+        </div>
     </div>`
     newUser.appendChild(userDetail);
     newUser.appendChild(userTable);
@@ -318,7 +396,6 @@ function createTodayOrderProduct(product, productTable) {
     else if (product.status == "accept") index = 1;
     else index = 2;
     document.getElementById("select-" + currentId + "-" + product.user).selectedIndex = index;
-    debugger
 }
 
 //Fix burger responsive ---------------------------------------------------------------------
@@ -352,7 +429,7 @@ function fixBurgerToMobile(menu, body) {
     menu.style.position = "fixed";
     menu.style.width = "100%";
     menu.style.top = "52px";
-    body.style.overflowY = "hidden";
+    // body.style.overflowY = "auto";
 }
 //> Set UI when resize window
 function fixBurgerDisplay(billOrder) {

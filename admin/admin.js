@@ -302,7 +302,6 @@ function changeStatus() {
     var selectionList = document.getElementsByClassName("selections");
     var updateList = [];
     for (var i = 0; i < selectionList.length; i++) {
-        debugger
         var obj = {};
         obj.productId = selectionList[i].id.substr(7);
         obj.orderId = orderIdList[i];
@@ -321,8 +320,6 @@ function changeTodayStatus(updateList) {
         var obj = {};
         obj.token = localStorage.getItem("token");
         obj.updateList = updateList;
-        debugger
-        console.log(obj);
         http.send(JSON.stringify(obj));
         http.onload = () => resolve(http);
         http.onerror = () => reject(http.response);

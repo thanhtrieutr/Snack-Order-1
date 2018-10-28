@@ -2,21 +2,29 @@ var crud = require("../utilities/databaseCRUD");
 var utilities = require("../utilities/utilities");
 var errorHandler = require("../errorHandler/controllerError");
 
-function checkLogin(request, response, accountArray) {
+function checkAdminLogin(request, response) {
     var getAccount = new Promise(function(resolve, reject) {
         utilities.collectDataFromPost(request, result => {
             if (result instanceof Error) {
                 reject(result);
             }
-            var position = utilities.findValidUserPosition(accountArray, result);
-            if (position == -1) {
-                reject (new Error("Email or Password is incorrect"));
+            if (typeof(result) != "object") {
+                reject(new Error ("Wrong Data Input"));
             }
-            resolve(accountArray[position]);
+            resolve(result);
         });
     });
 
-    getAccount.then(admin => {
+    getAccount.then((result) => {
+        return new Promise((resolve, reject) => {
+            crud.readOneDocument("adminAccount", result, account => {
+                if (account == null) {
+                    reject( new Error("Authentication Error"));
+                }
+                resolve(account);
+            });
+        });
+    }).then(admin => {
         utilities.createToken((newToken) => {
             newToken += Buffer.from(admin.user).toString('base64');
             var currentId = admin._id;
@@ -25,107 +33,73 @@ function checkLogin(request, response, accountArray) {
                 console.log("Current token: " + newToken);
             });
         });
-    }).catch(error => {
+    }).catch (error => {
         errorHandler(error, response);
         return;
     });
 }
 
-function checkAdminLogin(request, response) {
-    var promise = new Promise(function(resolve, reject) {
-        // don't read 1 time at beginning because accounts can change
-        crud.readDatabase("adminAccount", function(accountArray, error) {
-            if (error) {
-                reject(error);
-            } 
-            else {
-                checkLogin(request, response, accountArray);
-            }
-        });
-    });
-    promise.catch (error => {
-        errorHandler(error, response);
-        return;
-    })
-}
-
-function checkToken(request, response, accountArray) {
-    var getToken = new Promise(function(resolve, reject) {
+function checkAdminToken(request, response) {
+    var getAccount = new Promise(function(resolve, reject) {
         utilities.collectDataFromPost(request, result => {
             if (result instanceof Error) {
-                reject(new Error ('Wrong Data Input'));
+                reject(result);
             }
-            var position = utilities.findAccountByToken(accountArray, result);
-            if (position != -1) {
-                utilities.setResponseHeader(response);
-                response.end(JSON.stringify(accountArray[position].user));
+            if (typeof(result) != "object") {
+                reject(new Error ("Wrong Data Input"));
             }
-            else {
-                reject (new Error("Authentication Error"));
-            }  
+            resolve(result);
         });
-    });
-    getToken.catch (error => {
-        errorHandler(error,response);
-        return;
-    })
-}
-function checkAdminToken(request, response) {
-    // don't read 1 time at beginning because accounts can change
-    var promise = new Promise(function(resolve, reject) {
-        crud.readDatabase("adminAccount", function(accountArray, error) { 
-            if (error) {
-                reject(error);
-            } 
-            else {
-                checkToken(request, response, accountArray);
-            }
-        })
-    })
-    promise.catch (error => {
-        errorHandler(error,response);
-        return;
-    })
-}
-function deleteToken(request, response) {
-    var collectClient = new Promise((resolve, reject) => { 
-        try {
-            utilities.collectDataFromPost(request, result => {
-                resolve(result);
-            });
-        }
-        catch (error) {
-            reject(error);
-            return;
-        }
-    });
-    var collectAdminAccount = new Promise((resolve, reject) => {
-        try {
-            crud.readDatabase("adminAccount", (accountArray) => {
-                resolve(accountArray);
-            });
-        }
-        catch (error) {
-            reject(error);
-            return;
-        }
     });
 
-    Promise.all([collectClient, collectAdminAccount]).then(result => {
-        var token = result[0], accountArray = result[1];
-        var position = utilities.findAccountByToken(accountArray, token);
-        if (position == -1) {
-            throw new Error("Account Doesn't Exist");
-        }
-        utilities.createToken((newToken) => {
-            newToken += Buffer.from(accountArray[position].user).toString('base64');
-            var currentId = accountArray[position]._id;
-            crud.updateOneDocument("adminAccount", {_id: currentId}, {token: newToken}, () => {
-                response.end("Success!"); 
+    getAccount.then((result) => {
+        return new Promise((resolve, reject) => {
+            crud.readOneDocument("adminAccount", result, account => {
+                if (account == null) {
+                    reject( new Error("Authentication Error"));
+                }
+                resolve(account);
             });
         });
-    }).catch(error => {
-        errorHandler(error,response);
+    }).then(admin => {
+        response.end(JSON.stringify(admin.user));
+    }).catch (error => {
+        errorHandler(error, response);
+        return;
+    });
+}
+function deleteToken(request, response) {
+    var getAccount = new Promise(function(resolve, reject) {
+        utilities.collectDataFromPost(request, result => {
+            if (result instanceof Error) {
+                reject(result);
+            }
+            if (typeof(result) != "object") {
+                reject(new Error ("Wrong Data Input"));
+            }
+            resolve(result);
+        });
+    });
+
+    getAccount.then((result) => {
+        return new Promise((resolve, reject) => {
+            crud.readOneDocument("adminAccount", result, account => {
+                if (account == null) {
+                    reject( new Error("Account Doesn't Exist"));
+                }
+                resolve(account);
+            });
+        });
+    }).then(admin => {
+        utilities.createToken((newToken) => {
+            newToken += Buffer.from(admin.user).toString('base64');
+            var currentId = admin._id;
+            crud.updateOneDocument("adminAccount", {_id: currentId}, {token: newToken}, () => {
+                response.end("Success!");
+            });
+        });
+    }).catch (error => {
+        errorHandler(error, response);
         return;
     });
 }

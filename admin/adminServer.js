@@ -1,6 +1,6 @@
 checkAdminLogin();
 function checkAdminLogin() {
-    var token = localStorage.getItem("token");
+    var token = {token: localStorage.getItem("token")};
     var http = new XMLHttpRequest();
     http.open('POST', "http://127.0.0.1:3000/admin/check-token", true);
     http.send(JSON.stringify(token));
@@ -18,8 +18,8 @@ function checkAdminLogin() {
 function removeAdminTokenOnServe(token) {
     var http = new XMLHttpRequest();
     http.open("POST", "http://127.0.0.1:3000/admin/remove-token", true);
-    //let obj = {};
-    http.send(JSON.stringify(token));
+    obj = {token: token};
+    http.send(JSON.stringify(obj));
     http.onreadystatechange = function() {
         if (this.readyState == 4) {
             var result = this.response;

@@ -259,6 +259,7 @@ function createNewUser(user, currentID) {
 
 //today-order
 function loadTodayOrders() {
+    productRank=0;
     orderIdList = [];
     userList = [];
     var choiceList = document.getElementsByClassName("choice");
@@ -307,7 +308,7 @@ function changeStatus() {
     var updateList = [];
     for (var i = 0; i < selectionList.length; i++) {
         var obj = {};
-        obj.productId = selectionList[i].id.substr(7);
+        obj.productId = selectionList[i].getAttribute("data-id");
         obj.orderId = orderIdList[i];
         obj.user = userList[i];
         var selectAnswer = document.getElementById(selectionList[i].id);
@@ -382,7 +383,7 @@ function createTodayOrderProduct(product, productTable) {
     <td>${product.time}</td>
     <td>
         <div class="select">
-            <select class="selections" id="select-${currentId}-${product.user}">
+            <select class="selections" id="select-${productRank}-${product.user}" data-id="${currentId}">
             <option value="pending">pending</option>
             <option value="accept">accept</option>
             <option value="reject">reject</option>
@@ -396,7 +397,7 @@ function createTodayOrderProduct(product, productTable) {
     if (product.status == "pending") index = 0;
     else if (product.status == "accept") index = 1;
     else index = 2;
-    document.getElementById("select-" + currentId + "-" + product.user).selectedIndex = index;
+    document.getElementById("select-" + productRank + "-" + product.user).selectedIndex = index;
 }
 
 //Fix burger responsive ---------------------------------------------------------------------
@@ -423,14 +424,12 @@ function fixBurgerToDesktop(menu, body) {
     menu.style.position = "relative";
     menu.style.width = "16.66667%";
     menu.style.top = "0";
-    // body.style.overflowY = "auto";
 }
 
 function fixBurgerToMobile(menu, body) {
     menu.style.position = "fixed";
     menu.style.width = "100%";
     menu.style.top = "52px";
-    // body.style.overflowY = "auto";
 }
 //> Set UI when resize window
 function fixBurgerDisplay(billOrder) {
@@ -715,6 +714,7 @@ function loadOrderHistory() {
         var listProduct = JSON.parse(response);
         var orderContainer = document.getElementById("order-content");
         var currentId = 0;
+        listProduct.reverse();
         listProduct.forEach(oneOrder => {
             var oneUserContainer = createUserContainer(oneOrder, currentId);
             var oneOrderDetail = createOrderDetail(oneOrder, currentId);

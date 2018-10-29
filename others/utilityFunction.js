@@ -35,7 +35,8 @@ function findUserPosition(localAccount, user) {
 function checkToken(token, callback) {
     var http = new XMLHttpRequest();
     http.open('POST', "http://127.0.0.1:3000/check-token", true);
-    http.send(JSON.stringify(token));
+    var obj = {token: token};
+    http.send(JSON.stringify(obj));
     http.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
             var result = JSON.parse(this.response);

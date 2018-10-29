@@ -8,7 +8,8 @@ getById("order-button").addEventListener('click', submitCart);
 function removeTokenOnServe(token) {
     var http = new XMLHttpRequest();
     http.open("POST", "http://127.0.0.1:3000/remove-token", true);
-    http.send(JSON.stringify(token));
+    var obj = {token: token};
+    http.send(JSON.stringify(obj));
     http.onreadystatechange = function() {
         if (this.readyState == 4) {
             var result = this.response;

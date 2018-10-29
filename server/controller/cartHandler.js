@@ -84,7 +84,7 @@ function submitCart(request, response, product, accountArray) {
             }
             for (var j in product) {
                 // find match 
-                if (result.cartArray[i].productID == product[j].id) {
+                if (result.cartArray[i].productTrueID == product[j]._id.toString()) {
                     checkProduct = 1;
                     // calculate total price
                     var currentPrice = product[j].priceInt;
@@ -109,7 +109,6 @@ function submitCart(request, response, product, accountArray) {
         });
         
         utilities.setResponseHeader(response);
-        console.log(returnBill);
         response.end(JSON.stringify(returnBill));
         return;
     }).catch(error => {

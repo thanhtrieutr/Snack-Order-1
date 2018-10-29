@@ -32,6 +32,12 @@ var product = [
     {name: "Snack cua Oishi vị sốt chua ngọt 45g", price: "6.000 ₫", img: "../images/Oishi-Cua-Chua-Ngot.jpg", priceInt: 6000 },
     {name: "Snack bắp ngọt Oishi 42g", price: "6.000 ₫", img: "../images/Oishi-Bap-Ngot.jpg", priceInt: 6000 },
     {name: "Snack Oishi vị hành tây 42g", price: "6.000 ₫", img: "../images/Oishi-Hanh-Tay.jpg", priceInt: 6000 },
+    {name: "Snack Poca Partyz phồng tôm  33g", price: "5.000 ₫", img: "../images/Poca-Partyz-Phong-Tom.jpg", priceInt: 5000 },
+    {name: "Snack Poca Partyz vị bò lúc lắc 40g", price: "5.000 ₫", img: "../images/Poca-Partyz-Vi-Bo-Luc-Lac.jpg", priceInt: 5000 },
+    {name: "Snack Poca Partyz vị tôm hùm nướng 40g", price: "5.000 ₫", img: "../images/Poca-Partyz-Vi-Tom-Hum-Nuong.jpg", priceInt: 5000 },
+    {name: "Snack bắp rang Puff Corn vị socola 45g", price: "6.000 ₫", img: "../images/Puff-Corn-Chocolate.jpg", priceInt: 6000 },
+    {name: "Snack Oishi vị cà chua 40g", price: "6.000 ₫", img: "../images/Oishi-Ca-Chua.jpg", priceInt: 6000 },
+    {name: "Snack khoai tây Oishi vị tự nhiên 40g", price: "6.000 ₫", img: "../images/Oishi-Tu-Nhien.jpg", priceInt: 6000 }
 ];
 var accountArray = [
     {

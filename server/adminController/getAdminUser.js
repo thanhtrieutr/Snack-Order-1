@@ -8,6 +8,9 @@ function getAdminUser(request, response) {
             if (result instanceof Error) {
                 reject(result);
             }
+            if (typeof(result) != "object" || result == null) {
+                reject(new Error ("Wrong Data Input"));
+            }
             resolve(result);
         });
     });
@@ -21,31 +24,18 @@ function getAdminUser(request, response) {
             }
         });
     });
-    var collectAccountList = new Promise(function(resolve, reject) {
-        crud.readDatabase("adminAccount", function(object,error) {
-            if (error) {
-                reject(error);
-            } 
-            else {
-                resolve(object);
-            }
+    Promise.all([collectClient, collectUserList]).then(result => {
+        return new Promise((resolve, reject) => {
+            var obj = {token : result[0].token};
+            crud.readOneDocument("adminAccount", obj, account => {
+                if (account == null) {
+                    reject( new Error("Authentication Error"));
+                }
+                resolve(result);
+            });
         });
-    });
-    Promise.all([collectClient, collectUserList, collectAccountList]).then(result => {
-        var token = result[0].token;
+    }).then(result => {
         var users = result[1];
-        var accountList = result[2];
-
-        var position = -1;
-        for (var i = 0; i < accountList.length; i++) {
-            if (token == accountList[i].token) {
-                position = i;
-                break;
-            }
-        }
-
-        if (position == -1)
-            throw new Error("Authentication Error");
         response.end(JSON.stringify(users));
     }).catch(error => {
         errorHandler(error,response);

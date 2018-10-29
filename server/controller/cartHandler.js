@@ -4,65 +4,48 @@ var crud = require("../utilities/databaseCRUD");
 var utilities = require("../utilities/utilities");
 var errorHandler = require("../errorHandler/controllerError");
 
-function readData(callback) {
-    var readProduct = new Promise((resolve, reject) => {
-        try {
-            crud.readDatabase("product", function(item) {
-                resolve(item);
-            });
+function createProductList(oneCart) {
+    return new Promise((resolve, reject) => {
+        if (!oneCart.productID) {
+            reject(new Error ("Wrong Data Input"));
         }
-        catch (error) {
-            reject(error);
-        }
-    });
-    var readAccount = new Promise((resolve, reject) => {
-        try {
-            crud.readDatabase("account", function(item) {
-                resolve(item);
-            });
-        }
-        catch (error) {
-            reject(error);
-        }
-    });
-    
-    Promise.all([readProduct, readAccount]).then(result => {
-        callback(false, result[0], result[1]);
-    }).catch (error => {
-        errorHandler(error,response);
-        // return;
-        callback(error);
+        var obj = {id: oneCart.productID};
+        crud.readOneDocument("product", obj, oneProduct => {
+            if (oneProduct == null) {
+                reject(new Error ("Wrong Data Input"));
+            }
+            resolve(oneProduct);
+        });
     });
 }
-
 function submitCart(request, response, product, accountArray) {  
     var readPost = new Promise((resolve, reject) => {
         utilities.collectDataFromPost(request, result => {
-            var checkUser = 0;
-            var currentUser;
-            for (var i in accountArray) {
-                let token = accountArray[i].token;                    
-                if (result.token == token) {
-                    checkUser = 1;
-                    currentUser=accountArray[i];
-                    break;
-                } 
-            }
-            if (checkUser == 0) {
-                reject(new Error("Authentication Error"));
+            if (typeof(result) != "object" || result == null) {
+                reject(new Error ("Wrong Data Input"));
             }
             for (var i in result.cartArray) {
                 for (var j in result.cartArray) {
                     if (i != j && result.cartArray[i].productID == result.cartArray[j].productID) {
-                        throw new Error ("Wrong Data Input");
+                        reject(new Error ("Wrong Data Input"));
                     }
                 }
             }
-            resolve([currentUser, result]);
+            resolve(result);
         });
     });
 
-    readPost.then((result) => {
+    readPost.then(result => {
+        return new Promise((resolve, reject) => {
+            var obj = {token : result.token};
+            crud.readOneDocument("account", obj, account => {
+                if (account == null) {
+                    reject( new Error("Authentication Error"));
+                }
+                resolve([account, result]);
+            });
+        });
+    }).then((result) => {
         var currentUser = result[0];
         result = result[1];
         var returnBill = {};
@@ -76,54 +59,40 @@ function submitCart(request, response, product, accountArray) {
         returnBill.products = [];
         returnBill.estimateTotalPrice = 0;
         bill.actualTotalPrice = 0;
-        var checkProduct = 0;
-        for (var i in result.cartArray) {
-            checkProduct = 0;
-            if (!result.cartArray[i].productID) {
-                throw new Error ("Wrong Data Input");
-            }
-            for (var j in product) {
-                // find match 
-                if (result.cartArray[i].productTrueID == product[j]._id.toString()) {
-                    checkProduct = 1;
-                    // calculate total price
-                    var currentPrice = product[j].priceInt;
-                    var currentAmount  = result.cartArray[i].amount;
-                    if (!currentAmount || typeof currentAmount !== "number" || currentAmount <= 0 || currentAmount >=100)
-                    {
-                        throw new Error ("Wrong Data Input");
-                    }
-                    product[j].amount=currentAmount;
-                    bill.products.push({_id:product[j]._id,quantity:currentAmount,status:"pending"});
-                    returnBill.products.push(product[j]);
-                    bill.estimateTotalPrice += currentAmount * currentPrice;
-                    returnBill.estimateTotalPrice = bill.estimateTotalPrice;
+
+        var productInOrder = result.cartArray.map(x => createProductList(x));
+
+        Promise.all(productInOrder).then(productList => {
+            for (var i in productList) {
+                // calculate total price
+                var currentPrice = productList[i].priceInt;
+                var currentAmount  = result.cartArray[i].amount;
+                if (!currentAmount || typeof currentAmount !== "number" || currentAmount <= 0 || currentAmount >=100)
+                {
+                    reject(new Error ("Wrong Data Input"));
                 }
+                productList[i].amount=currentAmount;
+                bill.products.push({_id: productList[i]._id, quantity:currentAmount, status:"pending"});
+                returnBill.products.push(productList[i]);
+                bill.estimateTotalPrice += currentAmount * currentPrice;
+                returnBill.estimateTotalPrice = bill.estimateTotalPrice;
             }
-            if (checkProduct == 0) {
-                throw new Error ("Wrong Data Input");
-            }
-        }
-        crud.createDocument("order",bill,error => {
-            if (error) throw new Error ("Problem with database");
+            crud.createDocument("order",bill,error => {
+                if (error) reject(new Error ("Problem with database"));
+                utilities.setResponseHeader(response);
+                response.end(JSON.stringify(returnBill));
+            });
+        }).catch(error => {
+            errorHandler(error,response);
+            return;
         });
-        
-        utilities.setResponseHeader(response);
-        response.end(JSON.stringify(returnBill));
-        return;
     }).catch(error => {
         errorHandler(error,response);
         return;
     });
 }
 module.exports = function submitCartHandler(request, response) {
-    // read data first because they can change
-    readData((error, product, account) => {
-        if (error) {
-            return;
-        }
-        submitCart(request, response, product, account);
-    });
+    submitCart(request, response);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////

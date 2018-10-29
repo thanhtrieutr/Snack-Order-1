@@ -10,9 +10,7 @@ module.exports = function productHandler(request, response) {
             if (error) {
                 reject(error);
             } 
-            else {
-                resolve(object);
-            }
+            resolve(object);
         });
     });
 

@@ -63,12 +63,10 @@ function submitCart() {
     addInTrueId(temp.cartArray);
     obj.cartArray = temp.cartArray;
     obj.token = localStorage.getItem("token");
-    debugger;
     http.send(JSON.stringify(obj));
     http.onreadystatechange = function () {
         if (this.readyState == 4){
             var result = JSON.parse(this.response);
-            debugger;
             if (this.status != 200) {
                 alertError(this.response);
             }
@@ -87,16 +85,6 @@ function submitCart() {
 function addInTrueId(cartArray) {
     cartArray.forEach(product => {
         var checkBox = getById("checkbox-" + product.productID);
-        debugger;
         product.productTrueID=checkBox.getAttribute("data-id");
     });
-    debugger;
 }
-
-// function deleteTrueId(cartArray) {
-//     cartArray.forEach(product => {
-//         var checkBox = getById("checkbox-" + product.productID);
-//         product.productTrueID=checkBox.getAttribute("data-position");
-//     });
-//     debugger;
-// }

@@ -39,6 +39,7 @@
                         </li>
                         </li>
                         <li><a id="add-product" class="choice" onclick="loadAddForm()">Add new product</a></li>
+                        <li><a id="add-user" class="choice" onclick="loadSignupForm()">Create new user</a></li>
                     </ul>
                 </aside>
             </div>
@@ -53,8 +54,8 @@
                                     <span></span>
                                 </div>
                                 <div class="media-content">
-                                     <!-- drop down  -->
-                                     <div class="dropdown is-hoverable">
+                                    <!-- drop down  -->
+                                    <div class="dropdown is-hoverable">
                                         <!-- drop down button -->
                                         <div class="dropdown-trigger">
                                             <button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
@@ -87,7 +88,7 @@
                 <tbody>
                     <div id="today-content-container" class="tab"></div>
                     <div id="order-content" class="content tab">
-                            <!-- onclick="showDetail('order-detail')" -->
+                        <!-- onclick="showDetail('order-detail')" -->
                         <!-- <div>
                             <div id="user-container">
                                 <span id="user-item">
@@ -138,9 +139,10 @@
                             </table>
                         </div> -->
                     </div>
-                    <div id="add-product-content" class="content tab" ></div>
+                    <div id="add-product-content" class="content tab"></div>
                     <div id="user-content" class="content tab"></div>
                     <div id="product-content" class="content tab"></div>
+                    <div id="create-user" class="content tab"></div>
                 </tbody>
             </div>
         </div>
@@ -150,4 +152,6 @@
 <script src="../admin/admin.js"></script>
 <script src="../admin/adminServer.js"></script>
 <script src="../admin/edit-product.js"></script>
+<script src="../admin/adminSignup.js"></script>
+
 </html>

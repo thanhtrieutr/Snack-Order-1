@@ -49,17 +49,21 @@ body {
 .title {
     display: inline;
 }
+
 #icon-dropdown {
     position: relative;
 }
+
 .dropdown {
     padding-top: 6px;
     cursor: pointer;
 }
+
 .dropdown-item {
     font-weight: 600;
     font-size: 18px;
 }
+
 .media-content {
     overflow-x: visible;
     max-width: 250px;
@@ -69,7 +73,7 @@ img {
     padding: 5px;
 }
 
-#today-button { 
+#today-button {
     margin-top: 10px;
     margin-bottom: 10px;
     width: 100px;
@@ -78,7 +82,7 @@ img {
     overflow-y: auto;
 }
 
-.product-img{
+.product-img {
     height: 100px;
 }
 
@@ -124,7 +128,7 @@ input[type="file"] {
 .field-label {
     max-width: 150px;
     min-width: 140px;
-    padding-left: 10px; 
+    padding-left: 10px;
     padding-top: 0 !important;
 }
 
@@ -149,4 +153,7 @@ input[type="file"] {
 }
 .modal-card-title {
     text-align: center;
+}
+.tab {
+    margin: 0 !important;
 }

@@ -236,6 +236,7 @@ function changeStatus() {
         obj.status = selectAnswer.options[selectAnswer.selectedIndex].value;
         updateList.push(obj);
     }
+    debugger;
     changeTodayStatus(updateList);
 }
 
@@ -244,6 +245,7 @@ function changeTodayStatus(updateList) {
         var http = new XMLHttpRequest();
         http.open("POST", "http://127.0.0.1:3000/admin/change-status", true);
         var obj = {};
+        debugger;
         obj.token = localStorage.getItem("token");
         obj.updateList = updateList;
         console.log(obj);
@@ -294,6 +296,7 @@ function createTable() {
 }
 
 function createTodayOrderProduct(product, productTable) {
+    productRank++;
     var currentId = product.productId.toString();
     var newProduct = document.createElement("TR");
     newProduct.innerHTML =

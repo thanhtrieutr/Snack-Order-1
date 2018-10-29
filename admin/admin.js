@@ -372,6 +372,7 @@ function createTable() {
 }
 
 function createTodayOrderProduct(product, productTable) {
+    productRank++;
     var currentId = product.productId.toString();
     var newProduct = document.createElement("TR");
     newProduct.innerHTML =

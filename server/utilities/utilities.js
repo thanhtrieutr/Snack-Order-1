@@ -143,6 +143,15 @@ function findObjectById(objList, id) {
     }
     return position;
 }
+
+function cloneObject(obj) {
+    if (null == obj || "object" != typeof obj) return obj;
+    var copy = obj.constructor();
+    for (var attr in obj) {
+        if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+    }
+    return copy;
+}
 module.exports = {
     findAccountByToken: findAccountByToken,
     createToken: createToken,
@@ -151,5 +160,6 @@ module.exports = {
     setResponseHeader: setResponseHeader,
     savePhoto: savePhoto,
     modifyFileName: modifyFileName,
-    findObjectById: findObjectById
+    findObjectById: findObjectById,
+    cloneObject: cloneObject
 }

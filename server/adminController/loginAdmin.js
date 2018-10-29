@@ -8,7 +8,7 @@ function checkAdminLogin(request, response) {
             if (result instanceof Error) {
                 reject(result);
             }
-            if (typeof(result) != "object") {
+            if (typeof(result) != "object" || result == null) {
                 reject(new Error ("Wrong Data Input"));
             }
             resolve(result);
@@ -45,7 +45,7 @@ function checkAdminToken(request, response) {
             if (result instanceof Error) {
                 reject(result);
             }
-            if (typeof(result) != "object") {
+            if (typeof(result) != "object" || result == null) {
                 reject(new Error ("Wrong Data Input"));
             }
             resolve(result);
@@ -74,7 +74,7 @@ function deleteToken(request, response) {
             if (result instanceof Error) {
                 reject(result);
             }
-            if (typeof(result) != "object") {
+            if (typeof(result) != "object" || result == null) {
                 reject(new Error ("Wrong Data Input"));
             }
             resolve(result);

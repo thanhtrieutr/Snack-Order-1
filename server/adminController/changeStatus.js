@@ -51,6 +51,9 @@ function changeStatus(request,response){
             if (result instanceof Error) {
                 reject(result);
             }
+            if (typeof(result) != "object" || result == null) {
+                reject(new Error ("Wrong Data Input"));
+            }
             resolve(result);
         });
     });
@@ -64,32 +67,20 @@ function changeStatus(request,response){
             }
         });
     });
-    var collectAccountList = new Promise(function(resolve, reject) {
-        crud.readDatabase("adminAccount", function(object,error) {
-            if (error) {
-                reject(error);
-            } 
-            else {
-                resolve(object);
-            }
+    Promise.all([collectClient, collectOrderList]).then(result => {
+        return new Promise((resolve, reject) => {
+            var checkAccount = {token: result[0].token};
+            crud.readOneDocument("adminAccount", checkAccount, account => {
+                if (account == null) {
+                    reject( new Error("Authentication Error"));
+                }
+                resolve(result);
+            });
         });
-    });
-    Promise.all([collectClient, collectOrderList, collectAccountList]).then(result => {
+    }).then(result => {
         var orderListDb = result[1];
-        var accountList = result[2];
-        var token = result[0].token;
         var updateList = result[0].updateList;
         var userList = result[0].user;
-        var position = -1;
-        for (var i = 0; i < accountList.length; i++) {
-            if (token == accountList[i].token) {
-                position = i;
-                break;
-            }
-        }
-        if (position == -1){
-            throw new Error("Authentication Error");
-        }
         if (checkUpdateList(updateList)) {
             throw new Error("Wrong Data Input");
         }

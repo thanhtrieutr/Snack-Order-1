@@ -8,16 +8,6 @@ var errorHandler = require("../errorHandler/controllerError");
 //     {name: "Snack something", amount: 2, price: "19.000đ", totalPrice: "38.000đ", user: "HuuDuc", state: "In progress"},
 //     {name: "Snack something", amount: 2, price: "19.000đ", totalPrice: "38.000đ", user: "HuuDuc", state: "In progress"}
 // ];
-function clone(obj) {
-    if (null == obj || "object" != typeof obj) {
-        return obj;
-    }
-    var copy = obj.constructor();
-    for (var attr in obj) {
-        if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
-    }
-    return copy;
-}
 
 function commonProduct(a, b) {
     if (a.productId.equals(b.productId) && a.user == b.user && a.status == b.status) {
@@ -121,7 +111,7 @@ function getTodayOrder(request, response) {
                     }
                 }
                 if (position == -1) {
-                    var newObj = clone(obj);
+                    var newObj = utilities.cloneObject(obj);
                     orderList.push(newObj);
                 }
                 else {

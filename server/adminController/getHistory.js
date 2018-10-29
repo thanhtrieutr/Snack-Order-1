@@ -2,83 +2,71 @@ var crud = require("../utilities/databaseCRUD");
 var utilities = require("../utilities/utilities");
 var errorHandler = require("../errorHandler/controllerError");
 
-var orderList = [
-    {
-        user: "test567@gmail.com",
-        actualTotalPrice: 150000,
-        time: "22/10/2018",
-        products: [
-            {
-               name: "snack1",
-               quantity: 2,
-               price: "12345đ",
-               totalPrice: 38000,
-               status: "Done"
-            },
-            {
-                name: "snack1",
-                quantity: 2,
-                price: "12345đ",
-                totalPrice: 38000,
-                status: "pending"
-            }
-        ]
-    },
-    {
-        user: "absda@gmail.com",
-        actualTotalPrice: 150000,
-        time: "23/10/2018",
-        products: [
-            {
-               name: "snack2",
-               quantity: 2,
-               price: "12345đ",
-               totalPrice: 38000,
-               status: "Done"
-            },
-            {
-                name: "snack2",
-                quantity: 2,
-                price: "12345đ",
-                totalPrice: 38000,
-                status: "pending"
-            }
-        ]
-    },
-    {
-        user: "fjaoiu@gmail.com",
-        actualTotalPrice: 150000,
-        time: "24/10/2018",
-        products: [
-            {
-               name: "snack3",
-               quantity: 2,
-               price: "12345đ",
-               totalPrice: 38000,
-               status: "Done"
-            },
-            {
-                name: "snack3",
-                quantity: 2,
-                price: "12345đ",
-                totalPrice: 38000,
-                status: "pending"
-            }
-        ]
-    }
-];
-
-
-function clone(obj) {
-    if (null == obj || "object" != typeof obj) return obj;
-    var copy = obj.constructor();
-    for (var attribute in obj) {
-        if (obj.hasOwnProperty(attribute)) {
-            copy[attribute] = obj[attribute];
-        }
-    }
-    return copy;
-}
+// var orderList = [
+//     {
+//         user: "test567@gmail.com",
+//         actualTotalPrice: 150000,
+//         time: "22/10/2018",
+//         products: [
+//             {
+//                name: "snack1",
+//                quantity: 2,
+//                price: "12345đ",
+//                totalPrice: 38000,
+//                status: "Done"
+//             },
+//             {
+//                 name: "snack1",
+//                 quantity: 2,
+//                 price: "12345đ",
+//                 totalPrice: 38000,
+//                 status: "pending"
+//             }
+//         ]
+//     },
+//     {
+//         user: "absda@gmail.com",
+//         actualTotalPrice: 150000,
+//         time: "23/10/2018",
+//         products: [
+//             {
+//                name: "snack2",
+//                quantity: 2,
+//                price: "12345đ",
+//                totalPrice: 38000,
+//                status: "Done"
+//             },
+//             {
+//                 name: "snack2",
+//                 quantity: 2,
+//                 price: "12345đ",
+//                 totalPrice: 38000,
+//                 status: "pending"
+//             }
+//         ]
+//     },
+//     {
+//         user: "fjaoiu@gmail.com",
+//         actualTotalPrice: 150000,
+//         time: "24/10/2018",
+//         products: [
+//             {
+//                name: "snack3",
+//                quantity: 2,
+//                price: "12345đ",
+//                totalPrice: 38000,
+//                status: "Done"
+//             },
+//             {
+//                 name: "snack3",
+//                 quantity: 2,
+//                 price: "12345đ",
+//                 totalPrice: 38000,
+//                 status: "pending"
+//             }
+//         ]
+//     }
+// ];
 
 function getHistory(request, response) {
     var collectAdmin = new Promise((resolve, reject) => {
@@ -174,7 +162,7 @@ function getHistory(request, response) {
                         }
                     }
                 }
-                var newObj = clone(obj);
+                var newObj = utilities.cloneObject(obj);
                 allOrder.push(newObj);
             }
         }

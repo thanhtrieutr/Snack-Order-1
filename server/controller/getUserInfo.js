@@ -4,44 +4,41 @@ var errorHandler = require("../errorHandler/controllerError");
 var listInfo = ["fullName", "phoneNumber", "birthday", "address"];
 
 function checkToken(request, response, accountArray) {
-    try {
+    var collectClient = new Promise((resolve, reject) => {
         utilities.collectDataFromPost(request, result => {
-            //position == -1 mean don't exist that account
-            try {
-                var position = utilities.findAccountByToken(accountArray, result.token);
-                if (position != -1) {
-                    var obj = {};
-                    obj.avatarAddress = accountArray[position].avatarAddress;
-                    for (var i in listInfo) {
-                        obj[listInfo[i]] = accountArray[position][listInfo[i]];
-                    }
-                    utilities.setResponseHeader(response);
-                    response.end(JSON.stringify(obj));
-                }
-                else {
-                    throw new Error ("Authentication Error");
-                }
+            if (result instanceof Error) {
+                reject(result);
             }
-            catch (error) {
-                errorHandler(error,response);
-                return;
+            if (typeof(result) != "object" || result == null) {
+                reject(new Error ("Wrong Data Input"));
             }
+            resolve(result);
         });
-    }
-    catch (error) {
-        errorHandler(error,response);
+    });
+
+    collectClient.then((result) => {
+        var queryObj = {token: result.token};
+        return new Promise((resolve, reject) => {
+            crud.readOneDocument("account", queryObj, account => {
+                if (account == null) {
+                    reject( new Error("Authentication Error"));
+                }
+                resolve(account);
+            });
+        });
+    }).then(account => {
+        var obj = {};
+        obj.avatarAddress = account.avatarAddress;
+        for (var i in listInfo) {
+            obj[listInfo[i]] = account[listInfo[i]];
+        }
+        response.end(JSON.stringify(obj));
+    }).catch (error => {
+        errorHandler(error, response);
         return;
-    }
+    });
 }
 
 module.exports = function (request, response) {
-    try {
-        crud.readDatabase("account", function(accountArray) { 
-            checkToken(request, response, accountArray);
-        });
-    }
-    catch (error) {
-        errorHandler(error,response);
-        return;
-    }
+    checkToken(request, response);
 }

@@ -3,18 +3,35 @@ var crypto = require("crypto");
 
 
 var product = [
-    {name: "Snack Mực Tẩm Gia Vị Cay Ngọt Bento (24g)", price: "19.000 ₫", img: "../images/bento.png", priceInt: 19000 },
-    {name: "Snack Khoai Tây Ligo (110g)", price: "35.000 ₫", img: "../images/ligochips.png", priceInt: 35000 },
-    {name: "Snack rong biển TaoKaeNoi Tempura (25g)", price: "19.000 ₫", img: "../images/taokaenoi.png", priceInt: 19000 },
-    {name: "Snack Tôm NongShim Túi Lớn (180g)", price: "44.000 ₫", img: "../images/tomghim.png", priceInt: 44000 },
-    {name: "Snack Mực Tẩm Gia Vị Cay Ngọt Bento (24g)", price: "19.000 ₫", img: "../images/bento.png", priceInt: 19000 },
-    {name: "Snack Khoai Tây Ligo (110g)", price: "35.000 ₫", img: "../images/ligochips.png", priceInt: 35000 },
-    {name: "Snack rong biển TaoKaeNoi Tempura (25g)", price: "19.000 ₫", img: "../images/taokaenoi.png", priceInt: 19000 },
-    {name: "Snack Tôm NongShim Túi Lớn (180g)", price: "44.000 ₫", img: "../images/tomghim.png", priceInt: 44000 },
-    {name: "Snack Mực Tẩm Gia Vị Cay Ngọt Bento (24g)", price: "19.000 ₫", img: "../images/bento.png", priceInt: 19000 },
-    {name: "Snack Khoai Tây Ligo (110g)", price: "35.000 ₫", img: "../images/ligochips.png", priceInt: 35000 },
-    {name: "Snack rong biển TaoKaeNoi Tempura (25g)", price: "19.000 ₫", img: "../images/taokaenoi.png", priceInt: 19000 },
-    {name: "Snack Tôm NongShim Túi Lớn (180g)", price: "44.000 ₫", img: "../images/tomghim.png", priceInt: 44000 }
+    {name: "Snack mực tẩm gia vị Thái Bento 24g", price: "25.000 ₫", img: "../images/Bento-Vi-Thai.jpg", priceInt: 25000 },
+    {name: "Snack mực tẩm gia vị cay ngọt Bento 24g", price: "25.000 ₫", img: "../images/Bento-Cay-Ngot.jpg", priceInt: 25000 },
+    {name: "Snack mực tẩm gia vị đặc biệt Bento 24g", price: "25.000 ₫", img: "../images/Bento-Dac-Biet.jpg", priceInt: 25000 },
+    {name: "Snack Tôm Hanami 110g", price: "38.000 ₫", img: "../images/Tom-Hanami.jpg", priceInt: 38000 },
+    {name: "Snack Lay stax vị mực cay 110g", price: "31.000 ₫", img: "../images/Lay-Stax-Muc-Cay.jpg", priceInt: 31000 },
+    {name: "Snack Lay Stax vị tự nhiên 110g" , price: "31.000 ₫", img: "../images/Lay-Stax-Tu-Nhien.jpg", priceInt: 31000 },
+    {name: "Snack Lay Stax vị tôm hùm cay 110g", price: "31.000 ₫", img: "../images/Lay-Stax-Tom-Hum-Cay.jpg", priceInt: 31000 },
+    {name: "Snack Slide vị thịt nướng 100g", price: "29.000 ₫", img: "../images/Slide-Thit-Nuong.jpg", priceInt: 29000 },
+    {name: "Snack Slide vị Phô mai 100g", price: "29.000 ₫", img: "../images/Slide-Pho-Mai.jpg", priceInt: 29000 },
+    {name: "Snack khoai tây Poca vị tự nhiên 100g", price: "21.000 ₫", img: "../images/Poca-Tu-Nhien.jpg", priceInt: 21000 },
+    {name: "Snack khoai tây Poca Wavy vị BBQ 100g", price: "21.000 ₫", img: "../images/Poca-Wavy-BBQ.jpg", priceInt: 21000 },
+    {name: "Snack khoai tây Poca vị rong biển 54g", price: "11.000 ₫", img: "../images/Poca-Rong-Bien.jpg", priceInt: 11000 },
+    {name: "Snack khoai tây O Star vị rong biển 48g", price: "12.000 ₫", img: "../images/O-Star-Rong-Bien.jpg", priceInt: 12000 },
+    {name: "Snack khoai tây O Star vị kim chi 48g", price: "12.000 ₫", img: "../images/O-Star-Kim-Chi.jpg", priceInt: 12000 },
+    {name: "Snack khoai tây Orion Swing vị BBQ 48g", price: "12.000 ₫", img: "../images/Orion-Swing-BBQ.jpg", priceInt: 12000 },
+    {name: "Snack Pillows nhân kem socola 100g", price: "11.000 ₫", img: "../images/Pillows-Chocolate.jpg", priceInt: 11000 },
+    {name: "Snack Pillows nhân kem sữa dừa 100g", price: "11.000 ₫", img: "../images/Pillows-Vi-Dua.jpg", priceInt: 11000 },
+    {name: "Snack Orion Toonies vị cay 38g", price: "7.000 ₫", img: "../images/Toonies-Vi-Cay.jpg", priceInt: 7000 },
+    {name: "Snack Orion Toonies vị gà BBQ 38g", price: "7.000 ₫", img: "../images/Toonies-Vi-Ga-BBQ.jpg", priceInt: 7000 },
+    {name: "Snack Orion Toonies vị phô mai 38g", price: "7.000 ₫", img: "../images/Toonies-Vi-Pho-Mai.jpg", priceInt: 7000 },
+    {name: "Snack bắp rang Oishi vị caramen 40g", price: "6.000 ₫", img: "../images/Oishi-Bap-Caramen.jpg", priceInt: 6000 },
+    {name: "Snack tôm Oishi vị cay đặc biệt 42g", price: "6.000 ₫", img: "../images/Oishi-Tom-Cay-Dac-Biet.jpg", priceInt: 6000 },
+    {name: "Snack bánh phồng tôm Oishi vị mực 42g", price: "6.000 ₫", img: "../images/Oishi-Phong-Tom.jpg", priceInt: 6000 },
+    {name: "Snack chay Oishi vị da heo quay 45g", price: "5.000 ₫", img: "../images/Oishi-Chay-Vi-Da-Heo-Quay.jpg", priceInt: 5000 },
+    {name: "Snack Oishi bí đỏ vị bò nướng 42g", price: "6.000 ₫", img: "../images/Oishi-Bi-Do.jpg", priceInt: 6000 },
+    {name: "Snack Oishi vị phô mai 42g", price: "6.000 ₫", img: "../images/Oishi-Pho-Mai.jpg", priceInt: 6000 },
+    {name: "Snack cua Oishi vị sốt chua ngọt 45g", price: "6.000 ₫", img: "../images/Oishi-Cua-Chua-Ngot.jpg", priceInt: 6000 },
+    {name: "Snack bắp ngọt Oishi 42g", price: "6.000 ₫", img: "../images/Oishi-Bap-Ngot.jpg", priceInt: 6000 },
+    {name: "Snack Oishi vị hành tây 42g", price: "6.000 ₫", img: "../images/Oishi-Hanh-Tay.jpg", priceInt: 6000 }
 ];
 var accountArray = [
     {
@@ -58,7 +75,7 @@ function createFull(position, callback) {
     for (var i in listInfo) {
         oneAccount[listInfo[i]] = "";
     }
-    oneAccount.avatarAddress = "https://i.imgur.com/S2IRHcz.png";
+    oneAccount.avatarAddress = "../images/default-avatar.png";
     crypto.randomBytes(48, function(err, buffer) {
         oneAccount.token = buffer.toString('hex');
         createFull(position+1, callback);

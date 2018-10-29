@@ -25,7 +25,6 @@ function init(updateList) {
     var userList = [];
     for (var i in updateList) {
         var currentList = updateList[i].orderId;
-        debugger;
         for (var j in currentList) {
             if (orderList.indexOf(currentList[j]) == -1) {
                 orderList.push(currentList[j]);
@@ -76,7 +75,6 @@ function changeStatus(request,response){
         });
     });
     Promise.all([collectClient, collectOrderList, collectAccountList]).then(result => {
-        debugger
         var orderListDb = result[1];
         var accountList = result[2];
         var token = result[0].token;
@@ -100,21 +98,17 @@ function changeStatus(request,response){
         var productList = temporaryList.productList;
         var statusList = temporaryList.statusList;
         var userList = temporaryList.userList;
-        debugger;
         for (var i in orderListDb) {
-            debugger
             var currentOrder = orderListDb[i];
             var position = orderList.indexOf(currentOrder._id.toString());
             if (position != -1) {
                 var currentProductList = currentOrder.products;
                 for (var j in currentProductList) {
-                    debugger;
                     var productPosition = productList[position].indexOf(currentProductList[j]._id.toString());
                     if (productPosition != -1) {
                         currentProductList[j].status = statusList[position][productPosition];
                     }
                 }
-                debugger;
                 crud.updateOneDocument("order", {_id:currentOrder._id}, currentOrder, err => {
                     if (err) throw err;
                 });

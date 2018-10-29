@@ -1,0 +1,93 @@
+#product-picture, #product-detail-information {
+  height: 300px;
+  border: solid 1px black;    
+}
+ #product-border-box {
+  margin: auto;
+  width: 150px;
+  height: 150px;
+}
+#product-description {
+  text-align: center;
+  padding: 10px 0px;
+  margin-top: 20px;
+  font-size: 25px;
+  color: black;
+}
+#product-information-box {
+  margin-top: 30px;
+}
+
+[id ^= edit-product-image-] {
+  display: flex;
+  width: 105px;
+  font-size: 15px;
+  overflow: hidden;
+  margin: 0 auto !important;
+  padding: 5px;
+}
+
+[id ^= product-price-]:disabled {
+  cursor: default;
+  background: rgba(158, 158, 158, 0.3);
+}
+
+[id ^= product-price-] {
+  cursor: text;
+  background: white;
+}
+
+[id ^= edit-mode-], [id ^= show-mode-] {
+  background: orange;
+}
+
+[id ^= edit-mode-]:disabled, [id ^= show-mode-]:disabled {
+  background: darkgray;
+}
+.modal-card-body {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+.name {
+  text-align: right !important;
+  color: black;
+  padding: 5px 15px;
+}
+.text {
+  min-height: 30px;
+  margin-left: 10px;
+  color: black;
+  cursor: default;
+  padding: 10px;
+  font-size: 20px;
+}
+.product {
+  border: 1px solid black;
+  margin: auto;
+  height: 100%;
+  width: 100%;
+}
+#cancel-edit {
+  background-color: grey;
+  margin: auto 
+}
+label {
+  font-size: 25px;
+}
+input {
+  background: rgba(158, 158, 158, 0.3);
+}
+@media (max-width: 768px) {
+  .modal-card-foot .button:not(:last-child) {
+    margin: auto !important;
+  }
+  .modal-card-foot {
+    justify-content: center;
+  }
+}
+
+@media (min-width: 769px) {
+  .modal-card-foot {
+    justify-content: flex-end;
+  }
+}

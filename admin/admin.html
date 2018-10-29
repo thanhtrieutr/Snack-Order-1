@@ -9,13 +9,15 @@
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
     <link rel="stylesheet" href="../css/mystyles.css">
     <link rel="stylesheet" href="../admin/admin.css">
+    <link rel="stylesheet" href="../admin/modal-product.css">
+    <link rel="stylesheet" href="../admin/modal-user.css">
 </head>
 
 <body>
     <div class="container is-fullhd">
         <div class="columns">
             <div id="nav-menu" class="column is-2">
-                <aside class="menu">
+                <aside class="menu sticky">
                     <ul class="menu-list">
                         <li><a id="today-order" class="choice is-active" onclick="loadTodayOrders()">Today Order</a></li>
                         <li>
@@ -42,7 +44,7 @@
             </div>
             <div class="column is-10" id="body">
                 <thead>
-                    <nav class="navbar" role="navigation" aria-label="main navigation">
+                    <nav class="navbar sticky" role="navigation" aria-label="main navigation">
                         <div class="navbar-end">
                             <div class="media">
                                 <div id="navbar-burger" class="navbar-burger burger" data-target="nav-menu">
@@ -147,5 +149,5 @@
 <script src="../others/utilityFunction.js"></script>
 <script src="../admin/admin.js"></script>
 <script src="../admin/adminServer.js"></script>
-
+<script src="../admin/edit-product.js"></script>
 </html>

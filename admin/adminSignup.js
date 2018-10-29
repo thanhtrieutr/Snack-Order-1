@@ -23,7 +23,7 @@ function inputUserField() {
         <div class="field-body">
             <div class="field">
                 <div id = "input-field" class="control">
-                    <input id="username" class="input" type="text" required>
+                    <input id="username" class="input" type="text" placeholder="*Enter email (8-100 characters)" required>
                 </div> 
             </div>
         </div>

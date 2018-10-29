@@ -26,30 +26,24 @@ function createUser(request, response) {
             resolve(newAccount);
         });
     });
-    var readData = new Promise((resolve, reject) => {
-        crud.readDatabase("account", accounts => {
-            resolve(accounts);
-        });
-    });
-    Promise.all([readPost, readData]).then(result => {
-        var newAccount = result[0],
-            accounts = result[1];
-        
-        newAccount = initUserInfo(newAccount);
+    readPost.then((result) => {
+        return new Promise((resolve, reject) => {
+            crud.readOneDocument("account", result, account => {
+                if (account != null) {
+                    reject( new Error ("Account Existed"))
+                }
+                resolve(result);
+            })
+        })
+    }).catch(error => {
+        response.end("Account Existed");
+        return;
 
-        var checkConflict = false;
-        for (var i in accounts) {
-            if (accounts[i].user == newAccount.user) {
-                checkConflict = true;
-                break;
-            }
-        }
-        if (checkConflict) {
-            throw new Error("Account Existed");
-        } else {
-            crud.createDocument("account", newAccount);
-            response.end("create succeed");
-        }
+    }).then(newUser => {
+        newUser = initUserInfo(newUser);
+        crud.createDocument("account", newUser);
+        response.end("create succeed");
+        
     }).catch(error => {
         errorHandler(error, response);
         return;

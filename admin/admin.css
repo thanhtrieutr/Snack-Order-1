@@ -154,3 +154,6 @@ input[type="file"] {
 .modal-card-title {
     text-align: center;
 }
+.tab {
+    margin: 0 !important;
+}

@@ -1,5 +1,9 @@
 module.exports = function(error,response) {
-    console.log(error);
+    const fs = require('fs');
+    var time=new Date();
+    fs.appendFile('errorLog.txt', time+":\n"+error.toString()+"\n", function (err) {
+        if (err) throw err;
+    });
     var errorList = [
         {statusCode: 400, message: "Wrong Data Input"},
         {statusCode: 401, message: "Authentication Error"},

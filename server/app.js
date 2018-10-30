@@ -8,10 +8,14 @@ const app = express();
 const port = 3000;
 const hostname = "127.0.0.1";
 
-app.use((request, response) => {
+app.use((request, response, next) => {
     response.setHeader('Access-Control-Allow-Origin', '*');
-    var check404 = fileRouter(request.url, request, response);
-    mainRouter(request.url, request.method, request, response, check404);
+    request.check404 = fileRouter(request.url, request, response);
+    next()
+});
+
+app.use((request, response, next) => {
+    mainRouter(request.url, request.method, request, response, request.check404);
 });
 
 app.listen(port, () => {

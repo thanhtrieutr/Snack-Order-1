@@ -1,7 +1,10 @@
 module.exports = function(error,response) {
+    console.log(error);
     const fs = require('fs');
     var time=new Date();
-    fs.appendFile('errorLog.txt', time+":\n"+error.toString()+"\n", function (err) {
+    var errorStr = time+":\n";
+    errorStr += error.stack +"\n";
+    fs.appendFile('errorLog.txt',errorStr, function (err) {
         if (err) throw err;
     });
     var errorList = [

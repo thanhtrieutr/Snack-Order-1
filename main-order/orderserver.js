@@ -67,11 +67,11 @@ function submitCart() {
     http.send(JSON.stringify(obj));
     http.onreadystatechange = function () {
         if (this.readyState == 4){
-            var result = JSON.parse(this.response);
             if (this.status != 200) {
                 alertError(this.response);
             }
             else {
+                var result = JSON.parse(this.response);
                 var answer = "Bill: \n";
                 for (var i in result.products) {
                     answer += result.products[i].name + ":" + currentUser.cartArray[i].amount + "\n";

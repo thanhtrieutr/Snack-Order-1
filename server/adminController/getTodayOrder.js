@@ -1,14 +1,6 @@
 var crud = require("../utilities/databaseCRUD");
 var utilities = require("../utilities/utilities");
 var errorHandler = require("../errorHandler/controllerError");
-// var productList = [
-//     {name: "Snack something", amount: 2, price: "19.000đ", totalPrice: "38.000đ", user: "HuuDuc", state: "In progress"},
-//     {name: "Snack something", amount: 2, price: "19.000đ", totalPrice: "38.000đ", user: "HuuDuc", state: "In progress"},
-//     {name: "Snack something", amount: 2, price: "19.000đ", totalPrice: "38.000đ", user: "HuuDuc", state: "In progress"},
-//     {name: "Snack something", amount: 2, price: "19.000đ", totalPrice: "38.000đ", user: "HuuDuc", state: "In progress"},
-//     {name: "Snack something", amount: 2, price: "19.000đ", totalPrice: "38.000đ", user: "HuuDuc", state: "In progress"}
-// ];
-
 function commonProduct(a, b) {
     if (a.productId.equals(b.productId) && a.user == b.user && a.status == b.status) {
         return true;
@@ -21,82 +13,82 @@ function getMax(a, b) {
     }
     return b;
 }
+function createQuery() {
+    var todayStart = new Date();
+    todayStart.setHours(0,0,0,0);
+    var todayEnd = new Date();
+    todayEnd.setHours(23,59,59,999);
+    //find order (link with account, product) and match with today
+    var query =[
+        {
+            $lookup: { 
+                from: 'account',
+                localField: 'user',
+                foreignField: '_id',
+                as: 'userObj'
+            }
+        },
+        {   
+            $unwind: "$userObj"
+        },
+        {
+            $lookup: {
+                from: 'product',
+                localField: 'products._id',
+                foreignField: '_id',
+                as: 'productArray'
+            }
+        },
+        {
+            $match:{ 
+                "time": { $gte: todayStart, $lte: todayEnd} 
+            }
+        },
+        {
+            $project : {
+                userName: "$userObj.user",
+                time: 1,
+                productArray: 1,
+                products: 1
+            }
+        }
+    ];
+    return query;
+}
 function getTodayOrder(request, response) {
-    //in future will receive token of admin
     var collectClient = new Promise((resolve, reject) => { 
-        try {
-            utilities.collectDataFromPost(request, result => {
-                crud.readOneDocument("adminAccount", {token: result.token}, (admin, err) => {
-                    if (err) {
-                        reject(err);
-                    }
-                    if (!admin || admin.token != result.token) {
-                        reject(new Error("Authentication Error"));
-                    }
-                    resolve({token: "token"});
-                });
+        utilities.collectDataFromPost(request, result => {
+            crud.readOneDocument("adminAccount", {token: result.token}, (admin, err) => {
+                if (result instanceof Error) {
+                    reject(result);
+                }
+                if (typeof(result) != "object" || result == null) {
+                    reject(new Error("Authentication Error"));
+                }
+                resolve();
             });
-        }
-        catch (error) {
-            reject(error);
-            return;
-        }
+        });
     });
-    var collectAccount = new Promise((resolve, reject) => {
-        try {
-            crud.readDatabase("account", result => {
-                resolve(result);
-            })
-        }
-        catch (error) {
-            reject(error);
-            return;
-        }
-    });
-    var collectProduct = new Promise((resolve, reject) => {
-        try {
-            crud.readDatabase("product", result => {
-                resolve(result);
-            })
-        }
-        catch (error) {
-            reject(error);
-            return;
-        }
-    });
-    var collectOrderList = new Promise((resolve, reject) => {
-        try {
-            var todayStart = new Date();
-            todayStart.setHours(0,0,0,0);
-            var todayEnd = new Date();
-            todayEnd.setHours(23,59,59,999);
-            var query = { "time": { $gte: todayStart, $lte: todayEnd} };
-            crud.readSomeDocument("order", query, (result, err) => {
+
+    collectClient.then(result => {
+        return new Promise((resolve, reject) => {
+            var query = createQuery();
+            crud.readWithLink("order", query, (result, err) => {
                 if (err) {
                     reject(err);
                 }
                 resolve(result);
             });
-        }
-        catch (error) {
-            reject(error);
-            return;
-        }
-    });
-    Promise.all([collectClient, collectOrderList, collectAccount, collectProduct]).then(result => {
-        var token = result[0].token, order = result[1], account = result[2], product = result[3];
+        });
+    }).then(order => {
         var orderList = [];
-        if (token != "token")
-            throw new Error("Authentication Error");
         for (var i in order) {
             var obj = {}, oneOrder = order[i];
             obj.time = `${oneOrder.time.getHours()}:${oneOrder.time.getMinutes()}`;
-            var position = utilities.findObjectById(account, oneOrder.user);
-            obj.user = account[position].user;
+            obj.user = oneOrder.userName;
             obj.orderId = [oneOrder._id];
-            for (var j in oneOrder.products) {
-                var position = utilities.findObjectById(product, oneOrder.products[j]._id);
-                var oneProduct = product[position];
+            for (var j in oneOrder.productArray) {
+                var oneProduct = oneOrder.productArray[j];
                 obj.name = oneProduct.name;
                 obj.quantity = oneOrder.products[j].quantity;
                 obj.price = oneProduct.price;
@@ -104,7 +96,7 @@ function getTodayOrder(request, response) {
                 obj.productId = oneOrder.products[j]._id;
                 obj.totalPrice = oneProduct.priceInt * obj.quantity;
                 //join 
-                position = -1;
+                var position = -1;
                 for (var k in orderList) {
                     if (commonProduct(orderList[k], obj)) {
                         position = k; break;

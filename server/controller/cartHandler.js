@@ -3,13 +3,14 @@
 var crud = require("../utilities/databaseCRUD");
 var utilities = require("../utilities/utilities");
 var errorHandler = require("../errorHandler/controllerError");
-
+var mongo = require('mongodb');
 function createProductList(oneCart) {
     return new Promise((resolve, reject) => {
-        if (!oneCart.productID) {
+        if (!oneCart.productTrueID) {
             reject(new Error ("Wrong Data Input"));
         }
-        var obj = {id: oneCart.productID};
+        var objId = new mongo.ObjectID(oneCart.productTrueID);
+        var obj = {_id: objId};
         crud.readOneDocument("product", obj, oneProduct => {
             if (oneProduct == null) {
                 reject(new Error ("Wrong Data Input"));

@@ -99,32 +99,35 @@ function addAdmin() {
     }
 }
 function resetData() {
-    var checkDone = false;
+    var checkDone = 0;
     crud.deleteOneCollection('order', () => {
-        
+        checkDone++;
+        if (checkDone == 4) {
+            console.log("done");
+        }
     });
     crud.deleteOneCollection("product", function() {
         addProduct(0, () => {
-            if (checkDone) {
+            checkDone++;
+            if (checkDone == 4) {
                 console.log("done");
-            }
-            else {
-                checkDone = true;
             }
         });
     });
     crud.deleteOneCollection("account", function() {
         addAccount(0, () => {
-            if (checkDone) {
+            checkDone++;
+            if (checkDone == 4) {
                 console.log("done");
-            }
-            else {
-                checkDone = true;
             }
         })
     });
     crud.deleteOneCollection("adminAccount", () => {
         addAdmin();
+        checkDone++;
+        if (checkDone == 4) {
+            console.log("done");
+        }
     });
 }
 crud.connectDatabase(() => {

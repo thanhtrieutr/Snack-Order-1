@@ -5,6 +5,14 @@ const staticRouter = require('./static-router/static.router');
 const path = require('path');
 __dirname = path.join(__dirname, '../../');
 
+var setResponseHeader = function (req, res, next) {
+    res.header("Cache-Control", "no-cache, no-store, must-revalidate");
+    res.header("Pragma", "no-cache");
+    res.header("Expires", 0);
+    next();
+}
+routes.use(setResponseHeader);
+
 routes.use('/controller', mainRouter);
 routes.use('/static', staticRouter);
 

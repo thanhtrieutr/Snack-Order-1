@@ -7,7 +7,7 @@ const imageRouter = require('./image-router/image.router');
 
 staticRouter.use('/css', cssRouter);
 staticRouter.use('/js', jsRouter);
-staticRouter.use('/image', imageRouter);
+staticRouter.use('/images', imageRouter);
 
 staticRouter.get('/', (request, response) => {
     response.end('You routed to staticRouter!');

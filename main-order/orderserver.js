@@ -36,7 +36,7 @@ function createNewSnack(snack) {
 // get snack from server
 function loadSnack() {
     var http = new XMLHttpRequest();
-    http.open("GET", "http://127.0.0.1:3000/products", true);
+    http.open("GET", "http://127.0.0.1:3000/controller/products", true);
     http.send();
     var snackList = document.getElementById("main-order");
     http.onreadystatechange = function () {

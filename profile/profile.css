@@ -3,7 +3,7 @@
     line-height: 1.4;
 }
 body {
-    background: url("../images/background.png") no-repeat center center fixed;
+    background: url("../../image/background.png") no-repeat center center fixed;
     height: 100%;
     -webkit-background-size: cover;
     -moz-background-size: cover;

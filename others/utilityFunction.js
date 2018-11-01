@@ -32,7 +32,7 @@ function findUserPosition(localAccount, user) {
 
 function checkToken(token, callback) {
     var http = new XMLHttpRequest();
-    http.open('POST', "http://127.0.0.1:3000/check-token", true);
+    http.open('POST', "http://127.0.0.1:3000/controller/check-token", true);
     http.send(JSON.stringify(token));
     http.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {

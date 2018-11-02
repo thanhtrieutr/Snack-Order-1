@@ -44,6 +44,9 @@ function signupInSever(user, password, callback) {
             var result = this.response;
             if (callback) return callback(result);
         }
+        if (this.readyState == 4 && this.status != 200) {
+            alertError(this.response);
+        }
     }
 }
 

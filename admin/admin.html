@@ -7,15 +7,17 @@
     <title>Admin</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
-    <link rel="stylesheet" href="../css/mystyles.css">
-    <link rel="stylesheet" href="../admin/admin.css">
+    <link rel="stylesheet" href="static/css/css/mystyles.css">
+    <link rel="stylesheet" href="static/css/admin/admin.css">
+    <link rel="stylesheet" href="static/css/admin/modal-product.css">
+    <link rel="stylesheet" href="static/css/admin/modal-user.css">
 </head>
 
 <body>
     <div class="container is-fullhd">
         <div class="columns">
             <div id="nav-menu" class="column is-2">
-                <aside class="menu">
+                <aside class="menu sticky">
                     <ul class="menu-list">
                         <li><a id="today-order" class="choice is-active" onclick="loadTodayOrders()">Today Order</a></li>
                         <li>
@@ -37,12 +39,13 @@
                         </li>
                         </li>
                         <li><a id="add-product" class="choice" onclick="loadAddForm()">Add new product</a></li>
+                        <li><a id="add-user" class="choice" onclick="loadSignupForm()">Create new user</a></li>
                     </ul>
                 </aside>
             </div>
             <div class="column is-10" id="body">
                 <thead>
-                    <nav class="navbar" role="navigation" aria-label="main navigation">
+                    <nav class="navbar sticky" role="navigation" aria-label="main navigation">
                         <div class="navbar-end">
                             <div class="media">
                                 <div id="navbar-burger" class="navbar-burger burger" data-target="nav-menu">
@@ -51,8 +54,8 @@
                                     <span></span>
                                 </div>
                                 <div class="media-content">
-                                     <!-- drop down  -->
-                                     <div class="dropdown is-hoverable">
+                                    <!-- drop down  -->
+                                    <div class="dropdown is-hoverable">
                                         <!-- drop down button -->
                                         <div class="dropdown-trigger">
                                             <button class="button" aria-haspopup="true" aria-controls="dropdown-menu4">
@@ -75,7 +78,7 @@
                                 </div>
                                 <div class="media-left">
                                     <figure class="image is-48x48">
-                                        <img src="https://bulma.io/images/placeholders/96x96.png" alt="Placeholder image">
+                                        <img src="static/images/default-avatar.png">
                                     </figure>
                                 </div>
                             </div>
@@ -85,7 +88,7 @@
                 <tbody>
                     <div id="today-content-container" class="tab"></div>
                     <div id="order-content" class="content tab">
-                            <!-- onclick="showDetail('order-detail')" -->
+                        <!-- onclick="showDetail('order-detail')" -->
                         <!-- <div>
                             <div id="user-container">
                                 <span id="user-item">
@@ -136,16 +139,19 @@
                             </table>
                         </div> -->
                     </div>
-                    <div id="add-product-content" class="content tab" ></div>
+                    <div id="add-product-content" class="content tab"></div>
                     <div id="user-content" class="content tab"></div>
                     <div id="product-content" class="content tab"></div>
+                    <div id="create-user" class="content tab"></div>
                 </tbody>
             </div>
         </div>
     </div>
 </body>
-<script src="../others/utilityFunction.js"></script>
-<script src="../admin/admin.js"></script>
-<script src="../admin/adminServer.js"></script>
+<script src="static/js/others/utilityFunction.js"></script>
+<script src="static/js/admin/admin.js"></script>
+<script src="static/js/admin/adminServer.js"></script>
+<script src="static/js/admin/edit-product.js"></script>
+<script src="static/js/admin/adminSignup.js"></script>
 
 </html>

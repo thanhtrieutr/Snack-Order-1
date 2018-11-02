@@ -11,7 +11,7 @@ function submitAvatar() {
             token:localStorage.getItem("token"),
             fileName: avatar.name
         };
-        http.open('POST', "http://127.0.0.1:3000/upload-file", true);
+        http.open('POST', "http://127.0.0.1:3000/user-controller/upload-file", true);
         http.send(JSON.stringify(object));
         http.onreadystatechange = function() {
             if (this.readyState == 4 && this.status == 200) {

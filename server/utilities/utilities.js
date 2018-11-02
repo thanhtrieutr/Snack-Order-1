@@ -27,7 +27,7 @@ function collectDataFromPost(request, callback) {
         }
         catch (error) {
             console.log(`There is error: ${error} at parse data\n`);
-            if (callback) callback(error);
+            //if (callback) callback(error);
         }
         if (callback) callback(body);
     });
@@ -38,7 +38,7 @@ function savePhoto(filename, data, token, callback) {
         callback("not valid data");
         return;
     }
-    var filePath = '../../images/' + filename;
+    var filePath = '/static/images/' + filename;
     var data = data.replace(/^data:image\/\w+;base64,/, "");
     var buf = new Buffer(data, 'base64');
     fs.writeFile(path.join(__dirname,'../../images/' + filename), buf, function(err) {
@@ -56,8 +56,7 @@ function savePath(token, filePath, err) {
     var position = -1;
     crud.readDatabase("account", function(accountArray) {
         var checkUser = 0;
-        for (var i in accountArray)
-        {
+        for (var i in accountArray) {
             let currentToken = accountArray[i].token;
             if (token == currentToken) {
                 checkUser = 1;
@@ -143,6 +142,15 @@ function findObjectById(objList, id) {
     }
     return position;
 }
+
+function cloneObject(obj) {
+    if (null == obj || "object" != typeof obj) return obj;
+    var copy = obj.constructor();
+    for (var attr in obj) {
+        if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
+    }
+    return copy;
+}
 module.exports = {
     findAccountByToken: findAccountByToken,
     createToken: createToken,
@@ -151,5 +159,6 @@ module.exports = {
     setResponseHeader: setResponseHeader,
     savePhoto: savePhoto,
     modifyFileName: modifyFileName,
-    findObjectById: findObjectById
+    findObjectById: findObjectById,
+    cloneObject: cloneObject
 }

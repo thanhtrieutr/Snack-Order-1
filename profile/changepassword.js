@@ -24,7 +24,7 @@ function loadUserData() {
 //Function Get User Info
 function getUserInfo(callback) {
   var http = new XMLHttpRequest();
-  http.open('POST', "http://127.0.0.1:3000/get-user-info");
+  http.open('POST', "http://127.0.0.1:3000/user-controller/get-user-info");
   var obj = {};
   obj.token = token;
   http.send(JSON.stringify(obj));
@@ -43,7 +43,7 @@ function changeUserPassword(oldPassword, newPassword, token, callback) {
   //This function stringtify oldPassword, newPassword and token
   var changePassword = changePasswordUser(oldPassword, newPassword, token);
   var http = new XMLHttpRequest();
-  http.open('POST', "http://127.0.0.1:3000/update-password", true);
+  http.open('POST', "http://127.0.0.1:3000/user-controller/update-password", true);
   http.send(JSON.stringify(changePassword));
   http.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {       

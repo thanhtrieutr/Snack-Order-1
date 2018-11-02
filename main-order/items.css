@@ -10,6 +10,7 @@
 .snack-img {
     width: 100%;
     height: auto;
+    max-height: 237px;
 }
 .main-snack-name {
     text-align: center;

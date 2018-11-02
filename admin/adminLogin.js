@@ -1,7 +1,7 @@
 function checkAdminLogInAlready() {
-    var token = localStorage.getItem("token");
+    var token = { token: localStorage.getItem("token")};
     var http = new XMLHttpRequest();
-    http.open('POST', "http://127.0.0.1:3000/admin/check-token", true);
+    http.open('POST', "http://127.0.0.1:3000/admin-controller/check-token", true);
     http.send(JSON.stringify(token));
     http.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -15,7 +15,7 @@ function checkAdminLoginInSever(user, password) {
     var account = {};
     account.user = user; account.password = password;
     var http = new XMLHttpRequest();
-    http.open('POST', "http://127.0.0.1:3000/admin/check-login", true);
+    http.open('POST', "http://127.0.0.1:3000/admin-controller/check-login", true);
     http.send(JSON.stringify(account));
     http.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {

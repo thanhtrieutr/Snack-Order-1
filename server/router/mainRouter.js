@@ -16,6 +16,7 @@ var errorHandler = require("../errorHandler/controllerError");
 var loginAdmin = require("../adminController/loginAdmin");
 var getHistory = require("../adminController/getHistory");
 var changeStatus = require("../adminController/changeStatus");
+var createUser = require("../adminController/createUser");
 
 
 module.exports = function mainRouter(url, method, request, response, check404) {
@@ -107,6 +108,10 @@ module.exports = function mainRouter(url, method, request, response, check404) {
         routeUrl: "/admin/change-status",
         routeMethod: "POST",
         routeHandler: changeStatus.changeStatus
+    }, {
+        routeUrl: "/admin/create-user",
+        routeMethod: "POST",
+        routeHandler: createUser.createUser
     }];
     try {
         var routeId = route.findIndex(item => item.routeUrl === url);

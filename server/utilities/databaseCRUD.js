@@ -60,6 +60,11 @@ function readSomeDocument(collection, object, callback) {
     });
 }
 
+function readWithLink(collection, query, callback) {
+    db.collection(collection).aggregate(query).toArray(function(err, result) {
+        callback(result,err);
+    });
+}
 module.exports = {
     connectDatabase: connectDatabase,
     readDatabase: readDatabase,
@@ -68,5 +73,6 @@ module.exports = {
     updateOneDocument: updateOneDocument,
     readOneDocument: readOneDocument,
     deleteOneCollection: deleteOneCollection,
-    readSomeDocument: readSomeDocument
+    readSomeDocument: readSomeDocument,
+    readWithLink: readWithLink
 }

@@ -12,7 +12,7 @@ document.getElementById("user-field").appendChild(currentUsername);
 
 function getUserInfo(callback) {
     var http = new XMLHttpRequest();
-    http.open('POST', "http://127.0.0.1:3000/get-user-info");
+    http.open('POST', "http://127.0.0.1:3000/controller/get-user-info");
     var obj = {};
     obj.token = token;
     http.send(JSON.stringify(obj));

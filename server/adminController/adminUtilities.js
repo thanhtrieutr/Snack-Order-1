@@ -10,7 +10,7 @@ function savePhoto(object, filename, data, callback) {
         callback("not valid data");
         return;
     }
-    var filePath = '../images/' + filename;
+    var filePath = '/static/images/' + filename;
     console.log(filePath);
     var data = data.replace(/^data:image\/\w+;base64,/, "");
     var buf = new Buffer(data, 'base64');

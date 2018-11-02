@@ -36,3 +36,19 @@ Error: Authentication Error
     at endReadableNT (_stream_readable.js:1092:12)
     at process._tickCallback (internal/process/next_tick.js:63:19)
 
+Fri Nov 02 2018 15:10:47 GMT+0700 (Indochina Time):
+Error: Authentication Error
+    at utilities.collectDataFromPost.result (H:\SourceTree\Snack Order\server\userController\loginHandler.js:75:29)
+    at IncomingMessage.request.on (H:\SourceTree\Snack Order\server\utilities\utilities.js:32:23)
+    at IncomingMessage.emit (events.js:182:13)
+    at endReadableNT (_stream_readable.js:1092:12)
+    at process._tickCallback (internal/process/next_tick.js:63:19)
+
+Fri Nov 02 2018 15:10:54 GMT+0700 (Indochina Time):
+Error: Authentication Error
+    at utilities.collectDataFromPost.result (H:\SourceTree\Snack Order\server\adminController\loginAdmin.js:64:25)
+    at IncomingMessage.request.on (H:\SourceTree\Snack Order\server\utilities\utilities.js:32:23)
+    at IncomingMessage.emit (events.js:182:13)
+    at endReadableNT (_stream_readable.js:1092:12)
+    at process._tickCallback (internal/process/next_tick.js:63:19)
+

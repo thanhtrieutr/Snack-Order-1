@@ -38,7 +38,7 @@ function savePhoto(filename, data, token, callback) {
         callback("not valid data");
         return;
     }
-    var filePath = '../../images/' + filename;
+    var filePath = '/static/images/' + filename;
     var data = data.replace(/^data:image\/\w+;base64,/, "");
     var buf = new Buffer(data, 'base64');
     fs.writeFile(path.join(__dirname,'../../images/' + filename), buf, function(err) {

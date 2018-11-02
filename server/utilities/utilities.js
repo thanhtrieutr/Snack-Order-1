@@ -56,8 +56,7 @@ function savePath(token, filePath, err) {
     var position = -1;
     crud.readDatabase("account", function(accountArray) {
         var checkUser = 0;
-        for (var i in accountArray)
-        {
+        for (var i in accountArray) {
             let currentToken = accountArray[i].token;
             if (token == currentToken) {
                 checkUser = 1;

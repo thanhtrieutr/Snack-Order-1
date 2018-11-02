@@ -1,6 +1,8 @@
 const express = require('express');
 const adminRouter = express.Router();
 
+
+//Acquiring admin controller for admin backend
 var getAdminProduct = require("../../adminController/getAdminProduct")
 var getAdminUser = require("../../adminController/getAdminUser")
 var getTodayOrder = require("../../adminController/getTodayOrder");
@@ -11,6 +13,7 @@ var changeStatus = require("../../adminController/changeStatus");
 var createUser = require("../../adminController/createUser");
 var errorHandler = require("../../errorHandler/controllerError");
 
+//API for admin backend (using try..catch)
 try {
   adminRouter.use('/get-products', getAdminProduct.getAdminProduct);
   adminRouter.use('/get-users', getAdminUser.getAdminUser);
@@ -29,6 +32,7 @@ try {
   return;
 }
 
+//Fix file not found
 adminRouter.get('/', (request, response) => {
   response.end("You routed to admin's API router!");
 })

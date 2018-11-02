@@ -2,6 +2,7 @@ var crud = require("../utilities/databaseCRUD");
 var utilities = require("../utilities/utilities");
 var adminUtilities = require("../adminController/adminUtilities");
 var errorHandler = require("../errorHandler/controllerError");
+var mongo = require('mongodb');
 
 function checkValidProduct(productName) {
     if (productName == "" || productName == null || productName.length > 40) {
@@ -60,6 +61,7 @@ function checkProductName(request, response) {
             if (error) {
                 reject(error);
             }
+            //check conflict
             if (product != null) {
                 throw new Error("Wrong Data Input");
             }
@@ -100,6 +102,7 @@ function checkProduct(request, response) {
             if (error) {
                 reject(error);
             }
+            //check conflict
             if (product != null) {
                 throw new Error("Wrong Data Input");
             }
@@ -129,7 +132,6 @@ function checkProduct(request, response) {
         return;
     });
 }
-// chua test
 function updateProduct(request,response){
     var collectClient = new Promise((resolve, reject) => { 
         utilities.collectDataFromPost(request, result => {
@@ -142,9 +144,9 @@ function updateProduct(request,response){
             resolve(result);
         });
     });
-    Promise.all([collectClient]).then(result => {
+    collectClient.then(result => {
         return new Promise((resolve, reject) => {
-            var obj = {token : result[0].token};
+            var obj = {token : result.token};
             crud.readOneDocument("adminAccount", obj, account => {
                 if (account == null) {
                     reject( new Error("Authentication Error"));
@@ -153,16 +155,18 @@ function updateProduct(request,response){
             });
         });
     }).then(result => {
-        var obj = {_id: result[0].id};
-        crud.readOneDocument("product", obj, function(product, error) {
-            if (error) {
-                reject(error);
-            }
-            if (product != null) {
-                throw new Error("Wrong Data Input");
-            }
-            result.push(product);
-            resolve(result);
+        return new Promise((resolve, reject) => {
+            var objId = new mongo.ObjectID(result.id);
+            var obj = {_id: objId};
+            crud.readOneDocument("product", obj, function(product, error) {
+                if (error) {
+                    reject(error);
+                }
+                if (product == null) {
+                    reject(new Error("Wrong Data Input"));
+                }
+                resolve([result, product]);
+            });
         });
     }).then(result => {
         var productPrice = result[0].productPrice;

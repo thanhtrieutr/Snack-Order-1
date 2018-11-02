@@ -1,5 +1,6 @@
 const routes = require('express').Router();
-const mainRouter = require('./main-router/main.router');
+const userRouter = require('./main-router/user.router');
+const adminRouter = require('./main-router/admin.router');
 const staticRouter = require('./static-router/static.router');
 
 const path = require('path');
@@ -13,7 +14,8 @@ var setResponseHeader = function (req, res, next) {
 }
 routes.use(setResponseHeader);
 
-routes.use('/controller', mainRouter);
+routes.use('/user-controller', userRouter);
+routes.use('/admin-controller', adminRouter);
 routes.use('/static', staticRouter);
 
 var htmlRouter = function (req, res, next) {

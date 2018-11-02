@@ -12,7 +12,7 @@ document.getElementById("user-field").appendChild(currentUsername);
 
 function getUserInfo(callback) {
     var http = new XMLHttpRequest();
-    http.open('POST', "http://127.0.0.1:3000/get-user-info");
+    http.open('POST', "http://127.0.0.1:3000/user-controller/get-user-info");
     var obj = {};
     obj.token = token;
     http.send(JSON.stringify(obj));
@@ -72,7 +72,7 @@ function showNewUserInfo(result) {
 }
 function sendNewUserInfo(userInfo) {
     var http = new XMLHttpRequest();
-    http.open('POST', "http://127.0.0.1:3000/update-user-info", true);
+    http.open('POST', "http://127.0.0.1:3000/user-controller/update-user-info", true);
     var obj = {};
     obj.token = token;
     for (var i in listInfo) {

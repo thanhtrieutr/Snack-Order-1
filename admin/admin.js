@@ -376,13 +376,13 @@ function createTodayOrderProduct(product, productTable) {
     var currentId = product.productId.toString();
     var newProduct = document.createElement("TR");
     newProduct.innerHTML =
-    `<td>${product.name}</td>
+    `<td class="product-name">${product.name}</td>
     <td>${product.quantity}</td>
     <td>${product.price}</td>
     <td>${product.totalPrice}đ</td>
     <td>${product.user}</td>
     <td>${product.time}</td>
-    <td>
+    <td  class="action">
         <div class="select">
             <select class="selections" id="select-${productRank}-${product.user}" data-id="${currentId}">
             <option value="pending">pending</option>
@@ -563,6 +563,10 @@ function productInfoField() {
 
 
 function addSubmitButton() {
+    var newButton = document.getElementById("submit-button");
+    if (newButton != null) {
+        return;
+    }
     var submitContainer = document.createElement('div');
     submitContainer.innerHTML = 
     `<a id="submit-button" class="button is-info" onclick="createProduct()">Submit</a>`

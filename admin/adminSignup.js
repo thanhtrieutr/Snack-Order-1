@@ -23,13 +23,13 @@ function inputUserField() {
         <div class="field-body">
             <div class="field">
                 <div id = "input-field" class="control">
-                    <input id="username" class="input" type="text" placeholder="*Enter email (8-100 characters)" required>
+                    <input id="username" class="input" type="text" placeholder="*Enter email (8-100 characters)" onkeypress="checkKeyPress(event)" required>
                 </div> 
             </div>
         </div>
     </div>
     <div class"form-validate"></div>
-    <a id="submit-name-button" class="button is-info is-hovered" onclick="alertDataUser()">Submit</a>
+    <a id="submit-name-button" class="button is-info is-hovered" onclick="alertDataUser()" >Submit</a>
     `
     return userField;
 }
@@ -74,10 +74,10 @@ function emailCheck(user) {
     return /^[a-zA-Z0-9_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(user);
 }
 
-function checkKeyPress(key) {
-    if (key.keyCode == 13) {
+function checkKeyPress(event) {
+    if (event.keyCode == 13) {
         alertDataUser();
     }
 }
 
-addEventListener("keypress", checkKeyPress);
+// addEventListener("keypress", checkKeyPress);

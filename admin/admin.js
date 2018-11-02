@@ -109,7 +109,7 @@ function createNewProduct(product, currentID) {
     `<div id="display-container" onclick="showModal('product-detail-${productRank}', 'product-detail-label')">
         <table class="table is-fullwidth">
             <td class="display-item" style="width: 60%;">${product.name}</td>
-            <td class="display-item" style="width: 40%;">${product.price}</td>
+            <td id="dynamic-price" class="display-item" style="width: 40%;">${product.price}</td>
         </table>
     </div>`
     var productTable = document.createElement('div');

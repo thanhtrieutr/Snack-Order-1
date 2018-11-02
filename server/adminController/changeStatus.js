@@ -130,7 +130,7 @@ function changeStatus(request,response){
         //console.log(result);
         var updateList = result.updateList;
         if (checkUpdateList(updateList)) {
-            reject(new Error("Wrong Data Input"));
+            throw new Error("Wrong Data Input");
         }
         var temporaryList = init(updateList);
         var orderList = temporaryList.orderList;

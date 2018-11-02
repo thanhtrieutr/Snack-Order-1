@@ -70,7 +70,7 @@ function getTodayOrder(request, response) {
         });
     });
 
-    collectClient.then(result => {
+    collectClient.then(token => {
         return new Promise((resolve, reject) => {
             var query = createQuery();
             crud.readWithLink("order", query, (result, err) => {

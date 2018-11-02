@@ -70,7 +70,7 @@ function submitCart(request, response, product, accountArray) {
                 var currentAmount  = result.cartArray[i].amount;
                 if (!currentAmount || typeof currentAmount !== "number" || currentAmount <= 0 || currentAmount >=100)
                 {
-                    reject(new Error ("Wrong Data Input"));
+                    throw new Error ("Wrong Data Input");
                 }
                 productList[i].amount=currentAmount;
                 bill.products.push({_id: productList[i]._id, quantity:currentAmount, status:"pending"});

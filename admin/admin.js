@@ -77,7 +77,7 @@ function loadProduct() {
     removeAll();
     var loadProducts = new Promise((resolve, reject) => {
         var http = new XMLHttpRequest();
-        http.open("POST", "http://127.0.0.1:3000/admin/products", true);
+        http.open("POST", "http://127.0.0.1:3000/admin-controller/get-products", true);
         var obj = {};
         obj.token = localStorage.getItem("token");
         http.send(JSON.stringify(obj));
@@ -170,7 +170,7 @@ function loadUser() {
     removeAll();
     var loadUsers = new Promise((resolve, reject) => {
         var http = new XMLHttpRequest();
-        http.open("POST", "http://127.0.0.1:3000/admin/users", true);
+        http.open("POST", "http://127.0.0.1:3000/admin-controller/get-users", true);
         var obj = {};
         obj.token = localStorage.getItem("token");
         http.send(JSON.stringify(obj));
@@ -271,7 +271,7 @@ function loadTodayOrders() {
     removeAll();
     var loadTodayOrder = new Promise((resolve, reject) => {
         var http = new XMLHttpRequest();
-        http.open("POST", "http://127.0.0.1:3000/admin/get-today-order", true);
+        http.open("POST", "http://127.0.0.1:3000/admin-controller/get-today-order", true);
         var obj = {};
         obj.token = localStorage.getItem("token");
         http.send(JSON.stringify(obj));
@@ -321,7 +321,7 @@ function changeStatus() {
 function changeTodayStatus(updateList) {
     var changeOrderStatus = new Promise((resolve, reject) => {
         var http = new XMLHttpRequest();
-        http.open("POST", "http://127.0.0.1:3000/admin/change-status", true);
+        http.open("POST", "http://127.0.0.1:3000/admin-controller/change-order-status", true);
         var obj = {};
         obj.token = localStorage.getItem("token");
         obj.updateList = updateList;
@@ -500,7 +500,7 @@ function checkValidProductName() {
 function sendProductname(productName) {
     var sendName = new Promise((resolve, reject) => {
         var http = new XMLHttpRequest();
-        http.open("POST", "http://127.0.0.1:3000/admin/check-product-name", true);
+        http.open("POST", "http://127.0.0.1:3000/admin-controller/check-product-name", true);
         var obj = {};
         obj.token = localStorage.getItem("token");
         obj.productName = productName;
@@ -589,7 +589,7 @@ function createProduct() {
         obj.productImage = object;
         var sendProduct = new Promise((resolve, reject) => {
             var http = new XMLHttpRequest();
-            http.open("POST", "http://127.0.0.1:3000/admin/create-new-product", true);
+            http.open("POST", "http://127.0.0.1:3000/admin-controller/create-new-product", true);
             http.send(JSON.stringify(obj));
             http.onload = () => resolve(http.response);
             http.onerror = () => reject(http.response);
@@ -701,7 +701,7 @@ function loadOrderHistory() {
     removeAll();
     var loadOrder = new Promise((resolve, reject) => {
         var http = new XMLHttpRequest();
-        http.open("POST", "http://127.0.0.1:3000/admin/history", true);
+        http.open("POST", "http://127.0.0.1:3000/admin-controller/get-order-history", true);
         var obj = {};
         obj.token = localStorage.getItem("token");
         http.send(JSON.stringify(obj));

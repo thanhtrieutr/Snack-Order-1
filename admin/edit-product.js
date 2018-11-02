@@ -8,7 +8,7 @@ function loadNewProductData(currentID, trueID) {
 
 function adminGetProductInfo(callback) {
   var http = new XMLHttpRequest();
-  http.open('POST', "http://127.0.0.1:3000/admin/products");
+  http.open('POST', "http://127.0.0.1:3000/admin-controller/get-products");
   var obj = {};
   obj.token = localStorage.getItem("token");
   http.send(JSON.stringify(obj));
@@ -24,7 +24,7 @@ function adminGetProductInfo(callback) {
 
 function sendNewProductPrice(result, currentID, trueID) {
   var http = new XMLHttpRequest();
-  http.open('POST', "http://127.0.0.1:3000/admin/update-product", true);
+  http.open('POST', "http://127.0.0.1:3000/admin-controller/update-product", true);
   http.send(JSON.stringify(result));
   http.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
@@ -54,7 +54,7 @@ function submitImage(currentID) {
           id: trueImageID,
           productImage: imageObject
       };
-      http.open('POST', "http://127.0.0.1:3000/admin/update-product", true);
+      http.open('POST', "http://127.0.0.1:3000/admin-controller/update-product", true);
       http.send(JSON.stringify(object));
       http.onreadystatechange = function() {
           if (this.readyState == 4 && this.status == 200) {

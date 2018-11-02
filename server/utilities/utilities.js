@@ -38,7 +38,7 @@ function savePhoto(filename, data, token, callback) {
         callback("not valid data");
         return;
     }
-    var filePath = '../../images/' + filename;
+    var filePath = '/static/images/' + filename;
     var data = data.replace(/^data:image\/\w+;base64,/, "");
     var buf = new Buffer(data, 'base64');
     fs.writeFile(path.join(__dirname,'../../images/' + filename), buf, function(err) {
@@ -56,8 +56,7 @@ function savePath(token, filePath, err) {
     var position = -1;
     crud.readDatabase("account", function(accountArray) {
         var checkUser = 0;
-        for (var i in accountArray)
-        {
+        for (var i in accountArray) {
             let currentToken = accountArray[i].token;
             if (token == currentToken) {
                 checkUser = 1;

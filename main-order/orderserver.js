@@ -7,7 +7,7 @@ getById("order-button").addEventListener('click', submitCart);
 
 function removeTokenOnServe(token) {
     var http = new XMLHttpRequest();
-    http.open("POST", "http://127.0.0.1:3000/remove-token", true);
+    http.open("POST", "http://127.0.0.1:3000/user-controller/remove-token", true);
     var obj = {token: token};
     http.send(JSON.stringify(obj));
     http.onreadystatechange = function() {
@@ -37,7 +37,7 @@ function createNewSnack(snack) {
 // get snack from server
 function loadSnack() {
     var http = new XMLHttpRequest();
-    http.open("GET", "http://127.0.0.1:3000/products", true);
+    http.open("GET", "http://127.0.0.1:3000/user-controller/get-products", true);
     http.send();
     var snackList = document.getElementById("main-order");
     http.onreadystatechange = function () {
@@ -57,7 +57,7 @@ function loadSnack() {
 //when click order
 function submitCart() {
     var http = new XMLHttpRequest();
-    http.open("POST", "http://127.0.0.1:3000/submit-cart", true);
+    http.open("POST", "http://127.0.0.1:3000/user-controller/submit-cart", true);
     var currentUser = getUserInLocalAccount(user);
     var obj = {};
     var temp=Object.assign({},currentUser);

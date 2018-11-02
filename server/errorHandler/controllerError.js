@@ -1,5 +1,15 @@
+const fs = require('fs');
+
+function writeToLog(error) {
+    var time=new Date();
+    var errorStr = time+":\n";
+    errorStr += error.stack +"\n\n";
+    fs.appendFile('errorLog.txt',errorStr, function (err) {
+    if (err) throw err;
+    });
+}
+
 module.exports = function(error,response) {
-    console.log(error);
     var errorList = [
         {statusCode: 400, message: "Wrong Data Input"},
         {statusCode: 401, message: "Authentication Error"},
@@ -15,6 +25,7 @@ module.exports = function(error,response) {
             response.setHeader('Content-type', 'text/plain');
             response.setHeader('Access-Control-Allow-Origin', '*');
             response.end(error.message);
+            writeToLog(error);
             return;
         }
     }
@@ -22,4 +33,5 @@ module.exports = function(error,response) {
     response.setHeader('Content-type', 'text/plain');
     response.setHeader('Access-Control-Allow-Origin', '*');
     response.end(error.message);
+    writeToLog(error);
 }

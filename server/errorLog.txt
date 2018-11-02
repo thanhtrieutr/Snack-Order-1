@@ -1,0 +1,30 @@
+Tue Oct 30 2018 20:23:43 GMT+0700 (SE Asia Standard Time):
+Error: Authentication Error
+    at crud.readOneDocument (D:\Study\IT\Code Web\Snack-Order\server\adminController\getTodayOrder.js:44:32)
+    at D:\Study\IT\Code Web\Snack-Order\server\utilities\databaseCRUD.js:53:9
+    at result (D:\Study\IT\Code Web\Snack-Order\node_modules\mongodb\lib\utils.js:414:17)
+    at session.endSession (D:\Study\IT\Code Web\Snack-Order\node_modules\mongodb\lib\utils.js:401:11)
+    at ClientSession.endSession (D:\Study\IT\Code Web\Snack-Order\node_modules\mongodb-core\lib\sessions.js:129:41)
+    at executeCallback (D:\Study\IT\Code Web\Snack-Order\node_modules\mongodb\lib\utils.js:397:17)
+    at handleCallback (D:\Study\IT\Code Web\Snack-Order\node_modules\mongodb\lib\utils.js:128:55)
+    at cursor.next (D:\Study\IT\Code Web\Snack-Order\node_modules\mongodb\lib\operations\collection_ops.js:570:5)
+    at result (D:\Study\IT\Code Web\Snack-Order\node_modules\mongodb\lib\utils.js:414:17)
+    at executeCallback (D:\Study\IT\Code Web\Snack-Order\node_modules\mongodb\lib\utils.js:406:9)
+Tue Oct 30 2018 20:23:43 GMT+0700 (SE Asia Standard Time):
+Error: Authentication Error
+    at utilities.collectDataFromPost.result (D:\Study\IT\Code Web\Snack-Order\server\adminController\loginAdmin.js:64:25)
+    at IncomingMessage.request.on (D:\Study\IT\Code Web\Snack-Order\server\utilities\utilities.js:32:23)
+    at emitNone (events.js:106:13)
+    at IncomingMessage.emit (events.js:208:7)
+    at endReadableNT (_stream_readable.js:1064:12)
+    at _combinedTickCallback (internal/process/next_tick.js:138:11)
+    at process._tickCallback (internal/process/next_tick.js:180:9)
+Tue Oct 30 2018 20:23:44 GMT+0700 (SE Asia Standard Time):
+Error: Authentication Error
+    at utilities.collectDataFromPost.result (D:\Study\IT\Code Web\Snack-Order\server\adminController\loginAdmin.js:64:25)
+    at IncomingMessage.request.on (D:\Study\IT\Code Web\Snack-Order\server\utilities\utilities.js:32:23)
+    at emitNone (events.js:106:13)
+    at IncomingMessage.emit (events.js:208:7)
+    at endReadableNT (_stream_readable.js:1064:12)
+    at _combinedTickCallback (internal/process/next_tick.js:138:11)
+    at process._tickCallback (internal/process/next_tick.js:180:9)

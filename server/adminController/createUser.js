@@ -35,10 +35,6 @@ function createUser(request, response) {
                 resolve(result);
             })
         })
-    }).catch(error => {
-        response.end("Account Existed");
-        return;
-
     }).then(newUser => {
         newUser = initUserInfo(newUser);
         crud.createDocument("account", newUser);

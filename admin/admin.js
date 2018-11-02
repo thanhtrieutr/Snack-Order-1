@@ -657,7 +657,7 @@ function createRowProdct(oneProduct) {
     oneRowProduct.innerHTML = 
     `<td>${oneProduct.name}</td>
     <td>${oneProduct.quantity}</td>
-    <td>${oneProduct.price}</td>
+    <td>${displayPrice(oneProduct.price)}</td>
     <td>${displayPrice(oneProduct.totalPrice)}</td>
     <td>${oneProduct.status}</td>`;
     return oneRowProduct;
@@ -710,6 +710,7 @@ function loadOrderHistory() {
             var response = http.response;
         }
         else {
+            alertError(http.response);
             return;
         }
         var listProduct = JSON.parse(response);
@@ -724,7 +725,6 @@ function loadOrderHistory() {
             oneDiv.appendChild(oneOrderDetail);
             currentId++;
             orderContainer.appendChild(oneDiv);
-            // orderContainer.appendChild(oneOrderDetail);
         });
     }).catch((error) => {
         alertError(error);

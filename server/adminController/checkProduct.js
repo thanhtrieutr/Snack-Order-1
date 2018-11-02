@@ -54,16 +54,16 @@ function checkProductName(request, response) {
         });
     }).then(result => {
         if (checkValidProduct(result[0].productName)) {
-            reject(new Error("Wrong Data Input"));
+            throw new Error("Wrong Data Input");
         } 
         var obj = {name: result[0].productName};
         crud.readOneDocument("product", obj, function(product, error) {
             if (error) {
-                reject(error);
+                throw rerror;
             }
             //check conflict
             if (product != null) {
-                reject(new Error("Wrong Data Input"));
+                throw new Error("Wrong Data Input");
             }
             response.end("OK"); 
         });
@@ -100,7 +100,7 @@ function checkProduct(request, response) {
         var obj = {name: result[0].productName};
         crud.readOneDocument("product", obj, function(product, error) {
             if (error) {
-                reject(error);
+                throw error;
             }
             //check conflict
             if (product != null) {
@@ -174,7 +174,7 @@ function updateProduct(request,response){
         var currentProduct = result[1];
         if (productPrice) {
             if (checkPrice(productPrice)) {
-                reject(new Error("Wrong Data Input"));
+                throw new Error("Wrong Data Input");
             }
             var obj = {};
             obj.priceInt = productPrice;
@@ -186,7 +186,7 @@ function updateProduct(request,response){
         }
         if (productImage) {
             if (checkFile(productImage)) {
-                reject(new Error("Wrong Data Input"));
+                throw new Error("Wrong Data Input");
             }
             var fileName = utilities.modifyFileName(productImage.fileName);
             for (var i = 0; i < 4; i++) {

@@ -48,7 +48,7 @@ function createUser(request, response) {
             }
         }
         if (checkConflict) {
-            throw new Error ("Account Existed");
+            reject(new Error ("Account Existed"));
         }
         else {
             response.end("create succeed");     

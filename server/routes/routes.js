@@ -30,6 +30,14 @@ var htmlRouter = function (req, res, next) {
 }
 routes.use(htmlRouter);
 
+routes.get('/admin/login', (req, res) => {
+    res.sendFile(__dirname + '/admin/adminLogin.html');
+})
+
+routes.get('/profile/change-password', (req, res) => {
+    res.sendFile(__dirname + '/profile/change-password.html');
+})
+
 routes.get('/', (req, res) => {
     res.sendFile(__dirname + '/main-order/order.html')
 });

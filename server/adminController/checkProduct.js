@@ -35,12 +35,11 @@ function checkFile(productImage) {
 
 function checkProductName(request, response) {
     var collectClient = new Promise((resolve, reject) => { 
-        utilities.collectDataFromPost(request, result => {
-            if (result instanceof Error) {
-                reject(result);
-            }
-            resolve(result);
-        });
+        var result = request.body;
+        if (result instanceof Error) {
+            reject(result);
+        }
+        resolve(result);
     });
     Promise.all([collectClient]).then(result => {
         return new Promise((resolve, reject) => {
@@ -75,12 +74,11 @@ function checkProductName(request, response) {
 
 function checkProduct(request, response) {
     var collectClient = new Promise((resolve, reject) => { 
-        utilities.collectDataFromPost(request, result => {
-            if (result instanceof Error) {
-                reject(result);
-            }
-            resolve(result);
-        });
+        var result = request.body;
+        if (result instanceof Error) {
+            reject(result);
+        }
+        resolve(result);
     });
 
     Promise.all([collectClient]).then(result => {
@@ -134,15 +132,14 @@ function checkProduct(request, response) {
 }
 function updateProduct(request,response){
     var collectClient = new Promise((resolve, reject) => { 
-        utilities.collectDataFromPost(request, result => {
-            if (result instanceof Error) {
-                reject(result);
-            }
-            if (typeof(result) != "object" || result == null) {
-                reject(new Error ("Wrong Data Input"));
-            }
-            resolve(result);
-        });
+        var result = request.body;
+        if (result instanceof Error) {
+            reject(result);
+        }
+        if (typeof(result) != "object" || result == null) {
+            reject(new Error ("Wrong Data Input"));
+        }
+        resolve(result);
     });
     collectClient.then(result => {
         return new Promise((resolve, reject) => {

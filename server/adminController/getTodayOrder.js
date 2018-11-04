@@ -57,16 +57,15 @@ function createQuery() {
 }
 function getTodayOrder(request, response) {
     var collectClient = new Promise((resolve, reject) => { 
-        utilities.collectDataFromPost(request, result => {
-            crud.readOneDocument("adminAccount", {token: result.token}, (admin, err) => {
-                if (result instanceof Error) {
-                    reject(result);
-                }
-                if (typeof(result) != "object" || result == null) {
-                    reject(new Error("Authentication Error"));
-                }
-                resolve();
-            });
+        var result = request.body;
+        crud.readOneDocument("adminAccount", {token: result.token}, (admin, err) => {
+            if (err) {
+                reject(err);
+            }
+            if (typeof(admin) != "object" || admin == null) {
+                reject(new Error("Authentication Error"));
+            }
+            resolve();
         });
     });
 

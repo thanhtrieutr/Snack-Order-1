@@ -19,21 +19,20 @@ function createProductList(oneCart) {
         });
     });
 }
-function submitCart(request, response, product, accountArray) {  
+function submitCart(request, response) {  
     var readPost = new Promise((resolve, reject) => {
-        utilities.collectDataFromPost(request, result => {
-            if (typeof(result) != "object" || result == null) {
-                reject(new Error ("Wrong Data Input"));
-            }
-            for (var i in result.cartArray) {
-                for (var j in result.cartArray) {
-                    if (i != j && result.cartArray[i].productID == result.cartArray[j].productID) {
-                        reject(new Error ("Wrong Data Input"));
-                    }
+        var result = request.body;
+        if (typeof(result) != "object" || result == null) {
+            reject(new Error ("Wrong Data Input"));
+        }
+        for (var i in result.cartArray) {
+            for (var j in result.cartArray) {
+                if (i != j && result.cartArray[i].productID == result.cartArray[j].productID) {
+                    reject(new Error ("Wrong Data Input"));
                 }
             }
-            resolve(result);
-        });
+        }
+        resolve(result);
     });
 
     readPost.then(result => {

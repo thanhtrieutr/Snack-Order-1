@@ -137,5 +137,3 @@ function showNewProductData(result, currentID, trueID) {
   newProductImage.setAttribute("src", result[position].img);
   priceDisplay.value = result[position].price;
 }
-
-

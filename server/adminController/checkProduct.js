@@ -11,12 +11,11 @@ function checkValidProduct(productName) {
     else return /[!@#$%^&*_+\-=\[\]{};':"\\|,.<>\/?]/.test(productName);
 }
 function checkPrice(productPrice){
-    if (productPrice == "" || productPrice == null || productPrice.length > 6) {
+    if (productPrice == "" || productPrice == null || productPrice.length < 6) {
         return true; 
     } 
-    if (isNaN(productPrice)) 
-    {
-        return true
+    if (isNaN(productPrice)) {
+        return true;
     }
     return false;
 }

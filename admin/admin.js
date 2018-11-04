@@ -395,9 +395,15 @@ function createTodayOrderProduct(product, productTable) {
     userList.push(product.user);
     productTable.appendChild(newProduct);
     var index;
-    if (product.status == "pending") index = 0;
-    else if (product.status == "accept") index = 1;
-    else index = 2;
+    if (product.status == "pending") {
+        index = 0;
+    }
+    else if (product.status == "accept") {
+        index = 1;
+    }
+    else {
+        index = 2;
+    }
     document.getElementById("select-" + productRank + "-" + product.user).selectedIndex = index;
 }
 
@@ -595,8 +601,12 @@ function createProduct() {
             http.onerror = () => reject(http.response);
         });
         sendProduct.then((response) => {
-            if (response == "OK") alert("Success");
-            else alert("Fail");
+            if (response == "OK") {
+                alert("Success");
+            }
+            else {
+                alert("Fail");
+            } 
         }).catch((error) => {
             alertError(error);
         });

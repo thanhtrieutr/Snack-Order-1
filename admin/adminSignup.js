@@ -79,5 +79,3 @@ function checkKeyPress(event) {
         alertDataUser();
     }
 }
-
-// addEventListener("keypress", checkKeyPress);

@@ -1,4 +1,5 @@
 //Calling loadTodayOrders function after page loading finished
+loadTodayOrders()
 
 //loadTodayOrders function for initialize bill list in today
 function loadTodayOrders() {

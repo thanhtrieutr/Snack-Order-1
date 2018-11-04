@@ -43,8 +43,9 @@ function loadProduct() {
 
 //Function create new modal to check product information with product database
 function createNewProduct(product, currentID) {
+  //Using utilities variable from admin.js
   productRank++;
-  //Initializing product detail information element
+  //Initializing product detail information list element
   var newProduct = document.createElement('div');
   var productDetail = document.createElement('div');
   productDetail.innerHTML = 
@@ -54,7 +55,7 @@ function createNewProduct(product, currentID) {
           <td id="dynamic-price" class="display-item" style="width: 40%;">${product.price}</td>
       </table>
   </div>`
-  //Creating new modal box element of product
+  //Creating new modal box element of product detail information
   var productTable = document.createElement('div');
   productTable.innerHTML = 
   `<div id="product-detail-${productRank}" class="modal">

@@ -75,6 +75,7 @@ function checkLogIn() {
     });
 }
 
+//Function alertError
 function alertError(error) {
     alert(error);
 }

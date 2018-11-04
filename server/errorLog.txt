@@ -104,3 +104,68 @@ Error: Authentication Error
     at result (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:414:17)
     at executeCallback (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:406:9)
 
+Sun Nov 04 2018 21:33:58 GMT+0700 (Indochina Time):
+Error: Authentication Error
+    at crud.readOneDocument.account (H:\SourceTree\Snack Order\server\userController\loginHandler.js:60:29)
+    at H:\SourceTree\Snack Order\server\utilities\databaseCRUD.js:53:9
+    at result (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:414:17)
+    at session.endSession (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:401:11)
+    at ClientSession.endSession (H:\SourceTree\Snack Order\node_modules\mongodb-core\lib\sessions.js:129:41)
+    at executeCallback (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:397:17)
+    at handleCallback (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:128:55)
+    at cursor.next (H:\SourceTree\Snack Order\node_modules\mongodb\lib\operations\collection_ops.js:570:5)
+    at result (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:414:17)
+    at executeCallback (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:406:9)
+
+Sun Nov 04 2018 21:34:03 GMT+0700 (Indochina Time):
+Error: Authentication Error
+    at crud.readOneDocument.account (H:\SourceTree\Snack Order\server\userController\loginHandler.js:60:29)
+    at H:\SourceTree\Snack Order\server\utilities\databaseCRUD.js:53:9
+    at result (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:414:17)
+    at session.endSession (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:401:11)
+    at ClientSession.endSession (H:\SourceTree\Snack Order\node_modules\mongodb-core\lib\sessions.js:129:41)
+    at executeCallback (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:397:17)
+    at handleCallback (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:128:55)
+    at cursor.next (H:\SourceTree\Snack Order\node_modules\mongodb\lib\operations\collection_ops.js:570:5)
+    at result (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:414:17)
+    at executeCallback (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:406:9)
+
+Sun Nov 04 2018 22:08:39 GMT+0700 (Indochina Time):
+Error: Authentication Error
+    at crud.readOneDocument.account (H:\SourceTree\Snack Order\server\adminController\loginAdmin.js:59:29)
+    at H:\SourceTree\Snack Order\server\utilities\databaseCRUD.js:53:9
+    at result (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:414:17)
+    at session.endSession (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:401:11)
+    at ClientSession.endSession (H:\SourceTree\Snack Order\node_modules\mongodb-core\lib\sessions.js:129:41)
+    at executeCallback (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:397:17)
+    at handleCallback (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:128:55)
+    at cursor.next (H:\SourceTree\Snack Order\node_modules\mongodb\lib\operations\collection_ops.js:570:5)
+    at result (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:414:17)
+    at executeCallback (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:406:9)
+
+Sun Nov 04 2018 22:08:56 GMT+0700 (Indochina Time):
+Error: Authentication Error
+    at crud.readOneDocument.account (H:\SourceTree\Snack Order\server\userController\loginHandler.js:60:29)
+    at H:\SourceTree\Snack Order\server\utilities\databaseCRUD.js:53:9
+    at result (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:414:17)
+    at session.endSession (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:401:11)
+    at ClientSession.endSession (H:\SourceTree\Snack Order\node_modules\mongodb-core\lib\sessions.js:129:41)
+    at executeCallback (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:397:17)
+    at handleCallback (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:128:55)
+    at cursor.next (H:\SourceTree\Snack Order\node_modules\mongodb\lib\operations\collection_ops.js:570:5)
+    at result (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:414:17)
+    at executeCallback (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:406:9)
+
+Sun Nov 04 2018 22:10:25 GMT+0700 (Indochina Time):
+Error: Authentication Error
+    at crud.readOneDocument.account (H:\SourceTree\Snack Order\server\userController\loginHandler.js:60:29)
+    at H:\SourceTree\Snack Order\server\utilities\databaseCRUD.js:53:9
+    at result (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:414:17)
+    at session.endSession (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:401:11)
+    at ClientSession.endSession (H:\SourceTree\Snack Order\node_modules\mongodb-core\lib\sessions.js:129:41)
+    at executeCallback (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:397:17)
+    at handleCallback (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:128:55)
+    at cursor.next (H:\SourceTree\Snack Order\node_modules\mongodb\lib\operations\collection_ops.js:570:5)
+    at result (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:414:17)
+    at executeCallback (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:406:9)
+

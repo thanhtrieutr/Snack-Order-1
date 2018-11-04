@@ -1,5 +1,3 @@
-
-
 function loadNewProductData(currentID, trueID) {
   adminGetProductInfo(function (result) {
       showNewProductData(result, currentID, trueID);
@@ -74,8 +72,7 @@ function checkPrice(productPrice){
     if (productPrice == "" || productPrice == null || productPrice.length > 6) {
         return true; 
     } 
-    if (isNaN(productPrice)) 
-    {
+    if (isNaN(productPrice)) {
         return true
     }
     return false;

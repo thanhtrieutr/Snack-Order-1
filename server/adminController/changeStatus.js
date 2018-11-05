@@ -99,7 +99,7 @@ function createPromiseChange(order, productList, statusList) {
 function createPromiseUpdate(oneOrder) {
     return new Promise((resolve, reject) => {
         crud.updateOneDocument("order", {_id: oneOrder._id}, oneOrder, err => {
-            if (err) throw err;
+            if (err) reject(err);
             resolve();
         });
     });

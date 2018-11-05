@@ -43,7 +43,6 @@ function getUserInLocalAccount(temporary) {
     return -1;
 }
 
-//const itemPrice = [19,35,19,44,19,35,19,44,19,35,19,44,19,35,19,44];
 var itemPrice = [];
 
 function totalPrice(cartArray) {

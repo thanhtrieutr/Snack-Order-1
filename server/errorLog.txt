@@ -1,60 +1,6 @@
-Tue Oct 30 2018 20:23:43 GMT+0700 (SE Asia Standard Time):
+Mon Nov 05 2018 09:27:58 GMT+0700 (Indochina Time):
 Error: Authentication Error
-    at crud.readOneDocument (D:\Study\IT\Code Web\Snack-Order\server\adminController\getTodayOrder.js:44:32)
-    at D:\Study\IT\Code Web\Snack-Order\server\utilities\databaseCRUD.js:53:9
-    at result (D:\Study\IT\Code Web\Snack-Order\node_modules\mongodb\lib\utils.js:414:17)
-    at session.endSession (D:\Study\IT\Code Web\Snack-Order\node_modules\mongodb\lib\utils.js:401:11)
-    at ClientSession.endSession (D:\Study\IT\Code Web\Snack-Order\node_modules\mongodb-core\lib\sessions.js:129:41)
-    at executeCallback (D:\Study\IT\Code Web\Snack-Order\node_modules\mongodb\lib\utils.js:397:17)
-    at handleCallback (D:\Study\IT\Code Web\Snack-Order\node_modules\mongodb\lib\utils.js:128:55)
-    at cursor.next (D:\Study\IT\Code Web\Snack-Order\node_modules\mongodb\lib\operations\collection_ops.js:570:5)
-    at result (D:\Study\IT\Code Web\Snack-Order\node_modules\mongodb\lib\utils.js:414:17)
-    at executeCallback (D:\Study\IT\Code Web\Snack-Order\node_modules\mongodb\lib\utils.js:406:9)
-Tue Oct 30 2018 20:23:43 GMT+0700 (SE Asia Standard Time):
-Error: Authentication Error
-    at utilities.collectDataFromPost.result (D:\Study\IT\Code Web\Snack-Order\server\adminController\loginAdmin.js:64:25)
-    at IncomingMessage.request.on (D:\Study\IT\Code Web\Snack-Order\server\utilities\utilities.js:32:23)
-    at emitNone (events.js:106:13)
-    at IncomingMessage.emit (events.js:208:7)
-    at endReadableNT (_stream_readable.js:1064:12)
-    at _combinedTickCallback (internal/process/next_tick.js:138:11)
-    at process._tickCallback (internal/process/next_tick.js:180:9)
-Tue Oct 30 2018 20:23:44 GMT+0700 (SE Asia Standard Time):
-Error: Authentication Error
-    at utilities.collectDataFromPost.result (D:\Study\IT\Code Web\Snack-Order\server\adminController\loginAdmin.js:64:25)
-    at IncomingMessage.request.on (D:\Study\IT\Code Web\Snack-Order\server\utilities\utilities.js:32:23)
-    at emitNone (events.js:106:13)
-    at IncomingMessage.emit (events.js:208:7)
-    at endReadableNT (_stream_readable.js:1064:12)
-    at _combinedTickCallback (internal/process/next_tick.js:138:11)
-    at process._tickCallback (internal/process/next_tick.js:180:9)
-Fri Nov 02 2018 11:38:08 GMT+0700 (Indochina Time):
-Error: Authentication Error
-    at utilities.collectDataFromPost.result (H:\SourceTree\Snack Order\server\userController\loginHandler.js:75:29)
-    at IncomingMessage.request.on (H:\SourceTree\Snack Order\server\utilities\utilities.js:32:23)
-    at IncomingMessage.emit (events.js:182:13)
-    at endReadableNT (_stream_readable.js:1092:12)
-    at process._tickCallback (internal/process/next_tick.js:63:19)
-
-Fri Nov 02 2018 15:10:47 GMT+0700 (Indochina Time):
-Error: Authentication Error
-    at utilities.collectDataFromPost.result (H:\SourceTree\Snack Order\server\userController\loginHandler.js:75:29)
-    at IncomingMessage.request.on (H:\SourceTree\Snack Order\server\utilities\utilities.js:32:23)
-    at IncomingMessage.emit (events.js:182:13)
-    at endReadableNT (_stream_readable.js:1092:12)
-    at process._tickCallback (internal/process/next_tick.js:63:19)
-
-Fri Nov 02 2018 15:10:54 GMT+0700 (Indochina Time):
-Error: Authentication Error
-    at utilities.collectDataFromPost.result (H:\SourceTree\Snack Order\server\adminController\loginAdmin.js:64:25)
-    at IncomingMessage.request.on (H:\SourceTree\Snack Order\server\utilities\utilities.js:32:23)
-    at IncomingMessage.emit (events.js:182:13)
-    at endReadableNT (_stream_readable.js:1092:12)
-    at process._tickCallback (internal/process/next_tick.js:63:19)
-
-Fri Nov 02 2018 15:49:33 GMT+0700 (Indochina Time):
-Error: Authentication Error
-    at crud.readOneDocument.account (H:\SourceTree\Snack Order\server\adminController\loginAdmin.js:59:29)
+    at crud.readOneDocument.account (H:\SourceTree\Snack Order\server\userController\loginHandler.js:59:29)
     at H:\SourceTree\Snack Order\server\utilities\databaseCRUD.js:53:9
     at result (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:414:17)
     at session.endSession (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:401:11)
@@ -65,9 +11,9 @@ Error: Authentication Error
     at result (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:414:17)
     at executeCallback (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:406:9)
 
-Fri Nov 02 2018 15:49:34 GMT+0700 (Indochina Time):
+Mon Nov 05 2018 09:28:03 GMT+0700 (Indochina Time):
 Error: Authentication Error
-    at crud.readOneDocument.account (H:\SourceTree\Snack Order\server\adminController\loginAdmin.js:59:29)
+    at crud.readOneDocument.account (H:\SourceTree\Snack Order\server\userController\loginHandler.js:59:29)
     at H:\SourceTree\Snack Order\server\utilities\databaseCRUD.js:53:9
     at result (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:414:17)
     at session.endSession (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:401:11)
@@ -77,4 +23,140 @@ Error: Authentication Error
     at cursor.next (H:\SourceTree\Snack Order\node_modules\mongodb\lib\operations\collection_ops.js:570:5)
     at result (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:414:17)
     at executeCallback (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:406:9)
+
+Mon Nov 05 2018 09:29:26 GMT+0700 (Indochina Time):
+Error: Wrong Data Input
+    at H:\SourceTree\Snack Order\server\userController\loginHandler.js:50:20
+    at new Promise (<anonymous>)
+    at checkToken (H:\SourceTree\Snack Order\server\userController\loginHandler.js:43:22)
+    at Layer.handle [as handle_request] (H:\SourceTree\Snack Order\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (H:\SourceTree\Snack Order\node_modules\express\lib\router\index.js:317:13)
+    at H:\SourceTree\Snack Order\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (H:\SourceTree\Snack Order\node_modules\express\lib\router\index.js:335:12)
+    at next (H:\SourceTree\Snack Order\node_modules\express\lib\router\index.js:275:10)
+    at H:\SourceTree\Snack Order\node_modules\body-parser\lib\read.js:130:5
+    at invokeCallback (H:\SourceTree\Snack Order\node_modules\raw-body\index.js:224:16)
+
+Mon Nov 05 2018 09:29:33 GMT+0700 (Indochina Time):
+Error: Wrong Data Input
+    at H:\SourceTree\Snack Order\server\adminController\loginAdmin.js:48:20
+    at new Promise (<anonymous>)
+    at checkAdminToken (H:\SourceTree\Snack Order\server\adminController\loginAdmin.js:42:22)
+    at Layer.handle [as handle_request] (H:\SourceTree\Snack Order\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (H:\SourceTree\Snack Order\node_modules\express\lib\router\index.js:317:13)
+    at H:\SourceTree\Snack Order\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (H:\SourceTree\Snack Order\node_modules\express\lib\router\index.js:335:12)
+    at next (H:\SourceTree\Snack Order\node_modules\express\lib\router\index.js:275:10)
+    at H:\SourceTree\Snack Order\node_modules\body-parser\lib\read.js:130:5
+    at invokeCallback (H:\SourceTree\Snack Order\node_modules\raw-body\index.js:224:16)
+
+Mon Nov 05 2018 09:30:02 GMT+0700 (Indochina Time):
+Error: Wrong Data Input
+    at collectClient.then.then.then.result (H:\SourceTree\Snack Order\server\adminController\checkProduct.js:172:23)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+Mon Nov 05 2018 09:30:29 GMT+0700 (Indochina Time):
+Error: Wrong Data Input
+    at collectClient.then.then.then.result (H:\SourceTree\Snack Order\server\adminController\checkProduct.js:172:23)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+Mon Nov 05 2018 09:32:27 GMT+0700 (Indochina Time):
+Error: Authentication Error
+    at crud.readOneDocument.account (H:\SourceTree\Snack Order\server\adminController\checkProduct.js:147:29)
+    at H:\SourceTree\Snack Order\server\utilities\databaseCRUD.js:53:9
+    at result (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:414:17)
+    at session.endSession (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:401:11)
+    at ClientSession.endSession (H:\SourceTree\Snack Order\node_modules\mongodb-core\lib\sessions.js:129:41)
+    at executeCallback (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:397:17)
+    at handleCallback (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:128:55)
+    at cursor.next (H:\SourceTree\Snack Order\node_modules\mongodb\lib\operations\collection_ops.js:570:5)
+    at result (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:414:17)
+    at executeCallback (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:406:9)
+
+Mon Nov 05 2018 09:32:49 GMT+0700 (Indochina Time):
+Error: Wrong Data Input
+    at collectClient.then.then.then.result (H:\SourceTree\Snack Order\server\adminController\checkProduct.js:172:23)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+Mon Nov 05 2018 09:48:57 GMT+0700 (Indochina Time):
+Error: Wrong Data Input
+    at collectClient.then.then.then.result (H:\SourceTree\Snack Order\server\adminController\checkProduct.js:172:23)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+Mon Nov 05 2018 09:49:09 GMT+0700 (Indochina Time):
+Error: Wrong Data Input
+    at collectClient.then.then.then.result (H:\SourceTree\Snack Order\server\adminController\checkProduct.js:172:23)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+Mon Nov 05 2018 09:53:41 GMT+0700 (Indochina Time):
+Error: Wrong Data Input
+    at collectClient.then.then.then.result (H:\SourceTree\Snack Order\server\adminController\checkProduct.js:172:23)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+Mon Nov 05 2018 09:13:59 GMT+0700 (SE Asia Standard Time):
+Error: Wrong Data Input
+    at E:\webclass\ordersnack\Snack-Order\server\adminController\checkProduct.js:67:27
+    at E:\webclass\ordersnack\Snack-Order\server\utilities\databaseCRUD.js:53:9
+    at result (E:\webclass\ordersnack\Snack-Order\node_modules\mongodb\lib\utils.js:414:17)
+    at session.endSession (E:\webclass\ordersnack\Snack-Order\node_modules\mongodb\lib\utils.js:401:11)
+    at ClientSession.endSession (E:\webclass\ordersnack\Snack-Order\node_modules\mongodb-core\lib\sessions.js:129:41)
+    at executeCallback (E:\webclass\ordersnack\Snack-Order\node_modules\mongodb\lib\utils.js:397:17)
+    at handleCallback (E:\webclass\ordersnack\Snack-Order\node_modules\mongodb\lib\utils.js:128:55)
+    at cursor.next (E:\webclass\ordersnack\Snack-Order\node_modules\mongodb\lib\operations\collection_ops.js:570:5)
+    at result (E:\webclass\ordersnack\Snack-Order\node_modules\mongodb\lib\utils.js:414:17)
+    at executeCallback (E:\webclass\ordersnack\Snack-Order\node_modules\mongodb\lib\utils.js:406:9)
+
+Mon Nov 05 2018 10:03:00 GMT+0700 (Indochina Time):
+Error: Wrong Data Input
+    at H:\SourceTree\Snack Order\server\adminController\checkProduct.js:66:27
+    at H:\SourceTree\Snack Order\server\utilities\databaseCRUD.js:53:9
+    at result (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:414:17)
+    at session.endSession (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:401:11)
+    at ClientSession.endSession (H:\SourceTree\Snack Order\node_modules\mongodb-core\lib\sessions.js:129:41)
+    at executeCallback (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:397:17)
+    at handleCallback (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:128:55)
+    at cursor.next (H:\SourceTree\Snack Order\node_modules\mongodb\lib\operations\collection_ops.js:570:5)
+    at result (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:414:17)
+    at executeCallback (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:406:9)
+
+Mon Nov 05 2018 10:07:47 GMT+0700 (Indochina Time):
+Error: Wrong Data Input
+    at Promise.all.then.then.result (H:\SourceTree\Snack Order\server\adminController\checkProduct.js:102:19)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+Mon Nov 05 2018 10:12:08 GMT+0700 (Indochina Time):
+Error: Wrong Data Input
+    at Promise.all.then.then.result (H:\SourceTree\Snack Order\server\adminController\checkProduct.js:102:19)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+Mon Nov 05 2018 10:12:15 GMT+0700 (Indochina Time):
+Error: Wrong Data Input
+    at Promise.all.then.then.result (H:\SourceTree\Snack Order\server\adminController\checkProduct.js:102:19)
+    at process._tickCallback (internal/process/next_tick.js:68:7)
+
+Mon Nov 05 2018 10:13:01 GMT+0700 (Indochina Time):
+Error: Wrong Data Input
+    at H:\SourceTree\Snack Order\server\adminController\checkProduct.js:66:27
+    at H:\SourceTree\Snack Order\server\utilities\databaseCRUD.js:53:9
+    at result (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:414:17)
+    at session.endSession (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:401:11)
+    at ClientSession.endSession (H:\SourceTree\Snack Order\node_modules\mongodb-core\lib\sessions.js:129:41)
+    at executeCallback (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:397:17)
+    at handleCallback (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:128:55)
+    at cursor.next (H:\SourceTree\Snack Order\node_modules\mongodb\lib\operations\collection_ops.js:570:5)
+    at result (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:414:17)
+    at executeCallback (H:\SourceTree\Snack Order\node_modules\mongodb\lib\utils.js:406:9)
+
+Mon Nov 05 2018 10:13:13 GMT+0700 (Indochina Time):
+Error: Wrong Data Input
+    at H:\SourceTree\Snack Order\server\adminController\loginAdmin.js:48:20
+    at new Promise (<anonymous>)
+    at checkAdminToken (H:\SourceTree\Snack Order\server\adminController\loginAdmin.js:42:22)
+    at Layer.handle [as handle_request] (H:\SourceTree\Snack Order\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (H:\SourceTree\Snack Order\node_modules\express\lib\router\index.js:317:13)
+    at H:\SourceTree\Snack Order\node_modules\express\lib\router\index.js:284:7
+    at Function.process_params (H:\SourceTree\Snack Order\node_modules\express\lib\router\index.js:335:12)
+    at next (H:\SourceTree\Snack Order\node_modules\express\lib\router\index.js:275:10)
+    at H:\SourceTree\Snack Order\node_modules\body-parser\lib\read.js:130:5
+    at invokeCallback (H:\SourceTree\Snack Order\node_modules\raw-body\index.js:224:16)
 

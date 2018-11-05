@@ -43,7 +43,7 @@ function getUserInLocalAccount(temporary) {
     return -1;
 }
 
-const itemPrice = [19,35,19,44,19,35,19,44,19,35,19,44,19,35,19,44];
+var itemPrice = [];
 
 function totalPrice(cartArray) {
     var sum = 0;
@@ -51,7 +51,7 @@ function totalPrice(cartArray) {
     for (var i in cartArray) {
         sum += cartArray[i].amount * itemPrice[cartArray[i].productID - 1];
     }
-    return displayPrice(sum * 1000);
+    return displayPrice(sum);
 }
 
 function addSnack(ID, amount) {
@@ -77,7 +77,7 @@ function addSnack(ID, amount) {
     oneSpan = document.createElement("span");
     oneSpan.setAttribute("id", "price-display-" + ID);
     oneSpan.setAttribute("class", "price-of-snack cl-xs-3 cl-sm-3 cl-md-4");
-    snackPrice = displayPrice(itemPrice[ID - 1] * 1000);
+    snackPrice = displayPrice(itemPrice[ID - 1]);
     oneText = document.createTextNode(snackPrice);
     oneSpan.appendChild(oneText);
     oneDiv.appendChild(oneSpan);
@@ -138,7 +138,7 @@ function showCurrentSnack() {
     for (var i in currentUser.cartArray) {
         addSnack( currentUser.cartArray[i].productID, currentUser.cartArray[i].amount);
         document.getElementById("checkbox-" + currentUser.cartArray[i].productID).checked = true;
-        document.getElementById("price-display-" + currentUser.cartArray[i].productID ).innerHTML = displayPrice(currentUser.cartArray[i].amount * itemPrice[Number(currentUser.cartArray[i].productID)-1] * 1000);
+        document.getElementById("price-display-" + currentUser.cartArray[i].productID ).innerHTML = displayPrice(currentUser.cartArray[i].amount * itemPrice[Number(currentUser.cartArray[i].productID)-1] );
     }
     document.getElementById("total-price-number").innerHTML = totalPrice(currentUser.cartArray);
 }
@@ -203,7 +203,7 @@ function increaseAmount(currentID) {
     document.getElementById("minus-button-" + currentID).disabled = false;
     
     //show data
-    document.getElementById("price-display-" + currentID).innerHTML = displayPrice(currentProduct.amount * itemPrice[Number(currentID)-1] * 1000);
+    document.getElementById("price-display-" + currentID).innerHTML = displayPrice(currentProduct.amount * itemPrice[Number(currentID)-1]);
     document.getElementById("amount-" + currentID).innerHTML = " " + currentProduct.amount + " ";
     localStorage.setItem("accountArray", JSON.stringify(localAccount));
     document.getElementById("total-price-number").innerHTML = totalPrice(currentUser.cartArray);
@@ -225,7 +225,7 @@ function decreaseAmount(currentID) {
     document.getElementById("add-button-" + currentID).disabled = false;
     
     //show data
-    document.getElementById("price-display-" + currentID).innerHTML = displayPrice(currentProduct.amount * itemPrice[Number(currentID)-1] * 1000);
+    document.getElementById("price-display-" + currentID).innerHTML = displayPrice(currentProduct.amount * itemPrice[Number(currentID)-1]);
     document.getElementById("amount-" + currentID).innerHTML = " " + currentProduct.amount + " ";
     localStorage.setItem("accountArray", JSON.stringify(localAccount));
     document.getElementById("total-price-number").innerHTML = totalPrice(currentUser.cartArray);

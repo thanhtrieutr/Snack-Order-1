@@ -7,7 +7,6 @@ const port = 3000;
 
 var crud = require("./utilities/databaseCRUD");
 crud.connectDatabase();
-
 app.use('/', routes);
 
 app.listen(port, () => {

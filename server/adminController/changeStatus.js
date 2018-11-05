@@ -17,7 +17,7 @@ function checkUpdateList(updateList) {
     }
     return false;
 }
-
+//seperate group to order and its products
 function init(updateList) {
     var orderList = [];
     var productList = [];
@@ -86,9 +86,10 @@ function createPromiseChange(order, productList, statusList) {
                     reject(new Error ("Wrong Data Input"));
                 }
                 //change status
+                var i2 = utilities.findObjectById(oneOrder.productArray, oneOrder.products[i]._id);
                 oneOrder.products[i].status = statusList[productPosition];
                 if (oneOrder.products[i].status == "accept") {
-                    actualTotalPrice += oneOrder.products[i].quantity * oneOrder.productArray[i].priceInt;
+                    actualTotalPrice += oneOrder.products[i].quantity * oneOrder.productArray[i2].price;
                 }
             }
             oneOrder.actualTotalPrice = actualTotalPrice;
@@ -99,22 +100,21 @@ function createPromiseChange(order, productList, statusList) {
 function createPromiseUpdate(oneOrder) {
     return new Promise((resolve, reject) => {
         crud.updateOneDocument("order", {_id: oneOrder._id}, oneOrder, err => {
-            if (err) throw err;
+            if (err) reject(err);
             resolve();
         });
     });
 }
 function changeStatus(request,response){
     var collectClient = new Promise((resolve, reject) => { 
-        utilities.collectDataFromPost(request, result => {
-            if (result instanceof Error) {
-                reject(result);
-            }
-            if (typeof(result) != "object" || result == null) {
-                reject(new Error ("Wrong Data Input"));
-            }
-            resolve(result);
-        });
+        var result = request.body;
+        if (result instanceof Error) {
+            reject(result);
+        }
+        if (typeof(result) != "object" || result == null) {
+            reject(new Error ("Wrong Data Input"));
+        }
+        resolve(result);
     });
     collectClient.then(result => {
         return new Promise((resolve, reject) => {

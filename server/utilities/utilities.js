@@ -15,25 +15,6 @@ function findValidUserPosition(accountList, user) {
     return -1;
 }
 
-/*function collectDataFromPost(request, callback) {
-    let body = '';
-    // collect data
-    request.on('data', chunk => {
-        body += chunk.toString();
-    });
-    //collect done
-    request.on('end', () => {
-        try {
-            body = JSON.parse(body);
-        }
-        catch (error) {
-            console.log(`There is error: ${error} at parse data\n`);
-            //if (callback) callback(error);
-        }
-        if (callback) callback(body);
-    });
-}*/
-
 function savePhoto(filename, data, token, callback) {
     if (typeof(filename) != 'string' || typeof(token) != 'string' || typeof(data) != 'string') {
         callback("not valid data");
@@ -163,7 +144,6 @@ module.exports = {
     findAccountByToken: findAccountByToken,
     createToken: createToken,
     findValidUserPosition: findValidUserPosition,
-    //collectDataFromPost: collectDataFromPost,
     setResponseHeader: setResponseHeader,
     savePhoto: savePhoto,
     modifyFileName: modifyFileName,

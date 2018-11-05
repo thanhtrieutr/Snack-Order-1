@@ -42,7 +42,6 @@ function checkLogin(request, response) {
 function checkToken(request, response) {
     var getAccount = new Promise(function(resolve, reject) {
         var result = request.body;
-        debugger;
         if (result instanceof Error) {
             reject(result);
         }

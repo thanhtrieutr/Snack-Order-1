@@ -1,6 +1,6 @@
 const express = require('express');
 const adminRouter = express.Router();
-
+const utilities = require("../../utilities/utilities");
 
 //Acquiring admin controller for admin backend
 var getAdminProduct = require("../../adminController/getAdminProduct")
@@ -15,18 +15,18 @@ var errorHandler = require("../../errorHandler/controllerError");
 
 //API for admin backend (using try..catch)
 try {
-  adminRouter.use('/get-products', getAdminProduct.getAdminProduct);
-  adminRouter.use('/get-users', getAdminUser.getAdminUser);
-  adminRouter.use('/get-today-order', getTodayOrder.getTodayOrder);
-  adminRouter.use('/check-login', loginAdmin.checkLogin);
-  adminRouter.use('/check-token', loginAdmin.checkToken);
-  adminRouter.use('/remove-token', loginAdmin.deleteToken);
-  adminRouter.use('/check-product-name', checkProduct.checkProductName);
-  adminRouter.use('/create-new-product',  checkProduct.checkProduct);
-  adminRouter.use('/update-product', checkProduct.updateProduct);
-  adminRouter.use('/get-order-history', getHistory.getHistory);
-  adminRouter.use('/create-user', createUser.createUser);
-  adminRouter.use('/change-order-status', changeStatus.changeStatus);
+  adminRouter.use('/get-products', utilities.jsonParser(), getAdminProduct.getAdminProduct);
+  adminRouter.use('/get-users', utilities.jsonParser(), getAdminUser.getAdminUser);
+  adminRouter.use('/get-today-order', utilities.jsonParser(), getTodayOrder.getTodayOrder);
+  adminRouter.use('/check-login', utilities.jsonParser(), loginAdmin.checkLogin);
+  adminRouter.use('/check-token', utilities.jsonParser(), loginAdmin.checkToken);
+  adminRouter.use('/remove-token', utilities.jsonParser(), loginAdmin.deleteToken);
+  adminRouter.use('/check-product-name', utilities.jsonParser(), checkProduct.checkProductName);
+  adminRouter.use('/create-new-product', utilities.jsonParser(),  checkProduct.checkProduct);
+  adminRouter.use('/update-product', utilities.jsonParser(), checkProduct.updateProduct);
+  adminRouter.use('/get-order-history', utilities.jsonParser(), getHistory.getHistory);
+  adminRouter.use('/create-user', utilities.jsonParser(), createUser.createUser);
+  adminRouter.use('/change-order-status', utilities.jsonParser(), changeStatus.changeStatus);
 } catch (error) {
   errorHandler(error,response);
   return;

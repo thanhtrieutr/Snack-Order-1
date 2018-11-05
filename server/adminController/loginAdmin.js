@@ -4,15 +4,14 @@ var errorHandler = require("../errorHandler/controllerError");
 
 function checkAdminLogin(request, response) {
     var getAccount = new Promise(function(resolve, reject) {
-        utilities.collectDataFromPost(request, result => {
-            if (result instanceof Error) {
-                reject(result);
-            }
-            if (typeof(result) != "object" || result == null) {
-                reject(new Error ("Wrong Data Input"));
-            }
-            resolve(result);
-        });
+        var result = request.body;
+        if (result instanceof Error) {
+            reject(result);
+        }
+        if (typeof(result) != "object" || result == null || !result.user || !result.password) {
+            reject(new Error ("Wrong Data Input"));
+        }
+        resolve(result);
     });
 
     getAccount.then((result) => {
@@ -41,15 +40,14 @@ function checkAdminLogin(request, response) {
 
 function checkAdminToken(request, response) {
     var getAccount = new Promise(function(resolve, reject) {
-        utilities.collectDataFromPost(request, result => {
-            if (result instanceof Error) {
-                reject(result);
-            }
-            if (typeof(result) != "object" || result == null) {
-                reject(new Error ("Wrong Data Input"));
-            }
-            resolve(result);
-        });
+        var result = request.body;
+        if (result instanceof Error) {
+            reject(result);
+        }
+        if (typeof(result) != "object" || result == null || !result.token) {
+            reject(new Error ("Wrong Data Input"));
+        }
+        resolve(result);
     });
 
     getAccount.then((result) => {
@@ -70,15 +68,14 @@ function checkAdminToken(request, response) {
 }
 function deleteToken(request, response) {
     var getAccount = new Promise(function(resolve, reject) {
-        utilities.collectDataFromPost(request, result => {
-            if (result instanceof Error) {
-                reject(result);
-            }
-            if (typeof(result) != "object" || result == null) {
-                reject(new Error ("Wrong Data Input"));
-            }
-            resolve(result);
-        });
+        var result = request.body;
+        if (result instanceof Error) {
+            reject(result);
+        }
+        if (typeof(result) != "object" || result == null || !result.token) {
+            reject(new Error ("Wrong Data Input"));
+        }
+        resolve(result);
     });
 
     getAccount.then((result) => {

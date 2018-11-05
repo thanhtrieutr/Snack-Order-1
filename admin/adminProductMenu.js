@@ -30,7 +30,7 @@ function loadProduct() {
       if (contentContainer.style.display == "none" || contentContainer.style.display == "") {
           contentContainer.style.display = "block";
       }
-      listProduct.forEach(product => {
+      listProduct.forEach(product => {  
           var newProduct = createNewProduct(product, product._id);
           contentContainer.appendChild(newProduct);
       });
@@ -40,6 +40,10 @@ function loadProduct() {
       alertError(error);
   });
 }
+
+// function fixDisplayPrice(elementID, price)  {
+
+// }
 
 //Function create new modal to check product information with product database
 function createNewProduct(product, currentID) {
@@ -52,7 +56,7 @@ function createNewProduct(product, currentID) {
   `<div id="display-container" onclick="showModal('product-detail-${productRank}', 'product-detail-label')">
       <table class="table is-fullwidth">
           <td class="display-item" style="width: 60%;">${product.name}</td>
-          <td id="dynamic-price" class="display-item" style="width: 40%;">${product.price}</td>
+          <td id="dynamic-price-${productRank}" class="display-item" style="width: 40%;">${displayPrice(product.price)}</td>
       </table>
   </div>`
   //Creating new modal box element of product detail information
@@ -83,7 +87,7 @@ function createNewProduct(product, currentID) {
                       </div>  
                       <div id="product-information" class="columns is-mobile">
                           <label class="name column is-3"> <b> Price: </b> </label>
-                          <input id="product-price-${productRank}" class="text column is-7" data-id="${currentID}" value="${product.price}" onkeypress="checkEnterKey(event, '${productRank}')" disabled> </input>
+                          <input id="product-price-${productRank}" class="text column is-7" data-id="${currentID}" value="${displayPrice(product.price)}" onkeypress="checkEnterKey(event, '${productRank}')" disabled> </input>
                       </div>  
                   </div>           
               </section>

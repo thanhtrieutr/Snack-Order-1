@@ -4,12 +4,11 @@ var errorHandler = require("../errorHandler/controllerError");
 
 function deleteOneUser(request, response) {
     var collectClient = new Promise((resolve, reject) => {
-        utilities.collectDataFromPost(request, result => {
-            if (result == null || typeof(result) != "object") {
-                reject(new Error ("Wrong Data Input"));
-            }
-            resolve(result);
-        });
+        var result = request.body;
+        if (result == null || typeof(result) != "object" || !result.token) {
+            reject(new Error ("Wrong Data Input"));
+        }
+        resolve(result);
     })
 
     collectClient.then(result => {

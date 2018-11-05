@@ -110,7 +110,6 @@ function showMode (currentID){
 
 function checkEnterKey(event, currentID) {
     if (event.keyCode == 13) {
-
         showMode(currentID);
     }
   }
@@ -131,9 +130,11 @@ function showNewProductData(result, currentID, trueID) {
           position = i;
       }
   }
-  document.getElementById("dynamic-price").innerHTML = (result[position].price);
+  document.getElementById("dynamic-price-"+currentID).innerHTML = displayPrice(result[position].price);
   var priceDisplay = document.getElementById("product-price-" + currentID);
   var newProductImage = document.getElementById("product-img-" + currentID);
   newProductImage.setAttribute("src", result[position].img);
-  priceDisplay.value = result[position].price;
+  priceDisplay.value = displayPrice(result[position].price);
 }
+
+

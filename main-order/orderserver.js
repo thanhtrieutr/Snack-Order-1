@@ -29,7 +29,7 @@ function createNewSnack(snack) {
         ${snack.name}
     </div>
     <div class="main-snack-price" id="snack-price-${snackListId}">
-        ${snack.price}
+        ${displayPrice(snack.price)}
     </div>
     <input class="checkbox-button" data-id="${snack._id}" data-position=${snackListId} type="checkbox" id="checkbox-${snackListId}" onclick="chooseSnack(${snackListId})">`;
     return newSnack;
@@ -45,6 +45,7 @@ function loadSnack() {
             snackListId=0;
             var  snacks = JSON.parse(this.response);
             snacks.forEach(snack => {
+                itemPrice.push(snack.price);
                 var newSnack = createNewSnack(snack);
                 snackList.appendChild(newSnack);
             });

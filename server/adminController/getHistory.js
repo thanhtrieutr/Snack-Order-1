@@ -71,9 +71,10 @@ function getHistory(request, response) {
             obj.products = currentOrder.products;
             obj.user = currentOrder.userName;
             obj.actualTotalPrice = currentOrder.actualTotalPrice;
-            for (var j in currentOrder.productArray) {
-                obj.products[j].name = currentOrder.productArray[j].name;
-                obj.products[j].price = currentOrder.productArray[j].priceInt;
+            for (var j in obj.products) {
+                var k = utilities.findObjectById(currentOrder.productArray, obj.products[j]._id);
+                obj.products[j].name = currentOrder.productArray[k].name;
+                obj.products[j].price = currentOrder.productArray[k].price;
                 obj.products[j].totalPrice = obj.products[j].price * obj.products[j].quantity;
             }
             var newObj = utilities.cloneObject(obj);

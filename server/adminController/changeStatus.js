@@ -17,7 +17,7 @@ function checkUpdateList(updateList) {
     }
     return false;
 }
-
+//seperate group to order and its products
 function init(updateList) {
     var orderList = [];
     var productList = [];
@@ -86,9 +86,10 @@ function createPromiseChange(order, productList, statusList) {
                     reject(new Error ("Wrong Data Input"));
                 }
                 //change status
+                var i2 = utilities.findObjectById(oneOrder.productArray, oneOrder.products[i]._id);
                 oneOrder.products[i].status = statusList[productPosition];
                 if (oneOrder.products[i].status == "accept") {
-                    actualTotalPrice += oneOrder.products[i].quantity * oneOrder.productArray[i].priceInt;
+                    actualTotalPrice += oneOrder.products[i].quantity * oneOrder.productArray[i2].price;
                 }
             }
             oneOrder.actualTotalPrice = actualTotalPrice;

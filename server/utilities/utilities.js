@@ -136,7 +136,7 @@ function findObjectById(objList, id) {
     var position = -1;
     for (var i in objList) {
         let currentId = objList[i]._id;
-        if (currentId.equals(id)) {
+        if (currentId.toString() == id.toString()) {
             position = i;
             return position;
         }

@@ -86,14 +86,15 @@ function getTodayOrder(request, response) {
             obj.time = `${oneOrder.time.getHours()}:${oneOrder.time.getMinutes()}`;
             obj.user = oneOrder.userName;
             obj.orderId = [oneOrder._id];
-            for (var j in oneOrder.productArray) {
-                var oneProduct = oneOrder.productArray[j];
+            for (var j in oneOrder.products) {
+                var j2 = utilities.findObjectById(oneOrder.productArray, oneOrder.products[j]._id);
+                var oneProduct = oneOrder.productArray[j2];
                 obj.name = oneProduct.name;
                 obj.quantity = oneOrder.products[j].quantity;
                 obj.price = oneProduct.price;
                 obj.status = oneOrder.products[j].status;
                 obj.productId = oneOrder.products[j]._id;
-                obj.totalPrice = oneProduct.priceInt * obj.quantity;
+                obj.totalPrice = oneProduct.price * obj.quantity;
                 //join 
                 var position = -1;
                 for (var k in orderList) {

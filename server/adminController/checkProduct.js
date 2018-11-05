@@ -115,8 +115,7 @@ function checkProduct(request, response) {
             }
             var obj = {};
             obj.name = productName;
-            obj.priceInt = productPrice;
-            obj.price = displayPrice(productPrice);
+            obj.price = productPrice;
             crud.createDocument("product", obj, err => {
                 if (err) throw err;
                 adminUtilities.savePhoto(obj, fileName, productImage.file, err => {
@@ -174,8 +173,7 @@ function updateProduct(request,response){
                 throw new Error("Wrong Data Input");
             }
             var obj = {};
-            obj.priceInt = productPrice;
-            obj.price = displayPrice(productPrice);
+            obj.price = productPrice;
             console.log(currentProduct._id);
             crud.updateOneDocument("product", {_id:currentProduct._id}, obj, err => {
                 if (err) throw err;

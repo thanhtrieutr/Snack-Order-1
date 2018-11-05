@@ -65,7 +65,7 @@ function submitCart(request, response) {
         Promise.all(productInOrder).then(productList => {
             for (var i in productList) {
                 // calculate total price
-                var currentPrice = productList[i].priceInt;
+                var currentPrice = productList[i].price;
                 var currentAmount  = result.cartArray[i].amount;
                 if (!currentAmount || typeof currentAmount !== "number" || currentAmount <= 0 || currentAmount >=100)
                 {

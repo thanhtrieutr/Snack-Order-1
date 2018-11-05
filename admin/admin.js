@@ -109,7 +109,7 @@ function createNewProduct(product, currentID) {
     `<div id="display-container" onclick="showModal('product-detail-${productRank}', 'product-detail-label')">
         <table class="table is-fullwidth">
             <td class="display-item" style="width: 60%;">${product.name}</td>
-            <td id="dynamic-price" class="display-item" style="width: 40%;">${product.price}</td>
+            <td id="dynamic-price" class="display-item" style="width: 40%;">${displayPrice(product.price)}</td>
         </table>
     </div>`
     var productTable = document.createElement('div');
@@ -378,7 +378,7 @@ function createTodayOrderProduct(product, productTable) {
     newProduct.innerHTML =
     `<td class="product-name">${product.name}</td>
     <td>${product.quantity}</td>
-    <td>${product.price}</td>
+    <td>${displayPrice(product.price)}</td>
     <td>${product.totalPrice}đ</td>
     <td>${product.user}</td>
     <td>${product.time}</td>

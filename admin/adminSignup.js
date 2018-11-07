@@ -66,7 +66,9 @@ function alertDataUser() {
     signupInSever(user, password, result => {
         if (result == "create succeed") {
             alert("Create successful");
-        } else alert(result);
+        } else {
+            alert(result);
+        }
     });
 }
 
@@ -79,5 +81,3 @@ function checkKeyPress(event) {
         alertDataUser();
     }
 }
-
-// addEventListener("keypress", checkKeyPress);

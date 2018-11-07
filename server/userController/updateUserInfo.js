@@ -39,18 +39,17 @@ function checkUserInfo(result) {
 
 module.exports = function updateUserInfo(request, response) {
     var collectClient = new Promise(function(resolve, reject) {
-        utilities.collectDataFromPost(request, result =>{
-            if (result instanceof Error) {
-                reject(new Error ("Wrong Data Input"));
-            }
-            if (typeof(result) != "object" || result == null) {
-                reject(new Error ("Wrong Data Input"));
-            }
-            if (!result.token || Object.keys(result).length != 5 || checkUserInfo(result) == false) {
-                reject (new Error ("Wrong Data Input"));
-            }
-            resolve(result);
-        });
+        var result = request.body;
+        if (result instanceof Error) {
+            reject(new Error ("Wrong Data Input"));
+        }
+        if (typeof(result) != "object" || result == null) {
+            reject(new Error ("Wrong Data Input"));
+        }
+        if (!result.token || Object.keys(result).length != 5 || checkUserInfo(result) == false) {
+            reject (new Error ("Wrong Data Input"));
+        }
+        resolve(result);
     });
 
     collectClient.then(result => {

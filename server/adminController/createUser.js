@@ -16,15 +16,14 @@ function initUserInfo(newAccount) {
 
 function createUser(request, response) {
     var readPost = new Promise((resolve, reject) => {
-        utilities.collectDataFromPost(request, newAccount => {
-            if (typeof (newAccount) != "object" || newAccount == null) {
-                reject(new Error("Wrong Data Input"));
-            }
-            if (utilAdmin.validateAccount(newAccount) == false || Object.keys(newAccount).length > 3) {
-                reject(new Error("Wrong Data Input"));
-            }
-            resolve(newAccount);
-        });
+        var newAccount = request.body;
+        if (typeof (newAccount) != "object" || newAccount == null) {
+            reject(new Error("Wrong Data Input"));
+        }
+        if (utilAdmin.validateAccount(newAccount) == false || Object.keys(newAccount).length > 3) {
+            reject(new Error("Wrong Data Input"));
+        }
+        resolve(newAccount);
     });
     readPost.then((result) => {
         return new Promise((resolve, reject) => {

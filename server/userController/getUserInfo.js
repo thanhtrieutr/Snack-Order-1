@@ -3,17 +3,16 @@ var utilities = require("../utilities/utilities");
 var errorHandler = require("../errorHandler/controllerError");
 var listInfo = ["fullName", "phoneNumber", "birthday", "address"];
 
-function checkToken(request, response, accountArray) {
+function checkToken(request, response) {
     var collectClient = new Promise((resolve, reject) => {
-        utilities.collectDataFromPost(request, result => {
-            if (result instanceof Error) {
-                reject(result);
-            }
-            if (typeof(result) != "object" || result == null) {
-                reject(new Error ("Wrong Data Input"));
-            }
-            resolve(result);
-        });
+        var result = request.body;
+        if (result instanceof Error) {
+            reject(result);
+        }
+        if (typeof(result) != "object" || result == null) {
+            reject(new Error ("Wrong Data Input"));
+        }
+        resolve(result);
     });
 
     collectClient.then((result) => {

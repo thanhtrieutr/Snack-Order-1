@@ -4,15 +4,14 @@ var errorHandler = require("../errorHandler/controllerError");
 
 function getAdminProduct(request, response) {
     var collectClient = new Promise((resolve, reject) => { 
-        utilities.collectDataFromPost(request, result => {
-            if (result instanceof Error) {
-                reject(result);
-            }
-            if (typeof(result) != "object" || result == null) {
-                reject(new Error ("Wrong Data Input"));
-            }
-            resolve(result);
-        });
+        result = request.body;
+        if (result instanceof Error) {
+            reject(result);
+        }
+        if (typeof(result) != "object" || result == null) {
+            reject(new Error ("Wrong Data Input"));
+        }
+        resolve(result);
     });
     var collectProductList = new Promise(function(resolve, reject) {
         crud.readDatabase("product", function(object,error) {

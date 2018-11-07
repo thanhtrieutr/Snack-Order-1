@@ -8,21 +8,20 @@ function passwordCheck(password) {
 
 module.exports = function updatePassword(request, response) {
     var collectClient = new Promise(function(resolve, reject) {
-        utilities.collectDataFromPost(request, result =>{
-            if (result instanceof Error) {
-                reject(new Error ("Wrong Data Input"));
-            }
-            if (typeof(result) != "object" || result == null) {
-                reject(new Error ("Wrong Data Input"));
-            }
-            if (!result.oldPassword || !result.token || !result.newPassword || Object.keys(result).length != 3) {
-                reject(new Error('Wrong Data Input'));
-            }
-            if (result.newPassword.length < 8 || result.newPassword.length > 16 || !passwordCheck(result.newPassword)) {
-                reject(new Error('Authentication Error'));
-            }
-            resolve(result);
-        });
+        var result = request.body;
+        if (result instanceof Error) {
+            reject(new Error ("Wrong Data Input"));
+        }
+        if (typeof(result) != "object" || result == null) {
+            reject(new Error ("Wrong Data Input"));
+        }
+        if (!result.oldPassword || !result.token || !result.newPassword || Object.keys(result).length != 3) {
+            reject(new Error('Wrong Data Input'));
+        }
+        if (result.newPassword.length < 8 || result.newPassword.length > 16 || !passwordCheck(result.newPassword)) {
+            reject(new Error('Authentication Error'));
+        }
+        resolve(result);
     });
 
     collectClient.then(result => {

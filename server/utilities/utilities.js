@@ -4,6 +4,7 @@ var fs = require('fs');
 var path = require('path');
 var crud = require('../utilities/databaseCRUD');
 var crypto = require("crypto");
+var bodyParser = require('body-parser');
 
 function findValidUserPosition(accountList, user) {
     for (var i in accountList) {
@@ -12,25 +13,6 @@ function findValidUserPosition(accountList, user) {
         }
     }
     return -1;
-}
-
-function collectDataFromPost(request, callback) {
-    let body = '';
-    // collect data
-    request.on('data', chunk => {
-        body += chunk.toString();
-    });
-    //collect done
-    request.on('end', () => {
-        try {
-            body = JSON.parse(body);
-        }
-        catch (error) {
-            console.log(`There is error: ${error} at parse data\n`);
-            //if (callback) callback(error);
-        }
-        if (callback) callback(body);
-    });
 }
 
 function savePhoto(filename, data, token, callback) {
@@ -135,7 +117,7 @@ function findObjectById(objList, id) {
     var position = -1;
     for (var i in objList) {
         let currentId = objList[i]._id;
-        if (currentId.equals(id)) {
+        if (currentId.toString() == id.toString()) {
             position = i;
             return position;
         }
@@ -151,14 +133,21 @@ function cloneObject(obj) {
     }
     return copy;
 }
+function jsonParser(option) {
+    if (typeof(option) != 'object') {
+        return bodyParser.json({type: "*/*"});
+    }
+    option.type = "*/*";
+    return bodyParser.json(option); 
+}
 module.exports = {
     findAccountByToken: findAccountByToken,
     createToken: createToken,
     findValidUserPosition: findValidUserPosition,
-    collectDataFromPost: collectDataFromPost,
     setResponseHeader: setResponseHeader,
     savePhoto: savePhoto,
     modifyFileName: modifyFileName,
     findObjectById: findObjectById,
-    cloneObject: cloneObject
+    cloneObject: cloneObject,
+    jsonParser: jsonParser
 }

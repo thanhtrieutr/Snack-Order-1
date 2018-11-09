@@ -4,14 +4,16 @@ var multer = require('multer');
 var crud = require("../utilities/databaseCRUD")
 var express = require('express');
 var appGetFile = express();
+var path = require('path');
 
 var newFileName;
 var storage = multer.diskStorage({
     destination: function (req, file, callback) {
-        callback(null, path.join(__dirname,'../../images'));
+        callback(null, path.join(__dirname, '../../images'));
     },
     filename: function (req, file, callback) {
-        newFileName = utilities.modifyFileName(file.fieldname);
+        newFileName = utilities.modifyFileName(file.originalname);
+        console.log(newFileName);
         callback(null, newFileName);
     }
 })
@@ -24,7 +26,7 @@ function fileFilter (req, file, callback){
       callback(new Error ("Wrong Data Input"), false);
     }
 }
-var upload = multer({storage: storage, fileFilter: fileFilter}).single('user-image');
+var upload = multer({storage: storage, fileFilter: fileFilter}).single('file');
 var uploadFile = function(request, response, next) {
     upload(request, response, function (err) {
         if (err instanceof multer.MulterError) {
@@ -38,7 +40,7 @@ var uploadFile = function(request, response, next) {
     })
 }
 var authentication = function(request, response, next) {
-    var obj = {token : request.header['token']};
+    var obj = {token : request.get('token')};
     crud.readOneDocument("account", obj, account => {
         if (account == null) {
             errorHandler(new Error("Authentication Error"),response);

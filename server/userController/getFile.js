@@ -1,40 +1,63 @@
 var utilities = require("../utilities/utilities");
 var errorHandler = require("../errorHandler/controllerError");
+var multer = require('multer');
+var crud = require("../utilities/databaseCRUD")
+var express = require('express');
+var appGetFile = express();
 
-function getFile(request, response) {
-    var promise = new Promise(function(resolve, reject) {
-        var result = request.body;
-        if (result instanceof Error) {
-            reject(result);
+var newFileName;
+var storage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, path.join(__dirname,'../../images'));
+    },
+    filename: function (req, file, callback) {
+        newFileName = utilities.modifyFileName(file.fieldname);
+        callback(null, newFileName);
+    }
+})
+function fileFilter (req, file, callback){
+    var type = file.mimetype;
+    var typeArray = type.split("/");
+    if (typeArray[0] == "image") {
+      callback(null, true);
+    }else {
+      callback(new Error ("Wrong Data Input"), false);
+    }
+}
+var upload = multer({storage: storage, fileFilter: fileFilter}).single('user-image');
+var uploadFile = function(request, response, next) {
+    upload(request, response, function (err) {
+        if (err instanceof multer.MulterError) {
+          errorHandler(err, response);
+          return;
+        } else if (err) {
+            errorHandler(err, response);
+            return;
         }
-        if (!result.file || !result.fileName || !result.token) {
-            reject (new Error ("Wrong Data Input"));
+        next();
+    })
+}
+var authentication = function(request, response, next) {
+    var obj = {token : request.header['token']};
+    crud.readOneDocument("account", obj, account => {
+        if (account == null) {
+            errorHandler(new Error("Authentication Error"),response);
+            return;
         }
-        var fileName = utilities.modifyFileName(result.fileName);
-        if (fileName == false) {
-            reject (new Error ("Wrong Data Input"));
-        }
-        console.log(fileName);
-        for (var i = 0; i < 4; i++) {
-            var randomNumber = Math.floor((Math.random() * 10000) + 1);
-            randomNumber = randomNumber.toString();
-            fileName = randomNumber + "-" + fileName;
-        }
-        utilities.savePhoto(fileName, result.file, result.token, function(err) {
-            if (err !== true)  {
-                response.end('../../images/' + fileName);
-            }
-            else {
-                reject (new Error ("Problem with saving photo"));
-            }
-        }); 
-    });
-    promise.catch (error => {
-        errorHandler(error,response);
-        return;
+        request.account = account;
+        next();
     });
 }
+appGetFile.post('/', authentication, uploadFile, (request, response) => {
+    var avatarValue = {
+        avatarAddress: '/static/images/'+ newFileName
+    };
+    crud.updateOneDocument("account", request.account, avatarValue, function() {
+        response.end('../../images/' + newFileName);
+        return;
+    });
+});
 
 module.exports =  {
-    getFile: getFile
+    getFile: appGetFile
 }

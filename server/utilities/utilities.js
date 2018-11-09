@@ -144,6 +144,14 @@ function jsonParser(option) {
     option.type = "*/*";
     return bodyParser.json(option); 
 }
+function generateSimpleId(fileName) {
+    for (var i = 0; i < 4; i++) {
+        var randomNumber = Math.floor((Math.random() * 10000) + 1);
+        randomNumber = randomNumber.toString();
+        fileName = randomNumber + "-" + fileName;
+    }
+    return fileName;
+}
 module.exports = {
     findAccountByToken: findAccountByToken,
     createToken: createToken,
@@ -153,5 +161,6 @@ module.exports = {
     modifyFileName: modifyFileName,
     findObjectById: findObjectById,
     cloneObject: cloneObject,
-    jsonParser: jsonParser
+    jsonParser: jsonParser,
+    generateSimpleId: generateSimpleId
 }

@@ -84,7 +84,10 @@ function authenticateFileName(filename) {
 
 function modifyFileName(filename) {
     if (authenticateFileName(filename)) {
-      return validateFileName(filename) 
+        debugger;
+        filename = validateFileName(filename);
+        filename = generateSimpleId(filename);
+        return filename;
     } else {
         return false;
     }

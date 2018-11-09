@@ -115,11 +115,7 @@ function checkProduct(request, response) {
                 var productPrice = result[0].productPrice;
                 var productImage = result[0].productImage;
                 var fileName = utilities.modifyFileName(productImage.fileName);
-                for (var i = 0; i < 4; i++) {
-                    var randomNumber = Math.floor((Math.random() * 10000) + 1);
-                    randomNumber = randomNumber.toString();
-                    fileName = randomNumber + "-" + fileName;
-                }
+                fileName = utilities.generateSimpleId(fileName);
                 var obj = {};
                 obj.name = productName;
                 obj.price = productPrice;

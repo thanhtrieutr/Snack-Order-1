@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var accountSchema = mongoose.Schema({
+var accountSchema = new mongoose.Schema({
     user: String,
     password : String,
     fullName : String,
@@ -11,4 +11,6 @@ var accountSchema = mongoose.Schema({
     token : String
 });
 
-exports.module = accountSchema;
+var accountModel = mongoose.model('account', accountSchema, 'account');
+
+module.exports = accountModel;

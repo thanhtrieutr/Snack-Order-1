@@ -1,6 +1,8 @@
 var crud = require("../utilities/databaseCRUD");
 var utilities = require("../utilities/utilities");
 var errorHandler = require("../errorHandler/controllerError");
+var adminModel = require("../schema/admin-account-schema");
+var orderModel = require("../schema/order-schema");
 function commonProduct(a, b) {
     if (a.productId.equals(b.productId) && a.user == b.user && a.status == b.status) {
         return true;
@@ -58,7 +60,7 @@ function createQuery() {
 function getTodayOrder(request, response) {
     var collectClient = new Promise((resolve, reject) => { 
         var result = request.body;
-        crud.readOneDocument("adminAccount", {token: result.token}, (admin, err) => {
+        crud.readOneDocument(adminModel, {token: result.token}, (admin, err) => {
             if (err) {
                 reject(err);
             }
@@ -72,7 +74,7 @@ function getTodayOrder(request, response) {
     collectClient.then(token => {
         return new Promise((resolve, reject) => {
             var query = createQuery();
-            crud.readWithLink("order", query, (result, err) => {
+            crud.readOneDocument(orderModel, query, (result, err) => {
                 if (err) {
                     reject(err);
                 }

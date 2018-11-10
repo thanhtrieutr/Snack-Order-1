@@ -2,6 +2,7 @@ var utilities = require("../utilities/utilities");
 var utilAdmin = require("../adminController/adminUtilities");
 var crud = require("../utilities/databaseCRUD");
 var errorHandler = require("../errorHandler/controllerError");
+var accountModel = require("../schema/account-schema");
 
 function initUserInfo(newAccount) {
     newAccount.fullName = "";
@@ -27,7 +28,7 @@ function createUser(request, response) {
     });
     readPost.then((result) => {
         return new Promise((resolve, reject) => {
-            crud.readOneDocument("account", result, account => {
+            crud.readOneDocument(accountModel, result, account => {
                 if (account != null) {
                     reject( new Error ("Account Existed"))
                 }
@@ -36,7 +37,7 @@ function createUser(request, response) {
         })
     }).then(newUser => {
         newUser = initUserInfo(newUser);
-        crud.createDocument("account", newUser);
+        crud.createDocument(accountModel, newUser);
         response.end("create succeed");
         
     }).catch(error => {

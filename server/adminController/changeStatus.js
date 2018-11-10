@@ -3,6 +3,8 @@ var utilities = require("../utilities/utilities");
 var adminUtilities = require("../adminController/adminUtilities");
 var errorHandler = require("../errorHandler/controllerError");
 var mongo = require('mongodb');
+var orderModel = require("../schema/order-schema");
+var adminModel = require("../schema/admin-account-schema");
 function checkUpdateList(updateList) {
     if (!updateList || updateList.length == 0) {
         return true;
@@ -73,7 +75,7 @@ function createPromiseChange(order, productList, statusList) {
     return new Promise((resolve, reject) => {
         var objId = new mongo.ObjectID(order);
         var query = createQueryOrder(objId);
-        crud.readWithLink("order", query, oneOrder => {
+        crud.readWithLink(orderModel, query, oneOrder => {
             oneOrder = oneOrder[0];
             var actualTotalPrice = 0;
             if (oneOrder == null) {
@@ -99,7 +101,7 @@ function createPromiseChange(order, productList, statusList) {
 }
 function createPromiseUpdate(oneOrder) {
     return new Promise((resolve, reject) => {
-        crud.updateOneDocument("order", {_id: oneOrder._id}, oneOrder, err => {
+        crud.updateOneDocument(orderModel, {_id: oneOrder._id}, oneOrder, err => {
             if (err) reject(err);
             resolve();
         });
@@ -119,7 +121,7 @@ function changeStatus(request,response){
     collectClient.then(result => {
         return new Promise((resolve, reject) => {
             var checkAccount = {token: result.token};
-            crud.readOneDocument("adminAccount", checkAccount, account => {
+            crud.readOneDocument(adminModel, checkAccount, account => {
                 if (account == null) {
                     reject( new Error("Authentication Error"));
                 }

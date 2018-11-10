@@ -1,62 +1,54 @@
-var MongoClient = require('mongodb').MongoClient;
-var db;
+// var MongoClient = require('mongodb').MongoClient;
+// var db;
+var mongoose = require("mongoose");
 if (process.env.ENV =="production") {
     var urldb = "mongodb://test:123456789a@ds119523.mlab.com:19523/snack-order";
 }
 else {
-    var urldb = "mongodb://localhost:27017/";
+    var urldb = "mongodb://localhost:27017/snack-order";
 }
 
 function connectDatabase(callback) {
-    MongoClient.connect(urldb, { useNewUrlParser: true }, function(err,dbo) {
-       console.log(urldb);
-        db = dbo.db('snack-order');
-        if (callback) return callback(err);
-    });
+    mongoose.connect(urldb);
 }
     
-function readDatabase(collection, callback) {
-    db.collection(collection).find({}).toArray(function(err, result) {
-        callback(result,err);
+function readDatabase(myModel, callback) {
+    myModel.find(function(err, docs) {
+        callback(docs, err);
     });
 }
 
-function createDocument(collection, object, callback) {
-    db.collection(collection).insertOne(object, function(err, result) {
+function createDocument(myModel, object, callback) {
+    var obj = new myModel;
+    Object.assign(obj, object);
+    obj.save(function(err) { 
+        if (err) callback(err);
+    });
+}
+
+function deleteOneDocument(myModel, object, callback) {
+    var obj = new myModel;
+    Object.assign(obj, object);
+    obj.remove(function(err) { 
+        if (err) callback(err);
+    });
+}
+
+function updateOneDocument(myModel, object, newValues, callback) {
+    myModel.findOneAndUpdate(object, newValues,function(err) {
         if (callback) callback(err);
     });
 }
 
-function deleteOneDocument(collection, object, callback) {
-    db.collection(collection).deleteOne(object, function(err, result) {
-        if (callback) callback(err);
-    });
+function readOneDocument(myModel, object, callback) {
+    myModel.findOne(object, function(err, docs) { 
+        callback(docs, err);
+    })
 }
 
-function deleteOneCollection(collection, callback) {
-    db.collection(collection).drop(function(err, deleteOK) {
-        if (callback) callback(err);
-    });
-}
-
-function updateOneDocument(collection, object, newValues, callback) {
-    var newData = {
-        $set: newValues
-    };
-    db.collection(collection).updateOne(object, newData, function(err, result) {
-        if (callback) callback(err);
-    });
-}
-
-function readOneDocument(collection, object, callback) {
-    db.collection(collection).findOne(object , function(err, result) {
-        callback(result,err);
-    });
-}
-
-function readSomeDocument(collection, object, callback) {
-    db.collection(collection).find(object).toArray(function(err, result) {
-        callback(result,err);
+function readSomeDocument(myModel, object, callback) {
+    myModel.find(object, function(err, docs) {
+        callback(docs, err);
     });
 }
 
@@ -65,6 +57,7 @@ function readWithLink(collection, query, callback) {
         callback(result,err);
     });
 }
+
 module.exports = {
     connectDatabase: connectDatabase,
     readDatabase: readDatabase,
@@ -72,7 +65,6 @@ module.exports = {
     deleteOneDocument: deleteOneDocument,
     updateOneDocument: updateOneDocument,
     readOneDocument: readOneDocument,
-    deleteOneCollection: deleteOneCollection,
     readSomeDocument: readSomeDocument,
     readWithLink: readWithLink
 }

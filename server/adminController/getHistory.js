@@ -1,6 +1,8 @@
 var crud = require("../utilities/databaseCRUD");
 var utilities = require("../utilities/utilities");
 var errorHandler = require("../errorHandler/controllerError");
+var adminModel = require("../schema/admin-account-schema");
+var orderModel = require("../schema/order-schema");
 
 function createQuery() {
     //find order (link with account, product) 
@@ -40,7 +42,7 @@ function createQuery() {
 function getHistory(request, response) {
     var collectClient = new Promise((resolve, reject) => {
         var result = request.body;
-        crud.readOneDocument("adminAccount", {token: result.token}, (admin, err) => {
+        crud.readOneDocument(adminModel, {token: result.token}, (admin, err) => {
             if (err) {
                 reject(err);
             }
@@ -54,7 +56,7 @@ function getHistory(request, response) {
     collectClient.then(result => {
         return new Promise((resolve, reject) => {
             var query = createQuery();
-            crud.readWithLink("order", query, (result, err) => {
+            crud.readOneDocument(orderModel, query, (result, err) => {
                 if (err) {
                     reject(err);
                 }

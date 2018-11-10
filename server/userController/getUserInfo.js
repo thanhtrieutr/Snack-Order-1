@@ -2,6 +2,7 @@ var crud = require("../utilities/databaseCRUD");
 var utilities = require("../utilities/utilities");
 var errorHandler = require("../errorHandler/controllerError");
 var listInfo = ["fullName", "phoneNumber", "birthday", "address"];
+var accountModel =  require("../schema/account-schema");
 
 function checkToken(request, response) {
     var collectClient = new Promise((resolve, reject) => {
@@ -18,7 +19,7 @@ function checkToken(request, response) {
     collectClient.then((result) => {
         var queryObj = {token: result.token};
         return new Promise((resolve, reject) => {
-            crud.readOneDocument("account", queryObj, account => {
+            crud.readOneDocument(accountModel, queryObj, account => {
                 if (account == null) {
                     reject( new Error("Authentication Error"));
                 }

@@ -1,9 +1,11 @@
 var mongoose = require('mongoose');
 
-var productSchema = mongoose.Schema({
+var productSchema = new mongoose.Schema({
     name: String,
     pimg : String,
     price : Number
 });
 
-exports.module = productSchema;
+var productModel = mongoose.model('product', productSchema, 'product');
+
+module.exports = productModel;

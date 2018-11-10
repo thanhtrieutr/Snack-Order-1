@@ -3,6 +3,8 @@ var utilities = require("../utilities/utilities");
 var adminUtilities = require("../adminController/adminUtilities");
 var errorHandler = require("../errorHandler/controllerError");
 var mongo = require('mongodb');
+var productModel = require("../schema/product-schema");
+var adminModel = require("../schema/admin-account-schema");
 
 function checkValidProduct(productName) {
     if (productName == "" || productName == null || productName.length > 40) {
@@ -43,7 +45,7 @@ function checkProductName(request, response) {
     Promise.all([collectClient]).then(result => {
         return new Promise((resolve, reject) => {
             var obj = {token : result[0].token};
-            crud.readOneDocument("adminAccount", obj, account => {
+            crud.readOneDocument(adminModel, obj, account => {
                 if (account == null) {
                     reject( new Error("Authentication Error"));
                 }
@@ -55,7 +57,7 @@ function checkProductName(request, response) {
             throw new Error("Wrong Data Input");
         } 
         var obj = {name: result[0].productName};
-        crud.readOneDocument("product", obj, function(product, error) {
+        crud.readOneDocument(productModel, obj, function(product, error) {
             try {
                 debugger;
                 if (error) {
@@ -90,7 +92,7 @@ function checkProduct(request, response) {
     Promise.all([collectClient]).then(result => {
         return new Promise((resolve, reject) => {
             var obj = {token : result[0].token};
-            crud.readOneDocument("adminAccount", obj, account => {
+            crud.readOneDocument(adminModel, obj, account => {
                 if (account == null) {
                     reject( new Error("Authentication Error"));
                 }
@@ -102,7 +104,7 @@ function checkProduct(request, response) {
             throw new Error("Wrong Data Input");
         } 
         var obj = {name: result[0].productName};
-        crud.readOneDocument("product", obj, function(product, error) {
+        crud.readOneDocument(productModel, obj, function(product, error) {
             try {
                 if (error) {
                     throw error;
@@ -128,7 +130,7 @@ function checkProduct(request, response) {
                 errorHandler(error,response);
                 return;
             }
-            crud.createDocument("product", obj, err => {
+            crud.createDocument(productModel, obj, err => {
                 try {
                     if (err) throw err;
                     adminUtilities.savePhoto(obj, fileName, productImage.file, err => {
@@ -161,7 +163,7 @@ function updateProduct(request,response){
     collectClient.then(result => {
         return new Promise((resolve, reject) => {
             var obj = {token : result.token};
-            crud.readOneDocument("adminAccount", obj, account => {
+            crud.readOneDocument(adminModel, obj, account => {
                 if (account == null) {
                     reject( new Error("Authentication Error"));
                 }
@@ -172,7 +174,7 @@ function updateProduct(request,response){
         return new Promise((resolve, reject) => {
             var objId = new mongo.ObjectID(result.id);
             var obj = {_id: objId};
-            crud.readOneDocument("product", obj, function(product, error) {
+            crud.readOneDocument(productModel, obj, function(product, error) {
                 if (error) {
                     reject(error);
                 }
@@ -193,7 +195,7 @@ function updateProduct(request,response){
             var obj = {};
             obj.price = productPrice;
             console.log(currentProduct._id);
-            crud.updateOneDocument("product", {_id:currentProduct._id}, obj, err => {
+            crud.updateOneDocument(productModel, {_id:currentProduct._id}, obj, err => {
                 try {
                     if (err) throw err;
                 }

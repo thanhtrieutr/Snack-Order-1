@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var ObjectId = mongoose.Schema.Types.ObjectId;
 
-var orderSchema = mongoose.Schema({
+var orderSchema = new mongoose.Schema({
     user: ObjectId,
     time: Date,
     estimateTotalPrice: Number,
@@ -13,4 +13,6 @@ var orderSchema = mongoose.Schema({
     }]
 });
 
-exports.module = orderSchema;
+var orderModel = mongoose.model('order', orderSchema, 'order');
+
+module.exports = orderModel;

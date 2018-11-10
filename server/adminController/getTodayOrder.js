@@ -15,48 +15,7 @@ function getMax(a, b) {
     }
     return b;
 }
-function createQuery() {
-    var todayStart = new Date();
-    todayStart.setHours(0,0,0,0);
-    var todayEnd = new Date();
-    todayEnd.setHours(23,59,59,999);
-    //find order (link with account, product) and match with today
-    var query =[
-        {
-            $lookup: { 
-                from: 'account',
-                localField: 'user',
-                foreignField: '_id',
-                as: 'userObj'
-            }
-        },
-        {   
-            $unwind: "$userObj"
-        },
-        {
-            $lookup: {
-                from: 'product',
-                localField: 'products._id',
-                foreignField: '_id',
-                as: 'productArray'
-            }
-        },
-        {
-            $match:{ 
-                "time": { $gte: todayStart, $lte: todayEnd} 
-            }
-        },
-        {
-            $project : {
-                userName: "$userObj.user",
-                time: 1,
-                productArray: 1,
-                products: 1
-            }
-        }
-    ];
-    return query;
-}
+
 function getTodayOrder(request, response) {
     var collectClient = new Promise((resolve, reject) => { 
         var result = request.body;
@@ -73,8 +32,12 @@ function getTodayOrder(request, response) {
 
     collectClient.then(token => {
         return new Promise((resolve, reject) => {
-            var query = createQuery();
-            crud.readOneDocument(orderModel, query, (result, err) => {
+            var todayStart = new Date();
+            todayStart.setHours(0,0,0,0);
+            var todayEnd = new Date();
+            todayEnd.setHours(23,59,59,999);
+            var condition = {time: {$gte: todayStart, $lte: todayEnd}};
+            crud.getOrders(orderModel, condition, (result, err) => {
                 if (err) {
                     reject(err);
                 }
@@ -83,20 +46,18 @@ function getTodayOrder(request, response) {
         });
     }).then(order => {
         var orderList = [];
-        for (var i in order) {
+        for (var i = 0; i < order.length; i++) {
             var obj = {}, oneOrder = order[i];
             obj.time = `${oneOrder.time.getHours()}:${oneOrder.time.getMinutes()}`;
-            obj.user = oneOrder.userName;
+            obj.user = oneOrder.user.user;
             obj.orderId = [oneOrder._id];
-            for (var j in oneOrder.products) {
-                var j2 = utilities.findObjectById(oneOrder.productArray, oneOrder.products[j]._id);
-                var oneProduct = oneOrder.productArray[j2];
-                obj.name = oneProduct.name;
+            for (var j = 0; j < oneOrder.products.length; j++) {
+                obj.name = oneOrder.products[j]._id.name;
                 obj.quantity = oneOrder.products[j].quantity;
-                obj.price = oneProduct.price;
+                obj.price = oneOrder.products[j]._id.price;
                 obj.status = oneOrder.products[j].status;
-                obj.productId = oneOrder.products[j]._id;
-                obj.totalPrice = oneProduct.price * obj.quantity;
+                obj.productId = oneOrder.products[j]._id._id;
+                obj.totalPrice = obj.price * obj.quantity;
                 //join 
                 var position = -1;
                 for (var k in orderList) {

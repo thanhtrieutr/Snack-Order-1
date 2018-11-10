@@ -46,36 +46,10 @@ function init(updateList) {
     combineList.statusList = statusList;
     return combineList;
 }
-function createQueryOrder(orderId) {
-    var query = [
-        {
-            $lookup: {
-                from: 'product',
-                localField: 'products._id',
-                foreignField: '_id',
-                as: 'productArray'
-            }
-        },
-        {
-            $match:{ 
-                _id: orderId
-            }
-        },
-        {
-            $project : {
-                productArray: 1,
-                products: 1,
-                actualTotalPrice: 1
-            }
-        }
-    ];
-    return query;
-}
+
 function createPromiseChange(order, productList, statusList) {
     return new Promise((resolve, reject) => {
-        var objId = new mongo.ObjectID(order);
-        var query = createQueryOrder(objId);
-        crud.readWithLink(orderModel, query, oneOrder => {
+        crud.getOrders(orderModel, oneOrder => {
             oneOrder = oneOrder[0];
             var actualTotalPrice = 0;
             if (oneOrder == null) {

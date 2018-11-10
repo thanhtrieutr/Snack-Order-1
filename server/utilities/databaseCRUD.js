@@ -67,7 +67,6 @@ function getOrders(orderModel, object, callback) {
     .exec(function (err, docs) {
         callback(docs, err);
     });
-
 }
 module.exports = {
     connectDatabase: connectDatabase,

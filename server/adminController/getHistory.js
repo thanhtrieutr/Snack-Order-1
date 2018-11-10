@@ -25,6 +25,7 @@ function getHistory(request, response) {
                     reject(err);
                 }
                 resolve(result);
+                debugger
             });
         });
     }).then(order => {
@@ -37,7 +38,7 @@ function getHistory(request, response) {
             obj.user = currentOrder.user.user;
             obj.actualTotalPrice = currentOrder.actualTotalPrice;
             obj.products = [];
-            for (var j=0;j<currentOrder.products.length;j++) {
+            for (var j = 0 ; j < currentOrder.products.length; j++) {
                 debugger;
                 var newObj = {};
                 newObj.quantity = currentOrder.products[j].quantity;

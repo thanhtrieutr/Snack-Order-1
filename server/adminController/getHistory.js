@@ -4,41 +4,6 @@ var errorHandler = require("../errorHandler/controllerError");
 var adminModel = require("../schema/admin-account-schema");
 var orderModel = require("../schema/order-schema");
 
-function createQuery() {
-    //find order (link with account, product) 
-    var query =[
-        {
-            $lookup: { 
-                from: 'account',
-                localField: 'user',
-                foreignField: '_id',
-                as: 'userObj'
-            }
-        },
-        {   
-            $unwind: "$userObj"
-        },
-        {
-            $lookup: {
-                from: 'product',
-                localField: 'products._id',
-                foreignField: '_id',
-                as: 'productArray'
-            }
-        },
-        {
-            $project : {
-                userName: "$userObj.user",
-                time: 1,
-                productArray: 1,
-                products: 1,
-                actualTotalPrice: 1
-            }
-        }
-    ];
-    return query;
-}
-
 function getHistory(request, response) {
     var collectClient = new Promise((resolve, reject) => {
         var result = request.body;
@@ -55,8 +20,7 @@ function getHistory(request, response) {
 
     collectClient.then(result => {
         return new Promise((resolve, reject) => {
-            var query = createQuery();
-            crud.readOneDocument(orderModel, query, (result, err) => {
+            crud.getOrders(orderModel, {}, (result, err) => {
                 if (err) {
                     reject(err);
                 }
@@ -70,18 +34,24 @@ function getHistory(request, response) {
             obj._id = currentOrder._id;
             var tempTime = currentOrder.time;
             obj.time = tempTime.getDate() + "/" + (tempTime.getMonth()+1) + "/" + tempTime.getFullYear();
-            obj.products = currentOrder.products;
-            obj.user = currentOrder.userName;
+            obj.user = currentOrder.user.user;
             obj.actualTotalPrice = currentOrder.actualTotalPrice;
-            for (var j in obj.products) {
-                var k = utilities.findObjectById(currentOrder.productArray, obj.products[j]._id);
-                obj.products[j].name = currentOrder.productArray[k].name;
-                obj.products[j].price = currentOrder.productArray[k].price;
-                obj.products[j].totalPrice = obj.products[j].price * obj.products[j].quantity;
+            obj.products = [];
+            for (var j=0;j<currentOrder.products.length;j++) {
+                debugger;
+                var newObj = {};
+                newObj.quantity = currentOrder.products[j].quantity;
+                newObj.status = currentOrder.products[j].status;
+                newObj.name = currentOrder.products[j]._id.name;
+                newObj.price = currentOrder.products[j]._id.price;
+                newObj.totalPrice = newObj.price * newObj.quantity;
+                newObj._id=currentOrder.products[j]._id._id;
+                obj.products.push(newObj);
             }
             var newObj = utilities.cloneObject(obj);
             orderList.push(newObj);
         }
+        debugger;
         response.end(JSON.stringify(orderList));
     }).catch(error => {
         errorHandler(error,response);

@@ -93,6 +93,7 @@ function submitCart(request, response) {
             crud.createDocument(orderModel,bill,error => {
                 if (error) reject(new Error ("Problem with database"));
                 utilities.setResponseHeader(response);
+                console.log(returnBill);
                 response.end(JSON.stringify(returnBill));
             });
         }).catch(error => {

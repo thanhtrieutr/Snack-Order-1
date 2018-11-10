@@ -7,6 +7,8 @@ if (process.env.ENV =="production") {
 else {
     var urldb = "mongodb://localhost:27017/snack-order";
 }
+var accountModel = require("../schema/account-schema");
+var productModel = require("../schema/product-schema");
 
 function connectDatabase(callback) {
     mongoose.connect(urldb);
@@ -22,7 +24,7 @@ function createDocument(myModel, object, callback) {
     var obj = new myModel;
     Object.assign(obj, object);
     obj.save(function(err) { 
-        if (err) callback(err);
+        callback(err);
     });
 }
 
@@ -58,6 +60,15 @@ function readWithLink(collection, query, callback) {
     });
 }
 
+function getOrders(orderModel, object, callback) {
+    orderModel.find(object)
+    .populate('user')
+    .populate('products._id')
+    .exec(function (err, docs) {
+        callback(docs, err);
+    });
+
+}
 module.exports = {
     connectDatabase: connectDatabase,
     readDatabase: readDatabase,
@@ -66,5 +77,6 @@ module.exports = {
     updateOneDocument: updateOneDocument,
     readOneDocument: readOneDocument,
     readSomeDocument: readSomeDocument,
-    readWithLink: readWithLink
+    readWithLink: readWithLink,
+    getOrders:getOrders
 }

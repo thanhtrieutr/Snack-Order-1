@@ -16,54 +16,51 @@ function findValidUserPosition(accountList, user) {
     return -1;
 }
 
-function savePhoto(filename, data, token, callback) {
-    if (typeof(filename) != 'string' || typeof(token) != 'string' || typeof(data) != 'string') {
-        callback("not valid data");
-        return;
-    }
-    var filePath = '/static/images/' + filename;
-    var data = data.replace(/^data:image\/\w+;base64,/, "");
-    var buf = new Buffer(data, 'base64');
-    fs.writeFile(path.join(__dirname,'../../images/' + filename), buf, function(err) {
-        if (err) {
-            return callback(err);
-        }
-        checkWriteFile = true;
-        savePath(token, filePath, err);
-        return callback(err);
-    });
-}
+// function savePhoto(filename, data, token, callback) {
+//     if (typeof(filename) != 'string' || typeof(token) != 'string' || typeof(data) != 'string') {
+//         callback("not valid data");
+//         return;
+//     }
+//     var filePath = '/static/images/' + filename;
+//     var data = data.replace(/^data:image\/\w+;base64,/, "");
+//     var buf = new Buffer(data, 'base64');
+//     fs.writeFile(path.join(__dirname,'../../images/' + filename), buf, function(err) {
+//         if (err) {
+//             return callback(err);
+//         }
+//         checkWriteFile = true;
+//         savePath(token, filePath, err);
+//         return callback(err);
+//     });
+// }
 
-function savePath(token, filePath, err) {
-    err = true;
-    var position = -1;
-    crud.readDatabase(accountModel, function(accountArray) {
-        var checkUser = 0;
-        for (var i in accountArray) {
-            let currentToken = accountArray[i].token;
-            if (token == currentToken) {
-                checkUser = 1;
-                position = i;
-                currentUser = accountArray[i].user;
-                break;
-            } 
-        }
-        if (checkUser == 0) {
-            err = false;
-            return;
-        }
-        var avatarValue = {
-            avatarAddress: filePath
-        };
-        var obj = {};
-        obj.user = accountArray[position].user;
-        obj.password = accountArray[position].password;
-        crud.updateOneDocument(accountModel, obj, avatarValue, function() {
-            err = true;
-            return;
-        });
-    });
-}
+// function savePath(token, filePath, err) {
+//     err = true;
+//     var position = -1;
+//     crud.readDatabase("account", function(accountArray) {
+//         var checkUser = 0;
+//         for (var i in accountArray) {
+//             let currentToken = accountArray[i].token;
+//             if (token == currentToken) {
+//                 checkUser = 1;
+//                 position = i;
+//                 currentUser = accountArray[i].user;
+//                 break;
+//             } 
+//         }
+//         if (checkUser == 0) {
+//             err = false;
+//             return;
+//         }
+//         var avatarValue = {
+//             avatarAddress: filePath
+//         };
+//         crud.updateOneDocument("account", accountArray[position], avatarValue, function() {
+//             err = true;
+//             return;
+//         });
+//     });
+// }
 
 function setResponseHeader(response) {
     response.statusCode = 200;
@@ -74,7 +71,7 @@ function setResponseHeader(response) {
 function validateFileName(filename) {
     return filename.replace(/[^a-zA-Z0-9.]/gi, "");
 }
-  
+//use file filter instead
 function authenticateFileName(filename) {
     if (filename.match("\.png$") || filename.match("\.jpg$") || filename.match("\jpeg$")) {
       return true;
@@ -83,13 +80,9 @@ function authenticateFileName(filename) {
 }
 //normalize file name (remove unicode) and generate random part (hope it will be unique)
 function modifyFileName(filename) {
-    if (authenticateFileName(filename)) {
-        filename = validateFileName(filename);
-        filename = generateSimpleId(filename);
-        return filename;
-    } else {
-        return false;
-    }
+    filename = validateFileName(filename);
+    filename = generateSimpleId(filename);
+    return filename;
 }
 //create medium random for creating token
 function generateToken() {
@@ -186,7 +179,7 @@ module.exports = {
     createToken: createToken,
     findValidUserPosition: findValidUserPosition,
     setResponseHeader: setResponseHeader,
-    savePhoto: savePhoto,
+    // savePhoto: savePhoto,
     modifyFileName: modifyFileName,
     findObjectById: findObjectById,
     cloneObject: cloneObject,

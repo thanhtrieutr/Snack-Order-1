@@ -18,6 +18,8 @@ app.use('/', routes);
 if (process.env.ENV === 'dev') {
     app.use(errorhandler({ log: errorNotification }));
     console.log("Hello, This is development environment");
+} else {
+    app.use(errorhandler({ log: false }));
 }
 
 app.listen(port, () => {

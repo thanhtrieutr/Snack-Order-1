@@ -50,5 +50,7 @@ function validateAccount(account) {
 
 module.exports = {
     savePhoto: savePhoto,
-    validateAccount: validateAccount
+    validateAccount: validateAccount,
+    emailCheck: emailCheck,
+    passwordCheck: passwordCheck
 }

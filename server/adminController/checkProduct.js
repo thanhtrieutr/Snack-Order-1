@@ -242,6 +242,9 @@ function displayPrice(x) {
 
 
 module.exports = {
+    checkValidProduct: checkValidProduct,
+    checkPrice: checkPrice,
+    checkFile: checkFile,
     checkProductName: checkProductName,
     checkProduct: checkProduct,
     updateProduct: updateProduct

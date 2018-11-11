@@ -11,7 +11,9 @@ var accountModel = require("../schema/account-schema");
 var productModel = require("../schema/product-schema");
 
 function connectDatabase(callback) {
-    mongoose.connect(urldb, {useNewUrlParser: true});
+    mongoose.connect(urldb,{ useNewUrlParser: true },(err)=>{
+        if (callback) callback(err);
+    });
 }
     
 function readDatabase(myModel, callback) {
@@ -24,7 +26,7 @@ function createDocument(myModel, object, callback) {
     var obj = new myModel;
     Object.assign(obj, object);
     obj.save(function(err) { 
-        callback(err);
+        if (callback) callback(err);
     });
 }
 
@@ -32,7 +34,7 @@ function deleteOneDocument(myModel, object, callback) {
     var obj = new myModel;
     Object.assign(obj, object);
     obj.remove(function(err) { 
-        if (err) callback(err);
+        if (callback) callback(err);
     });
 }
 
@@ -68,6 +70,13 @@ function getOrders(orderModel, object, callback) {
         callback(docs, err);
     });
 }
+
+function deleteOneCollection(myModel, callback) {
+    myModel.deleteMany({}, function(err) {
+        if (callback) callback(err);
+    });
+}
+
 module.exports = {
     connectDatabase: connectDatabase,
     readDatabase: readDatabase,
@@ -77,5 +86,6 @@ module.exports = {
     readOneDocument: readOneDocument,
     readSomeDocument: readSomeDocument,
     readWithLink: readWithLink,
-    getOrders:getOrders
+    getOrders:getOrders,
+    deleteOneCollection:deleteOneCollection
 }

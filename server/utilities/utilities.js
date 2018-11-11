@@ -5,6 +5,7 @@ var path = require('path');
 var crud = require('../utilities/databaseCRUD');
 var crypto = require("crypto");
 var bodyParser = require('body-parser');
+var accountModel = require("../schema/account-schema")
 
 function findValidUserPosition(accountList, user) {
     for (var i in accountList) {
@@ -36,7 +37,7 @@ function savePhoto(filename, data, token, callback) {
 function savePath(token, filePath, err) {
     err = true;
     var position = -1;
-    crud.readDatabase("account", function(accountArray) {
+    crud.readDatabase(accountModel, function(accountArray) {
         var checkUser = 0;
         for (var i in accountArray) {
             let currentToken = accountArray[i].token;
@@ -54,7 +55,10 @@ function savePath(token, filePath, err) {
         var avatarValue = {
             avatarAddress: filePath
         };
-        crud.updateOneDocument("account", accountArray[position], avatarValue, function() {
+        var obj = {};
+        obj.user = accountArray[position].user;
+        obj.password = accountArray[position].password;
+        crud.updateOneDocument(accountModel, obj, avatarValue, function() {
             err = true;
             return;
         });

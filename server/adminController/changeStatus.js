@@ -49,23 +49,24 @@ function init(updateList) {
 
 function createPromiseChange(order, productList, statusList) {
     return new Promise((resolve, reject) => {
-        crud.getOrders(orderModel, oneOrder => {
-            oneOrder = oneOrder[0];
+        crud.getOrders(orderModel,{_id:order}, (result,err) => {
+            debugger;
+            oneOrder = result[0];
             var actualTotalPrice = 0;
             if (oneOrder == null) {
                 reject(new Error ("Wrong Data Input"));
             }
-            for (var i in oneOrder.products) {
-                var productId = oneOrder.products[i]._id.toString();
+            for (var i=0;i<oneOrder.products.length;i++) {
+                var productId = oneOrder.products[i]._id._id.toString();
                 var productPosition = productList.indexOf(productId);
                 if (productPosition == -1) {
                     reject(new Error ("Wrong Data Input"));
                 }
                 //change status
-                var i2 = utilities.findObjectById(oneOrder.productArray, oneOrder.products[i]._id);
+                // var i2 = utilities.findObjectById(oneOrder.products, oneOrder.products[i]._id._id);
                 oneOrder.products[i].status = statusList[productPosition];
                 if (oneOrder.products[i].status == "accept") {
-                    actualTotalPrice += oneOrder.products[i].quantity * oneOrder.productArray[i2].price;
+                    actualTotalPrice += oneOrder.products[i].quantity * oneOrder.products[i]._id.price;
                 }
             }
             oneOrder.actualTotalPrice = actualTotalPrice;

@@ -11,7 +11,7 @@ var accountModel = require("../schema/account-schema");
 var productModel = require("../schema/product-schema");
 
 function connectDatabase(callback) {
-    mongoose.connect(urldb);
+    mongoose.connect(urldb, {useNewUrlParser: true});
 }
     
 function readDatabase(myModel, callback) {

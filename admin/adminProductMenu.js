@@ -75,7 +75,9 @@ function createNewProduct(product, currentID) {
                   <div id="product-description"> <u> <b> Product Image </b> </u> </div>
                   <div id="product-border-box">
                       <img id="product-img-${productRank}" class="product" src=${product.img} alt="Product Image">
-                      <input type="file" id="edit-product-image-${productRank}" data-id="${currentID}" onchange="submitImage('${productRank}')">  
+                      <form id="image-upload-${productRank}" enctype="multipart/form-data" method="POST">
+                        <input type="file" id="edit-product-image-${productRank}" data-id="${currentID}" onchange="submitImage('${productRank}')">  
+                      </form>
                   </div>
               </div>
               <div id="product-detail-information" class="column is-7">

@@ -117,7 +117,7 @@ function createProduct() {
   var newProductData = new FormData(createProductForm);
   newProductData.append("productName", document.getElementById("product-name").value);
   newProductData.append("productPrice", document.getElementById("product-price").value);
-  newProductData.append("productImage", productImage);
+  newProductData.append("file", productImage);
   //Promise section
   var sendProduct = new Promise((resolve, reject) => {
   var http = new XMLHttpRequest();

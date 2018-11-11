@@ -20,9 +20,10 @@ function adminGetProductInfo(callback) {
   };
 }
 
-function sendNewProductPrice(result, currentID, trueID) {
+function sendNewProductPrice(result, currentID, trueID) 
   var http = new XMLHttpRequest();
   http.open('POST', "http://127.0.0.1:3000/admin-controller/update-product/price", true);
+  http.setRequestHeader("token", localStorage.getItem("token"));
   http.send(JSON.stringify(result));
   http.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
@@ -36,7 +37,6 @@ function sendNewProductPrice(result, currentID, trueID) {
 }
 
 function submitImage(currentID) { 
-    var token = localStorage.getItem("token");
     var image = document.getElementById("edit-product-image-"+currentID).files[0];
     var trueImageID = document.getElementById("edit-product-image-"+currentID).getAttribute("data-id");
     var productImageForm = document.getElementById("image-upload-"+currentID);
@@ -45,7 +45,7 @@ function submitImage(currentID) {
     updatedImageData.append("productID", trueImageID);
     var http = new XMLHttpRequest();
     http.open('POST', "http://127.0.0.1:3000/admin-controller/update-product/image", true);
-    http.setRequestHeader("token", token);
+    http.setRequestHeader("token", localStorage.getItem("token"));
     http.send(updatedImageData);
     http.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -86,7 +86,7 @@ function showMode (currentID){
       alert("Not valid price/Empty value");
       return;
   } else {
-      result.token = localStorage.getItem("token");
+      result.token = 
       result.id = trueProductID;
       result.productPrice = newPrice;
   }

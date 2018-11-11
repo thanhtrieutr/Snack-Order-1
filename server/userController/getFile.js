@@ -6,27 +6,19 @@ var express = require('express');
 var appGetFile = express();
 var path = require('path');
 
-var newFileName;
+//save to disk at image folder
 var storage = multer.diskStorage({
     destination: function (req, file, callback) {
         callback(null, path.join(__dirname, '../../images'));
     },
     filename: function (req, file, callback) {
-        newFileName = utilities.modifyFileName(file.originalname);
-        console.log(newFileName);
-        callback(null, newFileName);
+        req.newFileName = utilities.modifyFileName(file.originalname);
+        callback(null, req.newFileName);
     }
 })
-function fileFilter (req, file, callback){
-    var type = file.mimetype;
-    var typeArray = type.split("/");
-    if (typeArray[0] == "image") {
-      callback(null, true);
-    }else {
-      callback(new Error ("Wrong Data Input"), false);
-    }
-}
-var upload = multer({storage: storage, fileFilter: fileFilter}).single('file');
+
+//receive + parse (by multer) uploaded file
+var upload = multer({storage: storage, fileFilter: utilities.fileFilter}).single('file');
 var uploadFile = function(request, response, next) {
     upload(request, response, function (err) {
         if (err instanceof multer.MulterError) {
@@ -39,23 +31,14 @@ var uploadFile = function(request, response, next) {
         next();
     })
 }
-var authentication = function(request, response, next) {
-    var obj = {token : request.get('token')};
-    crud.readOneDocument("account", obj, account => {
-        if (account == null) {
-            errorHandler(new Error("Authentication Error"),response);
-            return;
-        }
-        request.account = account;
-        next();
-    });
-}
-appGetFile.post('/', authentication, uploadFile, (request, response) => {
+
+appGetFile.post('/', utilities.authenticationUserByHeader, uploadFile, (request, response) => {
+    //save link image to mongodb of that account
     var avatarValue = {
-        avatarAddress: '/static/images/'+ newFileName
+        avatarAddress: '/static/images/'+ request.newFileName
     };
     crud.updateOneDocument("account", request.account, avatarValue, function() {
-        response.end('../../images/' + newFileName);
+        response.end('../../images/' + request.newFileName);
         return;
     });
 });

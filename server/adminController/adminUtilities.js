@@ -48,7 +48,20 @@ function validateAccount(account) {
     return false;
 }
 
+//middleware to check admin token in header
+function authenticationAdminByHeader(request, response, next) {
+    var obj = {token : request.get('token')};
+    crud.readOneDocument("adminAccount", obj, account => {
+        if (account == null) {
+            errorHandler(new Error("Authentication Error"),response);
+            return;
+        }
+        request.account = account;
+        next();
+    });
+}
 module.exports = {
     savePhoto: savePhoto,
-    validateAccount: validateAccount
+    validateAccount: validateAccount,
+    authenticationAdminByHeader: authenticationAdminByHeader
 }

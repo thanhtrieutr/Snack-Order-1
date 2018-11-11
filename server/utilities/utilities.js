@@ -81,10 +81,9 @@ function authenticateFileName(filename) {
     }
     return false;
 }
-
+//normalize file name (remove unicode) and generate random part (hope it will be unique)
 function modifyFileName(filename) {
     if (authenticateFileName(filename)) {
-        debugger;
         filename = validateFileName(filename);
         filename = generateSimpleId(filename);
         return filename;
@@ -92,6 +91,7 @@ function modifyFileName(filename) {
         return false;
     }
 }
+//create medium random for creating token
 function generateToken() {
     return new Promise((resolve, reject) => {
         crypto.randomBytes(48, (err, buffer) => {
@@ -131,7 +131,7 @@ function findObjectById(objList, id) {
     }
     return position;
 }
-
+// create a clone object from origin simple object (don't have object in object)
 function cloneObject(obj) {
     if (null == obj || "object" != typeof obj) return obj;
     var copy = obj.constructor();
@@ -140,6 +140,7 @@ function cloneObject(obj) {
     }
     return copy;
 }
+//parse json for bodyparser + express
 function jsonParser(option) {
     if (typeof(option) != 'object') {
         return bodyParser.json({type: "*/*"});
@@ -147,6 +148,7 @@ function jsonParser(option) {
     option.type = "*/*";
     return bodyParser.json(option); 
 }
+//generate weak random format xxxx-xxxx-xxxx-xxxx-filename
 function generateSimpleId(fileName) {
     for (var i = 0; i < 4; i++) {
         var randomNumber = Math.floor((Math.random() * 10000) + 1);
@@ -154,6 +156,30 @@ function generateSimpleId(fileName) {
         fileName = randomNumber + "-" + fileName;
     }
     return fileName;
+}
+
+//filter not image file
+function fileFilter (req, file, callback){
+    var type = file.mimetype;
+    var typeArray = type.split("/");
+    //image type has format image/png or image/jpge ...
+    if (typeArray[0] == "image") {
+      callback(null, true);
+    }else {
+      callback(new Error ("Wrong Data Input"), false);
+    }
+}
+//middleware to check user token in header
+function authenticationUserByHeader(request, response, next) {
+    var obj = {token : request.get('token')};
+    crud.readOneDocument("account", obj, account => {
+        if (account == null) {
+            errorHandler(new Error("Authentication Error"),response);
+            return;
+        }
+        request.account = account;
+        next();
+    });
 }
 module.exports = {
     findAccountByToken: findAccountByToken,
@@ -165,5 +191,7 @@ module.exports = {
     findObjectById: findObjectById,
     cloneObject: cloneObject,
     jsonParser: jsonParser,
-    generateSimpleId: generateSimpleId
+    generateSimpleId: generateSimpleId,
+    fileFilter: fileFilter,
+    authenticationUserByHeader: authenticationUserByHeader
 }

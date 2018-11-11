@@ -15,9 +15,7 @@ var storage = multer.diskStorage({
         callback(null, path.join(__dirname, '../../images'));
     },
     filename: function (req, file, callback) {
-        console.log(file.originalname);
         req.newFileName = utilities.modifyFileName(file.originalname);
-        console.log(req.newFileName);
         callback(null, req.newFileName);
     }
 })

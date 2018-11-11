@@ -90,7 +90,9 @@ function productInfoField() {
       <div class="field-label is-medium">
           <label class="label">Product image</label>
       </div>
-      <input type="file" id="product-image">  
+      <form id="product-image-upload" enctype="multipart/form-data" method="POST">
+          <input type="file" id="product-image">  
+      </form>
   </div>`
   return infoField;
 }
@@ -111,40 +113,32 @@ function addSubmitButton() {
 function createProduct() {
   //Uploading image sector
   var productImage = document.getElementById("product-image").files[0];
-  var reader = new FileReader();
-  reader.readAsDataURL(productImage);
-  reader.onload = function () {
-      var object = {
-          file: reader.result,
-          fileName: productImage.name
-      };
-      //Package object of data before sending to server
-      var obj = {};
-      obj.token = localStorage.getItem("token");
-      obj.productName = document.getElementById("product-name").value;
-      obj.productPrice = document.getElementById("product-price").value;
-      obj.productImage = object;
-      //Promise section
-      var sendProduct = new Promise((resolve, reject) => {
-          var http = new XMLHttpRequest();
-          http.open("POST", "http://127.0.0.1:3000/admin-controller/create-new-product", true);
-          http.send(JSON.stringify(obj));
-          http.onload = () => resolve(http.response);
-          http.onerror = () => reject(http.response);
-      });
-      //If success then sent OK status, otherwise error to client side
-      sendProduct.then((response) => {
-          if (response == "OK") {
-              alert("Success");
-          }
-          else {
-              alert("Fail");
-          } 
-      }).catch((error) => {
-          //Calling alertError from utilityFunction.js
-          alertError(error);
-      });
-  };
+  var createProductForm = document.getElementById("product-image-upload");
+  var newProductData = new FormData(createProductForm);
+  newProductData.append("productName", document.getElementById("product-name").value);
+  newProductData.append("productPrice", document.getElementById("product-price").value);
+  newProductData.append("productImage", productImage);
+  //Promise section
+  var sendProduct = new Promise((resolve, reject) => {
+  var http = new XMLHttpRequest();
+      http.open("POST", "http://127.0.0.1:3000/admin-controller/create-new-product", true);
+      http.setRequestHeader("token", localStorage.getItem("token"));
+      http.send(newProductData);
+      http.onload = () => resolve(http.response);
+      http.onerror = () => reject(http.response);
+  });
+  //If success then sent OK status, otherwise error to client side
+  sendProduct.then((response) => {
+  if (response == "OK") {
+      alert("Success");
+  }
+  else {
+      alert("Fail");
+  } 
+  }).catch((error) => {
+  //Calling alertError from utilityFunction.js
+      alertError(error);
+  });
 }
 
 //inputNameField function for initializing add product form

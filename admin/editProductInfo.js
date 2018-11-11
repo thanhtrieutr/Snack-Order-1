@@ -20,7 +20,7 @@ function adminGetProductInfo(callback) {
   };
 }
 
-function sendNewProductPrice(result, currentID, trueID) 
+function sendNewProductPrice(result, currentID, trueID) {
   var http = new XMLHttpRequest();
   http.open('POST', "http://127.0.0.1:3000/admin-controller/update-product/price", true);
   http.setRequestHeader("token", localStorage.getItem("token"));

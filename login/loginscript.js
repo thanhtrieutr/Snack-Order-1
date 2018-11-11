@@ -9,7 +9,7 @@ function checkLoginInSever(user, password) {
             alertAnswerLogIn(user, token);
         }
         if (this.readyState == 4 && this.status != 200) {
-            alertError(this.response);
+            alertError("Email or password does not match");
         } 
     }
 }

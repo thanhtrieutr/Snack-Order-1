@@ -1,4 +1,3 @@
-var http = require("http");
 var fs = require('fs');
 var path = require('path');
 var crud = require('../utilities/databaseCRUD');
@@ -33,7 +32,7 @@ function emailCheck(user) {
     if (user.length < 6 || user.length > 100) {
         return false;
     }
-    return /^[a-zA-Z0-9_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(user)
+    return /^[a-zA-Z0-9_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(user);
 }
 
 function passwordCheck(password) {
@@ -52,4 +51,4 @@ function validateAccount(account) {
 module.exports = {
     savePhoto: savePhoto,
     validateAccount: validateAccount
-}
+};

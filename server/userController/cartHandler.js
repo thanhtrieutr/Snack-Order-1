@@ -2,46 +2,37 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 var crud = require("../utilities/databaseCRUD");
 var utilities = require("../utilities/utilities");
-var errorHandler = require("../errorHandler/controllerError");
 var mongo = require('mongodb');
 var productModel = require("../schema/product-schema");
 var orderModel = require("../schema/order-schema");
 var accountModel = require("../schema/account-schema");
 
-
-// var mongoose = require("mongoose");
-// var orderSchema = require("../schema/order-schema");
-// var orderModel = mongoose.model('order', orderSchema,'order');
-// var accountSchema = require("../schema/account-schema");
-// var accountModel = mongoose.model('account', accountSchema,'account');
-// var productSchema = require("../schema/product-schema");
-// var productModel = mongoose.model('product', productSchema,'product');
-
 function createProductList(oneCart) {
     return new Promise((resolve, reject) => {
         if (!oneCart.productTrueID) {
-            reject(new Error ("Wrong Data Input"));
+            reject(new Error("Wrong Data Input"));
         }
         var objId = new mongo.ObjectID(oneCart.productTrueID);
         var obj = {_id: objId};
         crud.readOneDocument(productModel, obj, oneProduct => {
             if (oneProduct == null) {
-                reject(new Error ("Wrong Data Input"));
+                reject(new Error("Wrong Data Input"));
             }
             resolve(oneProduct);
         });
     });
 }
-function submitCart(request, response) {  
+
+function submitCart(request, response, next) {
     var readPost = new Promise((resolve, reject) => {
         var result = request.body;
-        if (typeof(result) != "object" || result == null) {
-            reject(new Error ("Wrong Data Input"));
+        if (typeof (result) != "object" || result == null) {
+            reject(new Error("Wrong Data Input"));
         }
         for (var i in result.cartArray) {
             for (var j in result.cartArray) {
                 if (i != j && result.cartArray[i].productID == result.cartArray[j].productID) {
-                    reject(new Error ("Wrong Data Input"));
+                    reject(new Error("Wrong Data Input"));
                 }
             }
         }
@@ -53,7 +44,7 @@ function submitCart(request, response) {
             var obj = {token : result.token};
             crud.readOneDocument(accountModel, obj, account => {
                 if (account == null) {
-                    reject( new Error("Authentication Error"));
+                    reject(new Error("Authentication Error"));
                 }
                 resolve([account, result]);
             });
@@ -63,8 +54,8 @@ function submitCart(request, response) {
         result = result[1];
         var returnBill = {};
         var bill = {};
-        bill.time=new Date();
-        returnBill.time=new Date();
+        bill.time = new Date();
+        returnBill.time = new Date();
         bill.user = currentUser._id;
         bill.products = [];
         bill.estimateTotalPrice = 0;
@@ -79,13 +70,16 @@ function submitCart(request, response) {
             for (var i in productList) {
                 // calculate total price
                 var currentPrice = productList[i].price;
-                var currentAmount  = result.cartArray[i].amount;
-                if (!currentAmount || typeof currentAmount !== "number" || currentAmount <= 0 || currentAmount >=100)
-                {
-                    throw new Error ("Wrong Data Input");
+                var currentAmount = result.cartArray[i].amount;
+                if (!currentAmount || typeof currentAmount !== "number" || currentAmount <= 0 || currentAmount >= 100) {
+                    throw new Error("Wrong Data Input");
                 }
-                productList[i].amount=currentAmount;
-                bill.products.push({_id: productList[i]._id, quantity:currentAmount, status:"pending"});
+                productList[i].amount = currentAmount;
+                bill.products.push({
+                    _id: productList[i]._id,
+                    quantity: currentAmount,
+                    status: "pending"
+                });
                 returnBill.products.push(productList[i]);
                 bill.estimateTotalPrice += currentAmount * currentPrice;
                 returnBill.estimateTotalPrice = bill.estimateTotalPrice;
@@ -97,17 +91,14 @@ function submitCart(request, response) {
                 response.end(JSON.stringify(returnBill));
             });
         }).catch(error => {
-            errorHandler(error,response);
-            return;
+            next(error);
         });
     }).catch(error => {
-        errorHandler(error,response);
-        return;
+        next(error);
     });
 }
+
 module.exports = function submitCartHandler(request, response) {
     submitCart(request, response);
-}
-
+};
 ///////////////////////////////////////////////////////////////////////////////////////
-

@@ -12,7 +12,7 @@ var setResponseHeader = function (req, res, next) {
     res.header("Pragma", "no-cache");
     res.header("Expires", 0);
     next();
-}
+};
 //Running set response header before using API/Static router
 routes.use(setResponseHeader);
 
@@ -22,25 +22,26 @@ routes.use(setResponseHeader);
 routes.use('/user-controller', userRouter);
 routes.use('/admin-controller', adminRouter);
 routes.use('/static', staticRouter);
+
 //Implementing HTML router
 var htmlRouter = function (req, res, next) {
     routes.get(req.url, (req, res) => {
         res.sendFile(__dirname + `${req.url}${req.url}.html`);
-    })
+    });
     next();
-}
+};
 routes.use(htmlRouter);
 
 routes.get('/admin/login', (req, res) => {
     res.sendFile(__dirname + '/admin/adminLogin.html');
-})
+});
 
 routes.get('/profile/change-password', (req, res) => {
     res.sendFile(__dirname + '/profile/change-password.html');
-})
+});
 
 routes.get('/', (req, res) => {
-    res.sendFile(__dirname + '/main-order/order.html')
+    res.sendFile(__dirname + '/main-order/order.html');
 });
 
 module.exports = routes;

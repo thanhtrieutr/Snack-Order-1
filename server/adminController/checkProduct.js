@@ -1,21 +1,20 @@
 var crud = require("../utilities/databaseCRUD");
 var utilities = require("../utilities/utilities");
 var adminUtilities = require("../adminController/adminUtilities");
-var errorHandler = require("../errorHandler/controllerError");
 var mongo = require('mongodb');
 var productModel = require("../schema/product-schema");
 var adminModel = require("../schema/admin-account-schema");
 
 function checkValidProduct(productName) {
     if (productName == "" || productName == null || productName.length > 40) {
-        return true; 
-    } 
-    else return /[!@#$%^&*_+\-=\[\]{};':"\\|,.<>\/?]/.test(productName);
+        return true;
+    } else return /[!@#$%^&*_+\-=\[\]{};':"\\|,.<>\/?]/.test(productName);
 }
-function checkPrice(productPrice){
+
+function checkPrice(productPrice) {
     if (productPrice == "" || productPrice == null || productPrice.length > 6) {
-        return true; 
-    } 
+        return true;
+    }
     if (isNaN(productPrice)) {
         return true;
     }
@@ -33,9 +32,8 @@ function checkFile(productImage) {
     return false;
 }
 
-
-function checkProductName(request, response) {
-    var collectClient = new Promise((resolve, reject) => { 
+function checkProductName(request, response, next) {
+    var collectClient = new Promise((resolve, reject) => {
         var result = request.body;
         if (result instanceof Error) {
             reject(result);
@@ -47,7 +45,7 @@ function checkProductName(request, response) {
             var obj = {token : result[0].token};
             crud.readOneDocument(adminModel, obj, account => {
                 if (account == null) {
-                    reject( new Error("Authentication Error"));
+                    reject(new Error("Authentication Error"));
                 }
                 resolve(result);
             });
@@ -59,7 +57,6 @@ function checkProductName(request, response) {
         var obj = {name: result[0].productName};
         crud.readOneDocument(productModel, obj, function(product, error) {
             try {
-                debugger;
                 if (error) {
                     throw error;
                 }
@@ -68,20 +65,17 @@ function checkProductName(request, response) {
                     throw new Error("Wrong Data Input");
                 }
                 response.end("OK");
+            } catch (error) {
+                next(error);
             }
-            catch (error) {
-                errorHandler(error,response);
-                return;
-            } 
         });
     }).catch(error => {
-        errorHandler(error,response);
-        return;
+        next(error);
     });
 }
 
-function checkProduct(request, response) {
-    var collectClient = new Promise((resolve, reject) => { 
+function checkProduct(request, response, next) {
+    var collectClient = new Promise((resolve, reject) => {
         var result = request.body;
         if (result instanceof Error) {
             reject(result);
@@ -94,7 +88,7 @@ function checkProduct(request, response) {
             var obj = {token : result[0].token};
             crud.readOneDocument(adminModel, obj, account => {
                 if (account == null) {
-                    reject( new Error("Authentication Error"));
+                    reject(new Error("Authentication Error"));
                 }
                 resolve(result);
             });
@@ -125,10 +119,8 @@ function checkProduct(request, response) {
                 var obj = {};
                 obj.name = productName;
                 obj.price = productPrice;
-            }
-            catch (error) {
-                errorHandler(error,response);
-                return;
+            } catch (error) {
+                next(error);
             }
             crud.createDocument(productModel, obj, err => {
                 try {
@@ -137,26 +129,25 @@ function checkProduct(request, response) {
                         if (err) throw err;
                         response.end("OK");
                     });
-                }
-                catch (error) {
-                    errorHandler(error,response);
+                } catch (error) {
+                    errorHandler(error, response);
                     return;
                 }
             });
         });
     }).catch(error => {
-        errorHandler(error,response);
-        return;
+        next(error);
     });
 }
-function updateProduct(request,response){
-    var collectClient = new Promise((resolve, reject) => { 
+
+function updateProduct(request, response, next) {
+    var collectClient = new Promise((resolve, reject) => {
         var result = request.body;
         if (result instanceof Error) {
             reject(result);
         }
-        if (typeof(result) != "object" || result == null) {
-            reject(new Error ("Wrong Data Input"));
+        if (typeof (result) != "object" || result == null) {
+            reject(new Error("Wrong Data Input"));
         }
         resolve(result);
     });
@@ -165,7 +156,7 @@ function updateProduct(request,response){
             var obj = {token : result.token};
             crud.readOneDocument(adminModel, obj, account => {
                 if (account == null) {
-                    reject( new Error("Authentication Error"));
+                    reject(new Error("Authentication Error"));
                 }
                 resolve(result);
             });
@@ -198,9 +189,8 @@ function updateProduct(request,response){
             crud.updateOneDocument(productModel, {_id:currentProduct._id}, obj, err => {
                 try {
                     if (err) throw err;
-                }
-                catch(error) {
-                    errorHandler(error,response);
+                } catch (error) {
+                    errorHandler(error, response);
                     return;
                 }
             });
@@ -215,21 +205,20 @@ function updateProduct(request,response){
                 randomNumber = randomNumber.toString();
                 fileName = randomNumber + "-" + fileName;
             }
-            adminUtilities.savePhoto({_id:currentProduct._id}, fileName, productImage.file, err => {
+            adminUtilities.savePhoto({
+                _id: currentProduct._id
+            }, fileName, productImage.file, err => {
                 try {
                     if (err) throw err;
-                }
-                catch (error) {
-                    errorHandler(error,response);
-                    return;
+                } catch (error) {
+                    next(error);
                 }
             });
         }
         utilities.setResponseHeader(response);
         response.end("OK");
     }).catch(error => {
-        errorHandler(error,response);
-        return;
+        next(error);
     });
 }
 
@@ -242,10 +231,8 @@ function displayPrice(x) {
     return x + " đ";
 }
 
-
 module.exports = {
     checkProductName: checkProductName,
     checkProduct: checkProduct,
     updateProduct: updateProduct
 };
-

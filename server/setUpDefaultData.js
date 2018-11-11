@@ -64,7 +64,7 @@ var adminList = [{
     user: "admin@gmail.com",
     password: "admin1234",
     token: "duck"
-}]
+}];
 var listInfo = ["fullName", "phoneNumber", "birthday", "address", "avatarAddress"];
 
 //function add product (want to follow order)
@@ -123,7 +123,7 @@ function resetData() {
             if (checkDone == 4) {
                 console.log("done");
             }
-        })
+        });
     });
     crud.deleteOneCollection(adminModel, () => {
         addAdmin();

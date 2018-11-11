@@ -45,7 +45,7 @@ function signupInSever(user, password, callback) {
             if (callback) return callback(result);
         }
         if (this.readyState == 4 && this.status != 200) {
-            alertError(this.response);
+            alertError('User already exist!');
         }
     }
 }

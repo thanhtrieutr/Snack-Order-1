@@ -1,17 +1,16 @@
 var crud = require("../utilities/databaseCRUD");
 var utilities = require("../utilities/utilities");
-var errorHandler = require("../errorHandler/controllerError");
 var adminModel = require("../schema/admin-account-schema");
 var orderModel = require("../schema/order-schema");
 
-function getHistory(request, response) {
+function getHistory(request, response, next) {
     var collectClient = new Promise((resolve, reject) => {
         var result = request.body;
         crud.readOneDocument(adminModel, {token: result.token}, (admin, err) => {
             if (err) {
                 reject(err);
             }
-            if (typeof(admin) != "object" || admin == null) {
+            if (typeof (admin) != "object" || admin == null) {
                 reject(new Error("Authentication Error"));
             }
             resolve();
@@ -31,7 +30,8 @@ function getHistory(request, response) {
     }).then(order => {
         var orderList = [];
         for (var i in order) {
-            var obj = {}, currentOrder = order[i];
+            var obj = {},
+                currentOrder = order[i];
             obj._id = currentOrder._id;
             var tempTime = currentOrder.time;
             obj.time = tempTime.getDate() + "/" + (tempTime.getMonth()+1) + "/" + tempTime.getFullYear();
@@ -55,10 +55,10 @@ function getHistory(request, response) {
         debugger;
         response.end(JSON.stringify(orderList));
     }).catch(error => {
-        errorHandler(error,response);
-        return;
+        next(error);
     });
 }
+
 module.exports = {
     getHistory: getHistory
-}
+};

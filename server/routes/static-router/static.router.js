@@ -11,6 +11,6 @@ staticRouter.use('/images', imageRouter);
 
 staticRouter.get('/', (request, response) => {
     response.end('You routed to staticRouter!');
-})
+});
 
 module.exports = staticRouter;

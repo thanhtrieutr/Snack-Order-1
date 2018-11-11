@@ -1,10 +1,9 @@
 var crud = require("../utilities/databaseCRUD");
 var utilities = require("../utilities/utilities");
-var adminUtilities = require("../adminController/adminUtilities");
-var errorHandler = require("../errorHandler/controllerError");
 var mongo = require('mongodb');
 var orderModel = require("../schema/order-schema");
 var adminModel = require("../schema/admin-account-schema");
+
 function checkUpdateList(updateList) {
     if (!updateList || updateList.length == 0) {
         return true;
@@ -82,7 +81,7 @@ function createPromiseUpdate(oneOrder) {
         });
     });
 }
-function changeStatus(request,response){
+function changeStatus(request,response, next){
     var collectClient = new Promise((resolve, reject) => { 
         var result = request.body;
         if (result instanceof Error) {
@@ -125,16 +124,13 @@ function changeStatus(request,response){
             Promise.all(updatePromise).then(result => {
                 response.end("Success");
             }).catch(error => {
-                errorHandler(error,response);
-                return;
+                next(error);
             });
         }).catch(error => {
-            errorHandler(error,response);
-            return;
+            next(error);
         });
     }).catch(error => {
-        errorHandler(error,response);
-        return;
+        next(error);
     });
 }
 

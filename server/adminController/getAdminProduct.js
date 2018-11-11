@@ -1,10 +1,9 @@
 var crud = require("../utilities/databaseCRUD");
 var utilities = require("../utilities/utilities");
-var errorHandler = require("../errorHandler/controllerError");
 var productModel = require("../schema/product-schema");
 var adminModel = require("../schema/admin-account-schema");
 
-function getAdminProduct(request, response) {
+function getAdminProduct(request, response, next) {
     var collectClient = new Promise((resolve, reject) => { 
         result = request.body;
         if (result instanceof Error) {
@@ -37,8 +36,7 @@ function getAdminProduct(request, response) {
         var products = result[1];
         response.end(JSON.stringify(products));
     }).catch(error => {
-        errorHandler(error,response);
-        return;
+        next(error);
     });
 }
 

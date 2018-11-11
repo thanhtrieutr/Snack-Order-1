@@ -1,16 +1,14 @@
-var utilities = require("../utilities/utilities");
 var crud = require("../utilities/databaseCRUD");
-var errorHandler = require("../errorHandler/controllerError");
 var accountModel = require("../schema/account-schema");
 
-function deleteOneUser(request, response) {
+function deleteOneUser(request, response, next) {
     var collectClient = new Promise((resolve, reject) => {
         var result = request.body;
-        if (result == null || typeof(result) != "object" || !result.token) {
-            reject(new Error ("Wrong Data Input"));
+        if (result == null || typeof (result) != "object" || !result.token) {
+            reject(new Error("Wrong Data Input"));
         }
         resolve(result);
-    })
+    });
 
     collectClient.then(result => {
         return new Promise((resolve, reject) => {
@@ -26,10 +24,9 @@ function deleteOneUser(request, response) {
         crud.deleteOneDocument(accountModel ,result);
         response.end("Delete successfully");
     }).catch(error => {
-        errorHandler(error,response);
-        return;
+        next(error);
     });
 }
 module.exports = {
     deleteOneUser: deleteOneUser
-}
+};

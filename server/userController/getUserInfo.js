@@ -1,10 +1,8 @@
 var crud = require("../utilities/databaseCRUD");
-var utilities = require("../utilities/utilities");
-var errorHandler = require("../errorHandler/controllerError");
 var listInfo = ["fullName", "phoneNumber", "birthday", "address"];
 var accountModel =  require("../schema/account-schema");
 
-function checkToken(request, response) {
+function checkToken(request, response, next) {
     var collectClient = new Promise((resolve, reject) => {
         var result = request.body;
         if (result instanceof Error) {
@@ -34,11 +32,10 @@ function checkToken(request, response) {
         }
         response.end(JSON.stringify(obj));
     }).catch (error => {
-        errorHandler(error, response);
-        return;
+        next(error);
     });
 }
 
 module.exports = function (request, response) {
     checkToken(request, response);
-}
+};

@@ -1,9 +1,8 @@
 var crud = require("../utilities/databaseCRUD");
 var utilities = require("../utilities/utilities");
-var errorHandler = require("../errorHandler/controllerError");
 var productModel = require("../schema/product-schema");
 
-module.exports = function productHandler(request, response) {
+module.exports = function productHandler(request, response, next) {
     var promise1 = new Promise(function(resolve, reject) {
         crud.readDatabase(productModel, function(object,error) {
             if (error) {
@@ -18,6 +17,6 @@ module.exports = function productHandler(request, response) {
         response.end(JSON.stringify(result));
     })
     .catch (error => {
-        errorHandler(error,response);
+        next(error);
     });
-}
+};

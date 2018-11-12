@@ -1,7 +1,6 @@
 var crud = require("../utilities/databaseCRUD");
 var utilities = require("../utilities/utilities");
 var adminUtilities = require("../adminController/adminUtilities");
-var errorHandler = require("../errorHandler/controllerError");
 var mongo = require('mongodb');
 var productModel = require("../schema/product-schema");
 var adminModel = require("../schema/admin-account-schema");
@@ -39,14 +38,14 @@ var uploadFile = function(request, response, next) {
 
 function checkValidProduct(productName) {
     if (productName == "" || productName == null || productName.length > 40) {
-        return true; 
-    } 
-    else return /[!@#$%^&*_+\-=\[\]{};':"\\|,.<>\/?]/.test(productName);
+        return true;
+    } else return /[!@#$%^&*_+\-=\[\]{};':"\\|,.<>\/?]/.test(productName);
 }
-function checkPrice(productPrice){
+
+function checkPrice(productPrice) {
     if (productPrice == "" || productPrice == null || productPrice.length > 6) {
-        return true; 
-    } 
+        return true;
+    }
     if (isNaN(productPrice)) {
         return true;
     }
@@ -78,7 +77,7 @@ function checkProductName(request, response) {
             var obj = {token : result[0].token};
             crud.readOneDocument(adminModel, obj, account => {
                 if (account == null) {
-                    reject( new Error("Authentication Error"));
+                    reject(new Error("Authentication Error"));
                 }
                 resolve(result);
             });
@@ -98,15 +97,12 @@ function checkProductName(request, response) {
                     throw new Error("Wrong Data Input");
                 }
                 response.end("OK");
+            } catch (error) {
+                next(error);
             }
-            catch (error) {
-                errorHandler(error,response);
-                return;
-            } 
         });
     }).catch(error => {
-        errorHandler(error,response);
-        return;
+        next(error);
     });
 }
 
@@ -148,8 +144,7 @@ appAddProduct.post('/', adminUtilities.authenticationAdminByHeader, uploadFile, 
             response.end("OK");
         });
     }).catch(error => {
-        errorHandler(error,response);
-        return;
+        next(error);
     });
 });
 //update Product (productID, productImage, productPrice, token)
@@ -185,8 +180,7 @@ appUpdateProduct.post('/image', adminUtilities.authenticationAdminByHeader, uplo
             response.end("OK");
         });
     }).catch(error => {
-        errorHandler(error,response);
-        return;
+        next(error);
     });
 });
 

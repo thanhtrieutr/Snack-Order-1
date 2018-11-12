@@ -1,7 +1,5 @@
-var utilities = require("../utilities/utilities");
 var utilAdmin = require("../adminController/adminUtilities");
 var crud = require("../utilities/databaseCRUD");
-var errorHandler = require("../errorHandler/controllerError");
 var accountModel = require("../schema/account-schema");
 
 function initUserInfo(newAccount) {
@@ -9,13 +7,13 @@ function initUserInfo(newAccount) {
     newAccount.phoneNumber = "";
     newAccount.birthday = "";
     newAccount.address = "";
-    newAccount.avatarAddress = "../images/default-avatar.png";
+    newAccount.avatarAddress = "static/images/default-avatar.png";
     newAccount.token = "";
 
     return newAccount;
 }
 
-function createUser(request, response) {
+function createUser(request, response, next) {
     var readPost = new Promise((resolve, reject) => {
         var newAccount = request.body;
         if (typeof (newAccount) != "object" || newAccount == null) {
@@ -30,19 +28,18 @@ function createUser(request, response) {
         return new Promise((resolve, reject) => {
             crud.readOneDocument(accountModel, result, account => {
                 if (account != null) {
-                    reject( new Error ("Account Existed"))
+                    reject( new Error ("Account Existed"));
                 }
                 resolve(result);
-            })
-        })
+            });
+        });
     }).then(newUser => {
         newUser = initUserInfo(newUser);
         crud.createDocument(accountModel, newUser);
         response.end("create succeed");
         
     }).catch(error => {
-        errorHandler(error, response);
-        return;
+        next(error);
     });
 }
 

@@ -1,29 +1,29 @@
 var crud = require("../utilities/databaseCRUD");
 var utilities = require("../utilities/utilities");
-var errorHandler = require("../errorHandler/controllerError");
 var adminModel = require("../schema/admin-account-schema");
 var orderModel = require("../schema/order-schema");
+
 function commonProduct(a, b) {
     if (a.productId.equals(b.productId) && a.user == b.user && a.status == b.status) {
         return true;
     }
     return false;
 }
+
 function getMax(a, b) {
     if (a >= b) {
         return a;
     }
     return b;
 }
-
-function getTodayOrder(request, response) {
+function getTodayOrder(request, response, next) {
     var collectClient = new Promise((resolve, reject) => { 
         var result = request.body;
         crud.readOneDocument(adminModel, {token: result.token}, (admin, err) => {
             if (err) {
                 reject(err);
             }
-            if (typeof(admin) != "object" || admin == null) {
+            if (typeof (admin) != "object" || admin == null) {
                 reject(new Error("Authentication Error"));
             }
             resolve();
@@ -62,25 +62,24 @@ function getTodayOrder(request, response) {
                 var position = -1;
                 for (var k in orderList) {
                     if (commonProduct(orderList[k], obj)) {
-                        position = k; break;
+                        position = k;
+                        break;
                     }
                 }
                 if (position == -1) {
                     var newObj = utilities.cloneObject(obj);
                     orderList.push(newObj);
-                }
-                else {
+                } else {
                     orderList[k].quantity += obj.quantity;
                     orderList[k].totalPrice += obj.totalPrice;
                     orderList[k].time = getMax(orderList[k].time, obj.time);
-                    orderList[k].orderId = orderList[k].orderId.concat(obj.orderId); 
+                    orderList[k].orderId = orderList[k].orderId.concat(obj.orderId);
                 }
             }
         }
         response.end(JSON.stringify(orderList));
     }).catch(error => {
-        errorHandler(error,response);
-        return;
+        next(error);
     });
 }
 

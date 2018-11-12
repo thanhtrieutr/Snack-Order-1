@@ -1,9 +1,8 @@
 var crud = require("../utilities/databaseCRUD");
 var utilities = require("../utilities/utilities");
-var errorHandler = require("../errorHandler/controllerError");
 var adminModel = require("../schema/admin-account-schema");
 
-function checkAdminLogin(request, response) {
+function checkAdminLogin(request, response, next) {
     var getAccount = new Promise(function(resolve, reject) {
         var result = request.body;
         if (result instanceof Error) {
@@ -34,12 +33,11 @@ function checkAdminLogin(request, response) {
             });
         });
     }).catch (error => {
-        errorHandler(error, response);
-        return;
+        next(error);
     });
 }
 
-function checkAdminToken(request, response) {
+function checkAdminToken(request, response, next) {
     var getAccount = new Promise(function(resolve, reject) {
         var result = request.body;
         if (result instanceof Error) {
@@ -62,12 +60,11 @@ function checkAdminToken(request, response) {
         });
     }).then(admin => {
         response.end(JSON.stringify(admin.user));
-    }).catch (error => {
-        errorHandler(error, response);
-        return;
+    }).catch ((error) => {
+        next(error);
     });
 }
-function deleteToken(request, response) {
+function deleteToken(request, response, next) {
     var getAccount = new Promise(function(resolve, reject) {
         var result = request.body;
         if (result instanceof Error) {
@@ -97,8 +94,7 @@ function deleteToken(request, response) {
             });
         });
     }).catch (error => {
-        errorHandler(error, response);
-        return;
+        next(error);
     });
 }
 
@@ -106,4 +102,4 @@ module.exports = {
     checkLogin: checkAdminLogin,
     checkToken: checkAdminToken,
     deleteToken: deleteToken
-}
+};

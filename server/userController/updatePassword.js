@@ -1,20 +1,19 @@
 var crud = require("../utilities/databaseCRUD");
 var utilities = require("../utilities/utilities");
-var errorHandler = require("../errorHandler/controllerError");
 var accountModel = require("../schema/account-schema");
 
 function passwordCheck(password) {
     return /^[[a-zA-Z0-9!#$%&'*+-/=?^_`{|}]+$/.test(password);
 }
 
-module.exports = function updatePassword(request, response) {
-    var collectClient = new Promise(function(resolve, reject) {
+module.exports = function updatePassword(request, response, next) {
+    var collectClient = new Promise(function (resolve, reject) {
         var result = request.body;
         if (result instanceof Error) {
-            reject(new Error ("Wrong Data Input"));
+            reject(new Error("Wrong Data Input"));
         }
-        if (typeof(result) != "object" || result == null) {
-            reject(new Error ("Wrong Data Input"));
+        if (typeof (result) != "object" || result == null) {
+            reject(new Error("Wrong Data Input"));
         }
         if (!result.oldPassword || !result.token || !result.newPassword || Object.keys(result).length != 3) {
             reject(new Error('Wrong Data Input'));
@@ -30,7 +29,7 @@ module.exports = function updatePassword(request, response) {
             var queryObj = {password: result.oldPassword, token: result.token};
             crud.readOneDocument(accountModel, queryObj, account => {
                 if (account == null) {
-                    reject( new Error("Account Doesn't Exist"));
+                    reject(new Error("Account Doesn't Exist"));
                 }
                 resolve(result);
             });
@@ -40,8 +39,7 @@ module.exports = function updatePassword(request, response) {
             utilities.setResponseHeader(response);
             response.end("Update Success");
         });
-    }).catch (error=> {
-        errorHandler(error,response);
-        return;
+    }).catch(error => {
+        next(error);
     });
-}
+};

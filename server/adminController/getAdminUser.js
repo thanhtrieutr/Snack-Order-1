@@ -1,17 +1,16 @@
 var crud = require("../utilities/databaseCRUD");
 var utilities = require("../utilities/utilities");
-var errorHandler = require("../errorHandler/controllerError");
 var accountModel = require("../schema/account-schema");
 var adminModel = require("../schema/admin-account-schema");
 
-function getAdminUser(request, response) {
-    var collectClient = new Promise((resolve, reject) => { 
+function getAdminUser(request, response, next) {
+    var collectClient = new Promise((resolve, reject) => {
         var result = request.body;
         if (result instanceof Error) {
             reject(result);
         }
-        if (typeof(result) != "object" || result == null) {
-            reject(new Error ("Wrong Data Input"));
+        if (typeof (result) != "object" || result == null) {
+            reject(new Error("Wrong Data Input"));
         }
         resolve(result);
     });
@@ -19,8 +18,7 @@ function getAdminUser(request, response) {
         crud.readDatabase(accountModel, function(object,error) {
             if (error) {
                 reject(error);
-            } 
-            else {
+            } else {
                 resolve(object);
             }
         });
@@ -30,7 +28,7 @@ function getAdminUser(request, response) {
             var obj = {token : result[0].token};
             crud.readOneDocument(adminModel, obj, account => {
                 if (account == null) {
-                    reject( new Error("Authentication Error"));
+                    reject(new Error("Authentication Error"));
                 }
                 resolve(result);
             });
@@ -39,8 +37,7 @@ function getAdminUser(request, response) {
         var users = result[1];
         response.end(JSON.stringify(users));
     }).catch(error => {
-        errorHandler(error,response);
-        return;
+        next(error);
     });
 }
 

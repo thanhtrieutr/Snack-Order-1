@@ -438,3 +438,133 @@ ObjectParameterError: Parameter "filter" to findOne() must be an object, got [ob
     at <anonymous>
     at process._tickCallback (internal/process/next_tick.js:188:7)
 
+Mon Nov 12 2018 13:25:08 GMT+0700 (Indochina Time):
+Error: Wrong Data Input
+    at /home/tedotoji89/Desktop/Snack-Order/server/userController/loginHandler.js:51:20
+    at new Promise (<anonymous>)
+    at checkToken (/home/tedotoji89/Desktop/Snack-Order/server/userController/loginHandler.js:45:22)
+    at Layer.handle [as handle_request] (/home/tedotoji89/Desktop/Snack-Order/server/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/home/tedotoji89/Desktop/Snack-Order/server/node_modules/express/lib/router/index.js:317:13)
+    at /home/tedotoji89/Desktop/Snack-Order/server/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/home/tedotoji89/Desktop/Snack-Order/server/node_modules/express/lib/router/index.js:335:12)
+    at next (/home/tedotoji89/Desktop/Snack-Order/server/node_modules/express/lib/router/index.js:275:10)
+    at /home/tedotoji89/Desktop/Snack-Order/server/node_modules/body-parser/lib/read.js:130:5
+    at invokeCallback (/home/tedotoji89/Desktop/Snack-Order/server/node_modules/raw-body/index.js:224:16)
+    at done (/home/tedotoji89/Desktop/Snack-Order/server/node_modules/raw-body/index.js:213:7)
+    at IncomingMessage.onEnd (/home/tedotoji89/Desktop/Snack-Order/server/node_modules/raw-body/index.js:273:7)
+    at IncomingMessage.emit (events.js:182:13)
+    at endReadableNT (_stream_readable.js:1094:12)
+    at process._tickCallback (internal/process/next_tick.js:63:19)
+
+Mon Nov 12 2018 13:25:11 GMT+0700 (Indochina Time):
+Error: Wrong Data Input
+    at /home/tedotoji89/Desktop/Snack-Order/server/userController/loginHandler.js:51:20
+    at new Promise (<anonymous>)
+    at checkToken (/home/tedotoji89/Desktop/Snack-Order/server/userController/loginHandler.js:45:22)
+    at Layer.handle [as handle_request] (/home/tedotoji89/Desktop/Snack-Order/server/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/home/tedotoji89/Desktop/Snack-Order/server/node_modules/express/lib/router/index.js:317:13)
+    at /home/tedotoji89/Desktop/Snack-Order/server/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/home/tedotoji89/Desktop/Snack-Order/server/node_modules/express/lib/router/index.js:335:12)
+    at next (/home/tedotoji89/Desktop/Snack-Order/server/node_modules/express/lib/router/index.js:275:10)
+    at /home/tedotoji89/Desktop/Snack-Order/server/node_modules/body-parser/lib/read.js:130:5
+    at invokeCallback (/home/tedotoji89/Desktop/Snack-Order/server/node_modules/raw-body/index.js:224:16)
+    at done (/home/tedotoji89/Desktop/Snack-Order/server/node_modules/raw-body/index.js:213:7)
+    at IncomingMessage.onEnd (/home/tedotoji89/Desktop/Snack-Order/server/node_modules/raw-body/index.js:273:7)
+    at IncomingMessage.emit (events.js:182:13)
+    at endReadableNT (_stream_readable.js:1094:12)
+    at process._tickCallback (internal/process/next_tick.js:63:19)
+
+Mon Nov 12 2018 13:25:11 GMT+0700 (Indochina Time):
+Error: ENOENT: no such file or directory, stat '/home/tedotoji89/Desktop/Snack-Order/favicon.ico/favicon.ico.html'
+
+Mon Nov 12 2018 13:26:30 GMT+0700 (Indochina Time):
+Error: ENOENT: no such file or directory, stat '/home/tedotoji89/Desktop/Snack-Order/static/images/2505-4829-5334-2404-3070529213917674475942457906035361636155392n.jpg/static/images/2505-4829-5334-2404-3070529213917674475942457906035361636155392n.jpg.html'
+
+Mon Nov 12 2018 13:26:38 GMT+0700 (Indochina Time):
+Error: ENOENT: no such file or directory, stat '/home/tedotoji89/Desktop/Snack-Order/static/images/2505-4829-5334-2404-3070529213917674475942457906035361636155392n.jpg/static/images/2505-4829-5334-2404-3070529213917674475942457906035361636155392n.jpg.html'
+
+Mon Nov 12 2018 13:26:44 GMT+0700 (Indochina Time):
+Error: ENOENT: no such file or directory, stat '/home/tedotoji89/Desktop/Snack-Order/static/images/2505-4829-5334-2404-3070529213917674475942457906035361636155392n.jpg/static/images/2505-4829-5334-2404-3070529213917674475942457906035361636155392n.jpg.html'
+
+Mon Nov 12 2018 13:26:45 GMT+0700 (Indochina Time):
+Error: ENOENT: no such file or directory, stat '/home/tedotoji89/Desktop/Snack-Order/static/images/2505-4829-5334-2404-3070529213917674475942457906035361636155392n.jpg/static/images/2505-4829-5334-2404-3070529213917674475942457906035361636155392n.jpg.html'
+
+Mon Nov 12 2018 13:27:08 GMT+0700 (Indochina Time):
+Error: ENOENT: no such file or directory, stat '/home/tedotoji89/Desktop/Snack-Order/static/images/2505-4829-5334-2404-3070529213917674475942457906035361636155392n.jpg/static/images/2505-4829-5334-2404-3070529213917674475942457906035361636155392n.jpg.html'
+
+Mon Nov 12 2018 13:28:27 GMT+0700 (Indochina Time):
+Error: Wrong Data Input
+    at /home/tedotoji89/Desktop/Snack-Order/server/userController/loginHandler.js:51:20
+    at new Promise (<anonymous>)
+    at checkToken (/home/tedotoji89/Desktop/Snack-Order/server/userController/loginHandler.js:45:22)
+    at Layer.handle [as handle_request] (/home/tedotoji89/Desktop/Snack-Order/server/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/home/tedotoji89/Desktop/Snack-Order/server/node_modules/express/lib/router/index.js:317:13)
+    at /home/tedotoji89/Desktop/Snack-Order/server/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/home/tedotoji89/Desktop/Snack-Order/server/node_modules/express/lib/router/index.js:335:12)
+    at next (/home/tedotoji89/Desktop/Snack-Order/server/node_modules/express/lib/router/index.js:275:10)
+    at /home/tedotoji89/Desktop/Snack-Order/server/node_modules/body-parser/lib/read.js:130:5
+    at invokeCallback (/home/tedotoji89/Desktop/Snack-Order/server/node_modules/raw-body/index.js:224:16)
+    at done (/home/tedotoji89/Desktop/Snack-Order/server/node_modules/raw-body/index.js:213:7)
+    at IncomingMessage.onEnd (/home/tedotoji89/Desktop/Snack-Order/server/node_modules/raw-body/index.js:273:7)
+    at IncomingMessage.emit (events.js:182:13)
+    at endReadableNT (_stream_readable.js:1094:12)
+    at process._tickCallback (internal/process/next_tick.js:63:19)
+
+Mon Nov 12 2018 13:29:00 GMT+0700 (Indochina Time):
+Error: Wrong Data Input
+    at /home/tedotoji89/Desktop/Snack-Order/server/userController/loginHandler.js:51:20
+    at new Promise (<anonymous>)
+    at checkToken (/home/tedotoji89/Desktop/Snack-Order/server/userController/loginHandler.js:45:22)
+    at Layer.handle [as handle_request] (/home/tedotoji89/Desktop/Snack-Order/server/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/home/tedotoji89/Desktop/Snack-Order/server/node_modules/express/lib/router/index.js:317:13)
+    at /home/tedotoji89/Desktop/Snack-Order/server/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/home/tedotoji89/Desktop/Snack-Order/server/node_modules/express/lib/router/index.js:335:12)
+    at next (/home/tedotoji89/Desktop/Snack-Order/server/node_modules/express/lib/router/index.js:275:10)
+    at /home/tedotoji89/Desktop/Snack-Order/server/node_modules/body-parser/lib/read.js:130:5
+    at invokeCallback (/home/tedotoji89/Desktop/Snack-Order/server/node_modules/raw-body/index.js:224:16)
+    at done (/home/tedotoji89/Desktop/Snack-Order/server/node_modules/raw-body/index.js:213:7)
+    at IncomingMessage.onEnd (/home/tedotoji89/Desktop/Snack-Order/server/node_modules/raw-body/index.js:273:7)
+    at IncomingMessage.emit (events.js:182:13)
+    at endReadableNT (_stream_readable.js:1094:12)
+    at process._tickCallback (internal/process/next_tick.js:63:19)
+
+Mon Nov 12 2018 13:32:15 GMT+0700 (Indochina Time):
+Error: Wrong Data Input
+    at /home/tedotoji89/Desktop/Snack-Order/server/adminController/loginAdmin.js:47:20
+    at new Promise (<anonymous>)
+    at checkAdminToken (/home/tedotoji89/Desktop/Snack-Order/server/adminController/loginAdmin.js:41:22)
+    at Layer.handle [as handle_request] (/home/tedotoji89/Desktop/Snack-Order/server/node_modules/express/lib/router/layer.js:95:5)
+    at trim_prefix (/home/tedotoji89/Desktop/Snack-Order/server/node_modules/express/lib/router/index.js:317:13)
+    at /home/tedotoji89/Desktop/Snack-Order/server/node_modules/express/lib/router/index.js:284:7
+    at Function.process_params (/home/tedotoji89/Desktop/Snack-Order/server/node_modules/express/lib/router/index.js:335:12)
+    at next (/home/tedotoji89/Desktop/Snack-Order/server/node_modules/express/lib/router/index.js:275:10)
+    at /home/tedotoji89/Desktop/Snack-Order/server/node_modules/body-parser/lib/read.js:130:5
+    at invokeCallback (/home/tedotoji89/Desktop/Snack-Order/server/node_modules/raw-body/index.js:224:16)
+    at done (/home/tedotoji89/Desktop/Snack-Order/server/node_modules/raw-body/index.js:213:7)
+    at IncomingMessage.onEnd (/home/tedotoji89/Desktop/Snack-Order/server/node_modules/raw-body/index.js:273:7)
+    at IncomingMessage.emit (events.js:182:13)
+    at endReadableNT (_stream_readable.js:1094:12)
+    at process._tickCallback (internal/process/next_tick.js:63:19)
+
+Mon Nov 12 2018 13:33:12 GMT+0700 (Indochina Time):
+Error: Wrong Data Input
+    at /home/tedotoji89/Desktop/Snack-Order/server/adminController/checkProduct.js:65:27
+    at /home/tedotoji89/Desktop/Snack-Order/server/utilities/databaseCRUD.js:49:9
+    at /home/tedotoji89/Desktop/Snack-Order/node_modules/mongoose/lib/model.js:4518:16
+    at process.nextTick (/home/tedotoji89/Desktop/Snack-Order/node_modules/mongoose/lib/query.js:2584:28)
+    at process._tickCallback (internal/process/next_tick.js:61:11)
+
+Mon Nov 12 2018 13:33:30 GMT+0700 (Indochina Time):
+Error: Account Existed
+    at crud.readOneDocument.account (/home/tedotoji89/Desktop/Snack-Order/server/adminController/createUser.js:31:29)
+    at /home/tedotoji89/Desktop/Snack-Order/server/utilities/databaseCRUD.js:49:9
+    at /home/tedotoji89/Desktop/Snack-Order/node_modules/mongoose/lib/model.js:4518:16
+    at process.nextTick (/home/tedotoji89/Desktop/Snack-Order/node_modules/mongoose/lib/query.js:2584:28)
+    at process._tickCallback (internal/process/next_tick.js:61:11)
+
+Mon Nov 12 2018 13:33:36 GMT+0700 (Indochina Time):
+Error: ENOTDIR: not a directory, stat '/home/tedotoji89/Desktop/Snack-Order/images/default-avatar.png/images/default-avatar.png.html'
+
+Mon Nov 12 2018 13:35:54 GMT+0700 (Indochina Time):
+Error: ENOTDIR: not a directory, stat '/home/tedotoji89/Desktop/Snack-Order/images/default-avatar.png/images/default-avatar.png.html'
+

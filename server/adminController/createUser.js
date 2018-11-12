@@ -7,7 +7,7 @@ function initUserInfo(newAccount) {
     newAccount.phoneNumber = "";
     newAccount.birthday = "";
     newAccount.address = "";
-    newAccount.avatarAddress = "../images/default-avatar.png";
+    newAccount.avatarAddress = "static/images/default-avatar.png";
     newAccount.token = "";
 
     return newAccount;

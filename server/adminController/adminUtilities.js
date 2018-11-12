@@ -6,30 +6,6 @@ var crypto = require("crypto");
 var productModel = require("../schema/product-schema");
 var adminModel = require("../schema/admin-account-schema");
 
-// function savePhoto(object, filename, data, callback) {
-//     if (typeof(filename) != 'string' || typeof(data) != 'string') {
-//         callback("not valid data");
-//         return;
-//     }
-//     var filePath = '/static/images/' + filename;
-//     console.log(filePath);
-//     var data = data.replace(/^data:image\/\w+;base64,/, "");
-//     var buf = new Buffer(data, 'base64');
-//     fs.writeFile(path.join(__dirname,'../../images/' + filename), buf, function(err) {
-//         if (err) {
-//             return callback(err);
-//         }
-//         checkWriteFile = true;
-//         var avatarValue = {
-//             img: filePath
-//         };
-//         crud.updateOneDocument("product", object, avatarValue, function(err) {
-//             if (err) callback(err);
-//         });
-//         return callback(err);
-//     });
-// }
-
 function emailCheck(user) {
     if (user.length < 6 || user.length > 100) {
         return false;
@@ -62,8 +38,10 @@ function authenticationAdminByHeader(request, response, next) {
         next();
     });
 }
-module.exports = {
-    //savePhoto: savePhoto,
+module.exports = 
     validateAccount: validateAccount,
-    authenticationAdminByHeader: authenticationAdminByHeader
+    authenticationAdminByHeader: authenticationAdminByHeader,
+    validateAccount: validateAccount,
+    emailCheck: emailCheck,
+    passwordCheck: passwordCheck
 }

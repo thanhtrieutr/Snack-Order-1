@@ -234,6 +234,9 @@ appUpdateProduct.post('/price', adminUtilities.authenticationAdminByHeader, util
 });
 
 module.exports = {
+    checkValidProduct: checkValidProduct,
+    checkPrice: checkPrice,
+    checkFile: checkFile,
     checkProductName: checkProductName,
     addProduct: appAddProduct,
     updateProduct: appUpdateProduct

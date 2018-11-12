@@ -4,6 +4,7 @@ var path = require('path');
 var crud = require('../utilities/databaseCRUD');
 var crypto = require("crypto");
 var productModel = require("../schema/product-schema");
+var adminModel = require("../schema/admin-account-schema");
 
 // function savePhoto(object, filename, data, callback) {
 //     if (typeof(filename) != 'string' || typeof(data) != 'string') {
@@ -52,7 +53,7 @@ function validateAccount(account) {
 //middleware to check admin token in header
 function authenticationAdminByHeader(request, response, next) {
     var obj = {token : request.get('token')};
-    crud.readOneDocument("adminAccount", obj, account => {
+    crud.readOneDocument(adminModel, obj, account => {
         if (account == null) {
             errorHandler(new Error("Authentication Error"),response);
             return;

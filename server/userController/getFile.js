@@ -5,6 +5,7 @@ var crud = require("../utilities/databaseCRUD")
 var express = require('express');
 var appGetFile = express();
 var path = require('path');
+var accountModel = require("../schema/account-schema")
 
 //save to disk at image folder
 var storage = multer.diskStorage({
@@ -37,7 +38,7 @@ appGetFile.post('/', utilities.authenticationUserByHeader, uploadFile, (request,
     var avatarValue = {
         avatarAddress: '/static/images/'+ request.newFileName
     };
-    crud.updateOneDocument("account", request.account, avatarValue, function() {
+    crud.updateOneDocument(accountModel, {_id: request.account._id}, avatarValue, function() {
         response.end('../../images/' + request.newFileName);
         return;
     });

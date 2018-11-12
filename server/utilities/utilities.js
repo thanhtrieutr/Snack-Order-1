@@ -165,7 +165,7 @@ function fileFilter (req, file, callback){
 //middleware to check user token in header
 function authenticationUserByHeader(request, response, next) {
     var obj = {token : request.get('token')};
-    crud.readOneDocument("account", obj, account => {
+    crud.readOneDocument(accountModel, obj, account => {
         if (account == null) {
             errorHandler(new Error("Authentication Error"),response);
             return;

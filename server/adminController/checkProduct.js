@@ -124,7 +124,7 @@ appAddProduct.post('/', adminUtilities.authenticationAdminByHeader, uploadFile, 
     //find conflict product
     var collectProduct = new Promise((resolve, reject) => {
         var obj = {name: productName};
-        crud.readOneDocument("product", obj, function(product, error) {
+        crud.readOneDocument(productModel, obj, function(product, error) {
             if (error) {
                 reject(error);
             }
@@ -140,7 +140,7 @@ appAddProduct.post('/', adminUtilities.authenticationAdminByHeader, uploadFile, 
         obj.name = productName;
         obj.price = productPrice;
         obj.img = '/static/images/' + productImageLink;
-        crud.createDocument("product", obj, error => {
+        crud.createDocument(productModel, obj, error => {
             if (error) {
                 errorHandler(error,response);
                 return;
@@ -161,7 +161,7 @@ appUpdateProduct.post('/image', adminUtilities.authenticationAdminByHeader, uplo
     var collectProduct = new Promise((resolve, reject) => {
         var objID = new mongo.ObjectID(productID);
         var obj = {_id: objID};
-        crud.readOneDocument("product", obj, function(product, error) {
+        crud.readOneDocument(productModel, obj, function(product, error) {
             if (error) {
                 reject(error);
             }
@@ -176,9 +176,9 @@ appUpdateProduct.post('/image', adminUtilities.authenticationAdminByHeader, uplo
         var avatarValue = {
             img: '/static/images/' + productImageLink
         };
-        crud.updateOneDocument("product", currentProduct, avatarValue, function(err) {
+        crud.updateOneDocument(productModel, {_id: currentProduct._id}, avatarValue, function(err) {
             if (err) {
-                errorHandler(error,response);
+                errorHandler(err,response);
                 return;
             }
             utilities.setResponseHeader(response);
@@ -202,7 +202,7 @@ appUpdateProduct.post('/price', adminUtilities.authenticationAdminByHeader, util
     var collectProduct = new Promise((resolve, reject) => {
         var objID = new mongo.ObjectID(productID);
         var obj = {_id: objID};
-        crud.readOneDocument("product", obj, function(product, error) {
+        crud.readOneDocument(productModel, obj, function(product, error) {
             if (error) {
                 reject(error);
             }
@@ -218,7 +218,7 @@ appUpdateProduct.post('/price', adminUtilities.authenticationAdminByHeader, util
         var obj = {};
         obj.price = productPrice;
         console.log(currentProduct._id);
-        crud.updateOneDocument("product", {_id:currentProduct._id}, obj, err => {
+        crud.updateOneDocument(productModel, {_id:currentProduct._id}, obj, err => {
             if (err) {
                 errorHandler(error,response);
                 return;

@@ -22,7 +22,8 @@ function adminGetProductInfo(callback) {
 
 function sendNewProductPrice(result, currentID, trueID) {
   var http = new XMLHttpRequest();
-  http.open('POST', "http://127.0.0.1:3000/admin-controller/update-product", true);
+  http.open('POST', "http://127.0.0.1:3000/admin-controller/update-product/price", true);
+  http.setRequestHeader("token", localStorage.getItem("token"));
   http.send(JSON.stringify(result));
   http.onreadystatechange = function() {
       if (this.readyState == 4 && this.status == 200) {
@@ -35,37 +36,28 @@ function sendNewProductPrice(result, currentID, trueID) {
   };
 }
 
-function submitImage(currentID) {
-  var image = document.getElementById("edit-product-image-"+currentID).files[0];
-  var trueImageID = document.getElementById("edit-product-image-"+currentID).getAttribute("data-id");
-  var reader = new FileReader();
-  reader.readAsDataURL(image);
-
-  reader.onload = function () {
-    var imageObject = {
-        file: reader.result,
-        fileName: image.name
+function submitImage(currentID) { 
+    var image = document.getElementById("edit-product-image-"+currentID).files[0];
+    var trueImageID = document.getElementById("edit-product-image-"+currentID).getAttribute("data-id");
+    var productImageForm = document.getElementById("image-upload-"+currentID);
+    var updatedImageData = new FormData(productImageForm);
+    updatedImageData.append("file", image);
+    updatedImageData.append("productID", trueImageID);
+    var http = new XMLHttpRequest();
+    http.open('POST', "http://127.0.0.1:3000/admin-controller/update-product/image", true);
+    http.setRequestHeader("token", localStorage.getItem("token"));
+    http.send(updatedImageData);
+    http.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            if (this.response != "Wrong Data Input") {
+                alert("Update image successful");   
+                loadNewProductData(currentID, trueImageID);
+            }
+        }
+        else if (this.readyState == 4 && this.status != 200) {
+            alertError(this.response);
+        }
     }
-      var http = new XMLHttpRequest();
-      var object = {        
-          token: localStorage.getItem("token"),
-          id: trueImageID,
-          productImage: imageObject
-      };
-      http.open('POST', "http://127.0.0.1:3000/admin-controller/update-product", true);
-      http.send(JSON.stringify(object));
-      http.onreadystatechange = function() {
-          if (this.readyState == 4 && this.status == 200) {
-              if (this.response != "Wrong Data Input") {
-                  alert("Update image successful");   
-                  loadNewProductData(currentID, trueImageID);
-              }
-          }
-          else if (this.readyState == 4 && this.status != 200) {
-              alertError(this.response);
-          }
-      }
-  };  
 }
 
 function checkPrice(productPrice){
@@ -94,7 +86,7 @@ function showMode (currentID){
       alert("Not valid price/Empty value");
       return;
   } else {
-      result.token = localStorage.getItem("token");
+      result.token = 
       result.id = trueProductID;
       result.productPrice = newPrice;
   }

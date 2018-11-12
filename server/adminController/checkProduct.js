@@ -5,6 +5,37 @@ var errorHandler = require("../errorHandler/controllerError");
 var mongo = require('mongodb');
 var productModel = require("../schema/product-schema");
 var adminModel = require("../schema/admin-account-schema");
+var express = require('express');
+var multer = require('multer');
+var appUpdateProduct = express();
+var path = require('path');
+var appAddProduct = express();
+
+//save to disk at image folder
+var storage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, path.join(__dirname, '../../images'));
+    },
+    filename: function (req, file, callback) {
+        req.newFileName = utilities.modifyFileName(file.originalname);
+        callback(null, req.newFileName);
+    }
+})
+
+//receive + parse (by multer) uploaded file
+var upload = multer({storage: storage, fileFilter: utilities.fileFilter}).single('file');
+var uploadFile = function(request, response, next) {
+    upload(request, response, function (err) {
+        if (err instanceof multer.MulterError) {
+          errorHandler(err, response);
+          return;
+        } else if (err) {
+            errorHandler(err, response);
+            return;
+        }
+        next();
+    })
+}
 
 function checkValidProduct(productName) {
     if (productName == "" || productName == null || productName.length > 40) {
@@ -33,7 +64,7 @@ function checkFile(productImage) {
     return false;
 }
 
-
+//check valid name product
 function checkProductName(request, response) {
     var collectClient = new Promise((resolve, reject) => { 
         var result = request.body;
@@ -59,7 +90,6 @@ function checkProductName(request, response) {
         var obj = {name: result[0].productName};
         crud.readOneDocument(productModel, obj, function(product, error) {
             try {
-                debugger;
                 if (error) {
                     throw error;
                 }
@@ -80,172 +110,132 @@ function checkProductName(request, response) {
     });
 }
 
-function checkProduct(request, response) {
-    var collectClient = new Promise((resolve, reject) => { 
-        var result = request.body;
-        if (result instanceof Error) {
-            reject(result);
-        }
-        resolve(result);
-    });
+//create new product (productName, productPrice, productImage, token)
+appAddProduct.post('/', adminUtilities.authenticationAdminByHeader, uploadFile, (request, response) => {
+    var productName = request.body.productName;
+    var productPrice = request.body.productPrice;
+    var productImageLink = request.newFileName;
 
-    Promise.all([collectClient]).then(result => {
-        return new Promise((resolve, reject) => {
-            var obj = {token : result[0].token};
-            crud.readOneDocument(adminModel, obj, account => {
-                if (account == null) {
-                    reject( new Error("Authentication Error"));
-                }
-                resolve(result);
-            });
-        });
-    }).then(result => {
-        if (checkValidProduct(result[0].productName) || checkPrice(result[0].productPrice) || checkFile(result[0].productImage)) {
-            throw new Error("Wrong Data Input");
-        } 
-        var obj = {name: result[0].productName};
+    if (checkValidProduct(productName) || checkPrice(productPrice)) {
+        errorHandler(new Error("Wrong Data Input"),response);
+        return;
+    } 
+
+    //find conflict product
+    var collectProduct = new Promise((resolve, reject) => {
+        var obj = {name: productName};
         crud.readOneDocument(productModel, obj, function(product, error) {
-            try {
-                if (error) {
-                    throw error;
-                }
-                //check conflict
-                if (product != null) {
-                    throw new Error("Wrong Data Input");
-                }
-                var productName = result[0].productName;
-                var productPrice = result[0].productPrice;
-                var productImage = result[0].productImage;
-                var fileName = utilities.modifyFileName(productImage.fileName);
-                for (var i = 0; i < 4; i++) {
-                    var randomNumber = Math.floor((Math.random() * 10000) + 1);
-                    randomNumber = randomNumber.toString();
-                    fileName = randomNumber + "-" + fileName;
-                }
-                var obj = {};
-                obj.name = productName;
-                obj.price = productPrice;
+            if (error) {
+                reject(error);
             }
-            catch (error) {
+            if (product != null) {
+                reject(new Error("Wrong Data Input"));
+            }
+            resolve();
+        });
+    });
+    //add product
+    collectProduct.then(() => {
+        var obj = {};
+        obj.name = productName;
+        obj.price = productPrice;
+        obj.img = '/static/images/' + productImageLink;
+        crud.createDocument(productModel, obj, error => {
+            if (error) {
                 errorHandler(error,response);
                 return;
             }
-            crud.createDocument(productModel, obj, err => {
-                try {
-                    if (err) throw err;
-                    adminUtilities.savePhoto(obj, fileName, productImage.file, err => {
-                        if (err) throw err;
-                        response.end("OK");
-                    });
-                }
-                catch (error) {
-                    errorHandler(error,response);
-                    return;
-                }
-            });
+            response.end("OK");
         });
     }).catch(error => {
         errorHandler(error,response);
         return;
     });
-}
-function updateProduct(request,response){
-    var collectClient = new Promise((resolve, reject) => { 
-        var result = request.body;
-        if (result instanceof Error) {
-            reject(result);
-        }
-        if (typeof(result) != "object" || result == null) {
-            reject(new Error ("Wrong Data Input"));
-        }
-        resolve(result);
-    });
-    collectClient.then(result => {
-        return new Promise((resolve, reject) => {
-            var obj = {token : result.token};
-            crud.readOneDocument(adminModel, obj, account => {
-                if (account == null) {
-                    reject( new Error("Authentication Error"));
-                }
-                resolve(result);
-            });
-        });
-    }).then(result => {
-        return new Promise((resolve, reject) => {
-            var objId = new mongo.ObjectID(result.id);
-            var obj = {_id: objId};
-            crud.readOneDocument(productModel, obj, function(product, error) {
-                if (error) {
-                    reject(error);
-                }
-                if (product == null) {
-                    reject(new Error("Wrong Data Input"));
-                }
-                resolve([result, product]);
-            });
-        });
-    }).then(result => {
-        var productPrice = result[0].productPrice;
-        var productImage = result[0].productImage;
-        var currentProduct = result[1];
-        if (productPrice) {
-            if (checkPrice(productPrice)) {
-                throw new Error("Wrong Data Input");
-            }
-            var obj = {};
-            obj.price = productPrice;
-            console.log(currentProduct._id);
-            crud.updateOneDocument(productModel, {_id:currentProduct._id}, obj, err => {
-                try {
-                    if (err) throw err;
-                }
-                catch(error) {
-                    errorHandler(error,response);
-                    return;
-                }
-            });
-        }
-        if (productImage) {
-            if (checkFile(productImage)) {
-                throw new Error("Wrong Data Input");
-            }
-            var fileName = utilities.modifyFileName(productImage.fileName);
-            for (var i = 0; i < 4; i++) {
-                var randomNumber = Math.floor((Math.random() * 10000) + 1);
-                randomNumber = randomNumber.toString();
-                fileName = randomNumber + "-" + fileName;
-            }
-            adminUtilities.savePhoto({_id:currentProduct._id}, fileName, productImage.file, err => {
-                try {
-                    if (err) throw err;
-                }
-                catch (error) {
-                    errorHandler(error,response);
-                    return;
-                }
-            });
-        }
-        utilities.setResponseHeader(response);
-        response.end("OK");
-    }).catch(error => {
-        errorHandler(error,response);
-        return;
-    });
-}
+});
+//update Product (productID, productImage, productPrice, token)
+appUpdateProduct.post('/image', adminUtilities.authenticationAdminByHeader, uploadFile, (request, response) => {
+    var productID = request.body.productID;
+    var productImageLink = request.newFileName;
 
-function displayPrice(x) {
-    x = x.toString();
-    var pattern = /(-?\d+)(\d{3})/;
-    while (pattern.test(x)) {
-        x = x.replace(pattern, "$1.$2");
+    //find product by product Id 
+    var collectProduct = new Promise((resolve, reject) => {
+        var objID = new mongo.ObjectID(productID);
+        var obj = {_id: objID};
+        crud.readOneDocument(productModel, obj, function(product, error) {
+            if (error) {
+                reject(error);
+            }
+            if (product == null) {
+                reject(new Error("Wrong Data Input"));
+            }
+            resolve(product);
+        });
+    });
+    //update link image of product at mongodb
+    collectProduct.then(currentProduct => {
+        var avatarValue = {
+            img: '/static/images/' + productImageLink
+        };
+        crud.updateOneDocument(productModel, {_id: currentProduct._id}, avatarValue, function(err) {
+            if (err) {
+                errorHandler(err,response);
+                return;
+            }
+            utilities.setResponseHeader(response);
+            response.end("OK");
+        });
+    }).catch(error => {
+        errorHandler(error,response);
+        return;
+    });
+});
+
+appUpdateProduct.post('/price', adminUtilities.authenticationAdminByHeader, utilities.jsonParser(), (request, response) =>{
+    var productPrice = request.body.productPrice;
+    var productID = request.body.id;
+    if (checkPrice(productPrice)) {
+        errorHandler(new Error("Wrong Data Input"),response);
+        return;
     }
-    return x + " đ";
-}
 
+    //find product by product Id 
+    var collectProduct = new Promise((resolve, reject) => {
+        var objID = new mongo.ObjectID(productID);
+        var obj = {_id: objID};
+        crud.readOneDocument(productModel, obj, function(product, error) {
+            if (error) {
+                reject(error);
+            }
+            if (product == null) {
+                reject(new Error("Wrong Data Input"));
+            }
+            resolve(product);
+        });
+    });
+
+    //update price of product at mongodb
+    collectProduct.then(currentProduct => {
+        var obj = {};
+        obj.price = productPrice;
+        console.log(currentProduct._id);
+        crud.updateOneDocument(productModel, {_id:currentProduct._id}, obj, err => {
+            if (err) {
+                errorHandler(error,response);
+                return;
+            }
+            utilities.setResponseHeader(response);
+            response.end("OK");
+        });
+    }).catch(error => {
+        errorHandler(error,response);
+        return;
+    });
+    
+});
 
 module.exports = {
     checkProductName: checkProductName,
-    checkProduct: checkProduct,
-    updateProduct: updateProduct
+    addProduct: appAddProduct,
+    updateProduct: appUpdateProduct
 };
 

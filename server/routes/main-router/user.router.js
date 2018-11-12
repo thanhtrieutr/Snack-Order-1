@@ -24,7 +24,7 @@ try {
     userRouter.use('/update-password', utilities.jsonParser(), updatePassword);
     userRouter.use('/create-user', utilities.jsonParser(), createAccount.createUser);
     userRouter.use('/delete-user', utilities.jsonParser(), deleteOneUser.deleteOneUser);
-    userRouter.use('/upload-file', utilities.jsonParser({limit: '5mb'}), getFile.getFile);
+    userRouter.use('/upload-file', getFile.getFile);
     userRouter.use('/get-user-info', utilities.jsonParser(), getUserInfo);
     userRouter.use('/update-user-info', utilities.jsonParser(), updateUserInfo);
     userRouter.use('/remove-token', utilities.jsonParser(), deleteToken.deleteToken);

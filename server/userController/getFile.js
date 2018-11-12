@@ -1,40 +1,49 @@
 var utilities = require("../utilities/utilities");
 var errorHandler = require("../errorHandler/controllerError");
+var multer = require('multer');
+var crud = require("../utilities/databaseCRUD")
+var express = require('express');
+var appGetFile = express();
+var path = require('path');
+var accountModel = require("../schema/account-schema")
 
-function getFile(request, response) {
-    var promise = new Promise(function(resolve, reject) {
-        var result = request.body;
-        if (result instanceof Error) {
-            reject(result);
+//save to disk at image folder
+var storage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, path.join(__dirname, '../../images'));
+    },
+    filename: function (req, file, callback) {
+        req.newFileName = utilities.modifyFileName(file.originalname);
+        callback(null, req.newFileName);
+    }
+})
+
+//receive + parse (by multer) uploaded file
+var upload = multer({storage: storage, fileFilter: utilities.fileFilter}).single('file');
+var uploadFile = function(request, response, next) {
+    upload(request, response, function (err) {
+        if (err instanceof multer.MulterError) {
+          errorHandler(err, response);
+          return;
+        } else if (err) {
+            errorHandler(err, response);
+            return;
         }
-        if (!result.file || !result.fileName || !result.token) {
-            reject (new Error ("Wrong Data Input"));
-        }
-        var fileName = utilities.modifyFileName(result.fileName);
-        if (fileName == false) {
-            reject (new Error ("Wrong Data Input"));
-        }
-        console.log(fileName);
-        for (var i = 0; i < 4; i++) {
-            var randomNumber = Math.floor((Math.random() * 10000) + 1);
-            randomNumber = randomNumber.toString();
-            fileName = randomNumber + "-" + fileName;
-        }
-        utilities.savePhoto(fileName, result.file, result.token, function(err) {
-            if (err !== true)  {
-                response.end('../../images/' + fileName);
-            }
-            else {
-                reject (new Error ("Problem with saving photo"));
-            }
-        }); 
-    });
-    promise.catch (error => {
-        errorHandler(error,response);
-        return;
-    });
+        next();
+    })
 }
 
+appGetFile.post('/', utilities.authenticationUserByHeader, uploadFile, (request, response) => {
+    //save link image to mongodb of that account
+    var avatarValue = {
+        avatarAddress: '/static/images/'+ request.newFileName
+    };
+    crud.updateOneDocument(accountModel, {_id: request.account._id}, avatarValue, function() {
+        response.end('../../images/' + request.newFileName);
+        return;
+    });
+});
+
 module.exports =  {
-    getFile: getFile
+    getFile: appGetFile
 }

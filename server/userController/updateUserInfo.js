@@ -2,6 +2,7 @@ var crud = require("../utilities/databaseCRUD");
 var utilities = require("../utilities/utilities");
 var listInfo = ["fullName", "phoneNumber", "birthday", "address"];
 var errorHandler = require("../errorHandler/controllerError");
+var accountModel = require("../schema/account-schema");
 
 //check user input
 function checkValidPhone(telephone) {
@@ -55,7 +56,7 @@ module.exports = function updateUserInfo(request, response) {
     collectClient.then(result => {
         return new Promise((resolve, reject) => {
             var queryObj = {token: result.token};
-            crud.readOneDocument("account", queryObj, account => {
+            crud.readOneDocument(accountModel, queryObj, account => {
                 if (account == null) {
                     reject(new Error("Account Doesn't Exist"));
                 }
@@ -63,7 +64,7 @@ module.exports = function updateUserInfo(request, response) {
             });
         });
     }).then(result => {
-        crud.updateOneDocument("account", {token: result.token}, result, function(error) {
+        crud.updateOneDocument(accountModel, {token: result.token}, result, function(error) {
             if (error) {
                 reject(error);
             }

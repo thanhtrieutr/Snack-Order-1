@@ -1,6 +1,7 @@
 var crud = require("../utilities/databaseCRUD");
 var utilities = require("../utilities/utilities");
 var errorHandler = require("../errorHandler/controllerError");
+var accountModel = require("../schema/account-schema")
 
 function deleteToken(request, response) {
     var getAccount = new Promise(function(resolve, reject) {
@@ -16,7 +17,7 @@ function deleteToken(request, response) {
 
     getAccount.then((result) => {
         return new Promise((resolve, reject) => {
-            crud.readOneDocument("account", result, account => {
+            crud.readOneDocument(accountModel, result, account => {
                 if (account == null) {
                     reject( new Error("Account Doesn't Exist"));
                 }
@@ -27,7 +28,7 @@ function deleteToken(request, response) {
         utilities.createToken((newToken) => {
             newToken += Buffer.from(admin.user).toString('base64');
             var currentId = admin._id;
-            crud.updateOneDocument("account", {_id: currentId}, {token: newToken}, () => {
+            crud.updateOneDocument(accountModel, {_id: currentId}, {token: newToken}, () => {
                 response.end("Success!");
             });
         });

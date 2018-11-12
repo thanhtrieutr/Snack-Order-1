@@ -3,6 +3,8 @@ var utilities = require("../utilities/utilities");
 var adminUtilities = require("../adminController/adminUtilities");
 var errorHandler = require("../errorHandler/controllerError");
 var mongo = require('mongodb');
+var orderModel = require("../schema/order-schema");
+var adminModel = require("../schema/admin-account-schema");
 function checkUpdateList(updateList) {
     if (!updateList || updateList.length == 0) {
         return true;
@@ -44,52 +46,27 @@ function init(updateList) {
     combineList.statusList = statusList;
     return combineList;
 }
-function createQueryOrder(orderId) {
-    var query = [
-        {
-            $lookup: {
-                from: 'product',
-                localField: 'products._id',
-                foreignField: '_id',
-                as: 'productArray'
-            }
-        },
-        {
-            $match:{ 
-                _id: orderId
-            }
-        },
-        {
-            $project : {
-                productArray: 1,
-                products: 1,
-                actualTotalPrice: 1
-            }
-        }
-    ];
-    return query;
-}
+
 function createPromiseChange(order, productList, statusList) {
     return new Promise((resolve, reject) => {
-        var objId = new mongo.ObjectID(order);
-        var query = createQueryOrder(objId);
-        crud.readWithLink("order", query, oneOrder => {
-            oneOrder = oneOrder[0];
+        crud.getOrders(orderModel,{_id:order}, (result,err) => {
+            debugger;
+            oneOrder = result[0];
             var actualTotalPrice = 0;
             if (oneOrder == null) {
                 reject(new Error ("Wrong Data Input"));
             }
-            for (var i in oneOrder.products) {
-                var productId = oneOrder.products[i]._id.toString();
+            for (var i=0;i<oneOrder.products.length;i++) {
+                var productId = oneOrder.products[i]._id._id.toString();
                 var productPosition = productList.indexOf(productId);
                 if (productPosition == -1) {
                     reject(new Error ("Wrong Data Input"));
                 }
                 //change status
-                var i2 = utilities.findObjectById(oneOrder.productArray, oneOrder.products[i]._id);
+                // var i2 = utilities.findObjectById(oneOrder.products, oneOrder.products[i]._id._id);
                 oneOrder.products[i].status = statusList[productPosition];
                 if (oneOrder.products[i].status == "accept") {
-                    actualTotalPrice += oneOrder.products[i].quantity * oneOrder.productArray[i2].price;
+                    actualTotalPrice += oneOrder.products[i].quantity * oneOrder.products[i]._id.price;
                 }
             }
             oneOrder.actualTotalPrice = actualTotalPrice;
@@ -99,7 +76,7 @@ function createPromiseChange(order, productList, statusList) {
 }
 function createPromiseUpdate(oneOrder) {
     return new Promise((resolve, reject) => {
-        crud.updateOneDocument("order", {_id: oneOrder._id}, oneOrder, err => {
+        crud.updateOneDocument(orderModel, {_id: oneOrder._id}, oneOrder, err => {
             if (err) reject(err);
             resolve();
         });
@@ -119,7 +96,7 @@ function changeStatus(request,response){
     collectClient.then(result => {
         return new Promise((resolve, reject) => {
             var checkAccount = {token: result.token};
-            crud.readOneDocument("adminAccount", checkAccount, account => {
+            crud.readOneDocument(adminModel, checkAccount, account => {
                 if (account == null) {
                     reject( new Error("Authentication Error"));
                 }

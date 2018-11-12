@@ -81,6 +81,7 @@ function alertError(error) {
 }
 
 function displayPrice(x) {
+    debugger;
     x = x.toString();
     var pattern = /(-?\d+)(\d{3})/;
     while (pattern.test(x)) {

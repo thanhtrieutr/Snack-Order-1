@@ -4,6 +4,19 @@ var crud = require("../utilities/databaseCRUD");
 var utilities = require("../utilities/utilities");
 var errorHandler = require("../errorHandler/controllerError");
 var mongo = require('mongodb');
+var productModel = require("../schema/product-schema");
+var orderModel = require("../schema/order-schema");
+var accountModel = require("../schema/account-schema");
+
+
+// var mongoose = require("mongoose");
+// var orderSchema = require("../schema/order-schema");
+// var orderModel = mongoose.model('order', orderSchema,'order');
+// var accountSchema = require("../schema/account-schema");
+// var accountModel = mongoose.model('account', accountSchema,'account');
+// var productSchema = require("../schema/product-schema");
+// var productModel = mongoose.model('product', productSchema,'product');
+
 function createProductList(oneCart) {
     return new Promise((resolve, reject) => {
         if (!oneCart.productTrueID) {
@@ -11,7 +24,7 @@ function createProductList(oneCart) {
         }
         var objId = new mongo.ObjectID(oneCart.productTrueID);
         var obj = {_id: objId};
-        crud.readOneDocument("product", obj, oneProduct => {
+        crud.readOneDocument(productModel, obj, oneProduct => {
             if (oneProduct == null) {
                 reject(new Error ("Wrong Data Input"));
             }
@@ -38,7 +51,7 @@ function submitCart(request, response) {
     readPost.then(result => {
         return new Promise((resolve, reject) => {
             var obj = {token : result.token};
-            crud.readOneDocument("account", obj, account => {
+            crud.readOneDocument(accountModel, obj, account => {
                 if (account == null) {
                     reject( new Error("Authentication Error"));
                 }
@@ -77,9 +90,10 @@ function submitCart(request, response) {
                 bill.estimateTotalPrice += currentAmount * currentPrice;
                 returnBill.estimateTotalPrice = bill.estimateTotalPrice;
             }
-            crud.createDocument("order",bill,error => {
+            crud.createDocument(orderModel,bill,error => {
                 if (error) reject(new Error ("Problem with database"));
                 utilities.setResponseHeader(response);
+                console.log(returnBill);
                 response.end(JSON.stringify(returnBill));
             });
         }).catch(error => {

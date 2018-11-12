@@ -1,6 +1,9 @@
 var crud = require("./utilities/databaseCRUD");
 var crypto = require("crypto");
-
+var orderModel = require("./schema/order-schema");
+var productModel = require("./schema/product-schema");
+var accountModel = require("./schema/account-schema");
+var adminModel = require("./schema/admin-account-schema");
 
 var product = [
     {name: "Snack mực tẩm gia vị Thái Bento 24g", img: "static/images/Bento-Vi-Thai.png", price: 25000 },
@@ -67,7 +70,7 @@ var listInfo = ["fullName", "phoneNumber", "birthday", "address", "avatarAddress
 //function add product (want to follow order)
 function addProduct(position, callback) {
     if (position < product.length) {
-        crud.createDocument("product", product[position], () => {
+        crud.createDocument(productModel, product[position], () => {
             addProduct(position+1, callback);
         });
     }
@@ -89,24 +92,24 @@ function createFull(position, callback) {
 }
 function addAccount(position, callback) {
     if (position < accountArray.length) {
-        crud.createDocument("account", accountArray[position], addAccount(position+1, callback));
+        crud.createDocument(accountModel, accountArray[position], addAccount(position+1, callback));
     }
     else return callback();
 }
 function addAdmin() {
     for (var i in adminList) {
-        crud.createDocument("adminAccount", adminList[i]);
+        crud.createDocument(adminModel, adminList[i]);
     }
 }
 function resetData() {
     var checkDone = 0;
-    crud.deleteOneCollection('order', () => {
+    crud.deleteOneCollection(orderModel, () => {
         checkDone++;
         if (checkDone == 4) {
             console.log("done");
         }
     });
-    crud.deleteOneCollection("product", function() {
+    crud.deleteOneCollection(productModel, function() {
         addProduct(0, () => {
             checkDone++;
             if (checkDone == 4) {
@@ -114,7 +117,7 @@ function resetData() {
             }
         });
     });
-    crud.deleteOneCollection("account", function() {
+    crud.deleteOneCollection(accountModel, function() {
         addAccount(0, () => {
             checkDone++;
             if (checkDone == 4) {
@@ -122,7 +125,7 @@ function resetData() {
             }
         })
     });
-    crud.deleteOneCollection("adminAccount", () => {
+    crud.deleteOneCollection(adminModel, () => {
         addAdmin();
         checkDone++;
         if (checkDone == 4) {

@@ -1,6 +1,7 @@
 var utilities = require("../utilities/utilities");
 var crud = require("../utilities/databaseCRUD");
 var errorHandler = require("../errorHandler/controllerError");
+var accountModel = require("../schema/account-schema");
 
 function deleteOneUser(request, response) {
     var collectClient = new Promise((resolve, reject) => {
@@ -14,7 +15,7 @@ function deleteOneUser(request, response) {
     collectClient.then(result => {
         return new Promise((resolve, reject) => {
             var obj = result;
-            crud.readOneDocument("account", obj, account => {
+            crud.readOneDocument(accountModel, obj, account => {
                 if (account == null) {
                     reject(new Error("Account Doesn't Exist"));
                 }
@@ -22,7 +23,7 @@ function deleteOneUser(request, response) {
             });
         });
     }).then(result => {
-        crud.deleteOneDocument("account" ,result);
+        crud.deleteOneDocument(accountModel ,result);
         response.end("Delete successfully");
     }).catch(error => {
         errorHandler(error,response);

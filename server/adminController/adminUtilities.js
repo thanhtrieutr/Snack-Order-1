@@ -3,6 +3,7 @@ var fs = require('fs');
 var path = require('path');
 var crud = require('../utilities/databaseCRUD');
 var crypto = require("crypto");
+var productModel = require("../schema/product-schema");
 
 function savePhoto(object, filename, data, callback) {
     if (typeof(filename) != 'string' || typeof(data) != 'string') {
@@ -21,7 +22,7 @@ function savePhoto(object, filename, data, callback) {
         var avatarValue = {
             img: filePath
         };
-        crud.updateOneDocument("product", object, avatarValue, function(err) {
+        crud.updateOneDocument(productModel, object, avatarValue, function(err) {
             if (err) callback(err);
         });
         return callback(err);

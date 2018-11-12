@@ -1,6 +1,7 @@
 var crud = require("../utilities/databaseCRUD");
 var utilities = require("../utilities/utilities");
 var errorHandler = require("../errorHandler/controllerError");
+var adminModel = require("../schema/admin-account-schema");
 
 function checkAdminLogin(request, response) {
     var getAccount = new Promise(function(resolve, reject) {
@@ -16,7 +17,7 @@ function checkAdminLogin(request, response) {
 
     getAccount.then((result) => {
         return new Promise((resolve, reject) => {
-            crud.readOneDocument("adminAccount", result, account => {
+            crud.readOneDocument(adminModel, result, account => {
                 if (account == null) {
                     reject( new Error("Authentication Error"));
                 }
@@ -27,7 +28,7 @@ function checkAdminLogin(request, response) {
         utilities.createToken((newToken) => {
             newToken += Buffer.from(admin.user).toString('base64');
             var currentId = admin._id;
-            crud.updateOneDocument("adminAccount", {_id: currentId}, {token: newToken}, () => {
+            crud.updateOneDocument(adminModel, {_id: currentId}, {token: newToken}, () => {
                 response.end(JSON.stringify(newToken)); 
                 console.log("Current token: " + newToken);
             });
@@ -52,7 +53,7 @@ function checkAdminToken(request, response) {
 
     getAccount.then((result) => {
         return new Promise((resolve, reject) => {
-            crud.readOneDocument("adminAccount", result, account => {
+            crud.readOneDocument(adminModel, result, account => {
                 if (account == null) {
                     reject( new Error("Authentication Error"));
                 }
@@ -80,7 +81,7 @@ function deleteToken(request, response) {
 
     getAccount.then((result) => {
         return new Promise((resolve, reject) => {
-            crud.readOneDocument("adminAccount", result, account => {
+            crud.readOneDocument(adminModel, result, account => {
                 if (account == null) {
                     reject( new Error("Account Doesn't Exist"));
                 }
@@ -91,7 +92,7 @@ function deleteToken(request, response) {
         utilities.createToken((newToken) => {
             newToken += Buffer.from(admin.user).toString('base64');
             var currentId = admin._id;
-            crud.updateOneDocument("adminAccount", {_id: currentId}, {token: newToken}, () => {
+            crud.updateOneDocument(adminModel, {_id: currentId}, {token: newToken}, () => {
                 response.end("Success!");
             });
         });

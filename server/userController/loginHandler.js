@@ -1,6 +1,7 @@
 var crud = require("../utilities/databaseCRUD");
 var utilities = require("../utilities/utilities");
 var errorHandler = require("../errorHandler/controllerError");
+var accountModel = require("../schema/account-schema");
 
 function checkLogin(request, response) {
     var getAccount = new Promise(function(resolve, reject) {
@@ -17,7 +18,7 @@ function checkLogin(request, response) {
     getAccount.then((result) => {
         var queryObj = {user: result.user, password: result.password};
         return new Promise((resolve, reject) => {
-            crud.readOneDocument("account", queryObj, account => {
+            crud.readOneDocument(accountModel, queryObj, account => {
                 if (account == null) {
                     reject( new Error("Authentication Error"));
                 }
@@ -28,7 +29,7 @@ function checkLogin(request, response) {
         utilities.createToken((newToken) => {
             newToken += Buffer.from(account.user).toString('base64');
             var currentId = account._id;
-            crud.updateOneDocument("account", {_id: currentId}, {token: newToken}, () => {
+            crud.updateOneDocument(accountModel, {_id: currentId}, {token: newToken}, () => {
                 response.end(JSON.stringify(newToken)); 
                 console.log("Current token: " + newToken);
             });
@@ -53,7 +54,7 @@ function checkToken(request, response) {
 
     getAccount.then((result) => {
         return new Promise((resolve, reject) => {
-            crud.readOneDocument("account", result, account => {
+            crud.readOneDocument(accountModel, result, account => {
                 if (account == null) {
                     reject( new Error("Authentication Error"));
                 }

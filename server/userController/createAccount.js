@@ -2,6 +2,7 @@
 var utilities = require("../utilities/utilities");
 var crud = require("../utilities/databaseCRUD");
 var errorHandler = require("../errorHandler/controllerError");
+var accountModel = require("../schema/account-schema");
 
 function emailCheck(user) {
     if (user.length < 6 || user.length > 100) {
@@ -32,7 +33,7 @@ function createUser(request, response) {
         resolve(newAccount);
     });
     var readData = new Promise((resolve, reject) => {
-        crud.readDatabase("account", accounts => {
+        crud.readDatabase(accountModel, accounts => {
             resolve(accounts);
         });
     });

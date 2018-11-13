@@ -21,7 +21,7 @@ function deleteOneUser(request, response, next) {
             });
         });
     }).then(result => {
-        crud.deleteOneDocument(accountModel ,result);
+        crud.deleteOneDocument(accountModel, result);
         response.end("Delete successfully");
     }).catch(error => {
         next(error);

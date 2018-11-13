@@ -5,7 +5,7 @@ var path = require('path');
 var crud = require('../utilities/databaseCRUD');
 var crypto = require("crypto");
 var bodyParser = require('body-parser');
-var accountModel = require("../schema/account-schema")
+var accountModel = require("../schema/account-schema");
 
 function findValidUserPosition(accountList, user) {
     for (var i in accountList) {
@@ -187,4 +187,4 @@ module.exports = {
     generateSimpleId: generateSimpleId,
     fileFilter: fileFilter,
     authenticationUserByHeader: authenticationUserByHeader
-}
+};

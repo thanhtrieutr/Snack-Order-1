@@ -13,7 +13,6 @@ var getFile = require("../../userController/getFile");
 var getUserInfo = require("../../userController/getUserInfo");
 var updateUserInfo = require("../../userController/updateUserInfo");
 var deleteToken = require("../../userController/deleteToken");
-var errorHandler = require("../../errorHandler/controllerError");
 
 //API for user backend (using try..catch)
 userRouter.use('/get-products', getProduct);
@@ -21,8 +20,8 @@ userRouter.use('/check-login', utilities.jsonParser(), checkLogin.checkLogin);
 userRouter.use('/check-token', utilities.jsonParser(), checkLogin.checkToken);
 userRouter.use('/submit-cart', utilities.jsonParser(), cartHandler);
 userRouter.use('/update-password', utilities.jsonParser(), updatePassword);
-userRouter.use('/create-user', utilities.jsonParser(), createAccount.createUser);
-userRouter.use('/delete-user', utilities.jsonParser(), deleteOneUser.deleteOneUser);
+// userRouter.use('/create-user', utilities.jsonParser(), createAccount.createUser);
+// userRouter.use('/delete-user', utilities.jsonParser(), deleteOneUser.deleteOneUser);
 userRouter.use('/upload-file', getFile.getFile);
 userRouter.use('/get-user-info', utilities.jsonParser(), getUserInfo);
 userRouter.use('/update-user-info', utilities.jsonParser(), updateUserInfo);

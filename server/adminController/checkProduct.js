@@ -19,22 +19,22 @@ var storage = multer.diskStorage({
         req.newFileName = utilities.modifyFileName(file.originalname);
         callback(null, req.newFileName);
     }
-})
+});
 
 //receive + parse (by multer) uploaded file
-var upload = multer({storage: storage, fileFilter: utilities.fileFilter}).single('file');
-var uploadFile = function(request, response, next) {
+var upload = multer({ storage: storage, fileFilter: utilities.fileFilter }).single('file');
+var uploadFile = function (request, response, next) {
     upload(request, response, function (err) {
         if (err instanceof multer.MulterError) {
-          errorHandler(err, response);
-          return;
+            next(err);
+            return;
         } else if (err) {
-            errorHandler(err, response);
+            next(err);
             return;
         }
         next();
-    })
-}
+    });
+};
 
 function checkValidProduct(productName) {
     if (productName == "" || productName == null || productName.length > 40) {
@@ -64,8 +64,8 @@ function checkFile(productImage) {
 }
 
 //check valid name product
-function checkProductName(request, response) {
-    var collectClient = new Promise((resolve, reject) => { 
+function checkProductName(request, response, next) {
+    var collectClient = new Promise((resolve, reject) => {
         var result = request.body;
         if (result instanceof Error) {
             reject(result);
@@ -74,7 +74,9 @@ function checkProductName(request, response) {
     });
     Promise.all([collectClient]).then(result => {
         return new Promise((resolve, reject) => {
-            var obj = {token : result[0].token};
+            var obj = {
+                token: result[0].token
+            };
             crud.readOneDocument(adminModel, obj, account => {
                 if (account == null) {
                     reject(new Error("Authentication Error"));
@@ -85,9 +87,11 @@ function checkProductName(request, response) {
     }).then(result => {
         if (checkValidProduct(result[0].productName)) {
             throw new Error("Wrong Data Input");
-        } 
-        var obj = {name: result[0].productName};
-        crud.readOneDocument(productModel, obj, function(product, error) {
+        }
+        var obj = {
+            name: result[0].productName
+        };
+        crud.readOneDocument(productModel, obj, function (product, error) {
             try {
                 if (error) {
                     throw error;
@@ -107,20 +111,22 @@ function checkProductName(request, response) {
 }
 
 //create new product (productName, productPrice, productImage, token)
-appAddProduct.post('/', adminUtilities.authenticationAdminByHeader, uploadFile, (request, response) => {
+appAddProduct.post('/', adminUtilities.authenticationAdminByHeader, uploadFile, (request, response, next) => {
     var productName = request.body.productName;
     var productPrice = request.body.productPrice;
     var productImageLink = request.newFileName;
 
     if (checkValidProduct(productName) || checkPrice(productPrice)) {
-        errorHandler(new Error("Wrong Data Input"),response);
+        errorHandler(new Error("Wrong Data Input"), response);
         return;
-    } 
+    }
 
     //find conflict product
     var collectProduct = new Promise((resolve, reject) => {
-        var obj = {name: productName};
-        crud.readOneDocument(productModel, obj, function(product, error) {
+        var obj = {
+            name: productName
+        };
+        crud.readOneDocument(productModel, obj, function (product, error) {
             if (error) {
                 reject(error);
             }
@@ -138,7 +144,7 @@ appAddProduct.post('/', adminUtilities.authenticationAdminByHeader, uploadFile, 
         obj.img = '/static/images/' + productImageLink;
         crud.createDocument(productModel, obj, error => {
             if (error) {
-                errorHandler(error,response);
+                next(error);
                 return;
             }
             response.end("OK");
@@ -148,15 +154,16 @@ appAddProduct.post('/', adminUtilities.authenticationAdminByHeader, uploadFile, 
     });
 });
 //update Product (productID, productImage, productPrice, token)
-appUpdateProduct.post('/image', adminUtilities.authenticationAdminByHeader, uploadFile, (request, response) => {
+appUpdateProduct.post('/image', adminUtilities.authenticationAdminByHeader, uploadFile, (request, response, next) => {
     var productID = request.body.productID;
     var productImageLink = request.newFileName;
-
     //find product by product Id 
     var collectProduct = new Promise((resolve, reject) => {
         var objID = new mongo.ObjectID(productID);
-        var obj = {_id: objID};
-        crud.readOneDocument(productModel, obj, function(product, error) {
+        var obj = {
+            _id: objID
+        };
+        crud.readOneDocument(productModel, obj, function (product, error) {
             if (error) {
                 reject(error);
             }
@@ -166,15 +173,17 @@ appUpdateProduct.post('/image', adminUtilities.authenticationAdminByHeader, uplo
             resolve(product);
         });
     });
+
     //update link image of product at mongodb
     collectProduct.then(currentProduct => {
         var avatarValue = {
             img: '/static/images/' + productImageLink
         };
-        crud.updateOneDocument(productModel, {_id: currentProduct._id}, avatarValue, function(err) {
+        crud.updateOneDocument(productModel, {
+            _id: currentProduct._id
+        }, avatarValue, function (err) {
             if (err) {
-                errorHandler(err,response);
-                return;
+                throw err;
             }
             utilities.setResponseHeader(response);
             response.end("OK");
@@ -184,19 +193,21 @@ appUpdateProduct.post('/image', adminUtilities.authenticationAdminByHeader, uplo
     });
 });
 
-appUpdateProduct.post('/price', adminUtilities.authenticationAdminByHeader, utilities.jsonParser(), (request, response) =>{
+appUpdateProduct.post('/price', adminUtilities.authenticationAdminByHeader, utilities.jsonParser(), (request, response, next) => {
     var productPrice = request.body.productPrice;
     var productID = request.body.id;
     if (checkPrice(productPrice)) {
-        errorHandler(new Error("Wrong Data Input"),response);
+        next(new Error("Wrong Data Input"));
         return;
     }
 
     //find product by product Id 
     var collectProduct = new Promise((resolve, reject) => {
         var objID = new mongo.ObjectID(productID);
-        var obj = {_id: objID};
-        crud.readOneDocument(productModel, obj, function(product, error) {
+        var obj = {
+            _id: objID
+        };
+        crud.readOneDocument(productModel, obj, function (product, error) {
             if (error) {
                 reject(error);
             }
@@ -212,19 +223,21 @@ appUpdateProduct.post('/price', adminUtilities.authenticationAdminByHeader, util
         var obj = {};
         obj.price = productPrice;
         console.log(currentProduct._id);
-        crud.updateOneDocument(productModel, {_id:currentProduct._id}, obj, err => {
+        crud.updateOneDocument(productModel, {
+            _id: currentProduct._id
+        }, obj, err => {
             if (err) {
-                errorHandler(error,response);
+                next(err);
                 return;
             }
             utilities.setResponseHeader(response);
             response.end("OK");
         });
     }).catch(error => {
-        errorHandler(error,response);
+        next(error);
         return;
     });
-    
+
 });
 
 module.exports = {
@@ -235,4 +248,3 @@ module.exports = {
     addProduct: appAddProduct,
     updateProduct: appUpdateProduct
 };
-

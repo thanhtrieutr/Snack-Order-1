@@ -47,7 +47,7 @@ function updateOneDocument(myModel, object, newValues, callback) {
 function readOneDocument(myModel, object, callback) {
     myModel.findOne(object, function(err, docs) { 
         callback(docs, err);
-    })
+    });
 }
 
 function readSomeDocument(myModel, object, callback) {
@@ -88,4 +88,4 @@ module.exports = {
     readWithLink: readWithLink,
     getOrders:getOrders,
     deleteOneCollection:deleteOneCollection
-}
+};

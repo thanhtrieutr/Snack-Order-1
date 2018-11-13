@@ -22,7 +22,7 @@ adminRouter.use('/check-token', utilities.jsonParser(), loginAdmin.checkToken);
 adminRouter.use('/remove-token', utilities.jsonParser(), loginAdmin.deleteToken);
 adminRouter.use('/check-product-name', utilities.jsonParser(), checkProduct.checkProductName);
 adminRouter.use('/create-new-product', checkProduct.addProduct);
-adminRouter.use('/update-product',  checkProduct.updateProduct);
+adminRouter.use('/update-product', checkProduct.updateProduct);
 adminRouter.use('/get-order-history', utilities.jsonParser(), getHistory.getHistory);
 adminRouter.use('/create-user', utilities.jsonParser(), createUser.createUser);
 adminRouter.use('/change-order-status', utilities.jsonParser(), changeStatus.changeStatus);

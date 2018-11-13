@@ -32,7 +32,7 @@ function checkLogin(request, response, next) {
             newToken += Buffer.from(account.user).toString('base64');
             var currentId = account._id;
             crud.updateOneDocument(accountModel, {_id: currentId}, {token: newToken}, () => {
-                response.end(JSON.stringify(newToken)); 
+                response.end(JSON.stringify(newToken));
                 console.log("Current token: " + newToken);
             });
         });

@@ -52,7 +52,9 @@ module.exports = function updateUserInfo(request, response, next) {
 
     collectClient.then(result => {
         return new Promise((resolve, reject) => {
-            var queryObj = {token: result.token};
+            var queryObj = {
+                token: result.token
+            };
             crud.readOneDocument(accountModel, queryObj, account => {
                 if (account == null) {
                     reject(new Error("Account Doesn't Exist"));
@@ -61,7 +63,7 @@ module.exports = function updateUserInfo(request, response, next) {
             });
         });
     }).then(result => {
-        crud.updateOneDocument(accountModel, {token: result.token}, result, function(error) {
+        crud.updateOneDocument(accountModel, {token: result.token}, result, function (error) {
             if (error) {
                 reject(error);
             }

@@ -24,7 +24,6 @@ function getHistory(request, response, next) {
                     reject(err);
                 }
                 resolve(result);
-                debugger
             });
         });
     }).then(order => {
@@ -39,7 +38,6 @@ function getHistory(request, response, next) {
             obj.actualTotalPrice = currentOrder.actualTotalPrice;
             obj.products = [];
             for (var j = 0 ; j < currentOrder.products.length; j++) {
-                debugger;
                 var newObj = {};
                 newObj.quantity = currentOrder.products[j].quantity;
                 newObj.status = currentOrder.products[j].status;
@@ -52,7 +50,6 @@ function getHistory(request, response, next) {
             var newObj = utilities.cloneObject(obj);
             orderList.push(newObj);
         }
-        debugger;
         response.end(JSON.stringify(orderList));
     }).catch(error => {
         next(error);

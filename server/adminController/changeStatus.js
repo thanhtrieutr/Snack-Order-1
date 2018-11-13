@@ -49,7 +49,6 @@ function init(updateList) {
 function createPromiseChange(order, productList, statusList) {
     return new Promise((resolve, reject) => {
         crud.getOrders(orderModel,{_id:order}, (result,err) => {
-            debugger;
             oneOrder = result[0];
             var actualTotalPrice = 0;
             if (oneOrder == null) {

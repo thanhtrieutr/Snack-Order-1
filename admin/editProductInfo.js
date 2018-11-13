@@ -32,7 +32,7 @@ function sendNewProductPrice(result, currentID, trueID) {
           loadNewProductData(currentID, trueID);
       }
       if (this.readyState == 4 && this.status != 200)
-          alertError(this.response);
+          alertError('Error');
   };
 }
 
@@ -55,9 +55,9 @@ function submitImage(currentID) {
             }
         }
         else if (this.readyState == 4 && this.status != 200) {
-            alertError(this.response);
+            alertError("Error");
         }
-    }
+    };
 }
 
 function checkPrice(productPrice){
@@ -65,7 +65,7 @@ function checkPrice(productPrice){
         return true; 
     } 
     if (isNaN(productPrice)) {
-        return true
+        return true;
     }
     return false;
 }

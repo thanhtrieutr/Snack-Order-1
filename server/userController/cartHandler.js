@@ -13,7 +13,7 @@ function createProductList(oneCart) {
             reject(new Error("Wrong Data Input"));
         }
         var objId = new mongo.ObjectID(oneCart.productTrueID);
-        var obj = {_id: objId};
+        var obj = { _id: objId };
         crud.readOneDocument(productModel, obj, oneProduct => {
             if (oneProduct == null) {
                 reject(new Error("Wrong Data Input"));
@@ -41,7 +41,7 @@ function submitCart(request, response, next) {
 
     readPost.then(result => {
         return new Promise((resolve, reject) => {
-            var obj = {token : result.token};
+            var obj = { token: result.token };
             crud.readOneDocument(accountModel, obj, account => {
                 if (account == null) {
                     reject(new Error("Authentication Error"));
@@ -84,8 +84,8 @@ function submitCart(request, response, next) {
                 bill.estimateTotalPrice += currentAmount * currentPrice;
                 returnBill.estimateTotalPrice = bill.estimateTotalPrice;
             }
-            crud.createDocument(orderModel,bill,error => {
-                if (error) reject(new Error ("Problem with database"));
+            crud.createDocument(orderModel, bill, error => {
+                if (error) reject(new Error("Problem with database"));
                 utilities.setResponseHeader(response);
                 console.log(returnBill);
                 response.end(JSON.stringify(returnBill));
@@ -99,6 +99,6 @@ function submitCart(request, response, next) {
 }
 
 module.exports = function submitCartHandler(request, response) {
-    submitCart(request, response);
+    submitCart(request, response, next);
 };
 ///////////////////////////////////////////////////////////////////////////////////////

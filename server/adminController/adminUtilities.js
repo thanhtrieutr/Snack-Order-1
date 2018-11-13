@@ -30,7 +30,7 @@ function authenticationAdminByHeader(request, response, next) {
     var obj = {token : request.get('token')};
     crud.readOneDocument(adminModel, obj, account => {
         if (account == null) {
-            errorHandler(new Error("Authentication Error"),response);
+            next(new Error("Authentication Error"));
             return;
         }
         request.account = account;
@@ -42,4 +42,4 @@ module.exports = {
     authenticationAdminByHeader: authenticationAdminByHeader,
     emailCheck: emailCheck,
     passwordCheck: passwordCheck
-}
+};

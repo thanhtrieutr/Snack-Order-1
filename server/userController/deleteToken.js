@@ -1,6 +1,6 @@
 var crud = require("../utilities/databaseCRUD");
 var utilities = require("../utilities/utilities");
-var accountModel = require("../schema/account-schema")
+var accountModel = require("../schema/account-schema");
 
 function deleteToken(request, response, next) {
     var getAccount = new Promise(function (resolve, reject) {
@@ -27,7 +27,7 @@ function deleteToken(request, response, next) {
         utilities.createToken((newToken) => {
             newToken += Buffer.from(admin.user).toString('base64');
             var currentId = admin._id;
-            crud.updateOneDocument(accountModel, {_id: currentId}, {token: newToken}, () => {
+            crud.updateOneDocument(accountModel, { _id: currentId }, { token: newToken }, () => {
                 response.end("Success!");
             });
         });

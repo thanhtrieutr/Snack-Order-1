@@ -1,11 +1,10 @@
 var utilities = require("../utilities/utilities");
-var errorHandler = require("../errorHandler/controllerError");
 var multer = require('multer');
-var crud = require("../utilities/databaseCRUD")
+var crud = require("../utilities/databaseCRUD");
 var express = require('express');
 var appGetFile = express();
 var path = require('path');
-var accountModel = require("../schema/account-schema")
+var accountModel = require("../schema/account-schema");
 
 //save to disk at image folder
 var storage = multer.diskStorage({
@@ -16,22 +15,22 @@ var storage = multer.diskStorage({
         req.newFileName = utilities.modifyFileName(file.originalname);
         callback(null, req.newFileName);
     }
-})
+});
 
 //receive + parse (by multer) uploaded file
 var upload = multer({storage: storage, fileFilter: utilities.fileFilter}).single('file');
 var uploadFile = function(request, response, next) {
     upload(request, response, function (err) {
         if (err instanceof multer.MulterError) {
-          errorHandler(err, response);
+          next(err);
           return;
         } else if (err) {
-            errorHandler(err, response);
+            next(err);
             return;
         }
         next();
-    })
-}
+    });
+};
 
 appGetFile.post('/', utilities.authenticationUserByHeader, uploadFile, (request, response) => {
     //save link image to mongodb of that account
@@ -46,4 +45,4 @@ appGetFile.post('/', utilities.authenticationUserByHeader, uploadFile, (request,
 
 module.exports =  {
     getFile: appGetFile
-}
+};

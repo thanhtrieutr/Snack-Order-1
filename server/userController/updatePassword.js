@@ -26,7 +26,10 @@ module.exports = function updatePassword(request, response, next) {
 
     collectClient.then(result => {
         return new Promise((resolve, reject) => {
-            var queryObj = {password: result.oldPassword, token: result.token};
+            var queryObj = {
+                password: result.oldPassword,
+                token: result.token
+            };
             crud.readOneDocument(accountModel, queryObj, account => {
                 if (account == null) {
                     reject(new Error("Account Doesn't Exist"));
@@ -35,7 +38,7 @@ module.exports = function updatePassword(request, response, next) {
             });
         });
     }).then(result => {
-        crud.updateOneDocument(accountModel, {token: result.token}, {password: result.newPassword}, function() {
+        crud.updateOneDocument(accountModel, {token: result.token}, {password: result.newPassword}, function () {
             utilities.setResponseHeader(response);
             response.end("Update Success");
         });

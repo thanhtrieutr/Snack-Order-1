@@ -98,7 +98,7 @@ function submitCart(request, response, next) {
     });
 }
 
-module.exports = function submitCartHandler(request, response) {
+module.exports = function submitCartHandler(request, response, next) {
     submitCart(request, response, next);
 };
 ///////////////////////////////////////////////////////////////////////////////////////

@@ -1,5 +1,5 @@
 import React, { Component } from "react"; 
-import ButtonClick from "./button";
+import ButtonClick from "../../../components/Profile/button";
 // import { Link } from react-router-dom;
 
 class ButtonBox extends Component {

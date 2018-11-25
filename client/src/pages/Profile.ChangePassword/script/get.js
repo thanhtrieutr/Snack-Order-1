@@ -4,34 +4,27 @@ export function getAvatar(url) {
     });
 }
 
-export function getName(obj) {
-    let temp=this.state.userInfo;
-    temp.name = obj;
+export function getCurrentPassword(obj) {
+    let temp=this.state.passwordDetail;
+    temp.currentPassword = obj;
     this.setState({
-        userInfo:temp
+        passwordDetail:temp
     })
 }
 
-export function getBirthday(obj) {
-    let temp=this.state.userInfo;
-    temp.birthday = obj;
+export function getNewPassword(obj) {
+    let temp=this.state.passwordDetail;
+    temp.newPassword = obj;
     this.setState({
-        userInfo:temp
+        passwordDetail:temp
     })
 }
 
-export function getAddress(obj) {
-    let temp=this.state.userInfo;
-    temp.address = obj;
+export function getConfirmPassword(obj) {
+    debugger;
+    let temp=this.state.passwordDetail;
+    temp.confirmPassword = obj;
     this.setState({
-        userInfo:temp
-    })
-}
-
-export function getPhone(obj) {
-    let temp=this.state.userInfo;
-    temp.phone = obj;
-    this.setState({
-        userInfo:temp
+        passwordDetail:temp
     })
 }

@@ -1,9 +1,9 @@
 import React from 'react';
-import TitleBox from './components/title.box'
+import TitleBox from '../../components/Profile/title.box'
 import SideBar from "./components/side.bar"
 import ProfileContainer from './components/profile.container'
-import './profile.css'
-import './order.css'
+import '../../components/Profile/css/profile.css'
+import '../../components/Profile/css/order.css'
 import {userInfo,uploadNewInfo} from "./script/user.info"
 import {checkLogIn} from './script/token'
 import {avatarHandler} from "./script/avatar"

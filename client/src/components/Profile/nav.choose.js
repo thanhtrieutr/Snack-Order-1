@@ -1,6 +1,4 @@
 import React, { Component } from "react"; 
-import Image from "./image";
-import Name from './name';
 
 class NavigationChoose extends Component {
     render(){

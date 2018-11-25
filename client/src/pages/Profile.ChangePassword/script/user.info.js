@@ -1,4 +1,5 @@
-import {getUserInfo,sendNewUserInfo} from './script'
+import {getUserInfo,sendNewInfo} from './script'
+import {checkInput} from "./check.input";
 
 export function userInfo() {
     debugger;
@@ -6,31 +7,25 @@ export function userInfo() {
         debugger;
         if (result != false) {
             this.setState({
-                userInfo: {
-                    name: result.fullName,
-                    birthday: result.birthday,
-                    phone: result.phoneNumber,
-                    address: result.address,
-                },
                 avatar: result.avatarAddress
             })
         }
     })
 }
 
-export function uploadNewInfo() {
+export function changePassword() {
+    if (!checkInput(this.state.passwordDetail.newPassword,this.state.passwordDetail.confirmPassword)) {
+        return;
+    }
     var obj = {};
-    obj.fullName = this.state.userInfo.name;
-    obj.phoneNumber = this.state.userInfo.phone;
-    obj.address = this.state.userInfo.address;
-    obj.birthday = this.state.userInfo.birthday;
-    debugger;
-    sendNewUserInfo(obj,result => {
+    obj.oldPassword = this.state.passwordDetail.currentPassword;
+    obj.newPassword = this.state.passwordDetail.newPassword;
+    sendNewInfo(obj,result => {
         if (result == false) {
-            alert("Update Fail");
+            alert("Change Password Fail");
         }
         else {
-            alert("Update Success");
+            alert("Change Password Success");
         }
     });
 }

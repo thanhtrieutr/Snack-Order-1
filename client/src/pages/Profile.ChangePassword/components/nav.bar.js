@@ -1,6 +1,5 @@
 import React, { Component } from "react"; 
-import NavChoose from "./nav.choose";
-
+import NavChoose from "../../../components/Profile/nav.choose";
 
 class NavigationBar extends Component {
     constructor() {
@@ -12,8 +11,8 @@ class NavigationBar extends Component {
         return (
             <div className={this.props.class}>
                 <ul className="nav">
-                    <NavChoose class="active" redirect={this.changeUserInfo} name="Basic Information"></NavChoose>
-                    <NavChoose redirect={this.changePassword} name="Change Password"></NavChoose>
+                    <NavChoose redirect={this.changeUserInfo} name="Basic Information"></NavChoose>
+                    <NavChoose class="active" redirect={this.changePassword} name="Change Password"></NavChoose>
                 </ul>
             </div>
         );

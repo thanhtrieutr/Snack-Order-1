@@ -17,16 +17,12 @@ class InfoBar extends Component {
 			value: nextProps.value
 		})
     }
-    debugger;
     render(){
         return (
             <div className="info-bar">
                 <label className="property cl-xs-12 cl-sm-4 cl-md-3">{this.props.name} </label>
                 <div className="cl-xs-12 cl-sm-8 cl-md-8">
-                    {this.props.editState ? 
-                        <input placeholder={this.props.placeHolder} id={this.props.id} onChange={this.onChangeHandler} className="cl-xs-12 cl-sm-9 cl-md-10" value={this.state.value}/>:
-                        <input placeholder={this.props.placeHolder} id={this.props.id} onChange={this.onChangeHandler} className="cl-xs-12 cl-sm-9 cl-md-10" value={this.state.value} disabled/> 
-                    }
+                    <input type="password" id={this.props.id} onChange={this.onChangeHandler} className="cl-xs-12 cl-sm-9 cl-md-10" value={this.state.value}/>
                 </div>
             </div>
         );

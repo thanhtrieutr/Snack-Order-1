@@ -1,6 +1,5 @@
 import React, { Component } from "react"; 
-import NavChoose from "./nav.choose";
-
+import NavChoose from "../../../components/Profile/nav.choose";
 
 class NavigationBar extends Component {
     constructor() {

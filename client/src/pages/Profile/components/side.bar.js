@@ -1,8 +1,8 @@
 import React, { Component } from "react"; 
-import Image from "./image";
-import Name from './name';
+import Image from "../../../components/Profile/image";
+import Name from '../../../components/Profile/name';
 import NavBar from './nav.bar';
-import UploadImage from './upload.image'
+import UploadImage from '../../../components/Profile/upload.image'
 
 class ProfileContainer extends Component {
     render(){

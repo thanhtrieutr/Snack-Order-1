@@ -10,8 +10,10 @@ class InputContainer extends Component {
             termUser: "",
             termPassword: ""
         }
-        this.onChangeHandlePassword = this.onChangeHandlePassword.bind(this)
-        this.onChangeHandleUser = this.onChangeHandleUser.bind(this)
+        this.onChangeHandlePassword = this.onChangeHandlePassword.bind(this);
+        this.onChangeHandleUser = this.onChangeHandleUser.bind(this);
+        this.submitButtonHandle = this.submitButtonHandle.bind(this);
+        this.checkKeyPress = this.checkKeyPress.bind(this);
     }
     componentDidMount() {
         document.addEventListener('keypress', this.checkKeyPress);
@@ -43,6 +45,32 @@ class InputContainer extends Component {
         if (key.keyCode === 13) {
             this.submitButtonHandle();
         }
+    }
+    submitButtonHandle() {
+        var account =  {
+            user: this.state.user,
+            password: this.state.password
+        }
+        fetch('http://127.0.0.1:3000/user-controller/check-login', {
+            method: 'POST',
+            body: JSON.stringify(account)
+        }).then(response => {
+            if (response.status === 200) {
+                response.json().then(token => {
+                    var localUser = [];
+                    var currentUser = {};
+                    currentUser.user = this.state.user;
+                    currentUser.cartArray = [];
+                    localUser.push(currentUser);
+                    localStorage.setItem("accountArray", JSON.stringify(localUser));
+                    localStorage.setItem("currentAccount", this.state.user);
+                    localStorage.setItem("token", token);
+                    window.location.href = '/';
+                });
+            } else {
+                alert("Your input or password is not correct")
+            }
+        })
     }
     onChangeHandleUser(event) {
         this.setState(

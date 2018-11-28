@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Input from '../../../../components/input/Input';
-import Button from '../../../../components/button/Button';
-import InputField from '../../../../components/input-field/InputField';
+import Input from '../../../../components/Input';
+import Button from '../../../../components/Button';
+import InputField from '../../../../components/InputField';
 import ContentField from '../ContentField';
-import StatusField from '../../../../components/status-field/StatusField';
-import { emailCheck, passwordCheck, tokenCheck } from '../../validate.input';
+import Notification from '../../../../components/Notification';
+import { emailCheck, passwordCheck, tokenCheck } from '../../../../helpers/utils/validate.input';
 import './container.css'
 import '../../../../components/responsvie-design/build-column.css'
 import '../../../../components/responsvie-design/off-set.css'
@@ -33,12 +33,12 @@ class Container extends Component {
       <div className="container cl-xs-12 cl-md-8 offset-md-2 cl-lg-6 offset-lg-3">
         <ContentField stat={this.state.step}/>
         { this.state.step === 1 ? 
-          <Input changeText={this.changeEmail} value={this.state.email}
-                type="text" placeholder="* Enter your email here"/> : null }
+          <Input className="input is-info" changeText={this.changeEmail} value={this.state.email}
+            type="text" placeholder="* Enter your email here"/> : null }
 
         { this.state.step === 2 ? 
-          <Input changeText={this.changeCode} value={this.state.code}
-                type="text" placeholder="* Enter your code here" /> : null }
+          <Input className="input is-info" changeText={this.changeCode} value={this.state.code}
+            type="text" placeholder="* Enter your code here" /> : null }
 
         { this.state.step === 3 ? 
           <div>
@@ -49,13 +49,13 @@ class Container extends Component {
           </div> : null }
 
         { this.state.step !== 4 ? 
-          <div className="button-container">
-            <Button purpose="Submit" onClick={this.checkValue}/>
-            <Button purpose="Cancel"/>
+          <div className="buttons">
+            <Button className="button is-success" label="Submit" onClick={this.checkValue}/>
+            <Button className="button is-success" label="Cancel" href="/Cancel"/>
           </div> : null }
 
         { this.state.updateStat !== 'none' ?
-          <StatusField href={this.state.linking} stat={this.state.updateStat} content={this.state.message}/> : null }
+          <Notification href={this.state.linking} stat={this.state.updateStat} content={this.state.message}/> : null }
       </div>
     )
   }

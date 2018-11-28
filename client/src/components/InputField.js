@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Input from '../input/Input';
+import Input from './Input';
 
 class InputField extends Component {
   constructor() {
@@ -12,10 +12,18 @@ class InputField extends Component {
   }
   render () {
     return (
-      <div>
-        <label>{this.props.label}</label>
-        <Input type={this.props.type} placeholder={this.props.placeholder} name={this.props.name} 
-              value={this.props.value} changeText={this.changeText}/>
+      <div className="field is-horizontal">
+        <div className="field-label is-normal">
+          <label className="label is-size-4">{this.props.label}</label>
+        </div>
+        <div className="field-body">
+          <div className="field">
+            <div className="control">
+              <Input className={this.props.className} type={this.props.type} placeholder={this.props.placeholder} 
+                value={this.props.value} changeText={this.changeText}/>
+            </div>
+          </div>
+        </div> 
       </div>
     )
   }

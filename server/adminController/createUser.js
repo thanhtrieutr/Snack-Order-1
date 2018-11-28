@@ -15,7 +15,7 @@ function initUserInfo(newAccount) {
 
 function createUser(request, response, next) {
     var readPost = new Promise((resolve, reject) => {
-        var newAccount = request.body;
+        var newAccount = request.body.account;
         if (typeof (newAccount) != "object" || newAccount == null) {
             reject(new Error("Wrong Data Input"));
         }

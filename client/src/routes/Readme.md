@@ -2,7 +2,6 @@
 
 ## React router v4
 
-
 ### Normal user
 * /login - **Login**  -> 0.5 = Huy
 * / - **Products** -> 1.5 = Thạnh

@@ -43,6 +43,7 @@ function checkLogin(request, response, next) {
 
 function checkToken(request, response, next) {
     var getAccount = new Promise(function (resolve, reject) {
+        
         var result = request.body;
         if (result instanceof Error) {
             reject(result);

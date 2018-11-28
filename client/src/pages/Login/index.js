@@ -1,6 +1,6 @@
 import React from 'react';
 import './styles.css';
-import Input from './components/input'
+
 
 class Login extends React.Component {
   constructor() {

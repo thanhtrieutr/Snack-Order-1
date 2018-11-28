@@ -13,6 +13,9 @@ class InputContainer extends Component {
         this.onChangeHandlePassword = this.onChangeHandlePassword.bind(this)
         this.onChangeHandleUser = this.onChangeHandleUser.bind(this)
     }
+    componentDidMount() {
+        document.addEventListener('keypress', this.checkKeyPress);
+    }
     render() {
         return (
             <div>
@@ -36,6 +39,11 @@ class InputContainer extends Component {
             </div>
         );
     }
+    checkKeyPress(key) {
+        if (key.keyCode === 13) {
+            this.submitButtonHandle();
+        }
+    }
     onChangeHandleUser(event) {
         this.setState(
             {
@@ -51,3 +59,5 @@ class InputContainer extends Component {
         );
     }
 }
+
+export default InputContainer

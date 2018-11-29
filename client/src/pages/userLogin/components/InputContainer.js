@@ -52,6 +52,9 @@ class InputContainer extends Component {
             password: this.state.password
         }
         fetch('http://127.0.0.1:3000/user-controller/check-login', {
+            headers: {
+                "Content-type": "application/x-www-form-urlencoded; charset=UTF-8"
+            },
             method: 'POST',
             body: JSON.stringify(account)
         }).then(response => {

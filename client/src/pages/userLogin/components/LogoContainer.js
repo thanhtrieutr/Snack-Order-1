@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 
-class LogoContainer extends React {
-    constructor() {
-        super();
-    }
+class LogoContainer extends Component {
     render() {
         return (
             <div className="logo-container">

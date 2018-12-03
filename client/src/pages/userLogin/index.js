@@ -13,7 +13,7 @@ export default class UserLogin extends Component {
     }
     render() {
         return( 
-            <div>
+            <div className="user-login">
                 <LogoContainer></LogoContainer>
                 <InputContainer></InputContainer>
             </div>

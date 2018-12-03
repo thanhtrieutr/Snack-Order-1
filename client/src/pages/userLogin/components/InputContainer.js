@@ -25,13 +25,13 @@ class InputContainer extends Component {
                 <UserInputField 
                 id="input-user" placeholder="&#xf007; * Email" 
                 name="user" 
-                onChangeHandle={this.onChangeUserHandle}>
+                onChangeHandle={this.onChangeHandleUser}>
                 </UserInputField>
                 <h3>Password</h3>
                 <PasswordInputField id="input-password" 
                 placeholder="&#xf023; * Password (8-16 characters)"
                 name="password" 
-                onChangeHandle={this.onChangePasswordHandle}>
+                onChangeHandle={this.onChangeHandlePassword}>
                 </PasswordInputField>
                 <div className="button">
                     <LogInButton id="signin-button" 

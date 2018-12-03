@@ -16,7 +16,7 @@ function Routerx() {
      <Router>
          <div>
             <Route path="/user-login" exact component={UserLogin}/>
-            <Route path="/" component={Home} />
+            <Route path="/" exact component={Home} />
             <Route path="/profile" exact component={Profile} />
             <Route path="/profile/change-password" exact component={ProfileChangePassword} />
             <Route path='/admin/login' exact component={AdminLogin}/>

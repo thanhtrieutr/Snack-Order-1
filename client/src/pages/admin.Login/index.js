@@ -1,7 +1,5 @@
 import React from 'react';
 import './styles.css';
-import '../../helpers/css/responsive-design/off-set.css'
-import '../../helpers/css/responsive-design/build-column.css'
 import HeadTag from './components/HeadTag';
 import LogoField from './components/LogoField';
 import LoginField from './components/LoginField';
@@ -23,7 +21,7 @@ class AdminLogin extends React.Component {
   }
   render() {
     return (
-      <div>
+      <div className="Admin-login">
         <HeadTag></HeadTag>
         
         <div className="main-content">

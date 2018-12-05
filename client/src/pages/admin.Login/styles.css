@@ -1,10 +1,7 @@
-* {
-    font-family: FontAwesome, "Lato", "Helvetica Neue", "Helvetica", "Arial";
-    line-height: 1.4;
-}
-body {
+.Admin-login {
     background-color: 	#e0ebeb	;
-    height: 100%;
+    height: 100vh;
+    width:100%;
     overflow: hidden;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -13,7 +10,9 @@ body {
     background-position: center center;
     background-repeat: no-repeat;
 }
-.main-content {
+.Admin-login .main-content {
+    font-family: FontAwesome, "Lato", "Helvetica Neue", "Helvetica", "Arial";
+    line-height: 1.4;
     position: relative;
     display: block;
     top: 2%;
@@ -21,13 +20,14 @@ body {
     max-width: 360px;
     height: 100%;
     margin: auto;
+    
 }
-.container, h1 {
+.Admin-login .container, h1 {
     border-radius: 4px;
     background: white;
     border: hidden;
 }
-.container {
+.Admin-login .container {
     border-radius: 20px;
     height: auto;
     margin-top: 15px;
@@ -36,19 +36,19 @@ body {
     background: url("https://www.xmple.com/wallpaper/linear-highlight-yellow-green-gradient-1920x1080-c2-fffdc7-c7ffcd-l-50-a-135-f-21.svg");
     padding-bottom: 5px;
 }
-h3 {
+.Admin-login h3 {
     text-align: left;
     padding: 0px 20px;
     padding-top: 20px;
     margin: 0;
 }
-h4 {
+.Admin-login h4 {
     padding: 0;
     margin: 15px auto;
     font-size: 14px;
     text-align: center;
 }
-input[type=text], input[type=password] {
+.Admin-login input[type=text], input[type=password] {
     border-radius: 10px;
     position: relative;
     width: 92%;
@@ -58,13 +58,13 @@ input[type=text], input[type=password] {
     border: none;
     background: white;
 }
-input[type=text]:focus, input[type=password]:focus {
+.Admin-login input[type=text]:focus, input[type=password]:focus {
     background-color: white;
     outline: none;
     position: relative;
     padding: 12px 20px;
 }
-button {
+.Admin-login button {
     background-color: #ffe36a;
     color: black;
     padding: 5px 20px;
@@ -78,26 +78,26 @@ button {
     font-weight: bold;
     opacity: 0.9;
 }
-button:hover {
+.Admin-login button:hover {
     filter: brightness(105%);
 }
-#redirect-login {
+.Admin-login #redirect-login {
     padding-top: 0;
 }
-#link-signup {
+.Admin-login #link-signup {
     text-decoration: none;
 }
-.logo {
+.Admin-login .logo {
     width: 100%;
     height: auto;
     margin: auto;
     margin-top: 15px;
 }
-.logo-container {
+.Admin-login .logo-container {
     width: 100%;
 }
 @media  (min-width: 576px) {
-    br {
+    .Admin-login br {
         display: none;
     }
 }

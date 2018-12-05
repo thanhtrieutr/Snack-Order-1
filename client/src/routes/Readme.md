@@ -11,13 +11,13 @@
 
 ### Admin
 
-* /admin-login -> 0.5 = Ku
-* / **Home page of Admin (dashboard)** -> 2 = Thiện
-* /history -> 1 = Chym
-* /today-order -> 1 = Ku
-* /users - **User List** -> 1 = Huy
-* /user/add -> 1 Tuấn
-* /users/user/:userId - **User Detail** -> 1 = Thạnh
-* /products - **Product List** -> 1 = Tuấn
-* /products/product/:productId - **Product Detail** -> 1 = Ku
-* /product/add -> 1 = Chym
+* /admin/login -> 0.5 = Ku
+* /admin **Home page of Admin (dashboard)** -> 2 = Thiện
+* /admin/history -> 1 = Chym
+* /admin/today-order -> 1 = Ku
+* /admin/users - **User List** -> 1 = Huy
+* /admin/user/add -> 1 Tuấn
+* /admin/users/user/:userId - **User Detail** -> 1 = Thạnh
+* /admin/products - **Product List** -> 1 = Tuấn
+* /admin/products/product/:productId - **Product Detail** -> 1 = Ku
+* /admin/product/add -> 1 = Chym

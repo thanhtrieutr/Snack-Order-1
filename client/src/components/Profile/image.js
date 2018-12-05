@@ -4,7 +4,7 @@ class Images extends Component {
     render(){
         return (
             <div className={this.props.container}>
-                <img className={this.props.class} src={'http://127.0.0.1:3000'+ this.props.imgName} />
+                <img className={this.props.class} src={'http://127.0.0.1:3000'+ this.props.imgName} alt=""/>
             </div>
         );
     }

@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import Tab from './Tab';
 
 class Menu extends Component {
   render() {
     return (
       <ul className="menu-list">
-        <li><a href="/today-order" id="today-order" className="choice is-active">Today Order</a></li>
+        <Tab href="/today-order" id="today-order" className="choice is-active" content="Today Order"/>
         <ul>
+          <Tab></Tab>
           <a href="/order-history" id="order-history" className="choice">Order history</a>
           <li><p id="order-detail-label" className="menu-label">| Order history detail</p></li>
         </ul>

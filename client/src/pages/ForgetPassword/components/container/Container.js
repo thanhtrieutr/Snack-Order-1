@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import Input from '../../../../components/Input';
-import Button from '../../../../components/Button';
-import InputField from '../../../../components/InputField';
+import Input from '../../../../components/input/Input';
+import Button from '../../../../components/button/Button';
+import InputField from '../../../../components/input-field/InputField';
 import ContentField from '../ContentField';
-import Notification from '../../../../components/Notification';
+import StatusField from '../../../../components/status-field/StatusField';
 import { emailCheck, passwordCheck, tokenCheck } from '../../../../helpers/utils/validate.input';
+import { checkValidUser } from '../../../../helpers/api/user-api/getUser';
 import './container.css'
 import '../../../../components/responsvie-design/build-column.css'
 import '../../../../components/responsvie-design/off-set.css'
@@ -30,14 +31,14 @@ class Container extends Component {
   }
   render () {
     return (
-      <div className="container cl-xs-12 cl-md-8 offset-md-2 cl-lg-6 offset-lg-3">
+      <div className="forget-container cl-xs-12 cl-md-8 offset-md-2 cl-lg-6 offset-lg-3">
         <ContentField stat={this.state.step}/>
         { this.state.step === 1 ? 
-          <Input className="input is-info" changeText={this.changeEmail} value={this.state.email}
+          <Input changeText={this.changeEmail} value={this.state.email}
             type="text" placeholder="* Enter your email here"/> : null }
 
         { this.state.step === 2 ? 
-          <Input className="input is-info" changeText={this.changeCode} value={this.state.code}
+          <Input changeText={this.changeCode} value={this.state.code}
             type="text" placeholder="* Enter your code here" /> : null }
 
         { this.state.step === 3 ? 
@@ -48,14 +49,14 @@ class Container extends Component {
                   type="password"/>
           </div> : null }
 
-        { this.state.step !== 4 ? 
-          <div className="buttons">
-            <Button className="button is-success" label="Submit" onClick={this.checkValue}/>
-            <Button className="button is-success" label="Cancel" href="/Cancel"/>
-          </div> : null }
-
         { this.state.updateStat !== 'none' ?
-          <Notification href={this.state.linking} stat={this.state.updateStat} content={this.state.message}/> : null }
+          <StatusField href={this.state.linking} stat={this.state.updateStat} content={this.state.message}/> : null }
+
+        { this.state.step !== 4 ? 
+          <div className="forget-button-container">
+            <Button label="Submit" onClick={this.checkValue}/>
+            <Button label="Cancel" href="/"/>
+          </div> : null }
       </div>
     )
   }
@@ -83,10 +84,19 @@ class Container extends Component {
     switch (this.state.step) {
     case 1:
       if (emailCheck(this.state.email)) {
-        this.setState({
-          step : 2,
-          updateStat: 'none',
-          message: 'none',
+        checkValidUser(this.state.email, (result) => {
+          if (result.success === true) {
+            this.setState({
+              step : 2,
+              updateStat: 'none',
+              message: 'none',
+            });
+          } else {
+            this.setState({
+              updateStat : 'ms_warning',
+              message: 'User does not exist'
+            })
+          }
         });
       }
       else if (this.state.email.length === 0) {

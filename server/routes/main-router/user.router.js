@@ -13,6 +13,7 @@ var getFile = require("../../userController/getFile");
 var getUserInfo = require("../../userController/getUserInfo");
 var updateUserInfo = require("../../userController/updateUserInfo");
 var deleteToken = require("../../userController/deleteToken");
+var getUser = require("../../userController/users");
 
 //API for user backend (using try..catch)
 userRouter.use('/get-products', getProduct);
@@ -26,7 +27,7 @@ userRouter.use('/upload-file', getFile.getFile);
 userRouter.use('/get-user-info', utilities.jsonParser(), getUserInfo);
 userRouter.use('/update-user-info', utilities.jsonParser(), updateUserInfo);
 userRouter.use('/remove-token', utilities.jsonParser(), deleteToken.deleteToken);
-
+userRouter.use('/get-user', utilities.jsonParser(), getUser.getUser);
 
 //Fix file not found
 userRouter.get('/', (request, response) => {

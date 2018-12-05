@@ -26,19 +26,24 @@ function createUser(request, response, next) {
     });
     readPost.then((result) => {
         return new Promise((resolve, reject) => {
-            crud.readOneDocument(accountModel, result, account => {
+            let obj = {
+                user: result.user
+            }
+
+            crud.readOneDocument(accountModel, obj, account => {
                 if (account != null) {
                     reject( new Error ("Account Existed"));
                 }
                 resolve(result);
             });
         });
-    }).then(newUser => {
+    })
+    .then(newUser => {
         newUser = initUserInfo(newUser);
         crud.createDocument(accountModel, newUser);
-        response.end("create succeed");
-        
-    }).catch(error => {
+        response.json({msg: "Create succeed"});
+    })
+    .catch(error => {
         next(error);
     });
 }

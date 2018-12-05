@@ -1,4 +1,4 @@
-.container {
+.forget-container {
   min-height: 300px;
   height: auto;
   margin-top: 50px;
@@ -7,11 +7,12 @@
   background-color: rgb(255, 250, 240);
 }
 
-.button-container {
-  display: inline-block;
+.forget-button-container {
+  width: 300px;
+  margin: auto;
 }
 
-label {
+#forget-label {
   display: inline-block;
   min-width: 150px;
 }

@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import UserInputField from './UserInputField';
 import PasswordInputField from './PasswordInputField';
+import '../../../helpers/bootstrap/build-column.css';
+import '../../../helpers/bootstrap/off-set.css';
 import LogInButton from './LogInButton';
 
 class InputContainer extends Component {
@@ -20,7 +22,7 @@ class InputContainer extends Component {
     }
     render() {
         return (
-            <div>
+            <div className="container cl-xs-12">
                 <h3>Email</h3>
                 <UserInputField 
                 id="input-user" placeholder="&#xf007; * Email" 
@@ -38,6 +40,9 @@ class InputContainer extends Component {
                     onClickHandle={this.submitButtonHandle}>
                     Sign In</LogInButton>
                 </div>
+                <h4 id = "redirect-register"> Don't you have an account?
+                    <a id = "link-signup" href="#"> We got you </a>
+                </h4>
             </div>
         );
     }

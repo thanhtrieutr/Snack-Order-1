@@ -4,7 +4,7 @@ class LogoContainer extends Component {
     render() {
         return (
             <div className="logo-container">
-                <img src="link-of-img-logo" className="logo bulma-here"></img>
+                <img src="../../../helpers/static/images/logo.png" className="logo cl-xs-12"></img>
             </div>
         );
     }

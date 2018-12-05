@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Input from '../input/Input';
 
-class InputField extends Component {
+export default class InputField extends React.Component {
   constructor() {
     super();
     this.state = {
@@ -37,5 +37,3 @@ class InputField extends Component {
     this.props.changeText(editText);
   }
 }
-
-export default InputField;

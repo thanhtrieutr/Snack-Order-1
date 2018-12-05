@@ -5,7 +5,7 @@ export function createUser(email, password, callback) {
     user: email,
     password: password
   }
-  _helper.fetchPost('/admin-controller/create-user', {account}, result => {
+  _helper.fetchPOST('/admin-controller/create-user', {account}, result => {
     callback(result.status);
   })
 }

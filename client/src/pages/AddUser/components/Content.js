@@ -1,5 +1,5 @@
 import React from 'react';
-import InputField from '../../../components/input-field/InputField';
+import InputField from '../../../components/inputField/InputField';
 import Notification from '../../../components/notification/Notification';
 import Button from '../../../components/button/Button';
 import Header from './Header';

@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class ContentField extends Component {
+export default class ContentField extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -34,5 +34,3 @@ class ContentField extends Component {
     }
   }
 }
-
-export default ContentField;

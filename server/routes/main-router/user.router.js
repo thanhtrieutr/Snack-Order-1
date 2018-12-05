@@ -7,8 +7,6 @@ var checkLogin = require("../../userController/loginHandler");
 var getProduct = require("../../userController/getProduct");
 var cartHandler = require("../../userController/cartHandler");
 var updatePassword = require("../../userController/updatePassword");
-var createAccount = require("../../userController/createAccount");
-var deleteOneUser = require("../../userController/deleteOneUser");
 var getFile = require("../../userController/getFile");
 var getUserInfo = require("../../userController/getUserInfo");
 var updateUserInfo = require("../../userController/updateUserInfo");
@@ -21,13 +19,12 @@ userRouter.use('/check-login', utilities.jsonParser(), checkLogin.checkLogin);
 userRouter.use('/check-token', utilities.jsonParser(), checkLogin.checkToken);
 userRouter.use('/submit-cart', utilities.jsonParser(), cartHandler);
 userRouter.use('/update-password', utilities.jsonParser(), updatePassword);
-// userRouter.use('/create-user', utilities.jsonParser(), createAccount.createUser);
-// userRouter.use('/delete-user', utilities.jsonParser(), deleteOneUser.deleteOneUser);
 userRouter.use('/upload-file', getFile.getFile);
 userRouter.use('/get-user-info', utilities.jsonParser(), getUserInfo);
 userRouter.use('/update-user-info', utilities.jsonParser(), updateUserInfo);
 userRouter.use('/remove-token', utilities.jsonParser(), deleteToken.deleteToken);
 userRouter.use('/get-user', utilities.jsonParser(), getUser.getUser);
+userRouter.use('/validate-code', utilities.jsonParser(), getUser.validateCode);
 
 //Fix file not found
 userRouter.get('/', (request, response) => {

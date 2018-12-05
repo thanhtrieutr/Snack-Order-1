@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Notification extends Component {
+export default class Notification extends React.Component {
   render () {
     return (
       <div className={`notification has-text-weight-bold ${this.props.className}`}>
@@ -10,5 +10,3 @@ class Notification extends Component {
     )
   }
 }
-
-export default Notification;

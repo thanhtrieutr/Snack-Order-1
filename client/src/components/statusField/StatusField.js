@@ -1,5 +1,5 @@
 import React from 'react';
-import './status.css'
+import './status.scss'
 
 export default class StatusField extends React.Component {
   render () {

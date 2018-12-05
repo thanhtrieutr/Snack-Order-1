@@ -1,5 +1,5 @@
 import {emailCheck} from '../../helpers/utils/validate.input';
-import {createUser} from '../../helpers/api/admin-api/create-user.api';
+import {createUser} from '../../helpers/api/adminApi/create-user.api';
 
 function generatePassword() {
   var text = "";

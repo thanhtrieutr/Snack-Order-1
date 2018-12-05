@@ -14,9 +14,10 @@ class ButtonBox extends Component {
     render(){
         return (
             <div className="button">
-                <ButtonClick name="Return to Homepage" buttonHandler = {this.ReturnButton}></ButtonClick>
-                {!this.props.editState ? <ButtonClick name="Change Info" buttonHandler = {this.props.changeInputStatus}></ButtonClick> 
-                : <ButtonClick name="Save Info" buttonHandler = {this.props.saveInputStatus}></ButtonClick>}
+                <ButtonClick class="cl-xs-12 offset-sm-1 cl-sm-4 offset-md-1 cl-md-4" name="Return to Homepage" buttonHandler = {this.ReturnButton}></ButtonClick>
+                <div className="cl-sm-1"></div>
+                {!this.props.editState ? <ButtonClick name="Change Info" buttonHandler = {this.props.changeInputStatus} class="cl-xs-12 offset-sm-2 cl-sm-4 offset-md-2 cl-md-4"></ButtonClick> 
+                : <ButtonClick name="Save Info" buttonHandler = {this.props.saveInputStatus}class="cl-xs-12 offset-sm-2 cl-sm-4 offset-md-2 cl-md-4"></ButtonClick>}
             </div>
         );
     }

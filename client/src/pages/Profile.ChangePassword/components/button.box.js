@@ -14,8 +14,8 @@ class ButtonBox extends Component {
     render(){
         return (
             <div className="button">
-                <ButtonClick name="Return to Homepage" buttonHandler = {this.ReturnButton}></ButtonClick>
-                <ButtonClick name="Change Password" buttonHandler = {this.props.changePassword}></ButtonClick>
+                <ButtonClick class="cl-xs-12 offset-sm-1 cl-sm-4 offset-md-1 cl-md-4" name="Return to Homepage" buttonHandler = {this.ReturnButton}></ButtonClick>
+                <ButtonClick class="cl-xs-12 offset-sm-2 cl-sm-4 offset-md-2 cl-md-4"name="Change Password" buttonHandler = {this.props.changePassword}></ButtonClick>
             </div>
         );
     }

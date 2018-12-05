@@ -1,9 +1,8 @@
 import React from 'react';
 import TitleBox from '../../components/Profile/title.box'
-import SideBar from "../Profile/components/side.bar"
+import SideBar from "./components/side.bar"
 import ProfileContainer from './components/profile.container'
 import '../../components/Profile/css/profile.css'
-import '../../components/Profile/css/order.css'
 import {userInfo,changePassword} from "./script/user.info"
 import {checkLogIn} from './script/token'
 import {avatarHandler} from "./script/avatar"
@@ -41,16 +40,14 @@ class Index extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<div className="profile">
 				<TitleBox></TitleBox>
 				<div className="container">
-					<div className="profile">
 					<SideBar user={this.state.user} avatar={this.state.avatar} avatarHandler={this.avatarHandler} history={this.props.history}></SideBar>
 					<ProfileContainer 
 						history={this.props.history} passwordDetail={this.state.passwordDetail} getCurrentPassword={this.getCurrentPassword} 
 						getNewPassword = {this.getNewPassword} getConfirmPassword = {this.getConfirmPassword} changePassword={this.changePassword}>
 					</ProfileContainer>
-					</div>
 				</div>
 			</div>
 		)

@@ -3,7 +3,6 @@ import TitleBox from '../../components/Profile/title.box'
 import SideBar from "./components/side.bar"
 import ProfileContainer from './components/profile.container'
 import '../../components/Profile/css/profile.css'
-import '../../components/Profile/css/order.css'
 import {userInfo,uploadNewInfo} from "./script/user.info"
 import {checkLogIn} from './script/token'
 import {avatarHandler} from "./script/avatar"
@@ -13,7 +12,7 @@ class Index extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			avatar:"/static/images/default-avatar.png",
+			avatar:"static/images/default-avatar.png",
 			user:"",
 			userInfo: {
 				phone:"",
@@ -43,17 +42,15 @@ class Index extends React.Component {
 
 	render() {
 		return (
-			<div>
+			<div className="profile">
 				<TitleBox></TitleBox>
 				<div className="container">
-					<div className="profile">
 					<SideBar user={this.state.user} avatar={this.state.avatar} avatarHandler={this.avatarHandler} history={this.props.history}></SideBar>
 					<ProfileContainer 
 						history={this.props.history} userInfo={this.state.userInfo} getName={this.getName} 
 						getAddress={this.getAddress} getBirthday={this.getBirthday} getPhone={this.getPhone}
 						uploadNewInfo={this.uploadNewInfo}>
 					</ProfileContainer>
-					</div>
 				</div>
 			</div>
 		)

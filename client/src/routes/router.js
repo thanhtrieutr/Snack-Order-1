@@ -14,7 +14,7 @@ function Routerx() {
     return (
      <Router>
          <div>
-            <Route path="/" component={Home} />
+            {/* <Route path="/" component={Home} /> */}
             <Route path="/profile" exact component={Profile} />
             <Route path="/profile/change-password" exact component={ProfileChangePassword} />
         </div>

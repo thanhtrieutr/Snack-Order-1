@@ -2,9 +2,7 @@ import {getUserInfo,sendNewInfo} from './script'
 import {checkInput} from "./check.input";
 
 export function userInfo() {
-    debugger;
     getUserInfo(result => {
-        debugger;
         if (result != false) {
             this.setState({
                 avatar: result.avatarAddress

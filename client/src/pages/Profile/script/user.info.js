@@ -1,9 +1,7 @@
 import {getUserInfo,sendNewUserInfo} from './script'
 
 export function userInfo() {
-    debugger;
     getUserInfo(result => {
-        debugger;
         if (result != false) {
             this.setState({
                 userInfo: {
@@ -24,7 +22,6 @@ export function uploadNewInfo() {
     obj.phoneNumber = this.state.userInfo.phone;
     obj.address = this.state.userInfo.address;
     obj.birthday = this.state.userInfo.birthday;
-    debugger;
     sendNewUserInfo(obj,result => {
         if (result == false) {
             alert("Update Fail");

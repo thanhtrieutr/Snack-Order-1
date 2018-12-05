@@ -4,3 +4,5 @@ server/errorLog.txt
 package-lock.json
 
 errorLog\.txt
+
+client/package\.json

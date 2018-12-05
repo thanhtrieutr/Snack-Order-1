@@ -1,23 +1,24 @@
 * {
     font-family: "Lato", "Helvetica Neue", "Helvetica", "Arial", fontawesome;
     line-height: 1.4;
+    body {
+        /* background: url("../../images/background.png") no-repeat center center fixed; */
+        height: 100%;
+        overflow: hidden;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+        background-position: center center;
+        background-repeat: no-repeat;
 }
-body {
-    /* background: url("../../images/background.png") no-repeat center center fixed; */
-    height: 100%;
-    overflow: hidden;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
+
 }
 .main-content {
     position: relative;
     display: block;
     top: 2%;
-    width: 100%;
+    width: 200% - 100%;
     max-width: 360px;
     height: 100%;
     margin: auto;

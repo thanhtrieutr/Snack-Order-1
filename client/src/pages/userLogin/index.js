@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import "./userLogInStyle.css";
+import "./userLogInStyle.scss";
 import "../../helpers/bootstrap/build-column.css"
 import "../../helpers/bootstrap/off-set.css"
 import "./components/InputContainer";

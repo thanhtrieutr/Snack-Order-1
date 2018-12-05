@@ -11,7 +11,7 @@
     background-repeat: no-repeat;
 }
 .Admin-login .main-content {
-    font-family: FontAwesome, "Lato", "Helvetica Neue", "Helvetica", "Arial";
+    font-family:  "Lato", "Helvetica Neue", "Helvetica", "Arial", "FontAwesome";
     line-height: 1.4;
     position: relative;
     display: block;

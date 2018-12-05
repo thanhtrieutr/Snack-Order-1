@@ -48,7 +48,7 @@
     font-size: 14px;
     text-align: center;
 }
-.Admin-login input[type=text], input[type=password] {
+.Admin-login input[type=text],.Admin-login input[type=password] {
     border-radius: 10px;
     position: relative;
     width: 92%;
@@ -58,7 +58,7 @@
     border: none;
     background: white;
 }
-.Admin-login input[type=text]:focus, input[type=password]:focus {
+.Admin-login input[type=text]:focus,.Admin-login input[type=password]:focus {
     background-color: white;
     outline: none;
     position: relative;

@@ -29,9 +29,9 @@ class ProfileContainer extends Component {
                 <div className="profile-content">
                     <div className="cl-xs-12 cl-md-12">
                         <h2 className="profile-title">Change Password</h2>
-                        <InfoBar id="current-password" getValue={this.props.getCurrentPassword} value={this.props.passwordDetail.currentPassword} name="Current Password" ></InfoBar>
-                        <InfoBar id="new-password" getValue={this.props.getNewPassword} value={this.props.passwordDetail.newPassword} name="New Password" ></InfoBar>
-                        <InfoBar id="repeat-new-password" getValue={this.props.getConfirmPassword} value={this.props.passwordDetail.confirmPassword} name="Confirm Password"></InfoBar>
+                        <InfoBar placeHolder="Enter your password" id="current-password" getValue={this.props.getCurrentPassword} value={this.props.passwordDetail.currentPassword} name="Current Password :" ></InfoBar>
+                        <InfoBar placeHolder="Enter new password" id="new-password" getValue={this.props.getNewPassword} value={this.props.passwordDetail.newPassword} name="New Password :" ></InfoBar>
+                        <InfoBar placeHolder="Confirm the password" id="repeat-new-password" getValue={this.props.getConfirmPassword} value={this.props.passwordDetail.confirmPassword} name="Confirm Password :"></InfoBar>
                         <ButtonBox history={this.props.history} changePassword={this.props.changePassword}></ButtonBox>
                     </div>
                 </div>

@@ -10,3 +10,6 @@ can pass id, className, placeholder, onChangeHandle, name
 
 ### 3) SubmitButton
 can pass id, className, onClickHandle, content
+
+### 4) LinkAdminPage
+can pass activeMenuItem (ex: activeMenuItem="today-order")

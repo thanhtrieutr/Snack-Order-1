@@ -1,5 +1,6 @@
 import React from 'react';
 import {Menu} from 'react-bulma-components/full';
+
 var menuList=[
     {id:"home", href:"/admin", content:"Home page"},
     {id:"today-order", href:"/admin/today-order", content:"Today Order"},
@@ -9,6 +10,7 @@ var menuList=[
     {id:"add-product", href:"/admin/product/add", content:"Add new product"},
     {id:"add-user", href:"/admin/user/add", content:"Create new user"}
 ];
+
 class LinkAdminPage extends React.Component {
     render() {
         return (
@@ -22,21 +24,20 @@ class LinkAdminPage extends React.Component {
     createMenuList(activeId) {
         var listItems = menuList.map(item => {
             if (item.id === activeId) {
-                console.log(activeId);
                 return (
-                    <a href={item.href} id={item.id}  key={item.id} style={{padding:0}}>
-                        <Menu.List.Item active > 
+                    <p id={item.id}  key={item.id} style={{padding:0}}>
+                        <Menu.List.Item active href={item.href}> 
                             {item.content}
                         </Menu.List.Item>
-                    </a> 
+                    </p>
                 );
             }
             return (
-                <a href={item.href} id={item.id}  key={item.id} style={{padding:0}}>
-                    <Menu.List.Item> 
+                <p id={item.id}  key={item.id} style={{padding:0}}>
+                    <Menu.List.Item href={item.href}> 
                         {item.content}
                     </Menu.List.Item>
-                </a> 
+                </p> 
             );
         });
         return listItems;

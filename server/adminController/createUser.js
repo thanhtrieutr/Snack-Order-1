@@ -15,7 +15,7 @@ function initUserInfo(newAccount) {
 
 function createUser(request, response, next) {
     var readPost = new Promise((resolve, reject) => {
-        var newAccount = request.body.account;
+        var newAccount = request.body;
         if (typeof (newAccount) != "object" || newAccount == null) {
             reject(new Error("Wrong Data Input"));
         }
@@ -32,6 +32,9 @@ function createUser(request, response, next) {
 
             crud.readOneDocument(accountModel, obj, account => {
                 if (account != null) {
+                    response.json({
+                        success: false,
+                    })
                     reject( new Error ("Account Existed"));
                 }
                 resolve(result);
@@ -41,7 +44,10 @@ function createUser(request, response, next) {
     .then(newUser => {
         newUser = initUserInfo(newUser);
         crud.createDocument(accountModel, newUser);
-        response.json({msg: "Create succeed"});
+        response.json({
+            success: true,
+            messsage: "Create succeed"
+        });
     })
     .catch(error => {
         next(error);

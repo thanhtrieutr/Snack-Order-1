@@ -13,7 +13,7 @@ export default class InputField extends React.Component {
   render () {
     return (
       <div className="field is-horizontal">
-        <div className="field-label is-normal">
+        <div className="field-label">
           <label className="label is-size-4">{this.props.label}</label>
         </div>
         <div className="field-body">

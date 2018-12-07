@@ -21,8 +21,8 @@ export function validateEmail() {
   if (emailCheck(this.state.email)) {
     let password = generatePassword();
 
-    createUser(this.state.email, password, result => {
-      if (result === 200) {
+    createUser(this.state.email, password, (result) => {
+      if (result.success === true) {
         this.setState({
           status: 'is-success',
           message: 'Create successfully!',

@@ -1,6 +1,9 @@
-node_modules
 \.vscode/launch\.json
 server/errorLog.txt
 package-lock.json
 
 errorLog\.txt
+client/node_modules
+client/package-lock.json
+server/node_modules
+server/package-lock.json

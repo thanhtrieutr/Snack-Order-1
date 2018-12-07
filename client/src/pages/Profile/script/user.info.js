@@ -2,7 +2,7 @@ import {getUserInfo,sendNewUserInfo} from './script'
 
 export function userInfo() {
     getUserInfo(result => {
-        if (result != false) {
+        if (result !== false) {
             this.setState({
                 userInfo: {
                     name: result.fullName,
@@ -23,7 +23,7 @@ export function uploadNewInfo() {
     obj.address = this.state.userInfo.address;
     obj.birthday = this.state.userInfo.birthday;
     sendNewUserInfo(obj,result => {
-        if (result == false) {
+        if (result === false) {
             alert("Update Fail");
         }
         else {

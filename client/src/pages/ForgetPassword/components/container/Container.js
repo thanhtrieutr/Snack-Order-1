@@ -8,8 +8,6 @@ import { changePass, changeCfmPass, changeCode, changeEmail } from '../changeTex
 import { checkValue }         from '../changeValue';
 
 import './container.scss'
-import '../../../../components/responsvie-design/build-column.css'
-import '../../../../components/responsvie-design/off-set.css'
 
 export default class Container extends React.Component {
   constructor() {

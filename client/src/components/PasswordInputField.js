@@ -1,9 +1,6 @@
 import React from 'react';
 
 class PasswordInputField extends React.Component {
-    constructor() {
-        super();
-    }
     render() {
         return (
             <div>

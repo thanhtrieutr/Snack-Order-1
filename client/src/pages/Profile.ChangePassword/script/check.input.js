@@ -6,7 +6,7 @@ export function checkInput (newPassword,repeatNewPassword) {
     } else if (!passwordCheck(newPassword)) {
         alert("Password can only contains characters a->z,A->Z,0->9 and symbol !#$%&'*+-/=?^_`{|}");
         return false;
-    } else if (repeatNewPassword != newPassword) {
+    } else if (repeatNewPassword !== newPassword) {
         alert("New password and repeat password are not match");
         return false;
     }

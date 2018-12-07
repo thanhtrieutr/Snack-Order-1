@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-
+const cors = require('cors');
 const routes = require('./routes/routes');
 const errorhandler = require('errorhandler');
 const errorNotification = require('./errorHandler/controllerError');
@@ -11,6 +11,7 @@ const port = 3000;
 const crud = require("./utilities/databaseCRUD");
 crud.connectDatabase();
 
+app.use(cors());
 app.use('/', routes);
 
 //Only use in development

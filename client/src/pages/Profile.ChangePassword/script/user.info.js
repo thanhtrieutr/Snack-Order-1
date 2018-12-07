@@ -3,7 +3,7 @@ import {checkInput} from "./check.input";
 
 export function userInfo() {
     getUserInfo(result => {
-        if (result != false) {
+        if (result !== false) {
             this.setState({
                 avatar: result.avatarAddress
             })
@@ -19,7 +19,7 @@ export function changePassword() {
     obj.oldPassword = this.state.passwordDetail.currentPassword;
     obj.newPassword = this.state.passwordDetail.newPassword;
     sendNewInfo(obj,result => {
-        if (result == false) {
+        if (result === false) {
             alert("Change Password Fail");
         }
         else {

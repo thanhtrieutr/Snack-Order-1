@@ -21,7 +21,6 @@ export function getNewPassword(obj) {
 }
 
 export function getConfirmPassword(obj) {
-    debugger;
     let temp=this.state.passwordDetail;
     temp.confirmPassword = obj;
     this.setState({

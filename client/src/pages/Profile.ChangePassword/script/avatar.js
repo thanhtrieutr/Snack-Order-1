@@ -23,7 +23,7 @@ export function uploadImage(event , callback) {
             "token": token
         }
     }).then(response => {
-        if (response.status == 200) {
+        if (response.status === 200) {
             callback(true);
         }
         else {
@@ -38,7 +38,7 @@ export function avatarHandler(event) {
             alert("Image has loaded!");
             getUserInfo(result => {
                 debugger;
-                if (result != false) {
+                if (result !== false) {
                     this.setState({
                         avatar: result.avatarAddress
                     })

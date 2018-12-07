@@ -2,7 +2,6 @@ import React from 'react';
 import UserInputField from '../../../components/UserInputField';
 import PasswordInputField from '../../../components/PasswordInputField'
 import SubmitButton from '../../../components/SubmitButton'
-import 'font-awesome/css/font-awesome.min.css';
 
 class LoginField extends React.Component {
     constructor() {

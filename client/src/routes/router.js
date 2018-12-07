@@ -3,6 +3,7 @@ import Profile from '../pages/Profile/index';
 import Home from '../pages/Home';
 import ProfileChangePassword from "../pages/Profile.ChangePassword/index";
 import UserLogin from '../pages/userLogin/index';
+import AdminLogin from '../pages/admin.Login/index'
 import {
     BrowserRouter as Router,
     Route,

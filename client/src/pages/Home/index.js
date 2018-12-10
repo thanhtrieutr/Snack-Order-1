@@ -100,6 +100,7 @@ export default class Home extends Component {
         cart: tempCart,
         amountList: tempAmountList
     });
+    this.calculateTotal();
   }
   amountHandler(status, index) {
     var tempList = this.state.amountList;
@@ -117,6 +118,19 @@ export default class Home extends Component {
         this.setState({amountList: tempList});
       }
     }
+    this.calculateTotal();
+  }
+  calculateTotal() { 
+    var amountList = this.state.amountList;
+    var cartList = this.state.cart;
+    var productList = this.state.productList;
+    var totalPrice = 0;
+    for (var i=0; i<cartList.length; i++) { 
+      if (cartList[i] != -1) {
+        totalPrice += amountList[i] * productList[cartList[i]].price;
+      }
+    }
+    this.setState({total: totalPrice});
   }
   render() {
     return (
@@ -126,7 +140,7 @@ export default class Home extends Component {
           <div className="container">
             <div className="row">
               <Products productList={this.state.productList} checkboxHandler={this.handleCheckbox}></Products>
-              <Cart cartList={this.state.cart} productList={this.state.productList} amountList={this.state.amountList} amountHandler={this.amountHandler}></Cart>
+              <Cart totalPrice={displayPrice(this.state.total)} cartList={this.state.cart} productList={this.state.productList} amountList={this.state.amountList} amountHandler={this.amountHandler}></Cart>
             </div>
           </div>
         </div>

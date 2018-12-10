@@ -13,10 +13,10 @@ class HistoryContainer extends Component {
     )
   }
   loadOrderHistory(historyList) {
-    var listHistory = historyList.map((item, index) => {
+    var listHistory = historyList.reverse().map((item, index) => {
       return (
         <div key={item._id} index={index+1} id={`order-container-${index+1}`}>
-          <Table responsive={true} bordered={true} > 
+          <Table responsive={true} > 
             <tbody>
                 <tr>
                   <td className="display-item"> Account: {item.user}  </td>

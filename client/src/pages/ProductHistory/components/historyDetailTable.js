@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Table} from "react-bootstrap"
 import TitleContainer from '././titleContainer';
 import {displayPrice} from './../scripts/displayPrice';
 
@@ -6,6 +7,7 @@ class HistoryContainer extends Component {
   render () {
     return (
     <div>
+      <TitleContainer/>
       {this.loadHistoryTable(this.props.historyTableData)}
     </div>
     )
@@ -14,9 +16,8 @@ class HistoryContainer extends Component {
     var listHistory = historyData.map((item, index) => {
       return (
         <div key={index} index={index+1} id='order-detail'>
-          <table className="table" > 
+          <Table bordered > 
             <tbody>
-                <TitleContainer/>
                 <tr>
                     <td className="display-item">
                         {item.name}
@@ -35,7 +36,7 @@ class HistoryContainer extends Component {
                     </td>
                 </tr>
             </tbody>
-          </table>
+          </Table>
         </div>
       );
     })

@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
+import {Table} from 'react-bootstrap'
 import {displayPrice} from './../scripts/displayPrice';
 import HistoryDetailTable from '././historyDetailTable';
+
 
 class HistoryContainer extends Component {
   render () {
@@ -13,8 +15,8 @@ class HistoryContainer extends Component {
   loadOrderHistory(historyList) {
     var listHistory = historyList.map((item, index) => {
       return (
-        <div key={index} index={index+1} id="display-container">
-          <table className="table" > 
+        <div key={item._id} index={index+1} id="display-container">
+          <Table responsive bordered > 
             <tbody>
                 <tr>
                     <td className="display-item">
@@ -28,7 +30,7 @@ class HistoryContainer extends Component {
                     </td>
                 </tr>
             </tbody>
-          </table>
+          </Table>
           <HistoryDetailTable historyTableData={item.products}/>
         </div>
       );

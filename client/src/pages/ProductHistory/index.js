@@ -25,8 +25,6 @@ class AdminOrderHistory extends React.Component {
       </div>
     )
   }
-
-  
 }
 
 export default AdminOrderHistory;

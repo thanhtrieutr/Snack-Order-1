@@ -32,6 +32,7 @@ export default class Home extends Component {
     this.hamburgerHandler = this.hamburgerHandler.bind(this);
     this.handleCheckbox = this.handleCheckbox.bind(this);
     this.amountHandler = this.amountHandler.bind(this);
+    this.submitHandler = this.submitHandler.bind(this);
 	}
   componentWillMount() {
     checkLogIn(this.props.history,result => {
@@ -132,6 +133,23 @@ export default class Home extends Component {
     }
     this.setState({total: totalPrice});
   }
+  submitHandler() { 
+    debugger
+    var cartArray = [];
+    var cartList = this.state.cart;
+    var amountList = this.state.amountList;
+    var productList = this.state.productList;
+    for (var i = 0; i < cartList.length; ++i) { 
+      if (cartList[i] != -1) { 
+        var obj = {};
+        obj.amount = amountList[i];
+        obj.productID = cartList[i] + 1;
+        obj.productTrueID = productList[cartList[i]]._v.toString();
+      }
+      cartArray.push(obj);
+    }
+    console.log(cartArray);
+  }
   render() {
     return (
         <div className='home'>
@@ -140,7 +158,7 @@ export default class Home extends Component {
           <div className="container">
             <div className="row">
               <Products productList={this.state.productList} checkboxHandler={this.handleCheckbox}></Products>
-              <Cart totalPrice={displayPrice(this.state.total)} cartList={this.state.cart} productList={this.state.productList} amountList={this.state.amountList} amountHandler={this.amountHandler}></Cart>
+              <Cart submitCart={this.submitHandler} totalPrice={displayPrice(this.state.total)} cartList={this.state.cart} productList={this.state.productList} amountList={this.state.amountList} amountHandler={this.amountHandler}></Cart>
             </div>
           </div>
         </div>

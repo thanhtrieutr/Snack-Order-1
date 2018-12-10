@@ -3,7 +3,6 @@ var token = localStorage.getItem("token");
 export function logOut(history, callback) {
     localStorage.removeItem("currentAccount");
     removeTokenOnServe(token, result => {
-        debugger
         console.log(result);
         if (result!=false) {
             localStorage.removeItem('token');

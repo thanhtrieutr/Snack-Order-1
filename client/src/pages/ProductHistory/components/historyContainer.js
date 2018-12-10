@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import 'bootstrap/dist/css/bootstrap.css';
 import {Table} from 'react-bootstrap'
 import {displayPrice} from './../scripts/displayPrice';
 import HistoryDetailTable from '././historyDetailTable';

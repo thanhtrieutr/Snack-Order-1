@@ -1,47 +1,41 @@
-// import React from 'react';
-// import {Menu} from 'react-bulma-components/full';
+import React from 'react';
+import {Nav, NavItem} from 'react-bootstrap';
 
-// var menuList=[
-//     {id:"home", href:"/admin", content:"Home page"},
-//     {id:"today-order", href:"/admin/today-order", content:"Today Order"},
-//     {id:"order-history", href:"/admin/history", content:"Order history"},
-//     {id:"users", href:"/admin/users", content:"Users"},
-//     {id:"products", href:"/admin/products", content:"Product list"},
-//     {id:"add-product", href:"/admin/product/add", content:"Add new product"},
-//     {id:"add-user", href:"/admin/user/add", content:"Create new user"}
-// ];
+var menuList=[
+    {id:"home", href:"/admin", content:"Home page"},
+    {id:"today-order", href:"/admin/today-order", content:"Today Order"},
+    {id:"order-history", href:"/admin/history", content:"Order history"},
+    {id:"users", href:"/admin/users", content:"Users"},
+    {id:"products", href:"/admin/products", content:"Product list"},
+    {id:"add-product", href:"/admin/product/add", content:"Add new product"},
+    {id:"add-user", href:"/admin/user/add", content:"Create new user"}
+];
 
-// class LinkAdminPage extends React.Component {
-//     render() {
-//         return (
-//             <Menu>
-//                 <Menu.List>
-//                     {this.createMenuList(this.props.activeMenuItem)}
-//                 </Menu.List>
-//             </Menu>
-//         );
-//     }
-//     createMenuList(activeId) {
-//         var listItems = menuList.map(item => {
-//             if (item.id === activeId) {
-//                 return (
-//                     <p id={item.id}  key={item.id} style={{padding:0}}>
-//                         <Menu.List.Item active href={item.href}> 
-//                             {item.content}
-//                         </Menu.List.Item>
-//                     </p>
-//                 );
-//             }
-//             return (
-//                 <p id={item.id}  key={item.id} style={{padding:0}}>
-//                     <Menu.List.Item href={item.href}> 
-//                         {item.content}
-//                     </Menu.List.Item>
-//                 </p> 
-//             );
-//         });
-//         return listItems;
-//     }
-// }
+class LinkAdminPage extends React.Component {
+    render() {
+        return (
+            <Nav bsStyle="pills" stacked>
+                {this.createMenuList(this.props.activeMenuItem)}
+            </Nav>
+        );
+    }
+    createMenuList(activeId) {
+        var listItems = menuList.map(item => {
+            if (item.id === activeId) {
+                return (
+                    <NavItem id={item.id} key={item.id} eventKey={1} href={item.href} active>
+						{item.content}
+					</NavItem>
+                );
+            }
+            return (
+                <NavItem id={item.id} key={item.id} eventKey={1} href={item.href}>
+                    {item.content}
+                </NavItem>
+            );
+        });
+        return listItems;
+    }
+}
 
-// export default LinkAdminPage;
+export default LinkAdminPage;

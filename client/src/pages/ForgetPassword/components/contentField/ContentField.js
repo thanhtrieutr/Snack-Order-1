@@ -18,7 +18,7 @@ export default class ContentField extends React.Component {
   }
   render () {
     return (
-      <div>
+      <div className="forget-info">
         <h1>Can't sign in? Forget your password?</h1>
         { this.state.step === 1 ? <p>Please enter your registered email address in the box below.</p> : null }
         { this.state.step === 2 ? <p>A vaidation token will send to you.

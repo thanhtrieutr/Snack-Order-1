@@ -14,19 +14,19 @@ export function checkValue() {
             });
           } else {
             this.setState({
-              updateStat: 'ms_warning',
+              updateStat: 'warning',
               message: 'User does not exist'
             })
           }
         });
       } else if (this.state.email.length === 0) {
         this.setState({
-          updateStat: 'ms_error',
+          updateStat: 'danger',
           message: "Can't be blank",
         });
       } else {
         this.setState({
-          updateStat: 'ms_error',
+          updateStat: 'danger',
           message: "Email is invalid",
         });
       }
@@ -44,7 +44,7 @@ export function checkValue() {
             });
           } else {
             this.setState({
-              updateStat: 'ms_warning',
+              updateStat: 'warning',
               message: 'Code does not match'
             });
           }
@@ -52,12 +52,12 @@ export function checkValue() {
 
       } else if (this.state.code.length === 0) {
         this.setState({
-          updateStat: 'ms_error',
+          updateStat: 'danger',
           message: "Can't be blank",
         });
       } else {
         this.setState({
-          updateStat: 'ms_error',
+          updateStat: 'danger',
           message: "Code in invalid",
         });
       }
@@ -71,7 +71,7 @@ export function checkValue() {
                 step: 4
               }, () => {
                 this.setState({
-                  updateStat: 'ms_success',
+                  updateStat: 'success',
                   message: "Reset password successfully! ",
                   linking: '/login',
                   token: ''
@@ -79,20 +79,20 @@ export function checkValue() {
               });
             } else {
               this.setState({
-                updateStat: 'ms_warning',
+                updateStat: 'warning',
                 message: "Reset failed"
               });
             }
           })
         } else {
           this.setState({
-            updateStat: 'ms_error',
+            updateStat: 'danger',
             message: "Password and confirm password doesn't match",
           });
         }
       } else {
         this.setState({
-          updateStat: 'ms_error',
+          updateStat: 'danger',
           message: "Password is invalid",
         });
       }

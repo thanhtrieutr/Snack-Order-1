@@ -1,11 +1,12 @@
-import React from 'react';
+import React from 'react'
+import { Row } from 'react-bootstrap'
 import './header.scss'
 
 export default class Header extends React.Component {
   render () {
     return (
-      <div className="header">
-      </div>
+      <Row className="show-grid header">
+      </Row>
     )
   }
 }

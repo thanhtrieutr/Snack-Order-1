@@ -57,17 +57,3 @@ i.e:
   <Notification className="is-warning" content="something"></Notification>
 
 ```
-### 8) StatusField
-
-Like **Notification** but using in Main-order.
-
-stat: ms_info, ms_success, ms_warning, ms_error.
-
-i.e: 
-
-```js
-
-  <StatusField stat={this.state.updateStat} content={this.state.message}/>
-
-```
-

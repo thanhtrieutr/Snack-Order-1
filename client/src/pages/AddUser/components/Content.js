@@ -1,6 +1,5 @@
 import React from 'react';
 import InputField from '../../../components/inputField/InputField';
-import Notification from '../../../components/notification/Notification';
 import Guide from './panel/Panel';
 import {changeEmail, validateEmail} from '../utils';
 import { Col, Button } from 'react-bootstrap';
@@ -25,9 +24,7 @@ export default class ContentField extends React.Component {
         <Guide heading={headText} content={guideText}></Guide>
         <InputField label="Email :" changeText={this.changeEmail} value={this.state.email} type="text" 
           placeholder="* Enter email here"/>
-        { this.state.status !== ''?
-          <Notification className={this.state.status} content={this.state.message}/>
-          : null }
+
         <Col xs={4} xsOffset={5} sm={1} smOffset={6}>
           <Button type="button" onClick={this.checkValue} bsStyle="primary"> Submit </Button>
         </Col>

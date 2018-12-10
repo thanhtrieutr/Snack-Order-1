@@ -6,6 +6,7 @@ import AdminLogin from '../pages/admin.Login/index';
 import AdminTodayOrder from '../pages/admin.todayOrder/index';
 import ForgotPassword from '../pages/ForgetPassword/ForgotPassword';
 import AddNewUser from '../pages/AddUser/AddNewUser';
+import AdminOrderHistory from './../pages/ProductHistory/index'
 
 import {
     BrowserRouter as Router,
@@ -23,6 +24,7 @@ function Routerx() {
             <Route path='/admin/today-order' exact component={AdminTodayOrder}/>
             <Route path="/admin/user/add" exact component={AddNewUser}/>
             <Route path="/forget-password" exact component={ForgotPassword}/>
+            <Route path="/admin/order-history" exact component={AdminOrderHistory}/>
         </div>
      </Router>
     );

@@ -8,7 +8,9 @@ export default class ForgotPassword extends React.Component {
     return (
       <div>
         <Header/>
-        <Container/>
+        <div className="fp-home">
+          <Container/>
+        </div>
         <Footer/>
       </div>
     )

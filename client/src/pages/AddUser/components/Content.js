@@ -1,13 +1,13 @@
 import React from 'react';
 import InputField from '../../../components/inputField/InputField';
 import Notification from '../../../components/notification/Notification';
-import Button from '../../../components/button/Button';
-import Header from './Header';
+import Guide from './panel/Panel';
 import {changeEmail, validateEmail} from '../utils';
+import { Col, Button } from 'react-bootstrap';
 
-const guide = <ul><li>* Email must have more than 6 characters</li>
-                  <li>* Special characters is not allowed</li></ul>
- 
+const guideText = <ul><li>Email must have more than 6 characters</li>
+                  <li>Special characters is not allowed</li></ul>
+const headText = 'Create user guide'
 export default class ContentField extends React.Component {
   constructor() {
     super();
@@ -22,16 +22,15 @@ export default class ContentField extends React.Component {
   render() {
     return (
       <div id="body">
-        <Header></Header>
-        <Notification content={guide}></Notification>
-        <InputField className="input is-info" label="Email" changeText={this.changeEmail} 
-          value={this.state.email} type="text"/>
+        <Guide heading={headText} content={guideText}></Guide>
+        <InputField label="Email :" changeText={this.changeEmail} value={this.state.email} type="text" 
+          placeholder="* Enter email here"/>
         { this.state.status !== ''?
           <Notification className={this.state.status} content={this.state.message}/>
           : null }
-        <div className="buttons is-centered">
-          <Button className="button is-success" label="Submit" onClick={this.validateEmail}/>
-        </div>
+        <Col xs={4} xsOffset={5} sm={1} smOffset={6}>
+          <Button type="button" onClick={this.checkValue} bsStyle="primary"> Submit </Button>
+        </Col>
       </div>
     )
   }

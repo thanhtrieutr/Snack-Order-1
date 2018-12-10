@@ -1,12 +1,11 @@
-import React from 'react';
-import { Row } from 'react-bootstrap'
+import React from 'react'
 import './footer.scss'
 
 export default class Footer extends React.Component {
   render () {
     return (
-      <Row className="show-grid footer">
-      </Row>
+      <div className="show-grid footer">
+      </div>
     )
   }
 }

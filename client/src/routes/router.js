@@ -1,7 +1,7 @@
 import React from 'react';
-import Profile from './../pages/Profile/index';
-// import Home from '../pages/Home';
-import ProfileChangePassword from "../pages/profileChangePassword/index";
+import Profile from '../pages/Profile/index';
+import Home from '../pages/Home/index';
+import ProfileChangePassword from "../pages/Profile.ChangePassword/index";
 import AdminLogin from '../pages/admin.Login/index';
 import AdminTodayOrder from '../pages/admin.todayOrder/index';
 import ForgotPassword from '../pages/ForgetPassword/ForgotPassword';
@@ -13,6 +13,7 @@ import { Switch, Route } from 'react-router'
 
 function Routerx() {
     return (
+            <Route path="/" exact component={Home} />
      <Switch>
         <Route path="/profile" exact component={Profile} />
         <Route path="/profile/change-password" exact component={ProfileChangePassword} />

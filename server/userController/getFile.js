@@ -9,7 +9,7 @@ var accountModel = require("../schema/account-schema");
 //save to disk at image folder
 var storage = multer.diskStorage({
     destination: function (req, file, callback) {
-        callback(null, path.join(__dirname, '../../images'));
+        callback(null, path.join(__dirname, '../../client/src/assets/images/'));
     },
     filename: function (req, file, callback) {
         req.newFileName = utilities.modifyFileName(file.originalname);
@@ -38,7 +38,7 @@ appGetFile.post('/', utilities.authenticationUserByHeader, uploadFile, (request,
         avatarAddress: '/static/images/'+ request.newFileName
     };
     crud.updateOneDocument(accountModel, {_id: request.account._id}, avatarValue, function() {
-        response.end('../../images/' + request.newFileName);
+        response.end('../../client/src/assets/images/' + request.newFileName);
         return;
     });
 });

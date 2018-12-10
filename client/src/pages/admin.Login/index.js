@@ -21,7 +21,7 @@ class AdminLogin extends React.Component {
   }
   render() {
     debugger
-    const result = this.callYoutube();
+    // const result = this.callYoutube();
     return (
       <div className="Admin-login">
         <HeadTag></HeadTag>

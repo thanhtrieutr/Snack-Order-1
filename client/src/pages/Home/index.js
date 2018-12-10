@@ -11,12 +11,13 @@ import {loadSnack} from '../../pages/Home/script/loadSnack'
 import '../../components/Home/css/order.css'
 import '../../components/Home/css/items.css'
 import '../../components/Home/css/billstyle.scss'
-
+import {displayPrice} from './script/displayPrice'
 
 export default class Home extends Component {
   constructor() {
 		super();
 		this.state = {
+      total: 0,
       windowHeight: undefined,
       windowWidth: undefined,
       user:"",

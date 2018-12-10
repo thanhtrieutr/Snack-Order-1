@@ -38,7 +38,7 @@ appGetFile.post('/', utilities.authenticationUserByHeader, uploadFile, (request,
         avatarAddress: '/static/images/'+ request.newFileName
     };
     crud.updateOneDocument(accountModel, {_id: request.account._id}, avatarValue, function() {
-        response.end('../../client/src/assets/images/' + request.newFileName);
+        response.end('../../images/' + request.newFileName);
         return;
     });
 });

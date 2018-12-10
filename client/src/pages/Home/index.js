@@ -10,6 +10,7 @@ import {logOut} from './script/logout'
 import {loadSnack} from '../../pages/Home/script/loadSnack'
 import '../../components/Home/css/order.css'
 import '../../components/Home/css/items.css'
+import '../../components/Home/css/billstyle.scss'
 
 
 export default class Home extends Component {
@@ -20,23 +21,33 @@ export default class Home extends Component {
       windowWidth: undefined,
       user:"",
       hamburgerStatus: 0,
-      productList: []
+      productList: [],
+      checkboxList: [],
+      cart: [],
+      amountList: []
     }
     this.handleResize = this.handleResize.bind(this);
     this.logOutHandle = this.logOutHandle.bind(this);
     this.hamburgerHandler = this.hamburgerHandler.bind(this);
+    this.handleCheckbox = this.handleCheckbox.bind(this);
+    this.amountHandler = this.amountHandler.bind(this);
 	}
   componentWillMount() {
-		checkLogIn(this.props.history,result => {
-			this.setState({
-				user : result
+    checkLogIn(this.props.history,result => {
+        this.setState({
+            user : result
       });
       loadSnack(result => {
+        var checkboxListTemp= [];
+        for (var i=0; i<result.length; i++) { 
+            checkboxListTemp.push(0);
+        }
         this.setState({
-          productList : result
+          productList : result,
+          checkboxList: checkboxListTemp
         });
       })
-		});
+    });
   }
   handleResize = () => {
     this.setState({
@@ -68,6 +79,44 @@ export default class Home extends Component {
     }
     else this.setState({hamburgerStatus : 0});
   }
+  handleCheckbox(index) { 
+    var tempList = this.state.checkboxList;
+    var tempCart = this.state.cart;
+    var tempAmountList = this.state.amountList;
+    if (tempList[index]) {
+        var position = tempCart.indexOf(index);
+        tempCart[position] = -1;
+        tempAmountList[position] = 0;
+        tempList[index] = 0;
+    }
+    else {
+        tempList[index] = 1;
+        tempCart.push(index);
+        tempAmountList.push(1);
+    }
+    this.setState({
+        checkboxList: tempList,
+        cart: tempCart,
+        amountList: tempAmountList
+    });
+  }
+  amountHandler(status, index) {
+    var tempList = this.state.amountList;
+    //+
+    if (status) { 
+      if (tempList[index] < 99) { 
+        tempList[index]++;
+        this.setState({amountList: tempList});
+      }
+    }
+    //-
+    else {
+      if (tempList[index] > 1) { 
+        tempList[index]--;
+        this.setState({amountList: tempList});
+      }
+    }
+  }
   render() {
     return (
         <div className='home'>
@@ -75,8 +124,8 @@ export default class Home extends Component {
           <HamburgerBox history={this.props.history} logOutHandler={this.logOutHandle} hamburgerStatus={this.state.hamburgerStatus}></HamburgerBox>
           <div className="container">
             <div className="row">
-              <Products productList={this.state.productList}></Products>
-              <Cart></Cart>
+              <Products productList={this.state.productList} checkboxHandler={this.handleCheckbox}></Products>
+              <Cart cartList={this.state.cart} productList={this.state.productList} amountList={this.state.amountList} amountHandler={this.amountHandler}></Cart>
             </div>
           </div>
         </div>

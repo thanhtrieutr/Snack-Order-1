@@ -10,7 +10,7 @@ export default class Item extends Component {
         <Image class="snack-img" imgName={this.props.imgName}></Image>
         <Name class="main-snack-name" id={"snack-name-"+this.props.index} name={this.props.name}></Name>
         <Name class="main-snack-price" id={"snack-price-"+this.props.index} name={this.props.price}></Name>
-        <Checkbox dataId={this.props.dataId} index={this.props.index}></Checkbox>
+        <Checkbox dataId={this.props.dataId} index={this.props.index} checkboxHandler={this.props.checkboxHandler}></Checkbox>
       </label>
     )
   }

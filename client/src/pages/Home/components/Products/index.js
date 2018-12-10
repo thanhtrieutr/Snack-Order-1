@@ -17,7 +17,7 @@ export default class Products extends Component {
   createProductList(productList) { 
     var listProduct = productList.map((item, index) => { 
       return (
-        <Item key={index} index={index+1} imgName={item.img} name={item.name} price={displayPrice(item.price)} dataId={item._id}></Item>
+        <Item key={index} index={index+1} imgName={item.img} name={item.name} price={displayPrice(item.price)} dataId={item._id} checkboxHandler={this.props.checkboxHandler}></Item>
       )
     });
     return listProduct;

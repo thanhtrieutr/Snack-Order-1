@@ -5,21 +5,11 @@ class TitleContainer extends Component {
     return (
       <thead>
         <tr>
-          <th className="has-background-grey-lighter">
-            Product name
-          </th>
-          <th className="has-background-grey-lighter" >
-            Quantity
-          </th>
-          <th className="has-background-grey-lighter">
-            Unit Price
-          </th>
-          <th className="has-background-grey-lighter">
-            Total
-          </th>
-          <th className="has-background-grey-lighter">
-            Action
-          </th>
+          <th>  Product name </th>
+          <th>  Quantity  </th>
+          <th>  Unit Price  </th>
+          <th>  Total </th>
+          <th>  Action  </th>
         </tr>
       </thead>
     )

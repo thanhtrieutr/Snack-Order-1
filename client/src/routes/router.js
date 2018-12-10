@@ -4,6 +4,7 @@ import Profile from '../pages/profile/index';
 import ProfileChangePassword from "../pages/profileChangePassword/index";
 import AdminLogin from '../pages/admin.Login/index';
 import AdminTodayOrder from '../pages/admin.todayOrder/index';
+import AdminHome from '../pages/adminHome/index'
 import ForgotPassword from '../pages/ForgetPassword/ForgotPassword';
 import AddNewUser from '../pages/AddUser/AddNewUser';
 
@@ -20,6 +21,7 @@ function Routerx() {
             <Route path="/profile" exact component={Profile} />
             <Route path="/profile/change-password" exact component={ProfileChangePassword} />
             <Route path='/admin/login' exact component={AdminLogin}/>
+            <Route path='/admin' exact component={AdminHome}/>
             <Route path='/admin/today-order' exact component={AdminTodayOrder}/>
             <Route path="/admin/user/add" exact component={AddNewUser}/>
             <Route path="/forget-password" exact component={ForgotPassword}/>

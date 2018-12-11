@@ -12,6 +12,7 @@ import '../../components/Home/css/order.css'
 import '../../components/Home/css/items.css'
 import '../../components/Home/css/billstyle.scss'
 import {displayPrice} from './script/displayPrice'
+import {submitCart} from './script/submitCart'
 
 export default class Home extends Component {
   constructor() {
@@ -134,7 +135,6 @@ export default class Home extends Component {
     this.setState({total: totalPrice});
   }
   submitHandler() { 
-    debugger
     var cartArray = [];
     var cartList = this.state.cart;
     var amountList = this.state.amountList;
@@ -144,11 +144,11 @@ export default class Home extends Component {
         var obj = {};
         obj.amount = amountList[i];
         obj.productID = cartList[i] + 1;
-        obj.productTrueID = productList[cartList[i]]._v.toString();
+        obj.productTrueID = productList[cartList[i]]._id.toString();
       }
       cartArray.push(obj);
     }
-    console.log(cartArray);
+    submitCart(cartArray);
   }
   render() {
     return (

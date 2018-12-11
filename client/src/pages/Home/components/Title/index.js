@@ -9,9 +9,13 @@ export default class Title extends Component {
     super();
     this.hamburgerHandler = this.hamburgerHandler.bind(this);
     this.userBarHandler = this.userBarHandler.bind(this);
+    this.cartButtonHandler = this.cartButtonHandler.bind(this);
   }
   hamburgerHandler(width) { 
     return(width < 768 ? <Hamburger hamburgerHandler={this.props.hamburgerHandler}></Hamburger> : null);
+  }
+  cartButtonHandler(width) { 
+    return(width < 768 ? <CartButton cartHandler={this.props.cartHandler}></CartButton> : null);
   }
   userBarHandler(width) { 
     return(width >= 768 ? <UserBar history={this.props.history} user={this.props.user} buttonHandler={this.props.buttonHandler}></UserBar>: null);
@@ -25,10 +29,7 @@ export default class Title extends Component {
             <Logo></Logo>
           </div>
           {this.userBarHandler(this.props.windowWidth)}
-          
-          {/* <div className="mobile">
-            <CartButton></CartButton>
-          </div> */}
+          {this.cartButtonHandler(this.props.windowWidth)}
         </div>
       </div>
     )

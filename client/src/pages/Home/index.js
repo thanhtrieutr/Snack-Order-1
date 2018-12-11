@@ -26,7 +26,8 @@ export default class Home extends Component {
       productList: [],
       checkboxList: [],
       cart: [],
-      amountList: []
+      amountList: [],
+      cartStatus: 0,
     }
     this.handleResize = this.handleResize.bind(this);
     this.logOutHandle = this.logOutHandle.bind(this);
@@ -34,6 +35,8 @@ export default class Home extends Component {
     this.handleCheckbox = this.handleCheckbox.bind(this);
     this.amountHandler = this.amountHandler.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
+    this.cartDisplay = this.cartDisplay.bind(this);
+    this.cartHandler = this.cartHandler.bind(this);
 	}
   componentWillMount() {
     checkLogIn(this.props.history,result => {
@@ -53,10 +56,16 @@ export default class Home extends Component {
     });
   }
   handleResize = () => {
+    var status = this.state.hamburgerStatus;
+    if (status == 1 && window.innerWidth < 768) {
+      status = 1;
+    }
+    else status = 0;
     this.setState({
       windowHeight: window.innerHeight,
       windowWidth: window.innerWidth,
-      hamburgerStatus: 0
+      hamburgerStatus: status,
+      cartStatus: status
     });
   } 
   componentDidMount() {
@@ -81,6 +90,12 @@ export default class Home extends Component {
       this.setState({hamburgerStatus : 1});
     }
     else this.setState({hamburgerStatus : 0});
+  }
+  cartHandler() { 
+    if (this.state.cartStatus == 0) {
+      this.setState({cartStatus : 1});
+    }
+    else this.setState({cartStatus : 0});
   }
   handleCheckbox(index) { 
     var tempList = this.state.checkboxList;
@@ -150,15 +165,26 @@ export default class Home extends Component {
     }
     submitCart(cartArray);
   }
+  cartDisplay(width) { 
+    if (width >= 768) { 
+      return (<Cart submitCart={this.submitHandler} totalPrice={displayPrice(this.state.total)} cartList={this.state.cart} productList={this.state.productList} amountList={this.state.amountList} amountHandler={this.amountHandler}></Cart>);
+    }
+    else {
+      if (this.state.cartStatus == 1) { 
+        return (<Cart submitCart={this.submitHandler} totalPrice={displayPrice(this.state.total)} cartList={this.state.cart} productList={this.state.productList} amountList={this.state.amountList} amountHandler={this.amountHandler}></Cart>); 
+      }
+    }
+    return(null);
+  }
   render() {
     return (
         <div className='home'>
-          <Title history={this.props.history} user={this.state.user} buttonHandler={this.logOutHandle} hamburgerHandler={this.hamburgerHandler} windowWidth={this.state.windowWidth}></Title>
+          <Title cartHandler={this.cartHandler} history={this.props.history} user={this.state.user} buttonHandler={this.logOutHandle} hamburgerHandler={this.hamburgerHandler} windowWidth={this.state.windowWidth}></Title>
           <HamburgerBox history={this.props.history} logOutHandler={this.logOutHandle} hamburgerStatus={this.state.hamburgerStatus}></HamburgerBox>
           <div className="container">
             <div className="row">
               <Products productList={this.state.productList} checkboxHandler={this.handleCheckbox}></Products>
-              <Cart submitCart={this.submitHandler} totalPrice={displayPrice(this.state.total)} cartList={this.state.cart} productList={this.state.productList} amountList={this.state.amountList} amountHandler={this.amountHandler}></Cart>
+              {this.cartDisplay(this.state.windowWidth)}
             </div>
           </div>
         </div>

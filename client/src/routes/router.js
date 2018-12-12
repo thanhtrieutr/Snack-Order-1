@@ -5,7 +5,7 @@ import ProfileChangePassword from "../pages/profileChangePassword/index";
 import AdminLogin from '../pages/admin.Login/index';
 import AdminTodayOrder from '../pages/admin.todayOrder/index';
 import ForgotPassword from '../pages/ForgetPassword/ForgotPassword';
-import AddNewUser from '../pages/AddUser/AddNewUser';
+import AddNewUser from '../pages/../pages/admin.addUser/AddNewUser';
 import AdminOrderHistory from './../pages/OrderHistory/index'
 import ProductList from '../pages/admin.productList/ProductList';
 

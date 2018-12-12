@@ -12,7 +12,7 @@ class Index extends React.Component {
 	constructor() {
 		super();
 		this.state = {
-			avatar:"static/images/default-avatar.png",
+			avatar:"/static/images/default-avatar.png",
 			user:"",
 			userInfo: {
 				phone:"",

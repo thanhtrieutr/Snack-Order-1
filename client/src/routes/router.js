@@ -6,7 +6,7 @@ import React from 'react';
 // import AdminTodayOrder from '../pages/admin.todayOrder/index';
 // import ForgotPassword from '../pages/ForgetPassword/ForgotPassword';
 // import AddNewUser from '../pages/AddUser/AddNewUser';
-import AdminOrderHistory from './../pages/ProductHistory/index'
+import AdminOrderHistory from './../pages/OrderHistory/index'
 
 import {
     BrowserRouter as Router,

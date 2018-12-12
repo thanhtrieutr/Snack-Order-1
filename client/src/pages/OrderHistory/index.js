@@ -2,6 +2,7 @@ import React from 'react';
 import {getProductHistory} from '././scripts/loadHistoryData';
 import HeaderTag from '././components/headerTag'
 import HistoryContainer from '././components/historyContainer';
+import '././index.scss'
 
 class AdminOrderHistory extends React.Component {
   constructor() {
@@ -15,6 +16,10 @@ class AdminOrderHistory extends React.Component {
     getProductHistory(result => {
       this.setState({
         orderHistory: result
+      })
+      var data = this.state.orderHistory.reverse();
+      this.setState({
+        orderHistory: data
       })
     })
   }

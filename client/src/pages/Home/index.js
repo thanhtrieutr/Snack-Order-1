@@ -13,6 +13,7 @@ import '../../components/Home/css/items.css'
 import '../../components/Home/css/billstyle.scss'
 import {displayPrice} from './script/displayPrice'
 import {submitCart} from './script/submitCart'
+import Helmet from 'react-helmet'
 
 export default class Home extends Component {
   constructor() {
@@ -179,6 +180,9 @@ export default class Home extends Component {
   render() {
     return (
         <div className='home'>
+          <Helmet>
+            <title>Main Order</title>
+          </Helmet>
           <Title cartHandler={this.cartHandler} history={this.props.history} user={this.state.user} buttonHandler={this.logOutHandle} hamburgerHandler={this.hamburgerHandler} windowWidth={this.state.windowWidth}></Title>
           <HamburgerBox history={this.props.history} logOutHandler={this.logOutHandle} hamburgerStatus={this.state.hamburgerStatus}></HamburgerBox>
           <div className="container">

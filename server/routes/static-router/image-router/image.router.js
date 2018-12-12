@@ -2,7 +2,7 @@ const express = require('express');
 const imageRouter = express.Router();
 
 const path = require('path');
-__dirname = path.join(__dirname + '../../../../../');
+__dirname = path.join(__dirname + '../../../../../client/src/assets');
 
 imageRouter.use(express.static(__dirname + '/images'));
 

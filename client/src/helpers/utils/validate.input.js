@@ -18,3 +18,9 @@ export function passwordCheck(password) {
   }
   return /^[[a-zA-Z0-9!#$%&'*+-/=?^_`{|}]+$/.test(password);
 }
+
+export function priceCheck(price) {
+  if (price.length > 5)
+    return false;
+  return /^[0-9]+$/.test(price);
+}

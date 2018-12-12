@@ -10,14 +10,14 @@ export function changeCode(evt) {
   })
 }
 
-export function changePass(dataFromInput) {
+export function changePass(evt) {
   this.setState({
-    password: dataFromInput,
+    password: evt.target.value,
   })
 }
 
-export function changeCfmPass(dataFromInput) {
+export function changeCfmPass(evt) {
   this.setState({
-    confirmPassword: dataFromInput,
+    confirmPassword: evt.target.value,
   })
 }

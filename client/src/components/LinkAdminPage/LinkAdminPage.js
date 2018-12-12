@@ -4,7 +4,7 @@ import {Nav, NavItem, Col} from 'react-bootstrap';
 var menuList=[
     {id:"home", href:"/admin", content:"Home page"},
     {id:"today-order", href:"/admin/today-order", content:"Today Order"},
-    {id:"order-history", href:"/admin/order-history", content:"Order history"},
+    {id:"order-history", href:"/admin/history", content:"Order history"},
     {id:"users", href:"/admin/users", content:"Users"},
     {id:"products", href:"/admin/products", content:"Product list"},
     {id:"add-product", href:"/admin/product/add", content:"Add new product"},
@@ -14,7 +14,7 @@ var menuList=[
 class LinkAdminPage extends React.Component {
     render() {
         return (
-            <Col xsHidden smHidden md={2}>
+            <Col xsHidden smHidden md={3} lg={2}>
                 <Nav bsStyle="pills" stacked >
                     {this.createMenuList(this.props.activeMenuItem)}
                 </Nav>        

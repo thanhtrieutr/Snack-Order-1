@@ -1,39 +1,22 @@
-import React from 'react';
-import Input from '../input/Input';
+import React from 'react'
+import { Form, FormGroup, FormControl } from 'react-bootstrap'
+import { Col, ControlLabel, HelpBlock } from 'react-bootstrap'
 
 export default class InputField extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      inputValue: '',
-    }
-    this.returnValue = this.returnValue.bind(this);
-    this.changeText = this.changeText.bind(this);
-  }
   render () {
     return (
-      <div className="field is-horizontal">
-        <div className="field-label">
-          <label className="label is-size-4">{this.props.label}</label>
-        </div>
-        <div className="field-body">
-          <div className="field">
-            <div className="control">
-              <Input className={this.props.className} type={this.props.type} placeholder={this.props.placeholder} 
-                value={this.props.value} changeText={this.changeText}/>
-            </div>
-          </div>
-        </div> 
-      </div>
+      <Form horizontal>
+        <FormGroup bsSize={this.props.bsSize} validationState={this.props.validationState}>
+          <Col componentClass={ControlLabel} sm={this.props.labelSize}>
+            {this.props.label}
+          </Col>
+          <Col sm={this.props.inputSize}>
+            <FormControl type={this.props.type} placeholder={this.props.placeholder} value={this.props.value} 
+              onChange={this.props.changeText} />
+            <HelpBlock>{this.props.validationText}</HelpBlock>
+          </Col>
+        </FormGroup>
+      </Form>
     )
-  }
-  changeText(evt) {
-    this.setState({ inputValue: evt.target.value }, () => {
-      this.returnValue();
-    })
-  }
-  returnValue = () => {
-    var editText = this.state.inputValue;
-    this.props.changeText(editText);
   }
 }

@@ -4,7 +4,7 @@ var productModel = require("../schema/product-schema");
 var adminModel = require("../schema/admin-account-schema");
 
 function getAdminProduct(request, response, next) {
-    var collectClient = new Promise((resolve, reject) => { 
+    var collectClient = new Promise((resolve, reject) => {
         result = request.body;
         if (result instanceof Error) {
             reject(result);
@@ -34,7 +34,10 @@ function getAdminProduct(request, response, next) {
         });
     }).then(result => {
         var products = result[1];
-        response.end(JSON.stringify(products));
+        response.json({
+            success: true,
+            products: products,
+        });
     }).catch(error => {
         next(error);
     });

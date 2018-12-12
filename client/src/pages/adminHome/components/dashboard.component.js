@@ -1,5 +1,5 @@
 import React from 'react';
-import {Col, Panel, Jumbotron} from 'react-bootstrap';
+import {Col, Panel} from 'react-bootstrap';
 
 class DashboardComponent extends React.Component {
 	render() {

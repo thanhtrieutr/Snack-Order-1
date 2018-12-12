@@ -31,29 +31,3 @@ i.e:
   <InputField className="input is-info" label="Email" changeText={this.changeEmail} value={this.state.email} type="text"/>
 
 ```
-
-### 6) Input
-
-Like **InputField** without label.
-
-i.e:
-
-```js
-
-  <Input changeText={this.changeCode} className="forget-input" value={this.state.code} type="text" placeholder="* Enter something here" />
-
-```
-
-### 7) Notification
-
-Show guide, warning, info, ...
-
-Class: is-primary, is-info, is-warning, is-success, is-danger.
-
-i.e:
-
-```js
-
-  <Notification className="is-warning" content="something"></Notification>
-
-```

@@ -1,17 +1,18 @@
 import React from 'react'
 import Helmet from 'react-helmet'
-import { Grid, Col } from 'react-bootstrap'
+import { Grid } from 'react-bootstrap'
+import LinkAdminPage from "../../components/LinkAdminPage/LinkAdminPage"
 import Content from './components/Content'
 
 export default class ProductList extends React.Component {
     render() {
         return (
-            <div className="admin-product">
+            <div className="admin-products">
                 <Helmet>
                     <title>Admin | Product List</title>
                 </Helmet>
                 <Grid>
-                    <Col xs={2}></Col>
+                    <LinkAdminPage activeMenuItem="products"></LinkAdminPage>
                     <Content/>
                 </Grid>
             </div>

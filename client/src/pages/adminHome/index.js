@@ -2,7 +2,6 @@ import React from 'react';
 import {Helmet} from "react-helmet";
 import LinkAdminPage from "../../components/LinkAdminPage/LinkAdminPage"
 import NavBarAdmin from '../../components/NavBarAdmin/NavBarAdmin'
-import {Col} from 'react-bootstrap';
 class AdminHome extends React.Component {
 	render() {
 		return (

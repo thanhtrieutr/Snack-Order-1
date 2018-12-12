@@ -1,7 +1,8 @@
 import React from 'react'
 import Helmet from 'react-helmet'
-import { Grid, Col } from 'react-bootstrap'
+import { Grid } from 'react-bootstrap'
 import Content from './components/Content'
+import LinkAdminPage from "../../components/LinkAdminPage/LinkAdminPage"
 import './create-user.css'
 
 export default class AddNewUser extends React.Component {
@@ -12,7 +13,7 @@ export default class AddNewUser extends React.Component {
                     <title>Admin | Create user</title>
                 </Helmet>
                 <Grid>
-                    <Col xs={2}></Col>
+                    <LinkAdminPage activeMenuItem="add-user"></LinkAdminPage>
                     <Content/>
                 </Grid>
             </div>

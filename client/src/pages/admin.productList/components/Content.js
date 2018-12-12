@@ -1,7 +1,8 @@
 import React from 'react'
 import { Col, Table } from 'react-bootstrap'
-import ProductDetail from './Modal'
 import { loadProduct } from '../../../helpers/api/adminApi/get-product.api'
+import ProductDetail from './Modal'
+import NavBarAdmin from '../../../components/NavBarAdmin/NavBarAdmin'
 import Item from './Item';
 
 export default class ContentField extends React.Component {
@@ -25,6 +26,7 @@ export default class ContentField extends React.Component {
   render() {
     return (
       <Col xs={10}>
+      <NavBarAdmin activeMenuItem="home"></NavBarAdmin>
       <Table striped responsive hover>
           <thead>
             <tr>

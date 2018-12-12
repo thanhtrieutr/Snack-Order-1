@@ -1,6 +1,7 @@
 import React from 'react';
 import Guide from '../../../components/panel/Panel';
 import InputField from '../../../components/inputField/InputField';
+import NavBarAdmin from '../../../components/NavBarAdmin/NavBarAdmin'
 import { Col, Button } from 'react-bootstrap';
 import { changeEmail, validateEmail } from '../utils';
 
@@ -24,7 +25,8 @@ export default class ContentField extends React.Component {
   }
   render() {
     return (
-      <Col xs={10}>
+      <Col xs={12} md={10}>
+				<NavBarAdmin activeMenuItem="home"></NavBarAdmin>
         <Guide bsStyle='info' title={headText} content={guideText}></Guide>
 
         <InputField label="Email" changeText={this.changeEmail} value={this.state.email} type="text" 

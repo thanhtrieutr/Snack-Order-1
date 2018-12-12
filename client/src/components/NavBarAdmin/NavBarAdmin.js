@@ -1,6 +1,6 @@
 import React from 'react';
 import './style.scss'
-import {Button, Media, Glyphicon, Dropdown, MenuItem, ButtonToolbar, Col, DropdownButton, Well} from 'react-bootstrap';
+import {Button, Glyphicon, Dropdown, MenuItem, ButtonToolbar, Col, DropdownButton} from 'react-bootstrap';
 
 var menuList=[
     {id:"home", href:"/admin", content:"Home page"},
@@ -53,13 +53,13 @@ class  NavBarAdmin extends React.Component {
         var listItems = menuList.map((item,index) => {
             if (item.id === activeId) {
                 return (
-                    <MenuItem  eventKey={`1.${index}`} href={item.href} active>
+                    <MenuItem  key={`1.${index}`} href={item.href} active>
 						{item.content}
 					</MenuItem>
                 );
             }
             return (
-                <MenuItem eventKey={`1.${index}`} href={item.href}>
+                <MenuItem key={`1.${index}`} href={item.href}>
                     {item.content}
                 </MenuItem>
             );

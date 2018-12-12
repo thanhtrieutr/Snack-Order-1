@@ -1,10 +1,17 @@
-.admin-create-user {
-  background: #ECF0F1;
+html, body, #root {
   height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-  position: fixed;
+}
+
+.admin-create-user, .admin-products {
+  background: #ECF0F1;
+}
+
+.admin-create-user {
+  height: 100%;
+}
+
+.admin-products {
+  height: auto;
 }
 
 .admin-product-div {

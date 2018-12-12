@@ -8,6 +8,7 @@ var orderModel = require("../schema/order-schema");
 var accountModel = require("../schema/account-schema");
 
 function createProductList(oneCart) {
+    debugger
     return new Promise((resolve, reject) => {
         if (!oneCart.productTrueID) {
             reject(new Error("Wrong Data Input"));

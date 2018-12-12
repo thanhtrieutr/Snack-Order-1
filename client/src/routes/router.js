@@ -8,18 +8,17 @@ import ForgotPassword from '../pages/ForgetPassword/ForgotPassword';
 import AddNewUser from '../pages/../pages/admin.addUser/AddNewUser';
 import AdminOrderHistory from './../pages/OrderHistory/index'
 import ProductList from '../pages/admin.productList/ProductList';
-
+import adminHome from '../pages/adminHome/index';
 import { Switch, Route } from 'react-router'
 
 function Routerx() {
     return (
-            <Route path="/" exact component={Home} />
      <Switch>
         <Route path="/profile" exact component={Profile} />
         <Route path="/profile/change-password" exact component={ProfileChangePassword} />
         <Route path="/forget-password" exact component={ForgotPassword}/>
-
-        {/* <Route path="/admin" exact component={adminHome} /> */}
+        <Route path="/" exact component={Home} />
+        <Route path="/admin" exact component={adminHome} />
         <Route path='/admin/login' exact component={AdminLogin}/>
         <Route path='/admin/today-order' exact component={AdminTodayOrder}/>
         <Route path="/admin/user/add" exact component={AddNewUser}/>

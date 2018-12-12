@@ -10,6 +10,7 @@ export default class ContentField extends React.Component {
     super();
     this.state = {
       stateModal: false,
+      editState: false,
       products: [],
       item: {},
     }
@@ -38,7 +39,7 @@ export default class ContentField extends React.Component {
           </thead>
           <tbody>{this.createProduct(this.state.products)}</tbody>
         </Table>
-        <ProductDetail editState={false} name={this.state.item.name} show={this.state.stateModal} onHide={this.hideModal} bsSize="large"
+        <ProductDetail editState={this.state.editState} name={this.state.item.name} show={this.state.stateModal} onHide={this.hideModal} bsSize="large"
                       price={this.state.item.price} image={this.state.item.image} id={this.state.item.id}/>
       </Col>
     )
@@ -51,6 +52,7 @@ export default class ContentField extends React.Component {
   hideModal() {
     this.setState({
       stateModal: false,
+      editState: false,
     })
   }
   createProduct(productList) {

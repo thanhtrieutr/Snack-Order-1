@@ -24,3 +24,11 @@ html, body, #root {
   font-size: 30px;
   color: #c0392b;
 }
+
+.admin-button-div {
+  display: inline-block;
+}
+
+.admin-product-button {
+  margin-left: 5px;
+}

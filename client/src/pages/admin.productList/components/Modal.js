@@ -4,6 +4,7 @@ import { Image } from 'react-bootstrap'
 import { updatePrice } from '../../../helpers/api/adminApi/update-price.api'
 import { priceCheck } from '../../../helpers/utils/validate.input'
 import InputField from '../../../components/inputField/InputField'
+import InputFile from '../../../components/inputFile/InputFile'
 import Star from './Star'
 import Sale from './Sales'
 
@@ -17,12 +18,13 @@ export default class ProductDetail extends React.Component {
       newPrice: '',
     }
     this.editPrice = this.editPrice.bind(this);
+    this.cancelEdit = this.cancelEdit.bind(this);
     this.changePrice = this.changePrice.bind(this);
     this.savePrice = this.savePrice.bind(this);
   }
   render() {
     return (
-      <Modal show={this.props.show} onHide={this.props.onHide} bsSize={this.props.bsSize}>
+      <Modal show={this.props.show} bsSize={this.props.bsSize}>
         <Modal.Header>
           <Modal.Title>{this.props.name}</Modal.Title>
         </Modal.Header>
@@ -31,6 +33,7 @@ export default class ProductDetail extends React.Component {
           <Row>
             <Col xs={12} sm={3}>
               <Image alt="product" src={`http://127.0.0.1:3000${this.props.image}`} thumbnail responsive></Image>
+              { this.state.editState === true ? <InputFile id="product-image-input-field"/> : null}
             </Col>
             <Col xs={12} sm={4}>
               <div className="admin-product-div">
@@ -73,7 +76,10 @@ export default class ProductDetail extends React.Component {
           <Button onClick={this.props.onHide}>Close</Button>
           {this.state.editState === false? 
             <Button bsStyle="primary" onClick={this.editPrice}>Edit</Button>
-          : <Button bsStyle="primary" onClick={this.savePrice}>Save</Button>}
+          : <div className="admin-button-div">
+              <Button className="admin-product-button" onClick={this.cancelEdit}>Cancel</Button>
+              <Button bsStyle="primary" onClick={this.savePrice}>Save</Button>
+            </div>}
         </Modal.Footer>
       </Modal>
     )
@@ -85,6 +91,13 @@ export default class ProductDetail extends React.Component {
       editState: true,
       buttonState: 'Save',
     });
+  }
+  cancelEdit() {
+    this.setState({
+      status: null,
+      message: '',
+      editState: false,
+    })
   }
   savePrice() {
     if (priceCheck(this.state.newPrice)) {

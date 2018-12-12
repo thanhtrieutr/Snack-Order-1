@@ -11,16 +11,20 @@ export default class ContentField extends React.Component {
     this.state = {
       stateModal: false,
       editState: false,
+      newPrice: '',
       products: [],
       item: {},
     }
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
+    this.updateInfo = this.updateInfo.bind(this);
   }
   componentWillMount() {
     loadProduct((result) => {
       this.setState({
         products: result.products,
+      }, () => {
+        console.log(this.state.products);
       });
     });
   }
@@ -39,8 +43,9 @@ export default class ContentField extends React.Component {
           </thead>
           <tbody>{this.createProduct(this.state.products)}</tbody>
         </Table>
-        <ProductDetail editState={this.state.editState} name={this.state.item.name} show={this.state.stateModal} onHide={this.hideModal} bsSize="large"
-                      price={this.state.item.price} image={this.state.item.image} id={this.state.item.id}/>
+        <ProductDetail editState={this.state.editState} name={this.state.item.name} show={this.state.stateModal} 
+                      onHide={this.hideModal} bsSize="large" price={this.state.item.price} image={this.state.item.image} 
+                      id={this.state.item.id} updateInfo={this.updateInfo}/>
       </Col>
     )
   }
@@ -67,5 +72,8 @@ export default class ContentField extends React.Component {
       item: callbackItem,
       stateModal: true,
     });
+  }
+  updateInfo() {
+    this.forceUpdate(this.componentWillMount());
   }
 }

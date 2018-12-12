@@ -1,5 +1,5 @@
 import React from 'react';
-import {Nav, NavItem} from 'react-bootstrap';
+import {Nav, NavItem, Col} from 'react-bootstrap';
 
 var menuList=[
     {id:"home", href:"/admin", content:"Home page"},
@@ -14,9 +14,11 @@ var menuList=[
 class LinkAdminPage extends React.Component {
     render() {
         return (
-            <Nav bsStyle="pills" stacked>
-                {this.createMenuList(this.props.activeMenuItem)}
-            </Nav>
+            <Col xsHidden smHidden md={2}>
+                <Nav bsStyle="pills" stacked >
+                    {this.createMenuList(this.props.activeMenuItem)}
+                </Nav>        
+            </Col>
         );
     }
     createMenuList(activeId) {

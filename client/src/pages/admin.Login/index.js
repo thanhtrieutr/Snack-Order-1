@@ -20,7 +20,6 @@ class AdminLogin extends React.Component {
     // getAllUsersAPI().then(response => this.setState({ users: response.data })); 
   }
   render() {
-    debugger
     // const result = this.callYoutube();
     return (
       <div className="Admin-login">
@@ -35,7 +34,6 @@ class AdminLogin extends React.Component {
   }
 
   async callYoutube() {
-    debugger
     try {
       const result = await fetch('https://api.nasa.gov/planetary/apod?api_key=NNKOjkoul8n1CH18TWA9gwngW1s1SmjESPjNoUFo');
       console.log(result);

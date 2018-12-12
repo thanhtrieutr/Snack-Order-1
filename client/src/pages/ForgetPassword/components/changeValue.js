@@ -9,25 +9,25 @@ export function checkValue() {
           if (result.success === true) {
             this.setState({
               step: 2,
-              updateStat: 'none',
-              message: 'none',
+              updateStat: null,
+              message: '',
             });
           } else {
             this.setState({
-              updateStat: 'ms_warning',
-              message: 'User does not exist'
+              updateStat: 'warning',
+              message: 'User does not exist.'
             })
           }
         });
       } else if (this.state.email.length === 0) {
         this.setState({
-          updateStat: 'ms_error',
-          message: "Can't be blank",
+          updateStat: 'error',
+          message: "Can't be blank.",
         });
       } else {
         this.setState({
-          updateStat: 'ms_error',
-          message: "Email is invalid",
+          updateStat: 'error',
+          message: "Email is invalid.",
         });
       }
       break;
@@ -37,28 +37,28 @@ export function checkValue() {
           if (result.success === true) {
             this.setState({
               step: 3,
-              updateStat: 'none',
-              message: 'none',
+              updateStat: null,
+              message: '',
               token: result.token,
               oldPassword: result.password,
             });
           } else {
             this.setState({
-              updateStat: 'ms_warning',
-              message: 'Code does not match'
+              updateStat: 'warning',
+              message: 'Validation code does not match.'
             });
           }
         })
 
       } else if (this.state.code.length === 0) {
         this.setState({
-          updateStat: 'ms_error',
-          message: "Can't be blank",
+          updateStat: 'error',
+          message: "Can't be blank.",
         });
       } else {
         this.setState({
-          updateStat: 'ms_error',
-          message: "Code in invalid",
+          updateStat: 'error',
+          message: "Code in invalid.",
         });
       }
       break;
@@ -71,7 +71,7 @@ export function checkValue() {
                 step: 4
               }, () => {
                 this.setState({
-                  updateStat: 'ms_success',
+                  updateStat: 'success',
                   message: "Reset password successfully! ",
                   linking: '/login',
                   token: ''
@@ -79,21 +79,21 @@ export function checkValue() {
               });
             } else {
               this.setState({
-                updateStat: 'ms_warning',
-                message: "Reset failed"
+                updateStat: 'warning',
+                message: "Reset failed."
               });
             }
           })
         } else {
           this.setState({
-            updateStat: 'ms_error',
-            message: "Password and confirm password doesn't match",
+            updateStat: 'error',
+            message: "Password and confirm password doesn't match.",
           });
         }
       } else {
         this.setState({
-          updateStat: 'ms_error',
-          message: "Password is invalid",
+          updateStat: 'error',
+          message: "Password is invalid.",
         });
       }
       break;

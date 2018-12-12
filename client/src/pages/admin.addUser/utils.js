@@ -11,9 +11,9 @@ function generatePassword() {
   return text;
 }
 
-export function changeEmail(dataFormInput) {
+export function changeEmail(evt) {
   this.setState({
-    email: dataFormInput
+    email: evt.target.value,
   })
 }
 
@@ -24,19 +24,20 @@ export function validateEmail() {
     createUser(this.state.email, password, (result) => {
       if (result.success === true) {
         this.setState({
-          status: 'is-success',
+          status: 'success',
           message: 'Create successfully!',
+          email: '',
         });
       } else {
         this.setState({
-          status: 'is-warning',
+          status: 'warning',
           message: 'Account already exists.'
         });
       }
     })
   } else {
     this.setState({
-      status: 'is-danger',
+      status: 'error',
       message: 'Email is invalid.'
     });
   }

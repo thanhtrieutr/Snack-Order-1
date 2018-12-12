@@ -14,7 +14,7 @@ var menuList=[
 class LinkAdminPage extends React.Component {
     render() {
         return (
-            <Col xsHidden smHidden md={2}>
+            <Col xsHidden smHidden md={3} lg={2}>
                 <Nav bsStyle="pills" stacked >
                     {this.createMenuList(this.props.activeMenuItem)}
                 </Nav>        

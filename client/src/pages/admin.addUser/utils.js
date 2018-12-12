@@ -26,6 +26,7 @@ export function validateEmail() {
         this.setState({
           status: 'success',
           message: 'Create successfully!',
+          email: '',
         });
       } else {
         this.setState({

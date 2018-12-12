@@ -23,7 +23,7 @@ class  NavBarAdmin extends React.Component {
         <ButtonToolbar>
             <Col xs={2} sm={2} mdHidden lgHidden>
             <Dropdown id="admin-dropdown-hamburger" key="1">
-                <Dropdown.Toggle noCaret>
+                <Dropdown.Toggle noCaret bsSize="large">
                     <Glyphicon glyph="menu-hamburger" />
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
@@ -53,13 +53,13 @@ class  NavBarAdmin extends React.Component {
         var listItems = menuList.map((item,index) => {
             if (item.id === activeId) {
                 return (
-                    <MenuItem  key={`1.${index}`} href={item.href} active>
+                    <MenuItem  eventKey={`1.${index}`} key={index} href={item.href} active>
 						{item.content}
 					</MenuItem>
                 );
             }
             return (
-                <MenuItem key={`1.${index}`} href={item.href}>
+                <MenuItem eventKey={`1.${index}`} key={index} href={item.href}>
                     {item.content}
                 </MenuItem>
             );

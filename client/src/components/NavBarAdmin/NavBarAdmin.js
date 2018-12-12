@@ -53,13 +53,13 @@ class  NavBarAdmin extends React.Component {
         var listItems = menuList.map((item,index) => {
             if (item.id === activeId) {
                 return (
-                    <MenuItem  eventKey={`1.${index}`} href={item.href} active>
+                    <MenuItem key={index}  eventKey={`1.${index}`} href={item.href} active>
 						{item.content}
 					</MenuItem>
                 );
             }
             return (
-                <MenuItem eventKey={`1.${index}`} href={item.href}>
+                <MenuItem key={index} eventKey={`1.${index}`} href={item.href}>
                     {item.content}
                 </MenuItem>
             );

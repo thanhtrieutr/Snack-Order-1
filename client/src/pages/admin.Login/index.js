@@ -7,7 +7,7 @@ import AdminApi from '../../helpers/api/admin.api'
 
 class AdminLogin extends React.Component {
   constructor() {
-    super()
+    super();
     var token = { token: localStorage.getItem("token")};
     AdminApi.checkToken(token, (result) => {
       if (result !== false) {
@@ -20,7 +20,6 @@ class AdminLogin extends React.Component {
     // getAllUsersAPI().then(response => this.setState({ users: response.data })); 
   }
   render() {
-    debugger
     // const result = this.callYoutube();
     return (
       <div className="Admin-login">

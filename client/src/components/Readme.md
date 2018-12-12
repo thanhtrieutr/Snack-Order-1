@@ -11,8 +11,14 @@ can pass id, className, placeholder, onChangeHandle, name
 ### 3) SubmitButton
 can pass id, className, onClickHandle, content
 
-### 4) LinkAdminPage
+### 4.1) LinkAdminPage
 can pass activeMenuItem (ex: activeMenuItem="today-order")
+
+### 4.2) NavBarAdmin
+can pass activeMenuItem (ex: activeMenuItem="today-order")
+
+don't have check authentication
+Ex: see adminHome
 
 ### 5) InputField
 

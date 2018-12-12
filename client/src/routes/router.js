@@ -9,7 +9,6 @@ import ForgotPassword from '../pages/ForgetPassword/ForgotPassword';
 import AddNewUser from '../pages/../pages/admin.addUser/AddNewUser';
 import AdminOrderHistory from './../pages/OrderHistory/index'
 import ProductList from '../pages/admin.productList/ProductList';
-import adminHome from '../pages/adminHome/index';
 import { Switch, Route } from 'react-router'
 
 function Routerx() {
@@ -24,7 +23,7 @@ function Routerx() {
         <Route path='/admin/today-order' exact component={AdminTodayOrder}/>
         <Route path="/admin/user/add" exact component={AddNewUser}/>
         <Route path="/admin/products" exact component={ProductList}/>
-        <Route path="/admin/order-history" exact component={AdminOrderHistory}/>
+        <Route path="/admin/history" exact component={AdminOrderHistory}/>
     </Switch>
     );
 }

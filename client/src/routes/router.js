@@ -6,7 +6,8 @@ import AdminLogin from '../pages/admin.Login/index';
 import AdminTodayOrder from '../pages/admin.todayOrder/index';
 import AdminHome from '../pages/adminHome/index'
 import ForgotPassword from '../pages/ForgetPassword/ForgotPassword';
-import AddNewUser from '../pages/AddUser/AddNewUser';
+import AddNewUser from '../pages/admin.addUser/AddNewUser';
+import ProductList from '../pages/admin.productList/ProductList';
 
 import {
     BrowserRouter as Router,
@@ -20,11 +21,12 @@ function Routerx() {
             {/* <Route path="/" component={Home} /> */}
             <Route path="/profile" exact component={Profile} />
             <Route path="/profile/change-password" exact component={ProfileChangePassword} />
+            <Route path="/forget-password" exact component={ForgotPassword}/>
             <Route path='/admin/login' exact component={AdminLogin}/>
             <Route path='/admin' exact component={AdminHome}/>
             <Route path='/admin/today-order' exact component={AdminTodayOrder}/>
             <Route path="/admin/user/add" exact component={AddNewUser}/>
-            <Route path="/forget-password" exact component={ForgotPassword}/>
+            <Route path="/admin/product-list" exact component={ProductList}/>
         </div>
      </Router>
     );

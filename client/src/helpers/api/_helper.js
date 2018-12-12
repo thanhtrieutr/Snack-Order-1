@@ -8,6 +8,7 @@ let _helper = {
     fetch(host + endpoint, {
         method: 'POST',
         headers: {
+          'token': localStorage.token,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(dataToBeSent)

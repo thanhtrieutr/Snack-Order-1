@@ -11,7 +11,7 @@ class AdminHome extends React.Component {
 			<div className="admin-home">
 				<Helmet>
 					<meta charSet="utf-8" />
-					<title>My Title</title>
+					<title>Admin Home</title>
 					<link rel="canonical" href="http://mysite.com/example" />
 					<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
             	</Helmet>

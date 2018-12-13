@@ -5,7 +5,14 @@ import NavBarAdmin from '../../components/NavBarAdmin/NavBarAdmin'
 import "./style.scss"
 import {Col,Grid} from 'react-bootstrap';
 import MainContainer from "./components/main.container"
+import AdminApi from "../../helpers/api/admin.api"
 class AdminHome extends React.Component {
+	constructor() {
+		super();
+		this.state = {
+			trueUser:false
+		}
+	}
 	render() {
 		return (
 			<div className="admin-home">
@@ -19,11 +26,29 @@ class AdminHome extends React.Component {
                     <LinkAdminPage activeMenuItem="home"></LinkAdminPage>
 					<Col xs={12} md={9} lg={10}>
 						<NavBarAdmin activeMenuItem="home"></NavBarAdmin>
-						<MainContainer></MainContainer>
+						{!this.state.trueUser ? null :
+						<MainContainer></MainContainer> }
       				</Col>
                 </Grid>
 			</div>
 		);
+	}
+
+	componentWillMount() {
+		var item={
+			token:localStorage.getItem("token")
+		};
+		AdminApi.checkToken(item,result => {
+			if (result === false) {
+				alert("You haven't logged in");
+				this.props.history.push("/admin/login");
+			}
+			else {
+				this.setState({
+					trueUser:true
+				})
+			}
+		});
 	}
 }
 

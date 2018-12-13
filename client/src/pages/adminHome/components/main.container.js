@@ -3,14 +3,32 @@ import React from 'react';
 import DashboardComponent from './dashboard.component'
 
 class MainContainer extends React.Component {
+	constructor() {
+		super();
+		this.state = {
+			orderCount:0,
+			budgetRequire:0,
+			currentSpending:0,
+			mostBought:"None",
+			monthSpend:0
+		}
+	}
+
+	componentWillMount() {
+		var item={
+			token:localStorage.getItem("token")
+		};
+		//Call API get all the content.
+	}
+
 	render() {
 		return (
-			<div>
-				<DashboardComponent dataName="Today's Order Count" dataContent="11" currency="Order"></DashboardComponent>
-                <DashboardComponent dataName="Budget Requirement" dataContent="22" currency="VND"></DashboardComponent>
-                <DashboardComponent dataName="Current Spending" dataContent="33" currency="VND"></DashboardComponent>
-                <DashboardComponent dataName="Most Bought Item" dataContent="44" currency="Item"></DashboardComponent>
-                <DashboardComponent dataName="Monthly Spending" dataContent="55" currency="VND"></DashboardComponent>
+			<div className="home-content">
+				<DashboardComponent dataName="Today's Order Count" dataContent={this.state.orderCount} currency="Order"></DashboardComponent>
+                <DashboardComponent dataName="Budget Requirement" dataContent={this.state.budgetRequire} currency="VND"></DashboardComponent>
+                <DashboardComponent dataName="Current Spending" dataContent={this.state.currentSpending} currency="VND"></DashboardComponent>
+                <DashboardComponent dataName="Most Bought Item" dataContent={this.state.mostBought} currency="Item"></DashboardComponent>
+                <DashboardComponent dataName="Monthly Spending" dataContent={this.state.monthSpend} currency="VND"></DashboardComponent>
 			</div>
 			
 		);

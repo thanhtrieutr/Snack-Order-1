@@ -13,7 +13,7 @@ var appAddProduct = express();
 //save to disk at image folder
 var storage = multer.diskStorage({
     destination: function (req, file, callback) {
-        callback(null, path.join(__dirname, '../../images'));
+        callback(null, path.join(__dirname, '../../client/src/assets/images'));
     },
     filename: function (req, file, callback) {
         req.newFileName = utilities.modifyFileName(file.originalname);
@@ -179,14 +179,12 @@ appUpdateProduct.post('/image', adminUtilities.authenticationAdminByHeader, uplo
         var avatarValue = {
             img: '/static/images/' + productImageLink
         };
-        crud.updateOneDocument(productModel, {
-            _id: currentProduct._id
-        }, avatarValue, function (err) {
+        crud.updateOneDocument(productModel, {_id: currentProduct._id}, avatarValue, function (err) {
             if (err) {
                 throw err;
             }
             utilities.setResponseHeader(response);
-            response.end("OK");
+            response.end("success");
         });
     }).catch(error => {
         next(error);

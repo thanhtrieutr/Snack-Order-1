@@ -30,7 +30,7 @@ export default class ContentField extends React.Component {
         <Guide bsStyle='info' title={headText} content={guideText}></Guide>
 
         <InputField label="Email" changeText={this.changeEmail} value={this.state.email} type="text" 
-          placeholder="* Enter your email here" bsSize="large" labelSize={2} inputSize={10}
+          placeholder="* Enter email here" bsSize="large" labelSize={2} inputSize={10}
           validationState={this.state.status} validationText={this.state.message}/>
 
         <div className="fp-buttons">

@@ -4,7 +4,7 @@ export function logOut(history, callback) {
     localStorage.removeItem("currentAccount");
     removeTokenOnServe(token, result => {
         console.log(result);
-        if (result!=false) {
+        if (result !== false) {
             localStorage.removeItem('token');
             history.push('/login');
             callback(true);
@@ -22,10 +22,10 @@ function removeTokenOnServe(token, callback) {
         method: "POST",
         body: JSON.stringify(obj)
     }).then(response => {
-        if (response.status == 200) {
+        if (response.status === 200) {
             var result = response;
             console.log(result);
-            if (result == false) callback(false);
+            if (result === false) callback(false);
             else callback(result);
         }
     }); 

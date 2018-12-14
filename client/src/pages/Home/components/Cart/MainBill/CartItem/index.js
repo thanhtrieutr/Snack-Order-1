@@ -3,9 +3,9 @@ import Span from '../../../../../../components/Home/span'
 import AmountBar from './AmountBar/index'
 
 export default class CartItem extends Component {
-    constructor() {
-        super();
-    }
+    // constructor() {
+    //     super();
+    // }
     render() {
         return(
            <div className="order-thing" id={"cart-" + this.props.index}>

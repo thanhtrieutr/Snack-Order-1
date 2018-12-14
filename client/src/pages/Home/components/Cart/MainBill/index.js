@@ -17,7 +17,7 @@ export default class MainBill extends Component {
     }
     createCart(cartList) { 
         var cart = cartList.map((item, index) => { 
-          if (item !=  -1){
+          if (item !==  -1){
             return (
                 <CartItem key={index} valueIndex={index} index={item+1} name={this.props.productList[item].name} price={displayPrice(this.props.productList[item].price * this.props.amountList[index])} amount={this.props.amountList[index]} amountHandler={this.props.amountHandler}></CartItem>
             )

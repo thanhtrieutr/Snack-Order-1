@@ -7,7 +7,7 @@ export function submitCart(cartArray) {
         method: "POST",
         body: JSON.stringify(obj)
     }).then(response => {
-        if (response.status == 200) {
+        if (response.status === 200) {
             response.json().then(function(result) {
                 console.log(result);
                 var answer = "Bill: \n";

@@ -15,7 +15,7 @@ class HistoryContainer extends Component {
 
   render () {
     return (
-      <div>
+      <div className="col-md-9 col-lg-10">
         {this.loadOrderHistory(this.props.historyContainer)}
       </div>
     )
@@ -24,7 +24,7 @@ class HistoryContainer extends Component {
     var toggle = this.state.showHistory ? {display: 'block'} : {display: 'none'};
     var listHistory = historyList.map((item, index) => {
       return (
-        <div key={item._id} index={index+1} id={`order-container-${index+1}`} className="col-md-offset-2" >
+        <div key={item._id} index={index+1} id={`order-container-${index+1}`} >
           <Table id={`order-detail-${index+1}`} onClick={(event) => this.toggleShowHistory(event, index+1)}> 
           <thead>
             <tr>

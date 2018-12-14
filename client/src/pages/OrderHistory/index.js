@@ -10,26 +10,30 @@ import '././index.scss'
 class AdminOrderHistory extends React.Component {
   constructor() {
     super();
-    // var token = { token: localStorage.getItem("token")};
-    // AdminApi.checkToken(token, (result) => {
-    //   if (result !== false) {
-    //     alert("You haven't logged in");
-    //     window.location.href = "/admin/login";
-    //   }
-    // })
+    
     this.state = {
-      orderHistory: []
+      orderHistory: [],
+      dataLength: 0
     }
   }
   
   componentWillMount() {
+    var token = { token: localStorage.getItem("token")};
+    AdminApi.checkToken(token, (result) => {
+      console.log(result);
+      if (result === false) {
+        alert("You haven't logged in");
+        window.location.href = "/admin/login";
+      }
+    })
     getProductHistory(result => {
       this.setState({
         orderHistory: result
       })
       var data = this.state.orderHistory.reverse();
       this.setState({
-        orderHistory: data
+        orderHistory: data,
+        dataLength: data.length
       })
     })
   }
@@ -40,8 +44,7 @@ class AdminOrderHistory extends React.Component {
           <HeaderTag/>
           <NavBarAdmin activeMenuItem="Order history"></NavBarAdmin>
 				  <LinkAdminPage activeMenuItem="Order history"></LinkAdminPage>
-          <HistoryContainer historyContainer={this.state.orderHistory}
-          className="col-md-8"/>
+          <HistoryContainer historyContainer={this.state.orderHistory} dataLength={this.state.dataLength}/>
       </div>
     )
   }

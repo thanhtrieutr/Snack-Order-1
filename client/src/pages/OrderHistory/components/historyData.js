@@ -12,7 +12,7 @@ class HistoryData extends Component {
   loadHistoryTable(historyData) {
     var listHistory = historyData.map((item, index) => {
       return (
-        <tr key={item._id} index={index+1} id={`order-data-${index+1}`}>
+        <tr key={item._id} index={index} id={`order-data-${index+1}`}>
             <td className="display-item"> {item.name} </td>
             <td className="display-item"> {item.quantity} </td>
             <td className="display-item"> {displayPrice(item.price)} </td>

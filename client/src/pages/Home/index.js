@@ -58,7 +58,7 @@ export default class Home extends Component {
   }
   handleResize = () => {
     var status = this.state.hamburgerStatus;
-    if (status == 1 && window.innerWidth < 768) {
+    if (status === 1 && window.innerWidth < 768) {
       status = 1;
     }
     else status = 0;
@@ -79,7 +79,7 @@ export default class Home extends Component {
   }
   logOutHandle() { 
     logOut(this.props.history, result => { 
-      if (result == true) { 
+      if (result === true) { 
         this.setState({
           user: ""
         })
@@ -87,13 +87,13 @@ export default class Home extends Component {
     })
   }
   hamburgerHandler() { 
-    if (this.state.hamburgerStatus == 0) {
+    if (this.state.hamburgerStatus === 0) {
       this.setState({hamburgerStatus : 1});
     }
     else this.setState({hamburgerStatus : 0});
   }
   cartHandler() { 
-    if (this.state.cartStatus == 0) {
+    if (this.state.cartStatus === 0) {
       this.setState({cartStatus : 1});
     }
     else this.setState({cartStatus : 0});
@@ -144,7 +144,7 @@ export default class Home extends Component {
     var productList = this.state.productList;
     var totalPrice = 0;
     for (var i=0; i<cartList.length; i++) { 
-      if (cartList[i] != -1) {
+      if (cartList[i] !== -1) {
         totalPrice += amountList[i] * productList[cartList[i]].price;
       }
     }
@@ -156,7 +156,7 @@ export default class Home extends Component {
     var amountList = this.state.amountList;
     var productList = this.state.productList;
     for (var i = 0; i < cartList.length; ++i) { 
-      if (cartList[i] != -1) { 
+      if (cartList[i] !== -1) { 
         var obj = {};
         obj.amount = amountList[i];
         obj.productID = cartList[i] + 1;
@@ -171,7 +171,7 @@ export default class Home extends Component {
       return (<Cart submitCart={this.submitHandler} totalPrice={displayPrice(this.state.total)} cartList={this.state.cart} productList={this.state.productList} amountList={this.state.amountList} amountHandler={this.amountHandler}></Cart>);
     }
     else {
-      if (this.state.cartStatus == 1) { 
+      if (this.state.cartStatus === 1) { 
         return (<Cart submitCart={this.submitHandler} totalPrice={displayPrice(this.state.total)} cartList={this.state.cart} productList={this.state.productList} amountList={this.state.amountList} amountHandler={this.amountHandler}></Cart>); 
       }
     }

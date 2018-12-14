@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import Name from '../../../../../components/Home/name'
 
 export default class TotalPrice extends Component {
-    constructor(){ 
-        super();
-    }
+    // constructor(){ 
+    //     super();
+    // }
     render() {
         return (
         <div className="total">

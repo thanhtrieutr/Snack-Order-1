@@ -1,4 +1,4 @@
-var token = localStorage.getItem("token");
+// var token = localStorage.getItem("token");
 
 function checkToken(token, callback) {
     var obj = {token: token};
@@ -6,7 +6,7 @@ function checkToken(token, callback) {
         method: "POST",
         body: JSON.stringify(obj)
     }).then(response => {
-        if (response.status == 200) {
+        if (response.status === 200) {
             response.json().then(function(data) {
                 callback(data);
             });
@@ -20,7 +20,7 @@ function checkToken(token, callback) {
 export function checkLogIn(history, callback) {
     var token = localStorage.getItem("token");
     checkToken(token, result => {
-        if (result == false) {
+        if (result === false) {
             alert("You haven't logged in");
             history.push("/login");
         }

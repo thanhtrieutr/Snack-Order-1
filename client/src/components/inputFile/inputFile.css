@@ -1,0 +1,19 @@
+.product-input-image {
+	display: none !important;
+}
+
+.product-input-label {
+  text-align: center;
+  border: 1px solid #ccc;
+  display: block;
+  padding: 6px 12px;
+  width: 150px;
+  margin: 5px auto;
+  cursor: pointer;
+}
+
+.product-input-label:hover {
+  outline: 1px dotted #000;
+  outline: -webkit-focus-ring-color auto 5px;
+  background: rgb(231, 231, 231);
+}

@@ -3,9 +3,6 @@ import MainBill from './MainBill/index'
 import TotalPrice from './TotalPrice/index'
 import ButtonClick from '../../../../components/Home/button'
 export default class Cart extends Component {
-    constructor() { 
-        super();
-    }
     render() {
         return (
         <div id="bill-form" className="cl-xs-12 cl-md-4 cl-xl-3">

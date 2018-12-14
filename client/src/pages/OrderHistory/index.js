@@ -1,4 +1,5 @@
 import React from 'react';
+import {Grid} from 'react-bootstrap'
 import {getProductHistory} from '././scripts/loadHistoryData';
 import AdminApi from '../../helpers/api/admin.api'
 import HeaderTag from '././components/headerTag'
@@ -42,9 +43,11 @@ class AdminOrderHistory extends React.Component {
     return (
       <div className="admin-order-history">
           <HeaderTag/>
-          <NavBarAdmin activeMenuItem="Order history"></NavBarAdmin>
-				  <LinkAdminPage activeMenuItem="Order history"></LinkAdminPage>
-          <HistoryContainer historyContainer={this.state.orderHistory} dataLength={this.state.dataLength}/>
+          <Grid>
+            <NavBarAdmin activeMenuItem="order-history"></NavBarAdmin>
+				    <LinkAdminPage activeMenuItem="order-history"></LinkAdminPage>
+            <HistoryContainer historyContainer={this.state.orderHistory} dataLength={this.state.dataLength}/>
+          </Grid>
       </div>
     )
   }

@@ -1,3 +1,9 @@
+html, body, #root {
+  height: 100%;
+  overflow-x: auto
+}
+
+.admin-order-history {
 [id ^= order-detail-] {
   border: 1px solid black;
   :hover {
@@ -13,10 +19,11 @@
     height: 80px;
   }
 }
-[id ^= order-history-detail-table-] {
-  display: none;
+.active-item {
+  display: block;
 }
 .display-item {
   text-align: center;
   font-size: 16px;
+}
 }

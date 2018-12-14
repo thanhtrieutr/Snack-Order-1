@@ -24,17 +24,22 @@ class HistoryContainer extends Component {
     var listHistory = historyList.map((item, index) => {
       return (
         <div key={item._id} index={index} id={`order-container-${index+1}`} >
-          <Table id={`order-detail-${index+1}`} onClick={(event) => this.toggleShowHistory(event, index)}> 
+          <Table id={`order-detail-${index+1}`} > 
           <thead>
             <tr>
-              <td className="display-item col-xs-5"> 
-                Account: <br/> {item.user}  
-              </td>
               <td className="display-item col-xs-4"> 
-                Total: <br/> {displayPrice(item.actualTotalPrice)} 
+                <b> Account </b> <br/> {item.user}  
               </td>
               <td className="display-item col-xs-3"> 
-                Time: <br/> {item.time} 
+                <b> Total </b> <br/> {displayPrice(item.actualTotalPrice)} 
+              </td>
+              <td className="display-item col-xs-3"> 
+                <b> Time </b> <br/> {item.time} 
+              </td>
+              <td className="display-item col-xs-2"> 
+                <button onClick={(event) => this.toggleShowHistory(event, index)}>
+                  Show <br/> Details
+                </button>
               </td>
             </tr>
           </thead>

@@ -11,32 +11,35 @@ class HistoryContainer extends Component {
     }
     this.loadOrderHistory = this.loadOrderHistory.bind(this);
     this.toggleShowHistory = this.toggleShowHistory.bind(this);
-    // this.getDataLength = this.getDataLength.bind(this);
   }
 
   render () {
     return (
-      <div className="col-md-9 col-lg-10">
+      <div>
         {this.loadOrderHistory(this.props.historyContainer, this.props.dataLength)}
       </div>
     )
   }
   loadOrderHistory(historyList) {
     var listHistory = historyList.map((item, index) => {
-      // var toggle = this.state.activeItem === index  ? 'hidden' : null;
       return (
         <div key={item._id} index={index} id={`order-container-${index+1}`} >
-          <Table id={`order-detail-${index+1}`} onClick={(event) => this.toggleShowHistory(event, index)}> 
+          <Table id={`order-detail-${index+1}`} > 
           <thead>
             <tr>
-              <td className="display-item col-xs-5"> 
-                Account: <br/> {item.user}  
-              </td>
               <td className="display-item col-xs-4"> 
-                Total: <br/> {displayPrice(item.actualTotalPrice)} 
+                <b> Account </b> <br/> {item.user}  
               </td>
               <td className="display-item col-xs-3"> 
-                Time: <br/> {item.time} 
+                <b> Total </b> <br/> {displayPrice(item.actualTotalPrice)} 
+              </td>
+              <td className="display-item col-xs-3"> 
+                <b> Time </b> <br/> {item.time} 
+              </td>
+              <td className="display-item col-xs-2"> 
+                <button onClick={(event) => this.toggleShowHistory(event, index)}>
+                  Show <br/> Details
+                </button>
               </td>
             </tr>
           </thead>

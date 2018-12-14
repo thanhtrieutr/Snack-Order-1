@@ -35,7 +35,10 @@ function getAdminUser(request, response, next) {
         });
     }).then(result => {
         var users = result[1];
-        response.end(JSON.stringify(users));
+        response.json({
+            success: true,
+            users: users
+        });
     }).catch(error => {
         next(error);
     });

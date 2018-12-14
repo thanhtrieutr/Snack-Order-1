@@ -11,19 +11,17 @@ class HistoryContainer extends Component {
     }
     this.loadOrderHistory = this.loadOrderHistory.bind(this);
     this.toggleShowHistory = this.toggleShowHistory.bind(this);
-    // this.getDataLength = this.getDataLength.bind(this);
   }
 
   render () {
     return (
-      <div className="col-md-9 col-lg-10">
+      <div>
         {this.loadOrderHistory(this.props.historyContainer, this.props.dataLength)}
       </div>
     )
   }
   loadOrderHistory(historyList) {
     var listHistory = historyList.map((item, index) => {
-      // var toggle = this.state.activeItem === index  ? 'hidden' : null;
       return (
         <div key={item._id} index={index} id={`order-container-${index+1}`} >
           <Table id={`order-detail-${index+1}`} onClick={(event) => this.toggleShowHistory(event, index)}> 

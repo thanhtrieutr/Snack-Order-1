@@ -1,5 +1,5 @@
 import React from 'react';
-import './styles.css';
+import './styles.scss';
 import HeadTag from './components/HeadTag';
 import LogoField from './components/LogoField';
 import LoginField from './components/LoginField';
@@ -7,7 +7,7 @@ import AdminApi from '../../helpers/api/admin.api'
 
 class AdminLogin extends React.Component {
   constructor() {
-    super()
+    super();
     var token = { token: localStorage.getItem("token")};
     AdminApi.checkToken(token, (result) => {
       if (result !== false) {
@@ -20,6 +20,7 @@ class AdminLogin extends React.Component {
     // getAllUsersAPI().then(response => this.setState({ users: response.data })); 
   }
   render() {
+    // const result = this.callYoutube();
     return (
       <div className="Admin-login">
         <HeadTag></HeadTag>
@@ -30,6 +31,16 @@ class AdminLogin extends React.Component {
         </div>
       </div>
     )
+  }
+
+  async callYoutube() {
+    try {
+      const result = await fetch('https://api.nasa.gov/planetary/apod?api_key=NNKOjkoul8n1CH18TWA9gwngW1s1SmjESPjNoUFo');
+      console.log(result);
+    } catch (er) {
+      debugger
+      console.log(er);
+    }
   }
 }
 

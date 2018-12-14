@@ -1,0 +1,22 @@
+[id ^= order-detail-] {
+  border: 1px solid black;
+  :hover {
+    cursor: pointer;
+  }
+  .display-item {
+    font-size: 18px;
+    padding-top:40px;
+    padding-bottom:40px;
+    padding-right:40px; 
+  }
+  tr {
+    height: 80px;
+  }
+}
+[id ^= order-history-detail-table-] {
+  display: none;
+}
+.display-item {
+  text-align: center;
+  font-size: 16px;
+}

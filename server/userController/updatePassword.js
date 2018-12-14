@@ -40,7 +40,9 @@ module.exports = function updatePassword(request, response, next) {
     }).then(result => {
         crud.updateOneDocument(accountModel, {token: result.token}, {password: result.newPassword}, function () {
             utilities.setResponseHeader(response);
-            response.end("Update Success");
+            response.json({
+                success: true
+            });
         });
     }).catch(error => {
         next(error);

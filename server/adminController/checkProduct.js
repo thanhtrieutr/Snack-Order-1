@@ -223,15 +223,15 @@ appUpdateProduct.post('/price', adminUtilities.authenticationAdminByHeader, util
         var obj = {};
         obj.price = productPrice;
         console.log(currentProduct._id);
-        crud.updateOneDocument(productModel, {
-            _id: currentProduct._id
-        }, obj, err => {
+        crud.updateOneDocument(productModel, {_id: currentProduct._id}, obj, err => {
             if (err) {
                 next(err);
                 return;
             }
             utilities.setResponseHeader(response);
-            response.end("OK");
+            response.json({
+                success: true,
+            });
         });
     }).catch(error => {
         next(error);

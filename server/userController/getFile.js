@@ -9,7 +9,7 @@ var accountModel = require("../schema/account-schema");
 //save to disk at image folder
 var storage = multer.diskStorage({
     destination: function (req, file, callback) {
-        callback(null, path.join(__dirname, '../../images'));
+        callback(null, path.join(__dirname, '../../client/src/assets/images/'));
     },
     filename: function (req, file, callback) {
         req.newFileName = utilities.modifyFileName(file.originalname);

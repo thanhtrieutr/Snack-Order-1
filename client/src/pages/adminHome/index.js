@@ -6,6 +6,7 @@ import "./style.scss"
 import {Col,Grid} from 'react-bootstrap';
 import MainContainer from "./components/main.container"
 import AdminApi from "../../helpers/api/admin.api"
+import dashboardData from "./script/dashboard.data"
 class AdminHome extends React.Component {
 	constructor() {
 		super();

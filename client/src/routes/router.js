@@ -25,8 +25,9 @@ function Routerx() {
         <Route path="/admin/user/add" exact component={AddNewUser}/>
         <Route path="/admin/products" exact component={ProductList}/>
         <Route path="/admin/history" exact component={AdminOrderHistory}/>
+        <Route path="/user-login" exact component={UserLogin}/>
     </Switch>
-            <Route path="/user-login" exact component={UserLogin}/>
+
     );
 }
 

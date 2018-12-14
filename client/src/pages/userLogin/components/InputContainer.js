@@ -4,6 +4,7 @@ import PasswordInputField from './PasswordInputField';
 import '../../../helpers/bootstrap/build-column.css';
 import '../../../helpers/bootstrap/off-set.css';
 import LogInButton from './LogInButton';
+import {Col, Row, Grid} from 'react-bootstrap';
 
 class InputContainer extends Component {
     constructor() {
@@ -22,7 +23,7 @@ class InputContainer extends Component {
     }
     render() {
         return (
-            <div className="container cl-xs-12">
+            <Col className="container" xs={6} xsOffset={3} >
                 <h3>Email</h3>
                 <UserInputField 
                 id="input-user" placeholder="&#xf007; * Email" 
@@ -43,7 +44,7 @@ class InputContainer extends Component {
                 <h4 id = "redirect-register"> Don't you have an account?
                     <a id = "link-signup" href="#"> We got you </a>
                 </h4>
-            </div>
+            </Col>
         );
     }
     checkKeyPress(key) {
@@ -95,5 +96,6 @@ class InputContainer extends Component {
         );
     }
 }
+
 
 export default InputContainer

@@ -1,7 +1,5 @@
 import React, {Component} from 'react'
 import "./userLogInStyle.scss";
-import "../../helpers/bootstrap/build-column.css"
-import "../../helpers/bootstrap/off-set.css"
 import "./components/InputContainer";
 import "./components/LogoContainer";
 import LogoContainer from './components/LogoContainer';
@@ -13,7 +11,7 @@ export default class UserLogin extends Component {
     }
     render() {
         return( 
-            <div className="user-login">
+            <div className="user-login" xs={12} md={8}>
                 <LogoContainer></LogoContainer>
                 <InputContainer></InputContainer>
             </div>

@@ -1,30 +1,22 @@
 import React from 'react'
 import { Col, Table } from 'react-bootstrap'
 import { loadProduct } from '../../../helpers/api/adminApi/get-product.api'
-import ProductDetail from './Modal'
 import NavBarAdmin from '../../../components/NavBarAdmin/NavBarAdmin'
-import Item from './Item';
+import Item from './Item'
 
 export default class ContentField extends React.Component {
   constructor() {
     super();
     this.state = {
-      stateModal: false,
-      editState: false,
-      newPrice: '',
       products: [],
       item: {},
     }
-    this.showModal = this.showModal.bind(this);
-    this.hideModal = this.hideModal.bind(this);
     this.updateInfo = this.updateInfo.bind(this);
   }
   componentWillMount() {
     loadProduct((result) => {
       this.setState({
         products: result.products,
-      }, () => {
-        console.log(this.state.products);
       });
     });
   }
@@ -43,37 +35,17 @@ export default class ContentField extends React.Component {
           </thead>
           <tbody>{this.createProduct(this.state.products)}</tbody>
         </Table>
-        <ProductDetail editState={this.state.editState} name={this.state.item.name} show={this.state.stateModal} 
-                      onHide={this.hideModal} bsSize="large" price={this.state.item.price} image={this.state.item.image} 
-                      id={this.state.item.id} updateInfo={this.updateInfo}/>
       </Col>
     )
-  }
-  showModal() {
-    this.setState({
-      stateModal: true,
-    })
-  }
-  hideModal() {
-    this.setState({
-      stateModal: false,
-      editState: false,
-    })
   }
   createProduct(productList) {
     var listItem = productList.map((item, index) => {
       return <Item no={index+1} key={index} name={item.name} price={item.price} image={item.img} id={item._id}
-                  getData={this.getData}/>
+                  getData={this.getData} updateInfo={this.updateInfo}/>
     })
     return listItem;
   }
-  getData = (callbackItem) => {
-    this.setState({ 
-      item: callbackItem,
-      stateModal: true,
-    });
-  }
   updateInfo() {
-    this.forceUpdate(this.componentWillMount());
+    this.componentWillMount();
   }
 }

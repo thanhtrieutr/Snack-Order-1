@@ -15,6 +15,7 @@ var createUser = require("../../adminController/createUser");
 //API for admin backend (using try..catch)
 
 adminRouter.use('/get-products', utilities.jsonParser(), getAdminProduct.getAdminProduct);
+adminRouter.use('/get-product', utilities.jsonParser(), getAdminProduct.getOneProduct);
 adminRouter.use('/get-users', utilities.jsonParser(), getAdminUser.getAdminUser);
 adminRouter.use('/get-today-order', utilities.jsonParser(), getTodayOrder.getTodayOrder);
 adminRouter.use('/check-login', utilities.jsonParser(), loginAdmin.checkLogin);

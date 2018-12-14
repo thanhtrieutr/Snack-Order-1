@@ -24,3 +24,9 @@ export function priceCheck(price) {
     return false;
   return /^[0-9]+$/.test(price);
 }
+
+export function imageSizeCheck(size) {
+  if (size > 100000) 
+    return false;
+  return true;
+}

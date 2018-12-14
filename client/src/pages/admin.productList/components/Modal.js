@@ -2,7 +2,7 @@ import React from 'react'
 import { Modal, Button, Col, Row } from 'react-bootstrap'
 import { Image } from 'react-bootstrap'
 import { updatePrice } from '../../../helpers/api/adminApi/update-price.api'
-import { priceCheck } from '../../../helpers/utils/validate.input'
+import { priceCheck, imageSizeCheck } from '../../../helpers/utils/validate.input'
 import { uploadProductImage } from '../../../helpers/api/adminApi/upload-image.api'
 import InputField from '../../../components/inputField/InputField'
 import InputFile from '../../../components/inputFile/InputFile'
@@ -13,12 +13,11 @@ export default class ProductDetail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      editState: props.editState,
+      editState: false,
       status: null,
-      message: '',
-      newPrice: '',
-      newImage: '',
+      message: null,
       selectedFile: null,
+      newPrice: '',
     }
     this.editPrice = this.editPrice.bind(this);
     this.cancelEdit = this.cancelEdit.bind(this);
@@ -68,16 +67,17 @@ export default class ProductDetail extends React.Component {
                 <h3>Price</h3>
 
                 {this.state.editState === false ? 
-                  <p className="admin-product-price"> {this.state.newPrice} vnđ</p> : 
+                  <p className="admin-product-price"> {this.props.price} vnđ</p> : 
                   <InputField changeText={this.changePrice} value={this.state.newPrice} type="text" 
                   placeholder="* Enter price" bsSize="large" inputSize={12}
-                  validationState={this.state.status} validationText={this.state.message}/>}
+                  validationState={this.state.status}/>}
               </div>
             </Col>
           </Row>
         </Modal.Body>
 
         <Modal.Footer>
+          <p className={"admin-status " + this.state.status}>{this.state.message}</p>
           <Button onClick={this.closeModal}>Close</Button>
           {this.state.editState === false? 
             <Button bsStyle="primary" onClick={this.editPrice}>Edit</Button>
@@ -92,15 +92,15 @@ export default class ProductDetail extends React.Component {
   editPrice() {
     this.setState({
       status: null,
-      message: '',
+      message: null,
       editState: true,
-      buttonState: 'Save',
+      newPrice: this.props.price,
     });
   }
   cancelEdit() {
     this.setState({
       status: null,
-      message: '',
+      message: null,
       newPrice: this.props.price,
       editState: false,
       selectedFile: null,
@@ -110,26 +110,27 @@ export default class ProductDetail extends React.Component {
     if (priceCheck(this.state.newPrice)) {
       updatePrice(this.props.id, this.state.newPrice, (result) => {
         if (result.success === true) {
-          debugger
           if (this.state.selectedFile !== null) {
             this.handleUpload();
           }
           this.setState({
             editState: false,
             status: 'success',
-            message: 'Edit successfully!'
+            message: '*Edit successfully!'
+          }, () => {
+            this.props.changeInfo();
           });
         } else {
           this.setState({
             status: 'warning',
-            message: 'Edit failed.'
+            message: '*Edit failed.'
           })
         }
       })
     } else {
       this.setState({
         status: 'error',
-        message: 'Input is invaild.'
+        message: '*Input is invaild.'
       })
     }  
   }
@@ -139,63 +140,34 @@ export default class ProductDetail extends React.Component {
     });
   }
   handleSelectedFile(evt) {
-    this.setState({
-      selectedFile: evt.target.files[0],
-    });
+    if (imageSizeCheck(evt.target.files[0].size)) {
+      this.setState({
+        selectedFile: evt.target.files[0],
+        status: null,
+        message: null,
+      });
+    } else {
+      this.setState({
+        message: '*The uploaded image is too large. Maximum size allowed is 97KB',
+        status: 'warning'
+      })
+    }
   }
   handleUpload() {
     uploadProductImage(this.state.selectedFile, this.props.id, (result) => {
       if (result === true) {
-        debugger
-        this.setState({
-          selectedFile: null,
-        }, () => {
-          this.props.updateInfo();
-        });
+        this.props.changeInfo();
       }
     });
   }
   closeModal() {
-    if (this.state.status ===  'success') {
-      this.setState({
-        editState: false,
-        selectedFile: null,
-        status: null,
-        message: '',
-      }, () => {
-        this.props.onHide();
-      });
-    } else {
-      this.setState({
-        editState: false,
-        selectedFile: null,
-        status: null,
-        newPrice: this.props.price,
-        message: '',
-      }, () => {
-        this.props.onHide();
-      });
-    }
+    this.setState({
+      editState: false,
+      selectedFile: null,
+      status: null,
+      message: null,
+    }, () => {
+      this.props.onHide();
+    });
   }
-  // static getDerivedStateFromProps(nextProps, prevState) {
-  //   if (nextProps.price !== prevState.newPrice || nextProps.image !== prevState.newImage) {
-  //     return { 
-  //       newPrice: nextProps.price,
-  //       newImage: nextProps.image,
-  //      };
-  //   }
-  //   else return null;
-  // }
-  // componentDidUpdate(prevProps, prevState) {
-  //   if(prevProps.price !== this.props.price){
-  //     this.setState({
-  //       newPrice: this.props.price
-  //     });
-  //   }
-  //   if(prevProps.image !== this.props.image){
-  //     this.setState({
-  //       newImage: this.props.image
-  //     });
-  //   }
-  // }
 }

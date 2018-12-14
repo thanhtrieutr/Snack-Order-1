@@ -36,3 +36,19 @@ html, body, #root {
 .image-label {
   word-break: break-all;
 }
+
+.admin-status {
+  float: left;
+}
+
+.admin-status.error {
+  color: red;
+}
+
+.admin-status.success {
+  color: green;
+}
+
+.admin-status.warning {
+  color: #8a6d3b;
+}

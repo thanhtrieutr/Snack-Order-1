@@ -43,6 +43,36 @@ function getAdminProduct(request, response, next) {
     });
 }
 
+function getOneProduct(request, response , next) {
+    var collectClient = new Promise((resolve, reject) => {
+        result = request.body;
+        if (result instanceof Error) {
+            reject(result);
+        }
+        if (typeof(result) != "object" || result == null) {
+            reject(new Error ("Wrong Data Input"));
+        }
+        resolve(result);
+    });
+    collectClient.then((result) => {
+        obj = { _id : result.id };
+        crud.readOneDocument(productModel, obj, product => {
+            if (product == null) {
+                response.json({
+                    success: false,
+                });
+            }
+            response.json({
+                product: product,
+                success: true,
+            });
+        });
+    }).catch((err) => {
+        next(err);
+    })
+}
+
 module.exports = {
-    getAdminProduct: getAdminProduct
+    getAdminProduct: getAdminProduct,
+    getOneProduct: getOneProduct
 };

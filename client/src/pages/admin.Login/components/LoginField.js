@@ -23,7 +23,6 @@ class LoginField extends React.Component {
     render() {
         return (
             <div className="container cl-xs-12">
-            <form>
                 <FormGroup>
                     <ControlLabel bsClass="login-label">Email</ControlLabel>
                     <InputGroup>
@@ -47,7 +46,6 @@ class LoginField extends React.Component {
                 <div className="login-button">
                      <SubmitButton id="signin-button" content="Sign in" onClickHandle={this.submitButtonHandle}></SubmitButton>
                 </div>
-            </form>
             </div>
         );
     }

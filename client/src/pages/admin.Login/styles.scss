@@ -31,38 +31,25 @@
         border-radius: 20px;
         height: auto;
         margin-top: 15px;
-        text-align: center;
+        //text-align: center;
         background-color: #E9EBEE;
         background: url("https://www.xmple.com/wallpaper/linear-highlight-yellow-green-gradient-1920x1080-c2-fffdc7-c7ffcd-l-50-a-135-f-21.svg");
         padding-bottom: 5px;
     }
-    h3 {
+    .login-label {
         text-align: left;
         padding: 0px 20px;
         padding-top: 20px;
-        margin: 0;
+    }
+    .login-button {
+        text-align: center;
+        font-size: 16px;
     }
     h4 {
         padding: 0;
         margin: 15px auto;
         font-size: 14px;
         text-align: center;
-    }
-    input[type=text], input[type=password] {
-        border-radius: 10px;
-        position: relative;
-        width: 92%;
-        padding: 12px 20px;
-        margin: 5px 15px 0px 15px;
-        display: inline-block;
-        border: none;
-        background: white;
-    }
-    input[type=text]:focus, input[type=password]:focus {
-        background-color: white;
-        outline: none;
-        position: relative;
-        padding: 12px 20px;
     }
     button {
         background-color: #ffe36a;

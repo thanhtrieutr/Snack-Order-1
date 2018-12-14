@@ -32,16 +32,6 @@ class AdminLogin extends React.Component {
       </div>
     )
   }
-
-  async callYoutube() {
-    try {
-      const result = await fetch('https://api.nasa.gov/planetary/apod?api_key=NNKOjkoul8n1CH18TWA9gwngW1s1SmjESPjNoUFo');
-      console.log(result);
-    } catch (er) {
-      debugger
-      console.log(er);
-    }
-  }
 }
 
 export default AdminLogin;

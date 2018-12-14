@@ -3,6 +3,7 @@ import UserInputField from '../../../components/UserInputField';
 import PasswordInputField from '../../../components/PasswordInputField'
 import SubmitButton from '../../../components/SubmitButton'
 import 'font-awesome/css/font-awesome.min.css';
+import {FormGroup, ControlLabel, FormControl, InputGroup, Glyphicon} from 'react-bootstrap'
 
 class LoginField extends React.Component {
     constructor() {
@@ -22,14 +23,28 @@ class LoginField extends React.Component {
     render() {
         return (
             <div className="container cl-xs-12">
-                <h3>Email</h3>
-                <UserInputField id="input-user" placeholder="&#xf007; * Email" name="user" 
-                onChangeHandle={this.onChangeUserHandle}/>
-                <h3>Password</h3>
-                <PasswordInputField id="input-password" placeholder="&#xf023; * Password (8-16 characters)"
-                name="password" onChangeHandle={this.onChangePasswordHandle}/>
-                <div className="button">
-                    <SubmitButton id="signin-button" content="Sign in" onClickHandle={this.submitButtonHandle}></SubmitButton>
+                <FormGroup>
+                    <ControlLabel bsClass="login-label">Email</ControlLabel>
+                    <InputGroup>
+                        <InputGroup.Addon>
+                            <Glyphicon glyph="user"></Glyphicon>
+                        </InputGroup.Addon>
+                        <FormControl type="text" placeholder="Email" onChange={this.onChangeUserHandle}></FormControl>
+                    </InputGroup>
+                    </FormGroup>
+
+                <FormGroup>
+                    <ControlLabel bsClass="login-label">Password</ControlLabel>
+                    <InputGroup>
+                        <InputGroup.Addon>
+                            <Glyphicon glyph="lock"></Glyphicon>
+                        </InputGroup.Addon>
+                        <FormControl type="password" placeholder="password" onChange={this.onChangePasswordHandle}></FormControl>
+                    </InputGroup>
+                </FormGroup>
+
+                <div className="login-button">
+                     <SubmitButton id="signin-button" content="Sign in" onClickHandle={this.submitButtonHandle}></SubmitButton>
                 </div>
             </div>
         );

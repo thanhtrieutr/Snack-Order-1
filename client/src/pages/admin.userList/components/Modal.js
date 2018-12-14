@@ -18,7 +18,7 @@ export default class UserDetail extends React.Component {
             <Col xs={12} sm={3}>
               <Image alt="user" src={`http://127.0.0.1:3000${this.props.avatarAddress}`} thumbnail responsive></Image>
             </Col>
-            <Col xs={12} sm={4}>
+            <Col xs={12} sm={9}>
               <div className="admin-user-div">
                 Fullname: {this.props.fullName}
               </div>
@@ -32,30 +32,11 @@ export default class UserDetail extends React.Component {
                 Address: {this.props.address}
               </div>
             </Col>
-            {/* <Col xs={12} sm={5}>
-              <Sale/>
-              <div> 
-                <h3>Price</h3>
-
-                {this.state.editState === false ? 
-                  <p className="admin-product-price"> {this.props.price} vnđ</p> : 
-                  <InputField changeText={this.changePrice} value={this.state.newPrice} type="text" 
-                  placeholder="* Enter price" bsSize="large" inputSize={12}
-                  validationState={this.state.status}/>}
-              </div>
-            </Col> */}
           </Row>
         </Modal.Body>
 
         <Modal.Footer>
-          {/* <p className={"admin-status " + this.state.status}>{this.state.message}</p> */}
           <Button onClick={this.props.onHide}>Close</Button>
-          {/* {this.state.editState === false? 
-            <Button bsStyle="primary" onClick={this.editPrice}>Edit</Button>
-          : <div className="admin-button-div">
-              <Button className="admin-product-button" onClick={this.cancelEdit}>Cancel</Button>
-              <Button bsStyle="primary" onClick={this.saveInfo}>Save</Button>
-            </div>} */}
         </Modal.Footer>
       </Modal>
     )

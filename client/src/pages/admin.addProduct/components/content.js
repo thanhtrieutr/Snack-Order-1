@@ -164,8 +164,8 @@ class ContentField extends React.Component {
   }
 
   uploadNewProduct() {
-    uploadNewProduct(this.state.productName, this.state.productPrice, this.state.productImage, (result) => {
-      if (result === true) {
+    uploadNewProduct(this.state.productName, this.state.productPrice, this.state.productImage, result => {
+      if (result === 'OK') {
         this.setState({
           message_1: '',
           message_2: '',

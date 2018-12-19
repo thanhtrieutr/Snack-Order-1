@@ -112,9 +112,11 @@ function checkProductName(request, response, next) {
 
 //create new product (productName, productPrice, productImage, token)
 appAddProduct.post('/', adminUtilities.authenticationAdminByHeader, uploadFile, (request, response, next) => {
+    debugger;
     var productName = request.body.productName;
     var productPrice = request.body.productPrice;
     var productImageLink = request.newFileName;
+    debugger;
 
     if (checkValidProduct(productName) || checkPrice(productPrice)) {
         errorHandler(new Error("Wrong Data Input"), response);
@@ -126,6 +128,7 @@ appAddProduct.post('/', adminUtilities.authenticationAdminByHeader, uploadFile, 
         var obj = {
             name: productName
         };
+        debugger
         crud.readOneDocument(productModel, obj, function (product, error) {
             if (error) {
                 reject(error);
@@ -147,6 +150,7 @@ appAddProduct.post('/', adminUtilities.authenticationAdminByHeader, uploadFile, 
                 next(error);
                 return;
             }
+            debugger;
             response.end("OK");
         });
     }).catch(error => {

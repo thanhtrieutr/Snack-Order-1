@@ -165,7 +165,7 @@ class ContentField extends React.Component {
 
   uploadNewProduct() {
     uploadNewProduct(this.state.productName, this.state.productPrice, this.state.productImage, result => {
-      if (result === 'OK') {
+      if (result === true) {
         this.setState({
           message_1: '',
           message_2: '',
@@ -173,6 +173,13 @@ class ContentField extends React.Component {
           message_4: 'Create new product successful',
           successful: true
         })
+      } else {
+        this.setState({
+          status_3: 'error',
+          message_3 : 'Wrong file input',
+          productImage: null,
+          step: 3
+        });
       }
     })
   }

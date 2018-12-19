@@ -59,7 +59,7 @@ class ContentField extends React.Component {
           changeText={this.changeProductName} 
           validationState={this.state.status_1} 
           validationText={this.state.message_1}
-          disabled = {this.state.step === 2 ? this.state.disabledField_1 : (this.state.step === 3 ? this.state.disabledField_1 : false)}
+          disabled = {this.state.step === 2 ? this.state.disabledField_1 : (this.state.step === 3 || this.state.step === 4 ? this.state.disabledField_1 : false)}
           />
         <InputField2
           label="Product Price" type="text" 
@@ -69,7 +69,7 @@ class ContentField extends React.Component {
           changeText={this.changeProductPrice} 
           validationState={this.state.status_2} 
           validationText={this.state.message_2}
-          disabled = {this.state.step === 1 ? this.state.disabledField_2 : (this.state.step === 3 ? this.state.disabledField_2 : false)}
+          disabled = {this.state.step === 1 ? this.state.disabledField_2 : (this.state.step === 3 || this.state.step === 4 ? this.state.disabledField_2 : false)}
           />
           <InputField3
           label="Product Image"
@@ -77,7 +77,7 @@ class ContentField extends React.Component {
           changeText={this.changeProductImage} 
           validationState={this.state.status_3} 
           validationText={this.state.successful === true ? this.state.message_4 : this.state.message_3}
-          disabled = {this.state.step === 1 ? this.state.disabledField_3 : (this.state.step === 2 ? this.state.disabledField_3 : false)}
+          disabled = {this.state.step === 1 ? this.state.disabledField_3 : (this.state.step === 2 || this.state.step === 4 ? this.state.disabledField_3 : false)}
           />
 
         <div className="fp-buttons"  style = {{display: this.state.step === 1 ? 'block' : 'none'}}>
@@ -99,6 +99,7 @@ class ContentField extends React.Component {
   changeProductName(event) {
     this.setState({
       productName: event.target.value,
+      successful: false
     })
   }
 
@@ -171,6 +172,7 @@ class ContentField extends React.Component {
           message_2: '',
           message_3: '',
           message_4: 'Create new product successful',
+          successful: true
         })
       } else {
         this.setState({
@@ -188,12 +190,6 @@ class ContentField extends React.Component {
       productImage: null,
       status_1: null,
       status_2: null,
-      status_3: null,
-      message_1: '',
-      message_2: '',
-      message_3: '',
-      message_4: '',
-      successful: null
     })
   }
 }

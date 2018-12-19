@@ -10,11 +10,8 @@ import AddNewUser from '../pages/../pages/admin.addUser/AddNewUser';
 import AdminOrderHistory from './../pages/OrderHistory/index'
 import ProductList from '../pages/admin.productList/ProductList';
 import UserList from '../pages/admin.userList/index';
-<<<<<<< HEAD
 import AddNewProduct from './../pages/admin.addProduct/index';
-=======
 import Login from '../pages/Login/index';
->>>>>>> 752705935d69add89cb68341917cb6692f1689c0
 
 import { Switch, Route } from 'react-router'
 

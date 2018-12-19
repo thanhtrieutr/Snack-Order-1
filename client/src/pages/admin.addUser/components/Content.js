@@ -6,11 +6,12 @@ import { Col, Button } from 'react-bootstrap';
 import { changeEmail, validateEmail } from '../utils';
 
 const headText = 'Create user guide'
-const guideText = <ul>
-                    <li>Email must have more than 6 characters</li>
-                    <li>Special characters is not allowed</li>
-                    <li>Password will generate randomly</li>
-                  </ul>
+const guideText =  
+    <ul>
+      <li>Email must have more than 6 characters</li>
+      <li>Special characters is not allowed</li>
+      <li>Password will generate randomly</li>
+    </ul>
 
 export default class ContentField extends React.Component {
   constructor() {
@@ -26,7 +27,7 @@ export default class ContentField extends React.Component {
   render() {
     return (
       <Col xs={12} md={9} lg={10}>
-				<NavBarAdmin activeMenuItem="home"></NavBarAdmin>
+				<NavBarAdmin activeMenuItem="add-user"></NavBarAdmin>
         <Guide bsStyle='info' title={headText} content={guideText}></Guide>
 
         <InputField label="Email" changeText={this.changeEmail} value={this.state.email} type="text" 

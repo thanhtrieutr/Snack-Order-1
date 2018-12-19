@@ -10,6 +10,7 @@ import AddNewUser from '../pages/../pages/admin.addUser/AddNewUser';
 import AdminOrderHistory from './../pages/OrderHistory/index'
 import ProductList from '../pages/admin.productList/ProductList';
 import UserList from '../pages/admin.userList/index';
+import AddNewProduct from './../pages/admin.addProduct/index';
 
 import { Switch, Route } from 'react-router'
 
@@ -27,6 +28,7 @@ function Routerx() {
         <Route path="/admin/products" exact component={ProductList}/>
         <Route path="/admin/history" exact component={AdminOrderHistory}/>
         <Route path="/admin/users" exact component={UserList}/>
+        <Route path="/admin/product/add" exact component={AddNewProduct}/>
     </Switch>
     );
 }

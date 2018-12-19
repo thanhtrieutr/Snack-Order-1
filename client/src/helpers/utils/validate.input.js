@@ -20,13 +20,22 @@ export function passwordCheck(password) {
 }
 
 export function priceCheck(price) {
-  if (price.length > 5)
+  if (price.length > 5) {
     return false;
+  }
   return /^[0-9]+$/.test(price);
 }
 
 export function imageSizeCheck(size) {
-  if (size > 100000) 
+  if (size > 100000) {
     return false;
+  }
   return true;
+}
+
+export function productNameCheck(productName) {
+  if (productName === "" || productName === null || productName.length > 40) {
+    return false;
+  } 
+  return /^[_A-z0-9]*((-|\s)*[_A-z0-9])*$/.test(productName);
 }

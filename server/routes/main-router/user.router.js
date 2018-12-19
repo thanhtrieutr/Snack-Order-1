@@ -12,6 +12,7 @@ var getUserInfo = require("../../userController/getUserInfo");
 var updateUserInfo = require("../../userController/updateUserInfo");
 var deleteToken = require("../../userController/deleteToken");
 var getUser = require("../../userController/users");
+var session = require("../../app");
 
 //API for user backend (using try..catch)
 userRouter.use('/get-products', getProduct);
@@ -25,6 +26,16 @@ userRouter.use('/update-user-info', utilities.jsonParser(), updateUserInfo);
 userRouter.use('/remove-token', utilities.jsonParser(), deleteToken.deleteToken);
 userRouter.use('/get-user', utilities.jsonParser(), getUser.getUser);
 userRouter.use('/validate-code', utilities.jsonParser(), getUser.validateCode);
+userRouter.get('/huy',(request,response, next) => {
+    console.log("dcm")
+    response.end("its okay");
+})
+userRouter.post('/huy', (request, response, next) => {
+    const data = request.body;
+    request.session.user = data.username;
+    request.session.password = data.password;
+    response.end("its okay");
+})
 
 //Fix file not found
 userRouter.get('/', (request, response) => {

@@ -23,7 +23,7 @@ export default class ContentField extends React.Component {
   render() {
     return (
       <Col xs={12} md={9} lg={10}>
-      <NavBarAdmin activeMenuItem="home"></NavBarAdmin>
+      <NavBarAdmin activeMenuItem="products"></NavBarAdmin>
       <Table striped responsive hover>
           <thead>
             <tr>

@@ -1,0 +1,19 @@
+html, body, #root {
+  height: 100%;
+  overflow-x: auto
+}
+
+.admin-create-product {
+#product-add-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  cursor: pointer;
+}
+#product-add-input:disabled {
+  background-color: #eee;
+  cursor: not-allowed;
+}
+
+}

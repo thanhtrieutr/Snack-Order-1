@@ -13,6 +13,20 @@ var updateUserInfo = require("../../userController/updateUserInfo");
 var deleteToken = require("../../userController/deleteToken");
 var getUser = require("../../userController/users");
 
+
+//
+userRouter.get('/test-redis', (request, response, next) => {
+    debugger;
+    response.end('test ok');
+    
+})
+userRouter.post('/test-redis', (request, response, next) => {
+    debugger;
+    const data = request.body;
+    request.session.user = data.username;
+    request.session.password = data.password;
+    response.end('test ok');
+})
 //API for user backend (using try..catch)
 userRouter.use('/get-products', getProduct);
 userRouter.use('/check-login', utilities.jsonParser(), checkLogin.checkLogin);

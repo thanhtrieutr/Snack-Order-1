@@ -18,7 +18,7 @@ const port = 3000;
 const options = {
     host: 'localhost',
     port: 6379,
-    ttl: 260,
+    ttl: 30,
     client
 }
 
@@ -26,6 +26,7 @@ const crud = require("./utilities/databaseCRUD");
 crud.connectDatabase();
 
 app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
 app.use(cors());
 
 app.use(session({

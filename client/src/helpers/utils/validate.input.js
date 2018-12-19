@@ -35,7 +35,7 @@ export function imageSizeCheck(size) {
 
 export function productNameCheck(productName) {
   if (productName === "" || productName === null || productName.length > 40) {
-    return false;
+    return true;
   } 
-  return /^[_A-z0-9]*((-|\s)*[_A-z0-9])*$/.test(productName);
+  return /[!@#$%^&*_+\-=\[\]{};':"\\|,.<>\/?]/.test(productName);
 }

@@ -2,7 +2,8 @@ import {_helper} from '../_helper';
 
 export function checkProductName(productName, callback) {
   let product = {
-    productName: productName
+    token: localStorage.getItem("token"),
+    name: productName
   }
   _helper.fetchPOST('/admin-controller/check-product-name', product, (err, result) => {
     if (err) 

@@ -10,6 +10,7 @@ import AddNewUser from '../pages/../pages/admin.addUser/AddNewUser';
 import AdminOrderHistory from './../pages/OrderHistory/index'
 import ProductList from '../pages/admin.productList/ProductList';
 import UserList from '../pages/admin.userList/index';
+import Login from '../pages/Login/index';
 
 import { Switch, Route } from 'react-router'
 
@@ -20,6 +21,8 @@ function Routerx() {
         <Route path="/profile/change-password" exact component={ProfileChangePassword} />
         <Route path="/forget-password" exact component={ForgotPassword}/>
         <Route path="/" exact component={Home} />
+        <Route path="/login" exact component={Login}/>
+
         <Route path="/admin" exact component={AdminHome} />
         <Route path='/admin/login' exact component={AdminLogin}/>
         <Route path='/admin/today-order' exact component={AdminTodayOrder}/>

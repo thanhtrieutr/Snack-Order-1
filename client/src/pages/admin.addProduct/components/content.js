@@ -171,7 +171,6 @@ class ContentField extends React.Component {
           message_2: '',
           message_3: '',
           message_4: 'Create new product successful',
-          successful: true
         })
       } else {
         this.setState({
@@ -181,6 +180,20 @@ class ContentField extends React.Component {
           step: 3
         });
       }
+    })
+    this.setState({
+      step: 1,
+      productName: '',
+      productPrice: '',
+      productImage: null,
+      status_1: null,
+      status_2: null,
+      status_3: null,
+      message_1: '',
+      message_2: '',
+      message_3: '',
+      message_4: '',
+      successful: null
     })
   }
 }

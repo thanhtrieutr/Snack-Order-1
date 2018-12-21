@@ -36,10 +36,9 @@ class ProfileContainer extends Component {
         })
     }
     changeSave() {
-        // this.setState({
-        //     inputStatus: false
-        // })
-        alert("ok")
+        this.setState({
+            inputStatus: false
+        })
     }
 
     render(){

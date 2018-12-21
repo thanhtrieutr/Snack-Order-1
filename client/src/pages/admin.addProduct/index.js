@@ -1,6 +1,6 @@
 import React from 'react';
 import {Grid, Col} from 'react-bootstrap'
-import AdminApi from '../../helpers/api/admin.api'
+import AdminApi from '../../helpers/api/adminApi/check-token'
 import HeaderTag from '././components/headerTag'
 import Content from '././components/content';
 import LinkAdminPage from './../../components/LinkAdminPage/LinkAdminPage'

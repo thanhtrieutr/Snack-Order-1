@@ -17,7 +17,7 @@ var createUser = require("../../adminController/createUser");
 adminRouter.use('/get-products', utilities.jsonParser(), getAdminProduct.getAdminProduct);
 adminRouter.use('/get-product', utilities.jsonParser(), getAdminProduct.getOneProduct);
 adminRouter.use('/get-users', utilities.jsonParser(), getAdminUser.getAdminUser);
-adminRouter.use('/get-today-order', utilities.jsonParser(), getTodayOrder.getTodayOrder);
+adminRouter.use('/get-today-order', getTodayOrder.getTodayOrder);
 adminRouter.use('/check-login', utilities.jsonParser(), loginAdmin.checkLogin);
 adminRouter.use('/check-token', utilities.jsonParser(), loginAdmin.checkToken);
 adminRouter.use('/remove-token', utilities.jsonParser(), loginAdmin.deleteToken);

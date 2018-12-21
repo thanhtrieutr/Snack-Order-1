@@ -1,7 +1,7 @@
 import React from 'react';
 import {Grid, Col} from 'react-bootstrap'
 import {getProductHistory} from '././scripts/loadHistoryData';
-import AdminApi from '../../helpers/api/admin.api'
+import AdminApi from '../../helpers/api/adminApi/check-token';
 import HeaderTag from '././components/headerTag'
 import HistoryContainer from '././components/historyContainer';
 import LinkAdminPage from './../../components/LinkAdminPage/LinkAdminPage'

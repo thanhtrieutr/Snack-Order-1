@@ -2,7 +2,7 @@
 // var db;
 var mongoose = require("mongoose");
 if (process.env.ENV =="production") {
-    var urldb = "mongodb://test:123456789a@ds119523.mlab.com:19523/snack-order";
+    var urldb = "mongodb://test:test1234@ds021356.mlab.com:21356/testdata";
 }
 else {
     var urldb = "mongodb://localhost:27017/snack-order";
@@ -11,6 +11,7 @@ var accountModel = require("../schema/account-schema");
 var productModel = require("../schema/product-schema");
 
 function connectDatabase(callback) {
+    console.log("Data: " + urldb);
     mongoose.connect(urldb,{ useNewUrlParser: true },(err)=>{
         if (callback) callback(err);
     });

@@ -1,4 +1,4 @@
-const host = 'http://127.0.0.1:3000';
+ const host = 'http://127.0.0.1:3000';
 
 let _helper = {
   fetchPOST: function (endpoint, dataToBeSent, callback) {

@@ -1,11 +1,19 @@
-script:
- - source ~/.profile
- - git checkout dev
- - git stash
- - git pull https://kieutridang:Ktd93Nth91@github.com/SmithWinter/Snack-Order.git dev
- - cd client
- - npm install
- - npm run build
- - cd ../server
- - npm install
- - npm start
+stage:
+ - build
+ - deploy
+
+pull_git:
+ stage: build
+ script:
+  - source ~/.profile
+  - git checkout dev
+  - git stash
+  - git pull https://kieutridang:Ktd93Nth91@github.com/SmithWinter/Snack-Order.git dev
+
+deploy_production:
+ stage: deploy
+ script:
+  - cd client
+  - npm install
+  - npm run build
+  - cd ../server

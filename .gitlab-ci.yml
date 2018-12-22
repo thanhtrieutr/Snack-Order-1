@@ -13,7 +13,9 @@ deploy_production:
  stage: deploy
  script:
   - cd client
-  - source ~/.profile
+  - node -v
+  - npm -v
   - npm install
   - npm run build
   - cd ../server
+  - npm start

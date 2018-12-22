@@ -1,11 +1,9 @@
-import {API_ROOT} from '../../../api-config'
-
 export function checkProductName (productName, callback) {
   var object = {
     productName: productName,
     token: localStorage.getItem("token")
   }
-  fetch (`${API_ROOT}/admin-controller/check-product-name`, {
+  fetch ("http://127.0.0.1:3000/admin-controller/check-product-name", {
     method: "POST",
     body: JSON.stringify(object)
   }).then(response => {
@@ -26,7 +24,7 @@ export function uploadNewProduct (productName, productPrice, productImage, callb
   data.append("file", productImage);
   data.append("token", localStorage.getItem("token"))
 
-  fetch(`${API_ROOT}/admin-controller/create-new-product`, {
+  fetch("http://127.0.0.1:3000/admin-controller/create-new-product", {
     method: "POST",
     headers: token,
     body: data

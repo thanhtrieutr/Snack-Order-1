@@ -1,10 +1,8 @@
-import {API_ROOT} from '../../../api-config'
-
 var token = localStorage.getItem("token");
 
 export function getUserInfo(callback) {
     var obj = {token: token};
-    fetch(`${API_ROOT}/user-controller/get-user-info`, {
+    fetch("http://127.0.0.1:3000/user-controller/get-user-info",{
         method: "POST",
         body: JSON.stringify(obj)
     }).then(response => {
@@ -21,7 +19,7 @@ export function getUserInfo(callback) {
 
 export function sendNewInfo(info,callback) {
     info.token= token;
-    fetch(`${API_ROOT}/user-controller/update-password`, {
+    fetch("http://127.0.0.1:3000/user-controller/update-password",{
         method: "POST",
         body: JSON.stringify(info)
     }).then(response => {

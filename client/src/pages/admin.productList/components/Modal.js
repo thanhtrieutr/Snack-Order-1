@@ -8,7 +8,6 @@ import InputField from '../../../components/inputField/InputField'
 import InputFile from '../../../components/inputFile/InputFile'
 import Star from './Star'
 import Sale from './Sales'
-import {API_ROOT} from '../../../api-config'
 
 export default class ProductDetail extends React.Component {
   constructor(props) {
@@ -38,7 +37,7 @@ export default class ProductDetail extends React.Component {
         <Modal.Body>
           <Row>
             <Col xs={12} sm={3}>
-              <Image alt="product" src={`${API_ROOT}${this.props.image}`} thumbnail responsive></Image>
+              <Image alt="product" src={`http://127.0.0.1:3000${this.props.image}`} thumbnail responsive></Image>
               { this.state.editState === true ? 
                 <div>
                   <InputFile id="product-image-input-field" onChange={this.handleSelectedFile}/>

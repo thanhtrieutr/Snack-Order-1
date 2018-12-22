@@ -1,11 +1,12 @@
 import React from 'react'
 import { Modal, Button, Col, Row } from 'react-bootstrap'
 import { Image } from 'react-bootstrap'
+import {API_ROOT} from '../../../api-config'
 
 export default class UserDetail extends React.Component {
-  constructor() {
-    super();
-  }
+  // constructor() {
+  //   super();
+  // }
   render() {
     return (
       <Modal show={this.props.show} bsSize={this.props.bsSize}>
@@ -16,7 +17,7 @@ export default class UserDetail extends React.Component {
         <Modal.Body>
           <Row>
             <Col xs={12} sm={3}>
-              <Image alt="user" src={`http://127.0.0.1:3000${this.props.avatarAddress}`} thumbnail responsive></Image>
+              <Image alt="user" src={`${API_ROOT}${this.props.avatarAddress}`} thumbnail responsive></Image>
             </Col>
             <Col xs={12} sm={9}>
               <div className="admin-user-div">

@@ -1,5 +1,7 @@
-function checkToken(token, callback) {
-    fetch('http://127.0.0.1:3000/admin-controller/check-token', {
+import {API_ROOT} from '../../api-config'
+
+export function checkToken(token, callback) {
+    fetch(`${API_ROOT}/admin-controller/check-token`, {
         method: 'POST', // POST, DELETE, PUT,
         body: JSON.stringify(token) // object
     }).then(response => {
@@ -10,8 +12,4 @@ function checkToken(token, callback) {
             callback(false)
         }
     })
-}
-
-module.exports = {
-    checkToken: checkToken
 }

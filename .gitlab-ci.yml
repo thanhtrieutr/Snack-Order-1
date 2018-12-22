@@ -13,6 +13,7 @@ deploy_production:
  stage: deploy
  script:
   - cd client
+  - pwd
   - node -v
   - npm -v
   - npm install

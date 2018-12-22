@@ -17,6 +17,7 @@ deploy_production:
   - node -v
   - npm -v
   - npm install
+  - npm rebuild node-sass
   - npm run build
   - cd ../server
   - npm start

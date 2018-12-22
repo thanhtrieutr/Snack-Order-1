@@ -1,11 +1,9 @@
-import {API_ROOT} from '../../../api-config'
-
 export function submitCart(cartArray) {
     var obj = {};
     obj.cartArray = cartArray;
     obj.token = localStorage.getItem("token");
     console.log(obj);
-    fetch(`${API_ROOT}/user-controller/submit-cart`, {
+    fetch("http://127.0.0.1:3000/user-controller/submit-cart",{
         method: "POST",
         body: JSON.stringify(obj)
     }).then(response => {

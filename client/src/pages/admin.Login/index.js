@@ -3,13 +3,13 @@ import './styles.scss';
 import HeadTag from './components/HeadTag';
 import LogoField from './components/LogoField';
 import LoginField from './components/LoginField';
-import {checkToken} from '../../helpers/api/admin.api'
+import AdminApi from '../../helpers/api/adminApi/check-token'
 
 class AdminLogin extends React.Component {
   constructor() {
     super();
     var token = { token: localStorage.getItem("token")};
-    checkToken(token, (result) => {
+    AdminApi.checkToken(token, (result) => {
       if (result !== false) {
         alert("You have already logged in");
         window.location.href = "/admin";

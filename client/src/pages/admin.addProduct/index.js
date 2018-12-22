@@ -1,6 +1,6 @@
 import React from 'react';
 import {Grid, Col} from 'react-bootstrap'
-import {checkToken} from '../../helpers/api/admin.api'
+import AdminApi from '../../helpers/api/adminApi/check-token'
 import HeaderTag from '././components/headerTag'
 import Content from '././components/content';
 import LinkAdminPage from './../../components/LinkAdminPage/LinkAdminPage'
@@ -11,7 +11,7 @@ class AddNewProduct extends React.Component {
 
   componentWillMount() {
     var token = { token: localStorage.getItem("token")};
-    checkToken(token, (result) => {
+    AdminApi.checkToken(token, (result) => {
       console.log(result);
       if (result === false) {
         alert("You haven't logged in");

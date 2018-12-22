@@ -1,9 +1,8 @@
 // var token = localStorage.getItem("token");
-import {API_ROOT} from '../../../api-config'
 
 function checkToken(token, callback) {
     var obj = {token: token};
-    fetch(`${API_ROOT}/user-controller/check-token`,{
+    fetch("http://127.0.0.1:3000/user-controller/check-token",{
         method: "POST",
         body: JSON.stringify(obj)
     }).then(response => {

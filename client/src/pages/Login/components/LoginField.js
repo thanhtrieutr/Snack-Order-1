@@ -2,7 +2,6 @@ import React from 'react';
 import SubmitButton from '../../../components/SubmitButton'
 import 'font-awesome/css/font-awesome.min.css';
 import {FormGroup, ControlLabel, FormControl, InputGroup, Glyphicon} from 'react-bootstrap'
-import {API_ROOT} from '../../../api-config'
 
 class LoginField extends React.Component {
     constructor() {
@@ -53,7 +52,7 @@ class LoginField extends React.Component {
             user: this.state.user,
             password: this.state.password
         }
-        fetch(`${API_ROOT}/user-controller/check-login`, {
+        fetch('http://127.0.0.1:3000/user-controller/check-login', {
             method: 'POST', // POST, DELETE, PUT,
             body: JSON.stringify(account) // object
         }).then(response => {

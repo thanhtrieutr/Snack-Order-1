@@ -1,6 +1,7 @@
+import {API_ROOT} from '../../../api-config'
 
 export function loadSnack(callback) {
-    fetch("http://127.0.0.1:3000/user-controller/get-products",{
+    fetch(`${API_ROOT}/user-controller/get-products`, {
         method: "GET"
     }).then(response => {
         if (response.status === 200) {

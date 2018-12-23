@@ -81,7 +81,7 @@ export default class Home extends Component {
     logOut(this.props.history, result => { 
       if (result === true) { 
         this.setState({
-          user: ""
+          user: ""  
         })
       }
     })
@@ -153,6 +153,10 @@ export default class Home extends Component {
   submitHandler() { 
     var cartArray = [];
     var cartList = this.state.cart;
+    if (cartList.length == 0) { 
+      alert('You must have at least 1 item in your cart');
+      return;
+    }
     var amountList = this.state.amountList;
     var productList = this.state.productList;
     for (var i = 0; i < cartList.length; ++i) { 

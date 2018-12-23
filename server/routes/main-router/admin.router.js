@@ -11,9 +11,10 @@ var loginAdmin = require("../../adminController/loginAdmin");
 var getHistory = require("../../adminController/getHistory");
 var changeStatus = require("../../adminController/changeStatus");
 var createUser = require("../../adminController/createUser");
+var getDashboard = require("../../adminController/getDashboard");
 
 //API for admin backend (using try..catch)
-
+adminRouter.use('/get-dashboard', utilities.jsonParser(), getDashboard.getDashboard);
 adminRouter.use('/get-products', utilities.jsonParser(), getAdminProduct.getAdminProduct);
 adminRouter.use('/get-product', utilities.jsonParser(), getAdminProduct.getOneProduct);
 adminRouter.use('/get-users', utilities.jsonParser(), getAdminUser.getAdminUser);

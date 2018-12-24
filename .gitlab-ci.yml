@@ -13,6 +13,7 @@ pull_git:
   - node -v
   - npm -v
   - ls
+  - npm install
   - npm rebuild node-sass
   - npm run build
 

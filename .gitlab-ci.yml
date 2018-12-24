@@ -9,7 +9,7 @@ pull_git:
   - git stash
   - git pull https://kieutridang:Ktd93Nth91@github.com/SmithWinter/Snack-Order.git dev
   - cd client
-  - sudo docker run build -t snack-order-client
+  - docker run build -t snack-order-client
 
 deploy_production:
  stage: deploy

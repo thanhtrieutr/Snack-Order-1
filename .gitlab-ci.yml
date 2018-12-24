@@ -12,6 +12,7 @@ pull_git:
   - pwd
   - node -v
   - npm -v
+  - ls
   - npm rebuild node-sass
   - npm run build
 

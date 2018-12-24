@@ -10,10 +10,8 @@ const bodyParser = require('body-parser');
 const redis = require("redis");
 const client = redis.createClient();
 
-
 const hostname = "127.0.0.1";
 const port = 3000;
-
 
 const options = {
     host: 'localhost',

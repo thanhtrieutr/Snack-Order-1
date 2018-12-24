@@ -101,18 +101,6 @@ async function createToken(callback) {
     if (callback) return callback(token);
 }
 
-function findAccountByToken(accountArray, newToken) {
-    var position = -1;
-    for (var i in accountArray) {
-        let token = accountArray[i].token;
-        if (token == newToken) {
-            position = i;
-            return position;
-        }
-    }
-    return position;
-}
-
 function findObjectById(objList, id) {
     var position = -1;
     for (var i in objList) {
@@ -175,7 +163,6 @@ function authenticationUserByHeader(request, response, next) {
     });
 }
 module.exports = {
-    findAccountByToken: findAccountByToken,
     createToken: createToken,
     findValidUserPosition: findValidUserPosition,
     setResponseHeader: setResponseHeader,

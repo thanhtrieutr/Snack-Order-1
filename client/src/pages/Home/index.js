@@ -199,3 +199,21 @@ export default class Home extends Component {
     )
   }
 }
+
+// function showCurrentSnack() {
+//   var currentUser = getUserInLocalAccount(user);
+//   if (currentUser.cartArray == null) { 
+//       currentUser.cartArray = []; 
+//   }
+//   //hidd all
+//   for (var i = 1; i <= 12; i++) {
+//       removeSnack(i);
+//   }
+//   //show in data
+//   for (var i in currentUser.cartArray) {
+//       addSnack( currentUser.cartArray[i].productID, currentUser.cartArray[i].amount);
+//       document.getElementById("checkbox-" + currentUser.cartArray[i].productID).checked = true;
+//       document.getElementById("price-display-" + currentUser.cartArray[i].productID ).innerHTML = displayPrice(currentUser.cartArray[i].amount * itemPrice[Number(currentUser.cartArray[i].productID)-1] );
+//   }
+//   document.getElementById("total-price-number").innerHTML = totalPrice(currentUser.cartArray);
+// }

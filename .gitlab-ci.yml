@@ -8,16 +8,15 @@ pull_git:
   - git checkout dev
   - git stash
   - git pull https://kieutridang:Ktd93Nth91@github.com/SmithWinter/Snack-Order.git dev
-
-deploy_production:
- stage: deploy
- script:
   - cd client
   - pwd
   - node -v
   - npm -v
-  - npm install
   - npm rebuild node-sass
   - npm run build
+
+deploy_production:
+ stage: deploy
+ script:
   - cd ../server
   - npm start

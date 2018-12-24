@@ -48,12 +48,14 @@ function getDashboard(request, response, next) {
     }).then(order => {
         var result={};
         result.orderCount = order.length;
-        result.budgetRequire = 10;
-        result.currentSpending = 10;
-        result.mostBought = 10;
-        result.monthSpend = 10;
+        result.budgetRequire = 0;
+        result.currentSpending = 0;
+        result.mostBought = "Dummy data";
+        result.monthSpend = 0;
+
         for (var i = 0; i<order.length; i++) {
             result.budgetRequire += (order[i].estimateTotalPrice - order[i].actualTotalPrice );
+            result.currentSpending += order[i].actualTotalPrice;
         }
         response.end(JSON.stringify(result));
         // var orderList = [];

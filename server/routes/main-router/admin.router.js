@@ -1,6 +1,7 @@
 const express = require('express');
 const adminRouter = express.Router();
 const utilities = require("../../utilities/utilities");
+const adminUtilities = require('../../adminController/adminUtilities')
 
 //Acquiring admin controller for admin backend
 var getAdminProduct = require("../../adminController/getAdminProduct");
@@ -26,7 +27,8 @@ adminRouter.use('/create-new-product', checkProduct.addProduct);
 adminRouter.use('/update-product', checkProduct.updateProduct);
 adminRouter.use('/get-order-history', utilities.jsonParser(), getHistory.getHistory);
 adminRouter.use('/create-user', utilities.jsonParser(), createUser.createUser);
-adminRouter.use('/change-order-status', utilities.jsonParser(), changeStatus.changeStatus);
+adminRouter.use('/change-order-status', adminUtilities.authenticationAdminByHeader, 
+utilities.jsonParser(), changeStatus.changeStatus);
 
 
 //Fix file not found

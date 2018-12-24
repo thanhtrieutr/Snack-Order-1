@@ -1,19 +1,19 @@
 import React from 'react';
-
+import StatusDropdown from './StatusDropdown';
 class OneOrder extends React.Component {
-    constructor() {
-        super();
-    }
     render() {
         return (
             <tr>
-                <td>{this.props.key}</td>
+                <td>{this.props.no}</td>
                 <td>{this.props.name}</td>
                 <td>{this.props.quantity}</td>
                 <td>{this.displayPrice(this.props.price)}</td>
                 <td>{this.displayPrice(this.props.totalPrice)}</td>
                 <td>{this.props.user}</td>
-                <td>{this.props.status}</td>
+                <td>
+                    <StatusDropdown status={this.props.status} no={this.props.no}
+                    statusHandle={this.props.statusHandle}></StatusDropdown>
+                </td>
             </tr>
         );
     }

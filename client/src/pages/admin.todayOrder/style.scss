@@ -5,8 +5,25 @@
 .admin-today-order {
     .admin-today-order-button-bar{
         text-align: center;
+        padding-bottom: 5px;
     }
     #admin-today-order-button{
         font-weight: 600;
+    }
+    .admin-today-order-dropdown-menu{
+        min-width: 0;
+    }
+    .well{
+        text-align: center;   
+        font-weight: 600;
+        font-size: 16px;
+        margin-bottom: 0;
+    }
+    table{
+        margin: 0;  
+    }
+    .table-responsive{
+        overflow-y: hidden;
+        margin-bottom: 5px;
     }
 }

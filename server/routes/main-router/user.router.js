@@ -11,7 +11,7 @@ var getFile = require("../../userController/getFile");
 var getUserInfo = require("../../userController/getUserInfo");
 var updateUserInfo = require("../../userController/updateUserInfo");
 var deleteToken = require("../../userController/deleteToken");
-var getUser = require("../../userController/users");
+var getUser = require("../../userController/users");    
 
 
 //

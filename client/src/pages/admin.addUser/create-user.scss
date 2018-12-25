@@ -52,3 +52,9 @@ html, body, #root {
 .admin-status.warning {
   color: #8a6d3b;
 }
+
+.admin-justified-content {
+  div {
+    padding: 7px 0px;
+  }
+}

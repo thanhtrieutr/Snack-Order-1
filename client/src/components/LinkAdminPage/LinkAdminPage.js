@@ -1,6 +1,6 @@
 import React from 'react';
 import {Nav, NavItem, Col} from 'react-bootstrap';
-
+import { withRouter } from "react-router";
 var menuList=[
     {id:"home", href:"/admin", content:"Home page"},
     {id:"today-order", href:"/admin/today-order", content:"Today Order"},
@@ -22,16 +22,19 @@ class LinkAdminPage extends React.Component {
         );
     }
     createMenuList(activeId) {
+        var push = (path) => {
+            this.props.history.push(path);
+        }
         var listItems = menuList.map(item => {
             if (item.id === activeId) {
                 return (
-                    <NavItem id={item.id} key={item.id} eventKey={1} href={item.href} active>
+                    <NavItem id={item.id} key={item.id} eventKey={1} onClick={() => push(item.href)} active>
 						{item.content}
 					</NavItem>
                 );
             }
             return (
-                <NavItem id={item.id} key={item.id} eventKey={1} href={item.href}>
+                <NavItem id={item.id} key={item.id} eventKey={1} onClick={() => push(item.href)}>
                     {item.content}
                 </NavItem>
             );
@@ -40,4 +43,4 @@ class LinkAdminPage extends React.Component {
     }
 }
 
-export default LinkAdminPage;
+export default withRouter(LinkAdminPage);

@@ -1,6 +1,7 @@
 import React from 'react';
 import './style.scss'
 import {Button, Glyphicon, Dropdown, MenuItem, ButtonToolbar, Col, DropdownButton} from 'react-bootstrap';
+import { withRouter } from "react-router";
 
 var menuList=[
     {id:"home", href:"/admin", content:"Home page"},
@@ -50,16 +51,19 @@ class  NavBarAdmin extends React.Component {
         localStorage.setItem("token", "null");
     }
     createMenuList(activeId) {
+        var push = (path) => {
+            this.props.history.push(path);
+        }
         var listItems = menuList.map((item,index) => {
             if (item.id === activeId) {
                 return (
-                    <MenuItem  eventKey={`1.${index}`} key={index} href={item.href} active>
+                    <MenuItem  eventKey={`1.${index}`} key={index} onClick={() => push(item.href)} active>
 						{item.content}
 					</MenuItem>
                 );
             }
             return (
-                <MenuItem eventKey={`1.${index}`} key={index} href={item.href}>
+                <MenuItem eventKey={`1.${index}`} key={index} onClick={() => push(item.href)}>
                     {item.content}
                 </MenuItem>
             );
@@ -68,4 +72,4 @@ class  NavBarAdmin extends React.Component {
     }
 }
 
-export default NavBarAdmin;
+export default withRouter(NavBarAdmin);

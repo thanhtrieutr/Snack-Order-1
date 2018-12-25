@@ -16,20 +16,17 @@ class MainContainer extends React.Component {
 	}
 
 	componentWillMount() {
-		var item={
-			token:localStorage.getItem("token")
-		};
 		this.dashboardData();
 	}
 
 	render() {
 		return (
 			<div className="home-content">
-				<DashboardComponent dataName="Today's Order Count" dataContent={this.state.orderCount} currency="Order"></DashboardComponent>
-                <DashboardComponent dataName="Budget Requirement" dataContent={this.state.budgetRequire} currency="VND"></DashboardComponent>
-                <DashboardComponent dataName="Current Spending" dataContent={this.state.currentSpending} currency="VND"></DashboardComponent>
-                <DashboardComponent dataName="Most Bought Item" dataContent={this.state.mostBought} currency="Item"></DashboardComponent>
-                <DashboardComponent dataName="Monthly Spending" dataContent={this.state.monthSpend} currency="VND"></DashboardComponent>
+				<DashboardComponent dataName="Today's Order Count" dataContent={this.state.orderCount}></DashboardComponent>
+                <DashboardComponent dataName="Budget Requirement" dataContent={this.state.budgetRequire}></DashboardComponent>
+                <DashboardComponent dataName="Current Spending" dataContent={this.state.currentSpending}></DashboardComponent>
+                <DashboardComponent dataName="Most Ordered Item In The Day" dataContent={this.state.mostBought}></DashboardComponent>
+                <DashboardComponent dataName="Monthly Spending" dataContent={this.state.monthSpend}></DashboardComponent>
 			</div>
 			
 		);

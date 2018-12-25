@@ -5,8 +5,7 @@ import NavBarAdmin from '../../components/NavBarAdmin/NavBarAdmin'
 import "./style.scss"
 import {Col,Grid} from 'react-bootstrap';
 import MainContainer from "./components/main.container"
-import AdminApi from "../../helpers/api/adminApi/check-token"
-import dashboardData from "./script/dashboard.data"
+import {checkToken} from "../../helpers/api/adminApi/check-token"
 class AdminHome extends React.Component {
 	constructor() {
 		super();
@@ -39,7 +38,7 @@ class AdminHome extends React.Component {
 		var item={
 			token:localStorage.getItem("token")
 		};
-		AdminApi.checkToken(item,result => {
+		checkToken(item,result => {
 			if (result === false) {
 				alert("You haven't logged in");
 				this.props.history.push("/admin/login");

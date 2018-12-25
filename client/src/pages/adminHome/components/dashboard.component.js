@@ -12,9 +12,6 @@ class DashboardComponent extends React.Component {
                     <Panel.Body>
                         {this.props.dataContent}
                     </Panel.Body>
-                    <Panel.Footer>
-                        {this.props.currency}
-                    </Panel.Footer>
                 </Panel>
 			</Col>
 		);

@@ -1,14 +1,15 @@
 import {getDashboardData} from './api'
+import {displayPrice} from "../../../helpers/utilities/display.price"
 
 export function dashboardData() {
     getDashboardData(result => {
         if (result !== false) {
             this.setState({
                 orderCount:result.orderCount,
-                budgetRequire:result.budgetRequire,
-                currentSpending:result.currentSpending,
+                budgetRequire:displayPrice(result.budgetRequire),
+                currentSpending:displayPrice(result.currentSpending),
                 mostBought:result.mostBought,
-                monthSpend:result.monthSpend
+                monthSpend:displayPrice(result.monthSpend)
             })
         }
     })

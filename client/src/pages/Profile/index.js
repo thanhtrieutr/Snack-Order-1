@@ -3,7 +3,7 @@ import TitleBox from '../../components/Profile/title.box'
 import SideBar from "./components/side.bar"
 import ProfileContainer from './components/profile.container'
 import '../../components/Profile/css/profile.css'
-import {userInfo,uploadNewInfo} from "./script/user.info"
+import {setUserInfo,uploadNewInfo} from "./script/user.info"
 import {checkLogIn} from './script/token'
 import {avatarHandler} from "./script/avatar"
 import {getAddress,getAvatar,getBirthday,getName,getPhone} from "./script/get"
@@ -23,7 +23,7 @@ export class ProfileProvider extends React.Component {
         getName : getName.bind(this),
         getPhone : getPhone.bind(this),
 		getBirthday : getBirthday.bind(this),
-		userInfo : userInfo.bind(this),
+		setUserInfo : setUserInfo.bind(this),
 		uploadNewInfo : uploadNewInfo.bind(this),
 		avatarHandler : avatarHandler.bind(this)
 	}
@@ -33,7 +33,7 @@ export class ProfileProvider extends React.Component {
 			this.setState({
 				user:result
 			});
-			this.state.userInfo();
+			this.state.setUserInfo();
 			debugger;
 		});
 	}

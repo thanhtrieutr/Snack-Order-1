@@ -1,6 +1,6 @@
 import {getUserInfo,sendNewUserInfo} from './script'
 
-export function userInfo() {
+export function setUserInfo() {
     getUserInfo(result => {
         if (result !== false) {
             this.setState({

@@ -1,5 +1,5 @@
 import React from 'react'
-import {compose, withState, withHandlers} from 'recompose'
+import {compose,  withHandlers} from 'recompose'
 import {Dropdown, MenuItem, ButtonToolbar} from 'react-bootstrap'
 const enhance = compose(
     withHandlers({

@@ -1,3 +1,5 @@
+import {API_ROOT} from '../../../api-config'
+
 function submitStatus(orderList, callback) {
     var token = localStorage.getItem('token');
     
@@ -14,7 +16,7 @@ function submitStatus(orderList, callback) {
         sendObject.updateList.push(obj);
     }
 
-    fetch('http://127.0.0.1:3000/admin-controller/change-order-status', {
+    fetch(`${API_ROOT}/admin-controller/change-order-status`, {
         method: 'POST', // POST, DELETE, PUT, GET
         headers: {
             'token': token

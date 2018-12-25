@@ -1,6 +1,8 @@
+import {API_ROOT} from '../../../api-config'
+
 function getTodayOrder(callback) {
     var token = localStorage.getItem('token');
-    fetch('http://127.0.0.1:3000/admin-controller/get-today-order', {
+    fetch(`${API_ROOT}/admin-controller/get-today-order`, {
         method: 'GET', // POST, DELETE, PUT, GET
         headers: {
             'token': token
@@ -15,4 +17,4 @@ function getTodayOrder(callback) {
     })
 }
 
-module.exports = getTodayOrder;
+export default getTodayOrder;

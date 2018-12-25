@@ -5,6 +5,7 @@ stages:
 pull_git:
  stage: build
  script:
+  - npm install create-react-app -g
   - git checkout dev
   - git stash
   - git pull https://kieutridang:Ktd93Nth91@github.com/SmithWinter/Snack-Order.git dev

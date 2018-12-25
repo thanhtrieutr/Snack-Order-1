@@ -1,3 +1,5 @@
+import {API_ROOT} from '../../../api-config'
+
 var token = localStorage.getItem("token");
 
 export function logOut(history, callback) {
@@ -18,7 +20,7 @@ export function logOut(history, callback) {
 
 function removeTokenOnServe(token, callback) {
     var obj = {token: token};
-    fetch("http://127.0.0.1:3000/user-controller/remove-token",{
+    fetch(`${API_ROOT}/user-controller/remove-token`,{
         method: "POST",
         body: JSON.stringify(obj)
     }).then(response => {

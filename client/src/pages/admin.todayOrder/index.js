@@ -4,11 +4,12 @@ import HeadTag from './components/HeadTag'
 import { Grid } from 'react-bootstrap'
 import LinkAdminPage from "../../components/LinkAdminPage/LinkAdminPage"
 import OrderField from './components/OrderField'
-import checkToken from '../../helpers/api/adminApi/check-token'
+import {checkToken} from '../../helpers/api/adminApi/check-token'
+
 class AdminTodayOrder extends React.Component {
     componentWillMount() {
         var token = { token: localStorage.getItem("token")};
-        checkToken.checkToken(token, (result) => {
+        checkToken(token, (result) => {
             if (result === false) {
                 alert("You haven't logged in");
                 window.location.href = "/admin/login";

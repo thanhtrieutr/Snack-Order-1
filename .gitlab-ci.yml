@@ -12,7 +12,7 @@ pull_git:
   - cd client
   - rm -rf node_modules
   - npm install
-  - npm run build
+  - CI=false npm run build
 
 deploy_production:
  stage: deploy

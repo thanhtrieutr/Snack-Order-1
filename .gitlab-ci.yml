@@ -5,16 +5,16 @@ stages:
 pull_git:
  stage: build
  script:
-  - sudo usermod -aG docker gitlab-runner
   - git checkout dev
   - git stash
   - git pull https://kieutridang:Ktd93Nth91@github.com/SmithWinter/Snack-Order.git dev
   - cd client
-  - docker login -u kieutridang -p Tridang93
-  - docker run build -t snack-order-client
+  - npm install
+  - npm run build
 
 deploy_production:
  stage: deploy
  script:
   - cd ../server
+  - npm install
   - npm start

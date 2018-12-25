@@ -24,4 +24,4 @@ deploy_production:
 trigger_build:
   stage: build
   script:
-    - "curl -X POST -F token=TOKEN -F ref=REF_NAME https://gitlab.com/api/v4/projects/10030864/trigger/pipeline"
+    - "curl -X POST -F token=3725b3a10948015abb7337837aa189 -F ref=dev https://gitlab.com/api/v4/projects/10030864/trigger/pipeline"

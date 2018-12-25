@@ -19,3 +19,4 @@ deploy_production:
   - cd ../server
   - npm install
   - npm start
+  

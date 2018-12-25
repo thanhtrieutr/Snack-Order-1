@@ -92,16 +92,6 @@ function changeStatus(request,response, next){
         resolve(result);
     });
     collectClient.then(result => {
-        return new Promise((resolve, reject) => {
-            var checkAccount = {token: result.token};
-            crud.readOneDocument(adminModel, checkAccount, account => {
-                if (account == null) {
-                    reject( new Error("Authentication Error"));
-                }
-                resolve(result);
-            });
-        });
-    }).then(result => {
         //console.log(result);
         var updateList = result.updateList;
         if (checkUpdateList(updateList)) {

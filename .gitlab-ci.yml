@@ -17,7 +17,8 @@ pull_git:
 deploy_production:
  stage: deploy
  script:
-  - cd ../server
+  - pwd
+  - cd server
   - npm install
   - npm start
 

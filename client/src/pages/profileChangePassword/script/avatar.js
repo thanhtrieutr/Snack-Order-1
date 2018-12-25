@@ -38,7 +38,6 @@ export function avatarHandler(event) {
         if (result) {
             alert("Image has loaded!");
             getUserInfo(result => {
-                debugger;
                 if (result !== false) {
                     this.setState({
                         avatar: result.avatarAddress

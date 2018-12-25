@@ -3,7 +3,7 @@ import './styles.scss';
 import HeadTag from './components/HeadTag';
 import LogoField from './components/LogoField';
 import LoginField from './components/LoginField';
-import {checkToken} from '../../helpers/api/admin.api'
+import {checkToken} from '../../helpers/api/adminApi/check-token'
 
 class AdminLogin extends React.Component {
   constructor() {

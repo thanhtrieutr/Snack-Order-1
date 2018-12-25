@@ -1,4 +1,4 @@
-import {API_ROOT} from '../../api-config'
+import {API_ROOT} from '../../../api-config'
 
 export function checkToken(token, callback) {
     fetch(`${API_ROOT}/admin-controller/check-token`, {

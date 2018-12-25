@@ -18,15 +18,15 @@ export default class Item extends React.Component {
   }
   render() {
     return (
-      <tr>
+      <tr className="admin-justified-content">
         <td>
-          {this.props.no}
+          <div>{this.props.no}</div>
         </td>
         <td>
-          {this.props.name}
+          <div>{this.props.name}</div>
         </td>
         <td>
-          {this.props.price}
+          <div>{this.props.price} vnđ</div>
         </td>
         <td>
           <Button bsStyle="link" onClick={this.showModal}>Details</Button>

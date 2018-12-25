@@ -13,7 +13,7 @@ export function getName(obj) {
 }
 
 export function getBirthday(obj) {
-    let temp=this.state.userInfo;
+    let temp = this.state.userInfo;
     temp.birthday = obj;
     this.setState({
         userInfo:temp
@@ -21,7 +21,7 @@ export function getBirthday(obj) {
 }
 
 export function getAddress(obj) {
-    let temp=this.state.userInfo;
+    let temp = this.state.userInfo;
     temp.address = obj;
     this.setState({
         userInfo:temp

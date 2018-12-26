@@ -4,6 +4,7 @@ import InputField from '../../../components/inputField/InputField';
 import NavBarAdmin from '../../../components/NavBarAdmin/NavBarAdmin'
 import { Col, Button } from 'react-bootstrap';
 import { changeEmail, validateEmail } from '../utils';
+import LinkAdminPage from '../../../components/LinkAdminPage/LinkAdminPage';
 
 const headText = 'Create user guide'
 const guideText =  
@@ -26,18 +27,22 @@ export default class ContentField extends React.Component {
   }
   render() {
     return (
-      <Col xs={12} md={9} lg={10}>
-				<NavBarAdmin activeMenuItem="add-user"></NavBarAdmin>
-        <Guide bsStyle='info' title={headText} content={guideText}></Guide>
+      <div>
+        <NavBarAdmin activeMenuItem="add-user"></NavBarAdmin>
+        <LinkAdminPage activeMenuItem="add-user"></LinkAdminPage>
+        <Col xs={12} md={9} lg={10}>
+          <Guide bsStyle='info' title={headText} content={guideText}></Guide>
 
-        <InputField label="Email" changeText={this.changeEmail} value={this.state.email} type="text" 
-          placeholder="* Enter email here" bsSize="large" labelSize={2} inputSize={10}
-          validationState={this.state.status} validationText={this.state.message}/>
+          <InputField label="Email" changeText={this.changeEmail} value={this.state.email} type="text" 
+            placeholder="* Enter email here" bsSize="large" labelSize={2} inputSize={10}
+            validationState={this.state.status} validationText={this.state.message}/>
 
-        <div className="fp-buttons">
-          <Button type="button" onClick={this.validateEmail} bsStyle="success"> Submit </Button>
-        </div>
-      </Col>
+          <div className="fp-buttons">
+            <Button type="button" onClick={this.validateEmail} bsStyle="success"> Submit </Button>
+          </div>
+        </Col>
+      </div>
+      
     )
   }
 }

@@ -2,7 +2,6 @@ import React from 'react'
 import Helmet from 'react-helmet'
 import { Grid } from 'react-bootstrap'
 import {checkToken} from '../../helpers/api/adminApi/check-token'
-import LinkAdminPage from "../../components/LinkAdminPage/LinkAdminPage"
 import Content from './components/Content'
 
 export default class ProductList extends React.Component {
@@ -23,7 +22,6 @@ export default class ProductList extends React.Component {
                     <title>Admin | Product List</title>
                 </Helmet>
                 <Grid>
-                    <LinkAdminPage activeMenuItem="products"></LinkAdminPage>
                     <Content/>
                 </Grid>
             </div>

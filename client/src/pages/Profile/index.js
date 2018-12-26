@@ -28,13 +28,11 @@ export class ProfileProvider extends React.Component {
 		avatarHandler : avatarHandler.bind(this)
 	}
 	componentWillMount() {
-		debugger;
 		checkLogIn(this.props.history,result => {
 			this.setState({
 				user:result
 			});
 			this.state.setUserInfo();
-			debugger;
 		});
 	}
   	render() {

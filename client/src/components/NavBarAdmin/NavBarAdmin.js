@@ -1,7 +1,9 @@
 import React from 'react';
 import './style.scss'
-import {Button, Glyphicon, Dropdown, MenuItem, ButtonToolbar, Col, DropdownButton} from 'react-bootstrap';
+import {Image, Button, Glyphicon, Dropdown, MenuItem, ButtonToolbar, Col, DropdownButton} from 'react-bootstrap';
 import { withRouter } from "react-router";
+import {API_ROOT} from '../../api-config';
+
 
 var menuList=[
     {id:"home", href:"/admin", content:"Home page"},
@@ -21,29 +23,29 @@ class  NavBarAdmin extends React.Component {
     }
     render() {
         return (
-        <ButtonToolbar>
-            <Col xs={2} sm={2} mdHidden lgHidden>
-            <Dropdown id="admin-dropdown-hamburger" key="1">
-                <Dropdown.Toggle noCaret bsSize="large">
-                    <Glyphicon glyph="menu-hamburger" />
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                    {this.createMenuList(this.props.activeMenuItem)}
-                </Dropdown.Menu>
-            </Dropdown>
-            </Col>
-
-            <Col className="pull-right">
-            <DropdownButton  bsSize="large" id="admin-dropdown-logout" key="2" title={adminAccountName}>
-                <MenuItem eventKey="2.1" href="/admin/login" onClick={this.handleClick}>
-                    Log Out
-                </MenuItem>
-            </DropdownButton>
-            <Button bsSize="large">
-                <Glyphicon glyph="user"> </Glyphicon> 
-            </Button>
-            </Col>
-        </ButtonToolbar>
+            <ButtonToolbar>
+                <Col xs={2} sm={2} mdHidden lgHidden>
+                <Dropdown id="admin-dropdown-hamburger" key="1">
+                    <Dropdown.Toggle noCaret bsSize="large">
+                        <Glyphicon glyph="menu-hamburger" />
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu>
+                        {this.createMenuList(this.props.activeMenuItem)}
+                    </Dropdown.Menu>
+                </Dropdown>
+                </Col>
+                <Image className="logo" src={`${API_ROOT}${'/static/images/logo.png'}`}></Image>
+                <Col className="pull-right">
+                <DropdownButton  bsSize="large" id="admin-dropdown-logout" key="2" title={adminAccountName}>
+                    <MenuItem eventKey="2.1" href="/admin/login" onClick={this.handleClick}>
+                        Log Out
+                    </MenuItem>
+                </DropdownButton>
+                <Button bsSize="large">
+                    <Glyphicon glyph="user"> </Glyphicon> 
+                </Button>
+                </Col>
+            </ButtonToolbar>
         );
     }
     handleClick() {

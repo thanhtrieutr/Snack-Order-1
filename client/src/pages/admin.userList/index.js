@@ -4,6 +4,7 @@ import { Grid } from 'react-bootstrap'
 import {checkToken} from '../../helpers/api/adminApi/check-token'
 import LinkAdminPage from "../../components/LinkAdminPage/LinkAdminPage"
 import Content from './components/Content'
+import NavBarAdmin from '../../components/NavBarAdmin/NavBarAdmin'
 
 export default class ProductList extends React.Component {
     componentWillMount() {
@@ -23,6 +24,7 @@ export default class ProductList extends React.Component {
                     <title>Admin | User List</title>
                 </Helmet>
                 <Grid>
+                    <NavBarAdmin activeMenuItem="users"></NavBarAdmin>
                     <LinkAdminPage activeMenuItem="users"></LinkAdminPage>
                     <Content/>
                 </Grid>

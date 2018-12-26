@@ -23,9 +23,9 @@ class AdminHome extends React.Component {
 					<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
             	</Helmet>
 				<Grid>
+					<NavBarAdmin activeMenuItem="home"></NavBarAdmin>
                     <LinkAdminPage activeMenuItem="home"></LinkAdminPage>
 					<Col xs={12} md={9} lg={10}>
-						<NavBarAdmin activeMenuItem="home"></NavBarAdmin>
 						{!this.state.trueUser ? null :
 						<MainContainer></MainContainer> }
       				</Col>

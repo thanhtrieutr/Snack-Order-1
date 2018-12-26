@@ -32,7 +32,6 @@ class OrderField extends React.Component {
     render() {
         return (
         <Col xs={12} md={9} lg={10}>
-            <NavBarAdmin activeMenuItem="today-order"></NavBarAdmin>
             <div className="table-responsive">
             <Table striped 
             // responsive 

@@ -119,6 +119,7 @@
     margin-inline-start: 0px;
     margin-inline-end: 0px;
     padding-inline-start: 0px;
+    cursor: pointer;
 }
 
 .profile .profile-menu ul li.active {

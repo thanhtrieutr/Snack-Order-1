@@ -50,6 +50,20 @@ class AdminHome extends React.Component {
 			}
 		});
 	}
+	
+	handleResize = () => {
+		this.setState({
+		  windowHeight: window.innerHeight,
+		  windowWidth: window.innerWidth
+		});
+	} 
+	componentDidMount() {
+	window.addEventListener('resize', this.handleResize);
+	}
+
+	componentWillUnmount() {
+	window.removeEventListener('resize', this.handleResize);
+	}
 }
 
 export default AdminHome;

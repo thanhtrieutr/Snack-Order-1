@@ -3,7 +3,8 @@ import Helmet from 'react-helmet'
 import { Grid } from 'react-bootstrap'
 import Content from './components/Content'
 import {checkToken} from '../../helpers/api/adminApi/check-token'
-import './create-user.css'
+import LinkAdminPage from "../../components/LinkAdminPage/LinkAdminPage"
+import './create-user.scss'
 
 export default class AddNewUser extends React.Component {
     componentWillMount() {

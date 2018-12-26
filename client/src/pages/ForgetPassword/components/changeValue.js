@@ -1,4 +1,4 @@
-import {emailCheck, passwordCheck, tokenCheck} from '../../../helpers/utils/validate.input';
+import {emailCheck, passwordCheck, tokenCheck} from '../../../helpers/utilities/validate.input';
 import {checkValidUser, validateCode, updatePassword} from '../../../helpers/api/userApi/getUser';
 
 export function checkValue() {

@@ -4,6 +4,7 @@ import HeadTag from './components/HeadTag';
 import LogoField from './components/LogoField';
 import LoginField from './components/LoginField';
 import {checkToken} from '../../helpers/api/userApi/check-token.api';
+import { withRouter } from "react-router";
 
 class UserLogin extends React.Component {
   constructor() {
@@ -11,12 +12,9 @@ class UserLogin extends React.Component {
     checkToken((result) => {
       if (result === true) {
         alert("You have already logged in");
-        window.location.href = "/";
+        this.props.history.push('/');
       }
     })
-  }
-  componentDidMount() {
-    // getAllUsersAPI().then(response => this.setState({ users: response.data })); 
   }
   render() {
     return (
@@ -32,4 +30,4 @@ class UserLogin extends React.Component {
   }
 }
 
-export default UserLogin;
+export default withRouter(UserLogin);

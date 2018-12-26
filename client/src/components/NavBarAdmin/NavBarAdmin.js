@@ -2,8 +2,8 @@ import React from 'react';
 import './style.scss'
 import {Image, Button, Glyphicon, Dropdown, MenuItem, ButtonToolbar, Col, DropdownButton} from 'react-bootstrap';
 import { withRouter } from "react-router";
-import {API_ROOT} from '../../api-config';
-
+//import {API_ROOT} from '../../api-config';
+import logo from '../../assets/images/logo.png'
 
 var menuList=[
     {id:"home", href:"/admin", content:"Home page"},
@@ -20,6 +20,7 @@ class  NavBarAdmin extends React.Component {
     constructor() {
         super();
         adminAccountName = localStorage.getItem("adminAccount");
+        this.handleClick = this.handleClick.bind(this);
     }
     render() {
         return (
@@ -34,10 +35,10 @@ class  NavBarAdmin extends React.Component {
                     </Dropdown.Menu>
                 </Dropdown>
                 </Col>
-                <Image className="logo" src={`${API_ROOT}${'/static/images/logo.png'}`}></Image>
+                <Image className="logo" src={logo}></Image>
                 <Col className="pull-right">
                 <DropdownButton  bsSize="large" id="admin-dropdown-logout" key="2" title={adminAccountName}>
-                    <MenuItem eventKey="2.1" href="/admin/login" onClick={this.handleClick}>
+                    <MenuItem eventKey="2.1" onClick={this.handleClick}>
                         Log Out
                     </MenuItem>
                 </DropdownButton>
@@ -51,6 +52,8 @@ class  NavBarAdmin extends React.Component {
     handleClick() {
         localStorage.setItem("adminAccount", "default");
         localStorage.setItem("token", "null");
+        //this.props.history.push("/admin/login");
+        window.location.href='/admin/login';
     }
     createMenuList(activeId) {
         var push = (path) => {

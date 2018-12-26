@@ -4,6 +4,7 @@ import HeadTag from './components/HeadTag';
 import LogoField from './components/LogoField';
 import LoginField from './components/LoginField';
 import {checkToken} from '../../helpers/api/adminApi/check-token'
+import { withRouter } from "react-router"; 
 
 class AdminLogin extends React.Component {
   constructor() {
@@ -12,12 +13,9 @@ class AdminLogin extends React.Component {
     checkToken(token, (result) => {
       if (result !== false) {
         alert("You have already logged in");
-        window.location.href = "/admin";
+        this.props.history.push('/admin');
       }
     })
-  }
-  componentDidMount() {
-    // getAllUsersAPI().then(response => this.setState({ users: response.data })); 
   }
   render() {
     // const result = this.callYoutube();
@@ -34,4 +32,4 @@ class AdminLogin extends React.Component {
   }
 }
 
-export default AdminLogin;
+export default withRouter(AdminLogin);

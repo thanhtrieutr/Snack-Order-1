@@ -3,13 +3,15 @@ import SubmitButton from '../../../components/SubmitButton'
 import 'font-awesome/css/font-awesome.min.css';
 import {FormGroup, ControlLabel, FormControl, InputGroup, Glyphicon} from 'react-bootstrap'
 import {API_ROOT} from '../../../api-config'
-
+import {emailCheck, passwordCheck} from '../../../helpers/utilities/validate.input'
 class LoginField extends React.Component {
     constructor() {
         super();
         this.state = {
             user: "",
-            password: ""
+            password: "",
+            stateInput: null,
+            statePassword: null
         }
         this.onChangeUserHandle = this.onChangeUserHandle.bind(this);
         this.onChangePasswordHandle = this.onChangePasswordHandle.bind(this);
@@ -22,7 +24,7 @@ class LoginField extends React.Component {
     render() {
         return (
             <div className="container cl-xs-12">
-                <FormGroup>
+                <FormGroup validationState={this.state.stateInput}>
                     <ControlLabel bsClass="login-label">Email</ControlLabel>
                     <InputGroup>
                         <InputGroup.Addon>
@@ -30,9 +32,9 @@ class LoginField extends React.Component {
                         </InputGroup.Addon>
                         <FormControl type="text" placeholder="Email" onChange={this.onChangeUserHandle}></FormControl>
                     </InputGroup>
-                    </FormGroup>
+                </FormGroup>
 
-                <FormGroup>
+                <FormGroup validationState={this.state.statePassword}>
                     <ControlLabel bsClass="login-label">Password</ControlLabel>
                     <InputGroup>
                         <InputGroup.Addon>
@@ -63,8 +65,7 @@ class LoginField extends React.Component {
                     localStorage.setItem("userAccount", this.state.user);
                     localStorage.setItem("token", token);
                     //redirect
-                    alert("Login Success");
-                    window.location.href = "/";
+                    window.location.href='/';
                 });
             }
             else {
@@ -76,11 +77,29 @@ class LoginField extends React.Component {
         this.setState({
             user: event.target.value
         });
+        if (emailCheck(this.state.user) === false) {
+            this.setState({
+                stateInput: "error"
+            });
+        }
+        else { this.setState({
+                stateInput: null
+            });
+        }
     }
     onChangePasswordHandle(event) {
         this.setState({
             password: event.target.value
         });
+        if (passwordCheck(this.state.password) === false) {
+            this.setState({
+                statePassword: "error"
+            });
+        }
+        else { this.setState({
+                statePassword: null
+            });
+        }
     }
     checkKeyPress(key) {
         if (key.keyCode === 13) {

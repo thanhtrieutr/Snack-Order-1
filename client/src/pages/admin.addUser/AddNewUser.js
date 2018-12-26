@@ -3,16 +3,17 @@ import Helmet from 'react-helmet'
 import { Grid } from 'react-bootstrap'
 import Content from './components/Content'
 import {checkToken} from '../../helpers/api/adminApi/check-token'
-import './create-user.scss'
+import './create-user.css'
+import { withRouter } from "react-router";
 
-export default class AddNewUser extends React.Component {
+export default withRouter(class AddNewUser extends React.Component {
     componentWillMount() {
         var token = { token: localStorage.getItem("token")};
         checkToken(token, (result) => {
             console.log(result);
             if (result === false) {
                 alert("You haven't logged in");
-                window.location.href = "/admin/login";
+                this.props.history.push('/admin/login')
             }
         })
     }
@@ -28,4 +29,4 @@ export default class AddNewUser extends React.Component {
             </div>
         );
     }
-}
+})

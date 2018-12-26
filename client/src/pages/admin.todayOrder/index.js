@@ -6,14 +6,14 @@ import LinkAdminPage from "../../components/LinkAdminPage/LinkAdminPage"
 import OrderField from './components/OrderField'
 import {checkToken} from '../../helpers/api/adminApi/check-token'
 import NavBarAdmin from '../../components/NavBarAdmin/NavBarAdmin'
-
+import { withRouter } from "react-router";
 class AdminTodayOrder extends React.Component {
     componentWillMount() {
         var token = { token: localStorage.getItem("token")};
         checkToken(token, (result) => {
             if (result === false) {
                 alert("You haven't logged in");
-                window.location.href = "/admin/login";
+                this.props.history.push('/admin/login');
             }
         })
     }
@@ -31,4 +31,4 @@ class AdminTodayOrder extends React.Component {
     }
 }
 
-export default AdminTodayOrder;
+export default withRouter(AdminTodayOrder);

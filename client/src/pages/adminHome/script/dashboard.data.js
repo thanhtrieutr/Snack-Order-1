@@ -4,6 +4,7 @@ import {displayPrice} from "../../../helpers/utilities/display.price"
 export function dashboardData() {
     getDashboardData(result => {
         if (result !== false) {
+            debugger;
             this.setState({
                 orderCount:result.orderCount,
                 budgetRequire:displayPrice(result.budgetRequire),

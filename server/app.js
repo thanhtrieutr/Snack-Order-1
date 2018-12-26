@@ -9,11 +9,11 @@ const RedisStore = require('connect-redis')(session);
 const bodyParser = require('body-parser');
 const redis = require("redis");
 const client = redis.createClient();
+const dailySpending = require("./cronJobs/daily.spending");
 
 
 const hostname = "127.0.0.1";
 const port = 3000;
-
 
 const options = {
     host: 'localhost',

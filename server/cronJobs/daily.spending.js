@@ -13,7 +13,6 @@ module.exports = schedule.scheduleJob('0 0 0 * * *', function(){
         var todayEnd = new Date();
         todayEnd.setHours(23,59,59,999);
         todayEnd.setDate(todayEnd.getDate() - 1);
-        debugger;
         var condition = {time: {$gte: todayStart, $lte: todayEnd}};
         crud.getOrders(orderModel, condition, (result, err) => {
             if (err) {
@@ -24,12 +23,13 @@ module.exports = schedule.scheduleJob('0 0 0 * * *', function(){
     });
 
     getOrder.then(order => {
-        debugger;
         for (var i = 0; i<order.length ; i++) {
             dailyTotal += order[i].actualTotalPrice;
         }
         return new Promise((reject) => {
-            var obj = {spending: dailyTotal}
+            var obj = {};
+            obj.spending = dailyTotal;
+            obj.time = new Date();
             crud.createDocument(dailyModel, obj, error => {
                 if (error) reject(new Error("Problem with database"));
             });

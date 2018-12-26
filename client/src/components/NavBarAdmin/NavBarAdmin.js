@@ -24,27 +24,37 @@ class  NavBarAdmin extends React.Component {
     }
     render() {
         return (
-            <ButtonToolbar>
+            <ButtonToolbar className="admin-nav-bar">
                 <Col xs={2} sm={2} mdHidden lgHidden>
-                <Dropdown id="admin-dropdown-hamburger" key="1">
-                    <Dropdown.Toggle noCaret bsSize="large">
-                        <Glyphicon glyph="menu-hamburger" />
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                        {this.createMenuList(this.props.activeMenuItem)}
-                    </Dropdown.Menu>
-                </Dropdown>
+                    <Dropdown id="admin-dropdown-hamburger" className="nav-item" key="1">
+                        <Dropdown.Toggle noCaret bsSize="large">
+                            <Glyphicon glyph="menu-hamburger" />
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu>
+                            {this.createMenuList(this.props.activeMenuItem)}
+                        </Dropdown.Menu>
+                    </Dropdown>
                 </Col>
                 <Image className="logo" src={logo}></Image>
                 <Col className="pull-right">
-                <DropdownButton  bsSize="large" id="admin-dropdown-logout" key="2" title={adminAccountName}>
-                    <MenuItem eventKey="2.1" onClick={this.handleClick}>
-                        Log Out
-                    </MenuItem>
-                </DropdownButton>
-                <Button bsSize="large">
-                    <Glyphicon glyph="user"> </Glyphicon> 
-                </Button>
+                    <DropdownButton  bsSize="large" className="nav-item" id="admin-dropdown-logout" key="2" title={adminAccountName}>
+                        <MenuItem eventKey="2.1" href="/admin/login" onClick={this.handleClick}>
+                            Log Out
+                        </MenuItem>
+                    </DropdownButton>
+                    {/* <Button bsSize="large" className="nav-item">
+                        <Glyphicon glyph="user"> </Glyphicon> 
+                    </Button> */}
+                    <Dropdown id="admin-dropdown-user" bsSize="large" className="nav-item" pullRight>
+                        <Dropdown.Toggle noCaret bsSize="large">
+                            <Glyphicon glyph="user"/>
+                        </Dropdown.Toggle>
+                        <Dropdown.Menu >
+                            <MenuItem header>admin@gmail.com</MenuItem>
+                            <MenuItem divider/>
+                            <MenuItem eventKey="2">Log out</MenuItem>
+                        </Dropdown.Menu>
+                    </Dropdown>
                 </Col>
             </ButtonToolbar>
         );

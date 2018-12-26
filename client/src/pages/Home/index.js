@@ -38,6 +38,7 @@ export default class Home extends Component {
     this.submitHandler = this.submitHandler.bind(this);
     this.cartDisplay = this.cartDisplay.bind(this);
     this.cartHandler = this.cartHandler.bind(this);
+    this.menuHandler = this.menuHandler.bind(this);
 	}
   componentWillMount() {
     checkLogIn(this.props.history,result => {
@@ -166,6 +167,11 @@ export default class Home extends Component {
     }
     submitCart(cartArray);
   }
+  menuHandler() { 
+    if (this.state.hamburgerStatus == 1) { 
+      this.setState({hamburgerStatus : 0});
+    }
+  }
   cartDisplay(width) { 
     if (width >= 768) { 
       return (<Cart submitCart={this.submitHandler} totalPrice={displayPrice(this.state.total)} cartList={this.state.cart} productList={this.state.productList} amountList={this.state.amountList} amountHandler={this.amountHandler}></Cart>);
@@ -184,7 +190,7 @@ export default class Home extends Component {
             <title>Main Order</title>
           </Helmet>
           <Title cartHandler={this.cartHandler} history={this.props.history} user={this.state.user} buttonHandler={this.logOutHandle} hamburgerHandler={this.hamburgerHandler} windowWidth={this.state.windowWidth}></Title>
-          <HamburgerBox history={this.props.history} logOutHandler={this.logOutHandle} hamburgerStatus={this.state.hamburgerStatus}></HamburgerBox>
+          <HamburgerBox menuHandler={this.menuHandler} history={this.props.history} logOutHandler={this.logOutHandle} hamburgerStatus={this.state.hamburgerStatus}></HamburgerBox>
           <div className="container">
             <div className="row">
               <Products productList={this.state.productList} checkboxHandler={this.handleCheckbox}></Products>

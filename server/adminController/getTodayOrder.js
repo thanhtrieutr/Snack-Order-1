@@ -1,7 +1,10 @@
 var crud = require("../utilities/databaseCRUD");
 var utilities = require("../utilities/utilities");
+var adminUtilities = require("../adminController/adminUtilities");
 var adminModel = require("../schema/admin-account-schema");
 var orderModel = require("../schema/order-schema");
+var express = require('express');
+var app = express();
 
 function commonProduct(a, b) {
     if (a.productId.equals(b.productId) && a.user == b.user && a.status == b.status) {
@@ -16,35 +19,24 @@ function getMax(a, b) {
     }
     return b;
 }
+
+app.get('/', adminUtilities.authenticationAdminByHeader, getTodayOrder);
+
 function getTodayOrder(request, response, next) {
-    var collectClient = new Promise((resolve, reject) => { 
-        var result = request.body;
-        crud.readOneDocument(adminModel, {token: result.token}, (admin, err) => {
+   var getOrder = new Promise((resolve, reject) => {
+        var todayStart = new Date();
+        todayStart.setHours(0,0,0,0);
+        var todayEnd = new Date();
+        todayEnd.setHours(23,59,59,999);
+        var condition = {time: {$gte: todayStart, $lte: todayEnd}};
+        crud.getOrders(orderModel, condition, (result, err) => {
             if (err) {
                 reject(err);
             }
-            if (typeof (admin) != "object" || admin == null) {
-                reject(new Error("Authentication Error"));
-            }
-            resolve();
+            resolve(result);
         });
     });
-
-    collectClient.then(token => {
-        return new Promise((resolve, reject) => {
-            var todayStart = new Date();
-            todayStart.setHours(0,0,0,0);
-            var todayEnd = new Date();
-            todayEnd.setHours(23,59,59,999);
-            var condition = {time: {$gte: todayStart, $lte: todayEnd}};
-            crud.getOrders(orderModel, condition, (result, err) => {
-                if (err) {
-                    reject(err);
-                }
-                resolve(result);
-            });
-        });
-    }).then(order => {
+    getOrder.then(order => {
         var orderList = [];
         for (var i = 0; i < order.length; i++) {
             var obj = {}, oneOrder = order[i];
@@ -83,6 +75,7 @@ function getTodayOrder(request, response, next) {
     });
 }
 
+
 module.exports = {
-    getTodayOrder: getTodayOrder
+    getTodayOrder: app
 };

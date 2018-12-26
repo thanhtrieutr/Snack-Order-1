@@ -1,5 +1,6 @@
 //Implement function of uploading file in multipart/dataform
 import {getUserInfo} from './script'
+import {API_ROOT} from '../../../api-config'
 
 export function uploadImage(event , callback) {
     //If don't have event.preventDefault(), uploading process will be automatically run
@@ -16,7 +17,7 @@ export function uploadImage(event , callback) {
     userFormData.append("file", file);
     //Open new request and send POST request to user's API controller 
 
-    fetch("http://127.0.0.1:3000/user-controller/upload-file",{
+    fetch(`${API_ROOT}/user-controller/upload-file`, {
         method: "POST",
         body: userFormData,
         headers : {
@@ -37,7 +38,6 @@ export function avatarHandler(event) {
         if (result) {
             alert("Image has loaded!");
             getUserInfo(result => {
-                debugger;
                 if (result !== false) {
                     this.setState({
                         avatar: result.avatarAddress

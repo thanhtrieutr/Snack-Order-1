@@ -1,8 +1,10 @@
+import {API_ROOT} from '../../../api-config'
+
 var token = localStorage.getItem("token");
 
 export function getProductHistory (callback) {
   var object = {token: token};
-  fetch ("http://127.0.0.1:3000/admin-controller/get-order-history", {
+  fetch (`${API_ROOT}/admin-controller/get-order-history`, {
     method: "POST",
     body: JSON.stringify(object)
   }).then(response => {

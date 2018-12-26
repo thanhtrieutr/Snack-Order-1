@@ -1,7 +1,7 @@
 import React from 'react';
 import {Grid, Col} from 'react-bootstrap'
 import {getProductHistory} from '././scripts/loadHistoryData';
-import AdminApi from '../../helpers/api/admin.api'
+import {checkToken} from '../../helpers/api/adminApi/check-token'
 import HeaderTag from '././components/headerTag'
 import HistoryContainer from '././components/historyContainer';
 import LinkAdminPage from './../../components/LinkAdminPage/LinkAdminPage'
@@ -20,7 +20,7 @@ class AdminOrderHistory extends React.Component {
   
   componentWillMount() {
     var token = { token: localStorage.getItem("token")};
-    AdminApi.checkToken(token, (result) => {
+    checkToken(token, (result) => {
       console.log(result);
       if (result === false) {
         alert("You haven't logged in");

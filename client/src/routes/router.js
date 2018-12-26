@@ -12,7 +12,6 @@ import ProductList from '../pages/admin.productList/ProductList';
 import UserList from '../pages/admin.userList/index';
 import AddNewProduct from './../pages/admin.addProduct/index';
 import Login from '../pages/Login/index';
-
 import { Switch, Route } from 'react-router'
 
 function Routerx() {

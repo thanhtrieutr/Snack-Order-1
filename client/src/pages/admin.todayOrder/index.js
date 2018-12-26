@@ -1,28 +1,29 @@
 import React from 'react';
 import './style.scss';
 import HeadTag from './components/HeadTag'
-// import LinkAdminPage from '../../components/LinkAdminPage'
-// import TitlePanel from './components/TitlePanel'
-// import OrderField from './components/OrderField'
-// import {Container, Columns} from 'react-bulma-components/full';
+import { Grid } from 'react-bootstrap'
+import LinkAdminPage from "../../components/LinkAdminPage/LinkAdminPage"
+import OrderField from './components/OrderField'
+import {checkToken} from '../../helpers/api/adminApi/check-token'
+
 class AdminTodayOrder extends React.Component {
+    componentWillMount() {
+        var token = { token: localStorage.getItem("token")};
+        checkToken(token, (result) => {
+            if (result === false) {
+                alert("You haven't logged in");
+                window.location.href = "/admin/login";
+            }
+        })
+    }
     render() {
         return (
             <div className="admin-today-order"> 
                 <HeadTag></HeadTag>
-                {/* <Container breakpoint="fullhd">
-                    <Columns>
-                        <Columns.Column size={2} id="nav-menu">
-                            <LinkAdminPage activeMenuItem="today-order"/>
-                        </Columns.Column>
-                        
-                        <Columns.Column size={10} id="body">
-                            body
-                            <TitlePanel/>
-                            <OrderField/>
-                        </Columns.Column>
-                    </Columns> 
-                </Container> */}
+                <Grid>
+                    <LinkAdminPage activeMenuItem="today-order"></LinkAdminPage>
+                    <OrderField></OrderField>
+                </Grid>
             </div>
         );
     }

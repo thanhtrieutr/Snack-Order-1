@@ -1,27 +1,29 @@
 .admin-today-order {
-    background-color: #EFF0EB;
+    background-color: #FBFCFC;
     height: 100vh;
 }
 .admin-today-order {
-    @media (max-width: 1087.98px) {
-        #nav-menu {
-            display: none;
-            background: hsl(0, 0%, 96%);
-        }
-    
-        #body {
-            width: 100%;
-        }
+    .admin-today-order-button-bar{
+        text-align: center;
+        padding-bottom: 5px;
     }
-    @media (min-width: 1088px) {
-        #nav-menu {
-            display: block;
-            flex: none;
-            width: 16.66667%;
-        }
+    #admin-today-order-button{
+        font-weight: 600;
     }
-    #nav-menu {
-        background: #EFF0EB;
-        z-index: 2;
+    .admin-today-order-dropdown-menu{
+        min-width: 0;
+    }
+    .well{
+        text-align: center;   
+        font-weight: 600;
+        font-size: 16px;
+        margin-bottom: 0;
+    }
+    table{
+        margin: 0;  
+    }
+    .table-responsive{
+        overflow-y: hidden;
+        margin-bottom: 5px;
     }
 }

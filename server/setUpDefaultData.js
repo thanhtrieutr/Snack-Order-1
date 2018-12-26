@@ -133,7 +133,9 @@ function resetData() {
         }
     });
 }
-crud.connectDatabase(() => {
+crud.connectDatabase((err) => {
+    if (err)
+        console.log(err);
     createFull(0, () => {
         resetData();
     });

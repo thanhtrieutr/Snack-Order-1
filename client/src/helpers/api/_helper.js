@@ -1,11 +1,11 @@
-const host = 'http://127.0.0.1:3000';
+import {API_ROOT} from '../../api-config'
 
 let _helper = {
   fetchPOST: function (endpoint, dataToBeSent, callback) {
     if (!dataToBeSent.token && localStorage.token) {
       dataToBeSent.token = localStorage.token;
     }
-    fetch(host + endpoint, {
+    fetch(API_ROOT + endpoint, {
         method: 'POST',
         headers: {
           'token': localStorage.token,
@@ -22,7 +22,7 @@ let _helper = {
   },
 
   fetchGET: function (endpoint, callback) {
-    fetch(host + endpoint)
+    fetch(API_ROOT + endpoint)
       .then((response) => {
         callback(response);
       });

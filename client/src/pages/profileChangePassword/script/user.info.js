@@ -1,5 +1,6 @@
 import {getUserInfo,sendNewInfo} from './script'
 import {checkInput} from "./check.input";
+import { errorAlert, successAlert } from '../../../helpers/utilities/alert';
 
 export function userInfo() {
     getUserInfo(result => {
@@ -20,10 +21,10 @@ export function changePassword() {
     obj.newPassword = this.state.passwordDetail.newPassword;
     sendNewInfo(obj,result => {
         if (result === false) {
-            alert("Change Password Fail");
+            errorAlert("Change Password Fail");
         }
         else {
-            alert("Change Password Success");
+            successAlert("Change Password Success");
         }
     });
 }

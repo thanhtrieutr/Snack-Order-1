@@ -1,6 +1,7 @@
 //Implement function of uploading file in multipart/dataform
 import {getUserInfo} from './script'
 import {API_ROOT} from '../../../api-config'
+import { successAlert, errorAlert } from '../../../helpers/utilities/alert';
 
 export function uploadImage(event , callback) {
     //If don't have event.preventDefault(), uploading process will be automatically run
@@ -36,7 +37,7 @@ export function uploadImage(event , callback) {
 export function avatarHandler(event) {
     uploadImage(event,result => {
         if (result) {
-            alert("Image has loaded!");
+            successAlert("Image has loaded!");
             getUserInfo(result => {
                 if (result !== false) {
                     this.setState({
@@ -46,7 +47,7 @@ export function avatarHandler(event) {
             })
         }
         else {
-            alert("Upload Avatar Fail!");
+            errorAlert("Upload Avatar Fail!");
         }
     })
 }

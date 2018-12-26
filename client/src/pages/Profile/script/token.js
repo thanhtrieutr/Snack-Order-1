@@ -1,5 +1,6 @@
 // var token = localStorage.getItem("token");
 import {API_ROOT} from '../../../api-config'
+import { errorAlert } from '../../../helpers/utilities/alert';
 
 function checkToken(token, callback) {
     var obj = {token: token};
@@ -22,7 +23,7 @@ export function checkLogIn(history, callback) {
     var token = localStorage.getItem("token");
     checkToken(token, result => {
         if (result === false) {
-            alert("You haven't logged in");
+            errorAlert("You haven't logged in");
             history.push("/login");
         }
         else callback(result);

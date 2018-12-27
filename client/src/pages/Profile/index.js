@@ -18,6 +18,10 @@ export class ProfileProvider extends React.Component {
 			address:"a",
 			birthday:"a"
 		},
+		phoneError:false,
+		nameError:false,
+		addressError:false,
+		birthdayError:false,
 		getAvatar : getAvatar.bind(this),
 		getAddress : getAddress.bind(this),
         getName : getName.bind(this),
@@ -28,13 +32,11 @@ export class ProfileProvider extends React.Component {
 		avatarHandler : avatarHandler.bind(this)
 	}
 	componentWillMount() {
-		debugger;
 		checkLogIn(this.props.history,result => {
 			this.setState({
 				user:result
 			});
 			this.state.setUserInfo();
-			debugger;
 		});
 	}
   	render() {

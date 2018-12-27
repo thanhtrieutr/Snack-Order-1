@@ -8,6 +8,7 @@ pull_git:
   - sudo npm install create-react-app -g
   - cd client
   - rm -rf node_modules
+  - docker login -u kieutridang -p Tridang93
   - docker run build -t snack-order-client .
   - CI=false npm run build
 

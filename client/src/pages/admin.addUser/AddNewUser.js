@@ -3,7 +3,7 @@ import Helmet from 'react-helmet'
 import { Grid } from 'react-bootstrap'
 import Content from './components/Content'
 import {checkToken} from '../../helpers/api/adminApi/check-token'
-import './create-user.css'
+import './create-user.scss'
 import { withRouter } from "react-router";
 
 export default withRouter(class AddNewUser extends React.Component {

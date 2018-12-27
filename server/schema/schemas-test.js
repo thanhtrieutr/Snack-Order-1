@@ -16,7 +16,6 @@ var adminAccount = mongoose.model('adminAccount', adminAccountSchema,'adminAccou
 var product = mongoose.model('product', productSchema,'product');
 var order = mongoose.model('order', orderSchema,'order');
 
-debugger;
 account.find((err,acc) => {
     if (err) return handleError(err);
     console.log(acc);

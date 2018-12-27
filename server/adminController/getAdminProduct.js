@@ -15,12 +15,18 @@ function getAdminProduct(request, response, next) {
         resolve(result);
     });
     var collectProductList = new Promise(function(resolve, reject) {
-        crud.readDatabase(productModel, function(object,error) {
-            if (error) {
-                reject(error);
-            } 
-            resolve(object);
-        });
+        const { page, perPage } = request.query;
+        const options = {
+            page: parseInt(page, 10),
+            limit: parseInt(perPage, 10)
+        }
+        productModel.paginate({}, options, (err, result) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(result);
+            }
+        })
     });
     Promise.all([collectClient, collectProductList]).then(result => {
         return new Promise((resolve, reject) => {
@@ -33,10 +39,10 @@ function getAdminProduct(request, response, next) {
             });
         });
     }).then(result => {
-        var products = result[1];
         response.json({
             success: true,
-            products: products,
+            products: result[1].docs,
+            totalPages: result[1].totalPages,
         });
     }).catch(error => {
         next(error);

@@ -6,6 +6,7 @@ import "./style.scss"
 import {Col,Grid} from 'react-bootstrap';
 import MainContainer from "./components/main.container"
 import {checkToken} from "../../helpers/api/adminApi/check-token"
+import {errorAlert} from "../../helpers/utilities/alert"
 class AdminHome extends React.Component {
 	constructor() {
 		super();
@@ -20,16 +21,15 @@ class AdminHome extends React.Component {
 					<meta charSet="utf-8" />
 					<title>Admin Home</title>
 					<link rel="canonical" href="http://mysite.com/example" />
-					<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
-            	</Helmet>
+        </Helmet>
 				<Grid>
-                    <LinkAdminPage activeMenuItem="home"></LinkAdminPage>
+					<NavBarAdmin activeMenuItem="home"></NavBarAdmin>
+          <LinkAdminPage activeMenuItem="home"></LinkAdminPage>
 					<Col xs={12} md={9} lg={10}>
-						<NavBarAdmin activeMenuItem="home"></NavBarAdmin>
 						{!this.state.trueUser ? null :
 						<MainContainer></MainContainer> }
-      				</Col>
-                </Grid>
+      		</Col>
+        </Grid>
 			</div>
 		);
 	}
@@ -40,7 +40,7 @@ class AdminHome extends React.Component {
 		};
 		checkToken(item,result => {
 			if (result === false) {
-				alert("You haven't logged in");
+				errorAlert("You haven't logged in");
 				this.props.history.push("/admin/login");
 			}
 			else {

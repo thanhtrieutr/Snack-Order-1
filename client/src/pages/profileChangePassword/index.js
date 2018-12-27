@@ -17,6 +17,8 @@ export class ProfileProvider extends React.Component {
 			newPassword:"",
 			confirmPassword:""
 		},
+		error: false,
+		errorMessage:"None",
 		getAvatar : getAvatar.bind(this),
 		getCurrentPassword : getCurrentPassword.bind(this),
 		getNewPassword : getNewPassword.bind(this),
@@ -26,13 +28,11 @@ export class ProfileProvider extends React.Component {
 		avatarHandler : avatarHandler.bind(this),
 	}
 	componentWillMount() {
-		debugger;
 		checkLogIn(this.props.history,result => {
 			this.setState({
 				user:result
 			});
 			this.state.userInfo();
-			debugger;
 		});
 	}
   	render() {
@@ -46,7 +46,7 @@ export class ProfileProvider extends React.Component {
 class Index extends React.Component {
 	render() {
 		return (
-			<ProfileProvider>
+			<ProfileProvider history={this.props.history}>
 				<div className="profile">
 					<TitleBox></TitleBox>
 					<div className="container">

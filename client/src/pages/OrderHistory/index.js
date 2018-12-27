@@ -44,11 +44,12 @@ class AdminOrderHistory extends React.Component {
       <div className="admin-order-history">
           <HeaderTag/>
           <Grid>
-          <LinkAdminPage activeMenuItem="order-history"></LinkAdminPage>
-            <Col xs={12} md={9} lg={10}>
-              <NavBarAdmin activeMenuItem="order-history"></NavBarAdmin>
-              <HistoryContainer historyContainer={this.state.orderHistory} dataLength={this.state.dataLength}/>
-            </Col>
+            <NavBarAdmin activeMenuItem="order-history"></NavBarAdmin>
+            <LinkAdminPage activeMenuItem="order-history"></LinkAdminPage>
+              <Col xs={12} md={9} lg={10}>
+                
+                <HistoryContainer historyContainer={this.state.orderHistory} dataLength={this.state.dataLength}/>
+              </Col>
           </Grid>
       </div>
     )

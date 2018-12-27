@@ -6,9 +6,9 @@ var menuList=[
     {id:"today-order", href:"/admin/today-order", content:"Today Order"},
     {id:"order-history", href:"/admin/history", content:"Order history"},
     {id:"users", href:"/admin/users", content:"Users"},
+    {id:"add-user", href:"/admin/user/add", content:"Create new user"},
     {id:"products", href:"/admin/products", content:"Product list"},
-    {id:"add-product", href:"/admin/product/add", content:"Add new product"},
-    {id:"add-user", href:"/admin/user/add", content:"Create new user"}
+    {id:"add-product", href:"/admin/product/add", content:"Add new product"}
 ];
 
 class LinkAdminPage extends React.Component {

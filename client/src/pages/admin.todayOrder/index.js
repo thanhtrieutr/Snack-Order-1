@@ -5,6 +5,7 @@ import { Grid } from 'react-bootstrap'
 import LinkAdminPage from "../../components/LinkAdminPage/LinkAdminPage"
 import OrderField from './components/OrderField'
 import {checkToken} from '../../helpers/api/adminApi/check-token'
+import NavBarAdmin from '../../components/NavBarAdmin/NavBarAdmin'
 
 class AdminTodayOrder extends React.Component {
     componentWillMount() {
@@ -21,6 +22,7 @@ class AdminTodayOrder extends React.Component {
             <div className="admin-today-order"> 
                 <HeadTag></HeadTag>
                 <Grid>
+                    <NavBarAdmin activeMenuItem="today-order"></NavBarAdmin>
                     <LinkAdminPage activeMenuItem="today-order"></LinkAdminPage>
                     <OrderField></OrderField>
                 </Grid>

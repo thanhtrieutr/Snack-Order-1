@@ -3,8 +3,8 @@ import {Grid, Col} from 'react-bootstrap'
 import {checkToken} from '../../helpers/api/adminApi/check-token'
 import HeaderTag from '././components/headerTag'
 import Content from '././components/content';
-import LinkAdminPage from './../../components/LinkAdminPage/LinkAdminPage'
 import NavBarAdmin from './../../components/NavBarAdmin/NavBarAdmin'
+import LinkAdminPage from '../../components/LinkAdminPage/LinkAdminPage'
 import './index.scss'
 
 class AddNewProduct extends React.Component {
@@ -25,9 +25,9 @@ class AddNewProduct extends React.Component {
         <div className="admin-create-product">
             <HeaderTag/>
             <Grid>
+                <NavBarAdmin activeMenuItem="add-product"></NavBarAdmin>
                 <LinkAdminPage activeMenuItem="add-product"></LinkAdminPage>
                 <Col xs={12} md={9} lg={10}>
-                  <NavBarAdmin activeMenuItem="add-product"></NavBarAdmin>
                   <Content/>
                 </Col>
             </Grid>

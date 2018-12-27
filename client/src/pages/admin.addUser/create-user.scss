@@ -11,7 +11,7 @@ html, body, #root {
 }
 
 .admin-products {
-  height: auto;
+  height: 100%;
 }
 
 .admin-product-div {
@@ -51,4 +51,14 @@ html, body, #root {
 
 .admin-status.warning {
   color: #8a6d3b;
+}
+
+.admin-justified-content {
+  div {
+    padding: 7px 0px;
+  }
+}
+
+.table-responsive {
+  min-height: 600px;
 }

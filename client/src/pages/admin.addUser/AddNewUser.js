@@ -3,8 +3,7 @@ import Helmet from 'react-helmet'
 import { Grid } from 'react-bootstrap'
 import Content from './components/Content'
 import {checkToken} from '../../helpers/api/adminApi/check-token'
-import LinkAdminPage from "../../components/LinkAdminPage/LinkAdminPage"
-import './create-user.css'
+import './create-user.scss'
 
 export default class AddNewUser extends React.Component {
     componentWillMount() {
@@ -24,7 +23,6 @@ export default class AddNewUser extends React.Component {
                     <title>Admin | Create user</title>
                 </Helmet>
                 <Grid>
-                    <LinkAdminPage activeMenuItem="add-user"></LinkAdminPage>
                     <Content/>
                 </Grid>
             </div>

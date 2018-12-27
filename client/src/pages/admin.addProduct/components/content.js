@@ -2,7 +2,7 @@ import React from 'react';
 import Guide from '../../../components/panel/Panel';
 import InputField1 from './inputField-1';
 import InputField2 from './inputField-2';
-import InputField3 from '././inputField-3'
+import InputField3 from '././inputField-3';
 import { Col, Button } from 'react-bootstrap';
 import {productNameCheck, priceCheck, imageSizeCheck} from '../../../helpers/utils/validate.input';
 import {checkProductName, uploadNewProduct} from '../../../helpers/api/adminApi/create-product.api';

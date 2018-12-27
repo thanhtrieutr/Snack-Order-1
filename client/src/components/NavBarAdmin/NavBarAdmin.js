@@ -59,7 +59,7 @@ class  NavBarAdmin extends React.Component {
                 </Col>
                 <Image className="logo" src={`${API_ROOT}${'/static/images/logo.png'}`}></Image>
                 <Col className="pull-right">
-                    {this.handleDisplayUser}
+                    {this.handleDisplayUser()}
                 </Col>
             </ButtonToolbar>
         );
@@ -68,24 +68,22 @@ class  NavBarAdmin extends React.Component {
         localStorage.setItem("adminAccount", "default");
         localStorage.setItem("token", "null");
     }
-    
+
     handleDisplayUser(){
         var width = this.state.windowWidth;
-        if (width < 992) return(
-            <div>
-                <Dropdown id="admin-dropdown-user" bsSize="large" className="nav-item" pullRight>
-                    <Dropdown.Toggle noCaret bsSize="large">
-                        <Glyphicon glyph="user"/>
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu >
-                        <MenuItem header>admin@gmail.com</MenuItem>
-                        <MenuItem divider/>
-                        <MenuItem eventKey="2">Log out</MenuItem>
-                    </Dropdown.Menu>
-                </Dropdown>
-            </div>
+        if (width < 992) return (    
+            <Dropdown id="admin-dropdown-user" bsSize="large" className="nav-item" pullRight>
+                <Dropdown.Toggle noCaret bsSize="large">
+                    <Glyphicon glyph="user"/>
+                </Dropdown.Toggle>
+                <Dropdown.Menu >
+                    <MenuItem header>admin@gmail.com</MenuItem>
+                    <MenuItem divider/>
+                    <MenuItem eventKey="2">Log out</MenuItem>
+                </Dropdown.Menu>
+            </Dropdown>
         );
-        else return (
+        return(
             <div>
                 <DropdownButton  bsSize="large" className="nav-item" id="admin-dropdown-logout" key="2" title={adminAccountName}>
                     <MenuItem eventKey="2.1" href="/admin/login" onClick={this.handleClick}>
@@ -95,7 +93,7 @@ class  NavBarAdmin extends React.Component {
                 <Button bsSize="large" className="nav-item">
                     <Glyphicon glyph="user"> </Glyphicon> 
                 </Button>
-            </div>
+            </div> 
         );
     }
 

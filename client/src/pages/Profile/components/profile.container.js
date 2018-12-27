@@ -1,7 +1,6 @@
 import React, { Component } from "react"; 
 import ButtonBox from "./button.box";
 import InfoBar from "./info.bar";
-import {checkInput} from "../script/check.input";
 import {ProfileContext} from "../index";
 import ErrorBar from "../../../components/Profile/error.bar";
 import { errorAlert } from "../../../helpers/utilities/alert";

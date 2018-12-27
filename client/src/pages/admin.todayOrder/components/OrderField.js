@@ -1,7 +1,5 @@
 import React from 'react';
 import { Col, Table, ButtonToolbar, Button, Well } from 'react-bootstrap'
-
-import NavBarAdmin from '../../../components/NavBarAdmin/NavBarAdmin'
 import OneOrder from "./OneOrder";
 import getOrder from '../script/get-today-order';
 import {submitStatus} from '../script/submit-status';

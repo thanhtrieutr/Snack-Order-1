@@ -1,5 +1,5 @@
 import React from 'react'
-import { Col, Table, Pagination } from 'react-bootstrap'
+import { Col, Table } from 'react-bootstrap'
 import { loadProduct } from '../../../helpers/api/adminApi/get-product.api'
 import ReactPaginate from 'react-paginate'
 import Item from './Item'

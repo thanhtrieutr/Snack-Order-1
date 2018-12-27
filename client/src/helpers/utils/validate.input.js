@@ -37,5 +37,6 @@ export function productNameCheck(productName) {
   if (productName === "" || productName === null || productName.length > 40) {
     return true;
   } 
+  // eslint-disable-next-line
   return /[!@#$%^&*_+\-=\[\]{};':"\\|,.<>\/?]/.test(productName);
 }

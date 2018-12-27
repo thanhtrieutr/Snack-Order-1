@@ -65,79 +65,82 @@ class LoginField extends React.Component {
             return null;
         else return <HelpBlock>{message}</HelpBlock>
     }
+    checkInput(callback) {
+        let check = emailCheckClearly(this.state.user);
+        let newState = {
+            stateInput: "error",
+            helpInput: null,
+            statePassword: "error",
+            helpPassword: null
+        };
+        if (check === false) {
+            newState.helpInput = "It must follow email format";
+        }
+        if (check === -1) {
+            newState.helpInput = "Username's too short";
+        }
+        if (check === -2) {
+            newState.helpInput = "Username's too long";
+        }
+        if (check === true) {
+            newState.stateInput = null;
+        } 
+        check = passwordCheckClearly(this.state.password);
+        if (check === false) {
+            newState.helpPassword = "It should't contain special character";
+        }
+        if (check === -1) {
+            newState.helpPassword = "Password's too short";
+        }
+        if (check === -2) {
+            newState.helpPassword = "Password's too long";
+        }
+        if (check === true) {
+            newState.statePassword = null;
+        } 
+        this.setState(newState, callback);
+    }
     submitButtonHandle() {
-        if (this.state.stateInput !== null && this.state.statePassword !== null) {
-            return;
-        }
-        var account = {
-            user: this.state.user,
-            password: this.state.password
-        }
-        fetch(`${API_ROOT}/admin-controller/check-login`, {
-            method: 'POST', // POST, DELETE, PUT,
-            body: JSON.stringify(account) // object
-        }).then(response => {
-            if (response.status === 200) {
-                response.json().then(token => {
-                    //flag current account      
-                    localStorage.setItem("adminAccount", this.state.user);
-                    localStorage.setItem("token", token);
-                    //redirect
-                    window.location.href='/admin';
-                    //this.props.history.push('/admin')
-                });
+        this.checkInput(() => {
+            if (this.state.stateInput !== null || this.state.statePassword !== null) {
+                return;
             }
-            else {
-                errorAlert('Email or password does not match!');
+            var account = {
+                user: this.state.user,
+                password: this.state.password
             }
-        })
+            fetch(`${API_ROOT}/admin-controller/check-login`, {
+                method: 'POST', // POST, DELETE, PUT,
+                body: JSON.stringify(account) // object
+            }).then(response => {
+                if (response.status === 200) {
+                    response.json().then(token => {
+                        //flag current account      
+                        localStorage.setItem("adminAccount", this.state.user);
+                        localStorage.setItem("token", token);
+                        //redirect
+                        window.location.href='/admin';
+                        //this.props.history.push('/admin')
+                    });
+                }
+                else {
+                    errorAlert('Email or password not match!');
+                }
+            })
+        });
     }
     onChangeUserHandle(event) {
         this.setState({
-            user: event.target.value
-        }, () => {
-            let check = emailCheckClearly(this.state.user);
-            let newState = {
-                stateInput: "error",
-                helpInput: null
-            };
-            if (check === false) {
-                newState.helpInput = "It must follow email format";
-            }
-            if (check === -1) {
-                newState.helpInput = "Username's too short";
-            }
-            if (check === -2) {
-                newState.helpInput = "Username's too long";
-            }
-            if (check === true) {
-                newState.stateInput = null;
-            } 
-            this.setState(newState);
+            user: event.target.value,
+            stateInput: null,
+            helpInput: null
         });
     }
     onChangePasswordHandle(event) {
         this.setState({
-            password: event.target.value
-        }, () => {
-            let check = passwordCheckClearly(this.state.password);
-            let newState = {
-                statePassword: "error",
-                helpPassword: null
-            };
-            if (check === false) {
-                newState.helpPassword = "It should't contain special character";
-            }
-            if (check === -1) {
-                newState.helpPassword = "Password's too short";
-            }
-            if (check === -2) {
-                newState.helpPassword = "Password's too long";
-            }
-            if (check === true) {
-                newState.statePassword = null;
-            } 
-            this.setState(newState);
+            password: event.target.value,
+            statePassword: null,
+            helpPassword: null
         });
     }
     checkKeyPress(key) {

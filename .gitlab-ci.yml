@@ -6,9 +6,6 @@ pull_git:
  stage: build
  script:
   - sudo npm install create-react-app -g
-  - git checkout dev
-  - git stash
-  - git pull git@github.com:SmithWinter/Snack-Order.git dev
   - cd client
   - rm -rf node_modules
   - docker run build -t snack-order-client .

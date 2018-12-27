@@ -11,13 +11,11 @@ pull_git:
   - git pull https://kieutridang:Ktd93Nth91@github.com/SmithWinter/Snack-Order.git dev
   - cd client
   - rm -rf node_modules
-  - npm install
+  - docker run build -t snack-order-client .
   - CI=false npm run build
 
 deploy_production:
  stage: deploy
  script:
   - pwd
-  - cd server
-  - npm install
-  - npm start
+  - ls

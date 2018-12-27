@@ -1,5 +1,25 @@
-.logo {
-    width: auto;
-    height: 60px;
-    margin-left: 30px;
+.admin-nav-bar{
+    height: 70px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    position: relative;
+    .logo {
+        width: auto;
+        height: 65px;
+        margin: auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+    }
+    .nav-item{
+        margin-top: 5px;
+        display: inline-block;
+    }
+    @media (min-width: 992px) {
+        .logo {
+            margin-left: 30px;
+        }
+    } 
 }

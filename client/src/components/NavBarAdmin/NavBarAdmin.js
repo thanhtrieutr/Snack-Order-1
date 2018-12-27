@@ -78,7 +78,7 @@ class  NavBarAdmin extends React.Component {
                 <Dropdown.Menu >
                     <MenuItem header>admin@gmail.com</MenuItem>
                     <MenuItem divider/>
-                    <MenuItem eventKey="2">Log out</MenuItem>
+                    <MenuItem href="/admin/login" onClick={this.handleClick} eventKey="2">Log out</MenuItem>
                 </Dropdown.Menu>
             </Dropdown>
         );

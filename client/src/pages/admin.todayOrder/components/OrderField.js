@@ -3,6 +3,7 @@ import { Col, Table, ButtonToolbar, Button, Well } from 'react-bootstrap'
 import OneOrder from "./OneOrder";
 import getOrder from '../script/get-today-order';
 import {submitStatus} from '../script/submit-status';
+import {warnAlert, successAlert} from '../../../helpers/utilities/alert'
 class OrderField extends React.Component {
     constructor() {
         super();
@@ -74,8 +75,8 @@ class OrderField extends React.Component {
     submitChange() {
         submitStatus(this.state.orderList, (result) => {
             if (result) 
-                alert("Update success!");
-            else alert("Update fail!");
+                successAlert("Update success!");
+            else warnAlert("Update fail!");
         })
     }
     statusHandle(eventKey, event) {

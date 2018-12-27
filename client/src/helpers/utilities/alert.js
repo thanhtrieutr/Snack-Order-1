@@ -11,6 +11,17 @@ export function successAlert(string) {
         });
 }
 
+export function warnAlert(string) {
+    toast.warn(string, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        });
+}
+
 export function errorAlert(string) {
     toast.error(string, {
         position: "top-right",

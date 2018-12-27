@@ -1,15 +1,21 @@
 import React from 'react';
 import SubmitButton from '../../../components/SubmitButton'
 import 'font-awesome/css/font-awesome.min.css';
-import {FormGroup, ControlLabel, FormControl, InputGroup, Glyphicon} from 'react-bootstrap'
+import {FormGroup, ControlLabel, FormControl, InputGroup, Glyphicon, HelpBlock} from 'react-bootstrap'
 import {API_ROOT} from '../../../api-config'
 import { withRouter } from "react-router";
+import {emailCheckClearly, passwordCheckClearly} from '../../../helpers/utilities/validate.input'
+import {errorAlert} from '../../../helpers/utilities/alert'
 class LoginField extends React.Component {
     constructor() {
         super();
         this.state = {
             user: "",
-            password: ""
+            password: "",
+            stateInput: null,
+            statePassword: null,
+            helpInput: null,
+            helpPassword: null
         }
         this.onChangeUserHandle = this.onChangeUserHandle.bind(this);
         this.onChangePasswordHandle = this.onChangePasswordHandle.bind(this);
@@ -22,24 +28,30 @@ class LoginField extends React.Component {
     render() {
         return (
             <div className="container cl-xs-12">
-                <FormGroup>
+               <FormGroup validationState={this.state.stateInput}>
                     <ControlLabel bsClass="login-label">Email</ControlLabel>
                     <InputGroup>
                         <InputGroup.Addon>
                             <Glyphicon glyph="user"></Glyphicon>
                         </InputGroup.Addon>
                         <FormControl type="text" placeholder="Email" onChange={this.onChangeUserHandle}></FormControl>
+                        <FormControl.Feedback />
                     </InputGroup>
-                    </FormGroup>
+                    
+                    {this.createHelp(this.state.helpInput)}
+                </FormGroup>
 
-                <FormGroup>
-                    <ControlLabel bsClass="login-label">Password</ControlLabel>
+                <FormGroup validationState={this.state.statePassword}>
+                    <ControlLabel bsClass="login-label" id="password-login-label">Password</ControlLabel>
                     <InputGroup>
                         <InputGroup.Addon>
                             <Glyphicon glyph="lock"></Glyphicon>
                         </InputGroup.Addon>
                         <FormControl type="password" placeholder="password" onChange={this.onChangePasswordHandle}></FormControl>
+                        <FormControl.Feedback />
                     </InputGroup>
+
+                    {this.createHelp(this.state.helpPassword)}
                 </FormGroup>
 
                 <div className="login-button">
@@ -48,7 +60,15 @@ class LoginField extends React.Component {
             </div>
         );
     }
+    createHelp(message) {
+        if (message ===  null)
+            return null;
+        else return <HelpBlock>{message}</HelpBlock>
+    }
     submitButtonHandle() {
+        if (this.state.stateInput !== null && this.state.statePassword !== null) {
+            return;
+        }
         var account = {
             user: this.state.user,
             password: this.state.password
@@ -68,18 +88,56 @@ class LoginField extends React.Component {
                 });
             }
             else {
-                alert('Email or password does not match!');
+                errorAlert('Email or password does not match!');
             }
         })
     }
     onChangeUserHandle(event) {
         this.setState({
             user: event.target.value
+        }, () => {
+            let check = emailCheckClearly(this.state.user);
+            let newState = {
+                stateInput: "error",
+                helpInput: null
+            };
+            if (check === false) {
+                newState.helpInput = "It must follow email format";
+            }
+            if (check === -1) {
+                newState.helpInput = "Username's too short";
+            }
+            if (check === -2) {
+                newState.helpInput = "Username's too long";
+            }
+            if (check === true) {
+                newState.stateInput = null;
+            } 
+            this.setState(newState);
         });
     }
     onChangePasswordHandle(event) {
         this.setState({
             password: event.target.value
+        }, () => {
+            let check = passwordCheckClearly(this.state.password);
+            let newState = {
+                statePassword: "error",
+                helpPassword: null
+            };
+            if (check === false) {
+                newState.helpPassword = "It should't contain special character";
+            }
+            if (check === -1) {
+                newState.helpPassword = "Password's too short";
+            }
+            if (check === -2) {
+                newState.helpPassword = "Password's too long";
+            }
+            if (check === true) {
+                newState.statePassword = null;
+            } 
+            this.setState(newState);
         });
     }
     checkKeyPress(key) {

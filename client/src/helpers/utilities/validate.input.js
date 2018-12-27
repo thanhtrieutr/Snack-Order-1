@@ -5,6 +5,16 @@ export function emailCheck(user) {
   return /^[a-zA-Z0-9_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(user);
 }
 
+export function emailCheckClearly(user) {
+  if (user.length < 6) {
+    return -1;
+  }
+  if (user.length > 100) {
+    return -2;
+  }
+  return /^[a-zA-Z0-9_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/.test(user);
+}
+
 export function tokenCheck(token) {
   if (token.length !== 6) {
     return false;
@@ -15,6 +25,16 @@ export function tokenCheck(token) {
 export function passwordCheck(password) {
   if (password.length < 8 || password.length > 16) {
     return false;
+  }
+  return /^[[a-zA-Z0-9!#$%&'*+-/=?^_`{|}]+$/.test(password);
+}
+
+export function passwordCheckClearly(password) {
+  if (password.length < 8) {
+    return -1;
+  }
+  if (password.length > 16) {
+    return -2;
   }
   return /^[[a-zA-Z0-9!#$%&'*+-/=?^_`{|}]+$/.test(password);
 }

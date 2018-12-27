@@ -7,12 +7,13 @@ import OrderField from './components/OrderField'
 import {checkToken} from '../../helpers/api/adminApi/check-token'
 import NavBarAdmin from '../../components/NavBarAdmin/NavBarAdmin'
 import { withRouter } from "react-router";
+import {errorAlert} from '../../helpers/utilities/alert'
 class AdminTodayOrder extends React.Component {
     componentWillMount() {
         var token = { token: localStorage.getItem("token")};
         checkToken(token, (result) => {
             if (result === false) {
-                alert("You haven't logged in");
+                errorAlert("You haven't logged in");
                 this.props.history.push('/admin/login');
             }
         })

@@ -6,6 +6,7 @@ import LinkAdminPage from "../../components/LinkAdminPage/LinkAdminPage"
 import Content from './components/Content'
 import NavBarAdmin from '../../components/NavBarAdmin/NavBarAdmin'
 import { withRouter } from "react-router";
+import {errorAlert} from '../../helpers/utilities/alert'
 
 export default withRouter(class ProductList extends React.Component {
     componentWillMount() {
@@ -13,7 +14,7 @@ export default withRouter(class ProductList extends React.Component {
         checkToken(token, (result) => {
             console.log(result);
             if (result === false) {
-                alert("You haven't logged in");
+                errorAlert("You haven't logged in");
                 this.props.history.push('/admin/login');
             }
         })

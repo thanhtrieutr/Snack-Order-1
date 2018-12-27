@@ -46,7 +46,7 @@ export class ProfileProvider extends React.Component {
 class Index extends React.Component {
 	render() {
 		return (
-			<ProfileProvider>
+			<ProfileProvider history={this.props.history}>
 				<div className="profile">
 					<TitleBox></TitleBox>
 					<div className="container">

@@ -1,11 +1,10 @@
 import React, { Component } from "react"; 
-import Image from "./image";
-
+import logo from '../../assets/images/logo.png'
 class TitleBox extends Component {
     render(){
         return (
             <div className="title cl-xs-12">
-                <Image imgName="/static/images/logo.png" container="logo-container" class="logo"></Image>
+                <img alt="imageAlt" container="logo-container" className="logo" src={logo} />
             </div>
         );
     }

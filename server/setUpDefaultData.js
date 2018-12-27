@@ -44,20 +44,28 @@ var product = [
 ];
 var accountArray = [
     {
-        user: "test@gmail.com",
-        password: "test1234"
+        user: "hovuminhduc@gmail.com",
+        password: "12345678"
     },
     {
-        user: "guest@gmail.com",
-        password: "guest1234"
+        user: "cabcaber@gmail.com",
+        password: "12345678"
     },
     {
-        user: "server@gmail.com",
-        password: "server1234"
+        user: "tedotoji89@gmail.com",
+        password: "12345678"
     },
     {
-        user: "cilent@gmail.com",
-        password: "cilent1234"
+        user: "yellowthundercat@gmail.com",
+        password: "12345678"
+    },
+    {
+        user: "trieuthanhtr@gmail.com",
+        password: "12345678"
+    },
+    {
+        user: "oblivionbladex93@gmail.com",
+        password: "12345678"
     }
 ];
 var adminList = [{

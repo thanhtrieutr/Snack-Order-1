@@ -3,7 +3,7 @@ import SubmitButton from '../../../components/SubmitButton'
 import 'font-awesome/css/font-awesome.min.css';
 import {FormGroup, ControlLabel, FormControl, InputGroup, Glyphicon} from 'react-bootstrap'
 import {API_ROOT} from '../../../api-config'
-
+import { withRouter } from "react-router";
 class LoginField extends React.Component {
     constructor() {
         super();
@@ -63,8 +63,8 @@ class LoginField extends React.Component {
                     localStorage.setItem("adminAccount", this.state.user);
                     localStorage.setItem("token", token);
                     //redirect
-                    alert("Login Success");
-                    window.location.href = "/admin";
+                    window.location.href='/admin';
+                    //this.props.history.push('/admin')
                 });
             }
             else {
@@ -89,4 +89,4 @@ class LoginField extends React.Component {
     }
 }
 
-export default LoginField
+export default withRouter(LoginField)

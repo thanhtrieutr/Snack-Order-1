@@ -7,6 +7,7 @@ import HistoryContainer from '././components/historyContainer';
 import LinkAdminPage from './../../components/LinkAdminPage/LinkAdminPage'
 import NavBarAdmin from './../../components/NavBarAdmin/NavBarAdmin'
 import '././index.scss'
+import { withRouter } from "react-router";
 
 class AdminOrderHistory extends React.Component {
   constructor() {
@@ -24,7 +25,7 @@ class AdminOrderHistory extends React.Component {
       console.log(result);
       if (result === false) {
         alert("You haven't logged in");
-        window.location.href = "/admin/login";
+        this.props.history.push('/admin/login');
       }
     })
     getProductHistory(result => {
@@ -56,4 +57,4 @@ class AdminOrderHistory extends React.Component {
   }
 }
 
-export default AdminOrderHistory;
+export default withRouter(AdminOrderHistory);

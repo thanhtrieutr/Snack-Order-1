@@ -1,4 +1,4 @@
-import {emailCheck} from '../../helpers/utils/validate.input';
+import {emailCheck} from '../../helpers/utilities/validate.input';
 import {createUser} from '../../helpers/api/adminApi/create-user.api';
 
 function generatePassword() {

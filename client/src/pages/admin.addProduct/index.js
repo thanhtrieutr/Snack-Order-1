@@ -5,6 +5,7 @@ import HeaderTag from '././components/headerTag'
 import Content from '././components/content';
 import NavBarAdmin from './../../components/NavBarAdmin/NavBarAdmin'
 import LinkAdminPage from '../../components/LinkAdminPage/LinkAdminPage'
+import { withRouter } from "react-router";
 import './index.scss'
 
 class AddNewProduct extends React.Component {
@@ -15,7 +16,7 @@ class AddNewProduct extends React.Component {
       console.log(result);
       if (result === false) {
         alert("You haven't logged in");
-        window.location.href = "/admin/login";
+        this.props.history.push("/admin/login");
       }
     })
   }
@@ -36,4 +37,4 @@ class AddNewProduct extends React.Component {
   }
 }
 
-export default AddNewProduct
+export default withRouter(AddNewProduct)

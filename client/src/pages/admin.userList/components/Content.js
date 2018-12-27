@@ -1,7 +1,6 @@
 import React from 'react'
 import { Col, Table } from 'react-bootstrap'
 import { loadUser } from '../../../helpers/api/adminApi/get-user.api'
-import NavBarAdmin from '../../../components/NavBarAdmin/NavBarAdmin'
 import Item from './Item'
 
 export default class ContentField extends React.Component {

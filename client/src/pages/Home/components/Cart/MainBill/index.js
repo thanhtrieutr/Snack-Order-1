@@ -22,6 +22,7 @@ export default class MainBill extends Component {
                 <CartItem key={index} valueIndex={index} index={item+1} name={this.props.productList[item].name} price={displayPrice(this.props.productList[item].price * this.props.amountList[index])} amount={this.props.amountList[index]} amountHandler={this.props.amountHandler}></CartItem>
             )
           }
+          return null;
         });
         return cart;
       }

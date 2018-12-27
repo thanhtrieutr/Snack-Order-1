@@ -17,6 +17,8 @@ export class ProfileProvider extends React.Component {
 			newPassword:"",
 			confirmPassword:""
 		},
+		error: false,
+		errorMessage:"None",
 		getAvatar : getAvatar.bind(this),
 		getCurrentPassword : getCurrentPassword.bind(this),
 		getNewPassword : getNewPassword.bind(this),

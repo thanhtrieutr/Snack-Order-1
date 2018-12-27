@@ -164,7 +164,8 @@
 
 .profile .error-bar {
     display: block;
-    margin-bottom: 5px; 
+    font-size: 15px;
+    margin-bottom: 15px;
 }
 
 .profile .property {
@@ -173,7 +174,7 @@
     max-width: 100%;
     font-weight: 700;
     text-align: right;
-    padding: 6px;
+    padding: 6px 6px 0px 0px;
 }
 
 .profile .input-field {

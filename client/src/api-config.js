@@ -1,6 +1,6 @@
 let backendHost;
 
-if (process.env === 'production') {
+if (process.env.NODE_ENV === 'production') {
   backendHost = 'http://178.128.115.211';
 } else {
   backendHost = 'http://127.0.0.1:3000';

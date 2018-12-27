@@ -5,13 +5,13 @@ import LogoField from './components/LogoField';
 import LoginField from './components/LoginField';
 import {checkToken} from '../../helpers/api/userApi/check-token.api';
 import { withRouter } from "react-router";
-
+import {infoAlert} from '../../helpers/utilities/alert'
 class UserLogin extends React.Component {
   constructor() {
     super();
     checkToken((result) => {
       if (result === true) {
-        alert("You have already logged in");
+        infoAlert("You have already logged in");
         this.props.history.push('/');
       }
     })

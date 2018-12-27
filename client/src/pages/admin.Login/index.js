@@ -5,14 +5,14 @@ import LogoField from './components/LogoField';
 import LoginField from './components/LoginField';
 import {checkToken} from '../../helpers/api/adminApi/check-token'
 import { withRouter } from "react-router"; 
-
+import {infoAlert} from '../../helpers/utilities/alert'
 class AdminLogin extends React.Component {
   constructor() {
     super();
     var token = { token: localStorage.getItem("token")};
     checkToken(token, (result) => {
       if (result !== false) {
-        alert("You have already logged in");
+        infoAlert("You have already logged in");
         this.props.history.push('/admin');
       }
     })

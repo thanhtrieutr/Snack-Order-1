@@ -8,6 +8,7 @@ import LinkAdminPage from './../../components/LinkAdminPage/LinkAdminPage'
 import NavBarAdmin from './../../components/NavBarAdmin/NavBarAdmin'
 import '././index.scss'
 import { withRouter } from "react-router";
+import {errorAlert} from '../../helpers/utilities/alert'
 
 class AdminOrderHistory extends React.Component {
   constructor() {
@@ -24,7 +25,7 @@ class AdminOrderHistory extends React.Component {
     checkToken(token, (result) => {
       console.log(result);
       if (result === false) {
-        alert("You haven't logged in");
+        errorAlert("You haven't logged in");
         this.props.history.push('/admin/login');
       }
     })

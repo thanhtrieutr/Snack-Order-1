@@ -5,12 +5,9 @@ stages:
 pull_git:
  stage: build
  script:
-  - sudo npm install create-react-app -g
-  - cd client
-  - rm -rf node_modules
+  # - sudo npm install create-react-app -g
   - docker login -u kieutridang -p Tridang93
-  - docker build -t snack-order-client .
-  - CI=false npm run build
+  - docker build -t snack-order-client ./client
 
 deploy_production:
  stage: deploy

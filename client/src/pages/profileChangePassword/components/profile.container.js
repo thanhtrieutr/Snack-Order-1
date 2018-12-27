@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ButtonBox from "./button.box";
 import InfoBar from "./info.bar";
 import {ProfileContext} from "../index"
+import ErrorBar from "../../../components/Profile/error.bar";
 class ProfileContainer extends Component {
     constructor() {
         super();
@@ -34,6 +35,7 @@ class ProfileContainer extends Component {
                                     <InfoBar id="current-password" getValue={context.getCurrentPassword} value={context.passwordDetail.currentPassword} name="Current Password" ></InfoBar>
                                     <InfoBar id="new-password" getValue={context.getNewPassword} value={context.passwordDetail.newPassword} name="New Password" ></InfoBar>
                                     <InfoBar id="repeat-new-password" getValue={context.getConfirmPassword} value={context.passwordDetail.confirmPassword} name="Confirm Password"></InfoBar>
+                                    <ErrorBar errorMessage={context.errorMessage} error={context.error}></ErrorBar>
                                     <ButtonBox history={this.props.history} changePassword={context.changePassword}></ButtonBox>
                                 </div>
                             </div>

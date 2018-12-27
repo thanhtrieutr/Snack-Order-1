@@ -1,4 +1,5 @@
 import {getUserInfo,sendNewUserInfo} from './script'
+import { errorAlert, successAlert } from '../../../helpers/utilities/alert';
 
 export function setUserInfo() {
     getUserInfo(result => {
@@ -24,10 +25,10 @@ export function uploadNewInfo() {
     obj.birthday = this.state.userInfo.birthday;
     sendNewUserInfo(obj,result => {
         if (result === false) {
-            alert("Update Fail");
+            errorAlert("Update Fail");
         }
         else {
-            alert("Update Success");
+            successAlert("Update Success");
         }
     });
 }

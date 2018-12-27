@@ -6,6 +6,7 @@ import "./style.scss"
 import {Col,Grid} from 'react-bootstrap';
 import MainContainer from "./components/main.container"
 import {checkToken} from "../../helpers/api/adminApi/check-token"
+import {errorAlert} from "../../helpers/utilities/alert"
 class AdminHome extends React.Component {
 	constructor() {
 		super();
@@ -40,7 +41,7 @@ class AdminHome extends React.Component {
 		};
 		checkToken(item,result => {
 			if (result === false) {
-				alert("You haven't logged in");
+				errorAlert("You haven't logged in");
 				this.props.history.push("/admin/login");
 			}
 			else {

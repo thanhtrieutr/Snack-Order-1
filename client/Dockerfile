@@ -1,5 +1,5 @@
 # Docker for client
-FROM node:10
+FROM node:11
 
 RUN pwd
 WORKDIR /usr/src/app

@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.scss'
 import {Image, Button, Glyphicon, Dropdown, MenuItem, ButtonToolbar, Col, DropdownButton} from 'react-bootstrap';
-import { withRouter } from "react-router";
+import {withRouter} from "react-router";
 import {API_ROOT} from '../../api-config';
 
 
@@ -14,13 +14,36 @@ var menuList=[
     {id:"add-product", href:"/admin/product/add", content:"Add new product"},
     {id:"add-user", href:"/admin/user/add", content:"Create new user"}
 ];
-var adminAccountName = "default";
 
+var adminAccountName = 'default';
 class  NavBarAdmin extends React.Component {
     constructor() {
         super();
         adminAccountName = localStorage.getItem("adminAccount");
+        this.state = {
+            windowHeight: undefined,
+            windowWidth: undefined
+        }
+        this.handleResize = this.handleResize.bind(this);
+        this.handleDisplayUser = this.handleDisplayUser.bind(this);
     }
+
+    handleResize = () => {
+        this.setState({
+          windowHeight: window.innerHeight,
+          windowWidth: window.innerWidth,
+        });
+    } 
+
+    componentDidMount() {
+        this.handleResize();
+        window.addEventListener('resize', this.handleResize);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.handleResize);
+    }
+
     render() {
         return (
             <ButtonToolbar className="admin-nav-bar">
@@ -36,24 +59,7 @@ class  NavBarAdmin extends React.Component {
                 </Col>
                 <Image className="logo" src={`${API_ROOT}${'/static/images/logo.png'}`}></Image>
                 <Col className="pull-right">
-                    <DropdownButton  bsSize="large" className="nav-item" id="admin-dropdown-logout" key="2" title={adminAccountName}>
-                        <MenuItem eventKey="2.1" href="/admin/login" onClick={this.handleClick}>
-                            Log Out
-                        </MenuItem>
-                    </DropdownButton>
-                    {/* <Button bsSize="large" className="nav-item">
-                        <Glyphicon glyph="user"> </Glyphicon> 
-                    </Button> */}
-                    <Dropdown id="admin-dropdown-user" bsSize="large" className="nav-item" pullRight>
-                        <Dropdown.Toggle noCaret bsSize="large">
-                            <Glyphicon glyph="user"/>
-                        </Dropdown.Toggle>
-                        <Dropdown.Menu >
-                            <MenuItem header>admin@gmail.com</MenuItem>
-                            <MenuItem divider/>
-                            <MenuItem eventKey="2">Log out</MenuItem>
-                        </Dropdown.Menu>
-                    </Dropdown>
+                    {this.handleDisplayUser}
                 </Col>
             </ButtonToolbar>
         );
@@ -62,6 +68,37 @@ class  NavBarAdmin extends React.Component {
         localStorage.setItem("adminAccount", "default");
         localStorage.setItem("token", "null");
     }
+    
+    handleDisplayUser(){
+        var width = this.state.windowWidth;
+        if (width < 992) return(
+            <div>
+                <Dropdown id="admin-dropdown-user" bsSize="large" className="nav-item" pullRight>
+                    <Dropdown.Toggle noCaret bsSize="large">
+                        <Glyphicon glyph="user"/>
+                    </Dropdown.Toggle>
+                    <Dropdown.Menu >
+                        <MenuItem header>admin@gmail.com</MenuItem>
+                        <MenuItem divider/>
+                        <MenuItem eventKey="2">Log out</MenuItem>
+                    </Dropdown.Menu>
+                </Dropdown>
+            </div>
+        );
+        else return (
+            <div>
+                <DropdownButton  bsSize="large" className="nav-item" id="admin-dropdown-logout" key="2" title={adminAccountName}>
+                    <MenuItem eventKey="2.1" href="/admin/login" onClick={this.handleClick}>
+                        Log Out
+                    </MenuItem>
+                </DropdownButton>
+                <Button bsSize="large" className="nav-item">
+                    <Glyphicon glyph="user"> </Glyphicon> 
+                </Button>
+            </div>
+        );
+    }
+
     createMenuList(activeId) {
         var push = (path) => {
             this.props.history.push(path);

@@ -34,6 +34,7 @@ export default class ContentField extends React.Component {
           <thead>
             <tr>
               <th>#</th>
+              <th>Product Image</th>
               <th>Product Name</th>
               <th>Price</th>
               <th>Description</th>

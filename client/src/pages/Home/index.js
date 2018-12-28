@@ -168,7 +168,7 @@ export default class Home extends Component {
     submitCart(cartArray);
   }
   menuHandler() { 
-    if (this.state.hamburgerStatus == 1) { 
+    if (this.state.hamburgerStatus === 1) { 
       this.setState({hamburgerStatus : 0});
     }
   }

@@ -7,6 +7,7 @@ import Content from './components/Content'
 import NavBarAdmin from '../../components/NavBarAdmin/NavBarAdmin'
 import { withRouter } from "react-router";
 import {errorAlert} from '../../helpers/utilities/alert'
+import './style.scss'
 
 export default withRouter(class ProductList extends React.Component {
     componentWillMount() {

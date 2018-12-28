@@ -62,7 +62,7 @@ function getDashboard(request, response, next) {
             result.orderCount = order.length;
             result.budgetRequire = 0;
             result.currentSpending = 0;
-            result.mostBought = "Dummy data";
+            result.mostBought = "None";
             result.monthSpend = 0;
     
             debugger;

@@ -12,11 +12,15 @@ import ProductList from '../pages/admin.productList/ProductList';
 import UserList from '../pages/admin.userList/index';
 import AddNewProduct from './../pages/admin.addProduct/index';
 import Login from '../pages/Login/index';
+import PaymentInfo from './../pages/Payment/components/paymentInfo'
+import ReviewOrder from './../pages/Payment/components/reviewPurchase'
 import { Switch, Route } from 'react-router'
 
 function Routerx() {
     return (
      <Switch>
+        <Route path="/review-order" component={ReviewOrder} />
+        <Route path="/payment-info" component={PaymentInfo} />
         <Route path="/profile" exact component={Profile} />
         <Route path="/profile/change-password" exact component={ProfileChangePassword} />
         <Route path="/forget-password" exact component={ForgotPassword}/>

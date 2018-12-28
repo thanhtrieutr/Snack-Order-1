@@ -1,0 +1,43 @@
+.checkout-header{
+  z-index: 2;
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  border-bottom: 1px solid rgb(252, 193, 0);
+  background-color: #ffd54f;
+  align-items: center;
+  height: 200px;
+  .glyphicon, .glyphicon-arrow-right {
+  width: 25px;
+  padding: 10px 5px;
+  font-size: 20px;
+  }
+  .checkout-menu {
+    padding: 10px 5px;
+    font-size: 15px;
+    
+  }
+  .checkout-logo {
+    display: flex;
+    padding: 3px;
+    border-radius: 100px;
+    background: #fff8e1;
+  }
+  .checkout-logo img {
+    align-content: center;
+    height: 100px;
+    margin: auto;
+  }
+  @media (min-width: 768px) {
+    .checkout-menu {
+      margin: -100px 0px;
+      line-height: 50px;
+    }
+    .glyphicon, .glyphicon-arrow-right {
+      padding: 24px 4px;
+    }
+  }
+  }

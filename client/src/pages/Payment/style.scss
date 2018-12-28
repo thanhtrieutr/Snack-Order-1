@@ -1,0 +1,69 @@
+.payment-page {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background: url(/static/media/background.5b97435e.png) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  overflow-y: auto;
+    .payment-method {
+      margin-top: 220px;
+      font-size: 15px;
+      .select-method, .payment-logo-gallery {
+        border: 1px solid #ffe082;
+        background-color: #FFF8E1;
+        padding: 15px;
+      }
+      .select-method-title, .logo-gallery-title {
+        text-align: center;
+        font-size: 20px;
+        padding: 10px;
+      }
+      .logo-gallery-title {
+        font-size: 15px;
+      }
+      select {
+        width: 250px;
+        height: 30px;
+        font-size: 18px;
+      }
+      .payment-description {
+        margin-top: 20px;
+      }
+      .payment-logo {
+        height: 55px;
+        width: 42px;
+      }
+      .payment-button {
+        background-color: #ffe36a;
+        color: black;
+        padding: 5px 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: bold;
+        opacity: 0.9;
+      }
+      .logo-gallery-description {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      @media (max-width: 767px) {
+        .payment-logo-gallery {
+          margin-top: 30px;
+        }
+        .logo-gallery-title {
+          font-size: 20px
+        }
+      }
+    }
+}

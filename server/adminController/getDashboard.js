@@ -67,10 +67,12 @@ function getDashboard(request, response, next) {
     
             debugger;
             for (var i = 0; i < order.length; i++) {
-                result.budgetRequire += (order[i].estimateTotalPrice - order[i].actualTotalPrice );
                 result.currentSpending += order[i].actualTotalPrice;
                 for (var j = 0; j < order[i].products.length; j++) {
                     position = item.indexOf(order[i].products[j]._id);
+                    if (order[i].products[j].status == "pending") {
+                        result.budgetRequire += order[i].products[j]._id.price;
+                    }
                     if (position == -1) {
                         item.push(order[i].products[j]._id);
                         quantity.push(order[i].products[j].quantity);

@@ -89,9 +89,6 @@ class  NavBarAdmin extends React.Component {
                         Log Out
                     </MenuItem>
                 </DropdownButton>
-                <Button bsSize="large" className="nav-item">
-                    <Glyphicon glyph="user"> </Glyphicon> 
-                </Button>
             </div> 
         );
     }

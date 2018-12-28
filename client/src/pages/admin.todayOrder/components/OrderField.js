@@ -9,7 +9,8 @@ class OrderField extends React.Component {
         super();
         this.state = {
             orderList: [],
-            total: 0
+            pendingTotal: 0,
+            acceptTotal: 0,
         }
         this.createOrder = this.createOrder.bind(this);
         this.submitChange = this.submitChange.bind(this);
@@ -18,12 +19,17 @@ class OrderField extends React.Component {
     componentWillMount() {
         getOrder((result) => {
             if (result !== false) {
-                var total = 0;
-                for (var i in result)
-                    total += result[i].totalPrice;
+                var pendingTotal = 0, acceptTotal = 0;
+                for (var i in result) {
+                    if (result[i].status === 'pending')
+                        pendingTotal += result[i].totalPrice;
+                    if (result[i].status === 'accept')
+                        acceptTotal += result[i].totalPrice;
+                }
                 this.setState({
                     orderList: result,
-                    total: total
+                    pendingTotal: pendingTotal,
+                    acceptTotal: acceptTotal,
                 });
             }
         })
@@ -49,7 +55,8 @@ class OrderField extends React.Component {
             <tbody>
                 {this.createOrder()}
                 <tr>
-                <td colSpan="7"><Well >Total: {this.displayPrice(this.state.total)}</Well></td>
+                <td colSpan="4"><Well >Estimate Total: {this.displayPrice(this.state.pendingTotal)}</Well></td>
+                <td colSpan="3"><Well >Actual Total: {this.displayPrice(this.state.acceptTotal)}</Well></td>
                 </tr>
             </tbody>
             
@@ -81,17 +88,33 @@ class OrderField extends React.Component {
     }
     statusHandle(eventKey, event) {
         eventKey = eventKey.substring(0, eventKey.length-1);
+        let pendingTotal = this.state.pendingTotal;
+        let acceptTotal = this.state.acceptTotal;
         var newOrderList = this.state.orderList.map((item, index) => {
             if (index.toString() !== eventKey) {
                 return item;
             }
             else {
+                if (item.status === 'pending' && event.target.innerHTML !== 'pending') {
+                    pendingTotal -= item.totalPrice;
+                }
+                if (item.status !== 'pending' && event.target.innerHTML === 'pending') {
+                    pendingTotal += item.totalPrice;
+                }
+                if (item.status === 'accept' && event.target.innerHTML !== 'accept') {
+                    acceptTotal -= item.totalPrice;
+                }
+                if (item.status !== 'accept' && event.target.innerHTML === 'accept') {
+                    acceptTotal += item.totalPrice;
+                }
                 item.status = event.target.innerHTML;
                 return item;
             }
         });
         this.setState({
-            orderList: newOrderList
+            orderList: newOrderList,
+            pendingTotal: pendingTotal,
+            acceptTotal: acceptTotal,
         })
     }
     displayPrice(x) {

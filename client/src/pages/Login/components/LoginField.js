@@ -56,6 +56,10 @@ class LoginField extends React.Component {
                 <div className="login-button">
                      <SubmitButton id="signin-button" content="Sign in" onClickHandle={this.submitButtonHandle}></SubmitButton>
                 </div>
+                <div className="forget-password-dir">
+                    <span>Forgot your password?</span> 
+                    <a href="/forget-password"> Reset it here.</a>
+                </div>
             </div>
         );
     }

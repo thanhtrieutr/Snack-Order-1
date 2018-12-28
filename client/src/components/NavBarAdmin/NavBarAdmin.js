@@ -1,6 +1,6 @@
 import React from 'react';
 import './style.scss'
-import {Image, Button, Glyphicon, Dropdown, MenuItem, ButtonToolbar, Col, DropdownButton} from 'react-bootstrap';
+import {Image, Glyphicon, Dropdown, MenuItem, ButtonToolbar, Col, DropdownButton} from 'react-bootstrap';
 import {withRouter} from "react-router";
 import {API_ROOT} from '../../api-config';
 

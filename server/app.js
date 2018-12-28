@@ -34,7 +34,7 @@ app.use(session({
     secret: 'KTD',
     resave: false
 }));
-app.use('/', routes);
+app.use('/v1/', routes);
 
 //Only use in development
 //Command: ENV=dev node app.js

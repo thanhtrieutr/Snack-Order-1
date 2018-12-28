@@ -69,7 +69,7 @@ var accountArray = [
     },
     {
         user: "test@gmail.com",
-        password: "12345678"
+        password: "test1234"
     }
 ];
 var adminList = [{

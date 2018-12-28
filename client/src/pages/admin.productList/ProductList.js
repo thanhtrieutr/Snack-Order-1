@@ -7,6 +7,7 @@ import NavBarAdmin from '../../components/NavBarAdmin/NavBarAdmin'
 import Content from './components/Content'
 import { withRouter } from "react-router";
 import {errorAlert} from '../../helpers/utilities/alert'
+import './style.scss'
 export default withRouter(class ProductList extends React.Component {
     componentWillMount() {
         var token = { token: localStorage.getItem("token")};

@@ -1,7 +1,9 @@
 import React from 'react'
-import { Button } from 'react-bootstrap'
+import { Button, Image } from 'react-bootstrap'
 import { getOneProduct } from '../../../helpers/api/adminApi/upload-image.api'
 import ProductDetail from './Modal'
+import {API_ROOT} from '../../../api-config'
+
 export default class Item extends React.Component {
   constructor(props) {
     super(props);
@@ -21,6 +23,9 @@ export default class Item extends React.Component {
       <tr className="admin-justified-content">
         <td>
           <div>{this.props.no}</div>
+        </td>
+        <td>
+          <Image className="product-image" alt="product" src={`${API_ROOT}${this.props.image}`} thumbnail responsive></Image>
         </td>
         <td>
           <div>{this.props.name}</div>

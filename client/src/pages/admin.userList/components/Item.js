@@ -1,6 +1,7 @@
 import React from 'react'
-import { Button } from 'react-bootstrap'
+import { Image, Button } from 'react-bootstrap'
 import UserDetail from './Modal'
+import {API_ROOT} from '../../../api-config'
 export default class Item extends React.Component {
   constructor() {
     super();
@@ -27,7 +28,13 @@ export default class Item extends React.Component {
           {this.props.no}
         </td>
         <td>
+          <Image className="user-avatar" alt="avatar" src={`${API_ROOT}${this.props.avatarAddress}`} thumbnail responsive></Image>
+        </td>
+        <td>
           {this.props.user}
+        </td>
+        <td>
+          {this.props.fullName}
         </td>
         <td>
           <Button bsStyle="link" onClick={this.showModal}>Details</Button>

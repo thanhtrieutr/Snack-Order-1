@@ -25,7 +25,9 @@ export default class ContentField extends React.Component {
           <thead>
             <tr>
               <th>#</th>
+              <th>Avatar</th>
               <th>Username</th>
+              <th>Full name</th>
               <th>Description</th>
             </tr>
           </thead>

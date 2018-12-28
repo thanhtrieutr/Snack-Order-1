@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "nodemon app.js",
-    "deploy": "kill $(lsof -t -i :3000) ENV=production node app.js &"
+    "deploy": "kill $(lsof -t -i :3000) & ENV=production node app.js &"
   },
   "dependencies": {
     "body-parser": "^1.18.3",

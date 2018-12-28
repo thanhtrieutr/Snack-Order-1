@@ -18,6 +18,7 @@
     font-weight: 700;
     margin-top: 10px;
     min-height: 68px;
+    text-overflow: ellipsis;
 }
 .home .main-snack-price {
     color: red;

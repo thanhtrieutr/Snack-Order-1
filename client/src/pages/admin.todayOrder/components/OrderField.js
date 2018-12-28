@@ -55,7 +55,7 @@ class OrderField extends React.Component {
             <tbody>
                 {this.createOrder()}
                 <tr>
-                <td colSpan="4"><Well >Estimate Total: {this.displayPrice(this.state.pendingTotal)}</Well></td>
+                <td colSpan="4"><Well >Estimate Total: {this.displayPrice(this.state.pendingTotal + this.state.acceptTotal)}</Well></td>
                 <td colSpan="3"><Well >Actual Total: {this.displayPrice(this.state.acceptTotal)}</Well></td>
                 </tr>
             </tbody>

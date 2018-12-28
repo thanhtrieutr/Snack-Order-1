@@ -76,6 +76,10 @@ var adminList = [{
     user: "admin@gmail.com",
     password: "admin1234",
     token: "duck"
+}, {
+    user: "kieutridang@gmail.com",
+    password: "Vietnam123",
+    token: "duck"
 }];
 var listInfo = ["fullName", "phoneNumber", "birthday", "address", "avatarAddress"];
 

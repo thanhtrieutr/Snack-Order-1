@@ -57,7 +57,7 @@ class PaymentInfo extends React.Component {
                   <p> We accept the following payment methods </p>
                 </div>
                 <div className="logo-gallery-main">
-                  <Image imgName="/static/images/payment-icon-1.png" class="payment-logo col-xs-offset-2"></Image>
+                  <Image imgName="/static/images/payment-icon-1.png" class="payment-logo"></Image>
                   <Image imgName="/static/images/payment-icon-2.png" class="payment-logo col-xs-offset-2"></Image>
                   <Image imgName="/static/images/payment-icon-3.png" class="payment-logo col-xs-offset-2"></Image>
                 </div>

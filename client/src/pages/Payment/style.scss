@@ -39,6 +39,8 @@
       .payment-logo {
         height: 55px;
         width: 42px;
+        margin-top: 20px;
+        margin-bottom: 20px;
       }
       .payment-button {
         background-color: #ffe36a;
@@ -60,6 +62,7 @@
       @media (max-width: 767px) {
         .payment-logo-gallery {
           margin-top: 30px;
+          margin-bottom: 30px;
         }
         .logo-gallery-title {
           font-size: 20px

@@ -1,7 +1,7 @@
 
 import React from 'react';
 import '././style.scss'
-import {Col, Nav, NavItem, Grid} from 'react-bootstrap';
+import {Nav, NavItem, Grid} from 'react-bootstrap';
 import Image from './../Home/image'
 
 class NavBarAdmin extends React.Component {
@@ -9,13 +9,10 @@ class NavBarAdmin extends React.Component {
     return (
       <div className="checkout-header">
       <Grid>
-        <Col xsOffset={3} xs={6} smOffset={8} sm={4}>
-          <div className="checkout-logo">
+          <div className="checkout-logo col-xs-offset-3 col-sm-offset-8 col-md-offset-9">
               <Image imgName="/static/images/logo.png" class="logo col-xs-12"></Image>
           </div>
-        </Col>
-        <Col xs={12} sm={8}>
-          <div className="checkout-menu">
+          <div className="checkout-menu col-xs-12 col-sm-8">
           <Nav bsStyle="pills" activeKey={this.props.activeKey} >
             <NavItem eventKey={1} href="/payment/payment-info" >
               Payment Info
@@ -30,7 +27,6 @@ class NavBarAdmin extends React.Component {
             </NavItem>
           </Nav>
           </div>
-        </Col>
       </Grid>
       </div>
     );
